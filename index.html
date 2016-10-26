@@ -3,8 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>My page</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+        }
+    </style>
 </head>
 <body>
     <h1>HELLO THERE</h1>
+    <div id="info"></div>
+
+    <script>
+
+        var info = document.getElementById("info");
+
+
+        function do_something(lat, long) {
+            info.innerHTML = "<p>Din posisjon er</p>"
+            info.innerHTML += "<p>latitude: " + lat + "</p>";
+            info.innerHTML += "<p>longitude: " + long + "</p>";
+        }
+
+        navigator.geolocation.getCurrentPosition(function(position) {
+            do_something(position.coords.latitude, position.coords.longitude);
+        });
+
+
+    </script>
+
 </body>
 </html>
