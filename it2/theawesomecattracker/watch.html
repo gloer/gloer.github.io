@@ -23,8 +23,22 @@
 <div id="map"></div>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcgEzqSgdT6wue6GFhaawRj-XuNgfStLM&callback=initMap" async defer></script>
+<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyDqym8brxa8zty4kyvFtXQ4TqXftQrw-u8",
+        authDomain: "the-awesome-cat-tracker.firebaseapp.com",
+        databaseURL: "https://the-awesome-cat-tracker.firebaseio.com",
+        storageBucket: "the-awesome-cat-tracker.appspot.com",
+        messagingSenderId: "571408272203"
+    };
+    firebase.initializeApp(config);
+</script>
 <script>
     var info = document.getElementById("info");
+    var database = firebase.database();
+    var ref = database.ref("spor/");
 
     var id, target, options;
 
@@ -38,9 +52,22 @@
 
     function success(position) {
 
-        var pos = {
+        ref.push({
             lat: position.coords.latitude,
             lng: position.coords.longitude
+        });
+
+
+
+
+    }
+
+    ref.on("child_added", function(snapshot){
+        var track = snapshot.val();
+
+        var pos = {
+            lat: track.lat,
+            lng: track.lng
         };
 
         map.setCenter(pos);
@@ -56,8 +83,7 @@
             map: map
         });
 
-
-    }
+    });
 
     function error(err) {
         console.warn('ERROR(' + err.code + '): ' + err.message);
