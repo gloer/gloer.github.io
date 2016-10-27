@@ -6,28 +6,57 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation-flex.css">
     <style>
-        body {
-            padding: 10px;
+        #map {
+            height: 100%;
         }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
     </style>
 </head>
 <body>
 
-<div id="info"></div>
+<div id="map"></div>
 
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
 <script>
     var info = document.getElementById("info");
 
     var id, target, options;
 
-    function success(pos) {
-        var crd = pos.coords;
-        info.innerHTML += "<p>" + crd.latitude + " : " + crd.longitude + "</p>";
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 0, lng: 0},
+            zoom: 18
+        });
+    }
 
-        if (target.latitude === crd.latitude && target.longitude === crd.longitude) {
-            console.log('Congratulations, you reached the target');
-            navigator.geolocation.clearWatch(id);
-        }
+    function success(position) {
+
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+
+        map.setCenter(pos);
+
+
+        var marker = new google.maps.Marker({
+            position: map.getCenter(),
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 2
+            },
+            draggable: true,
+            map: map
+        });
+
+
     }
 
     function error(err) {
