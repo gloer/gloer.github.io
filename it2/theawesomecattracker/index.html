@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>The Awesome Cat Tracker</title>
+</head>
+<body>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDqym8brxa8zty4kyvFtXQ4TqXftQrw-u8",
+            authDomain: "the-awesome-cat-tracker.firebaseapp.com",
+            databaseURL: "https://the-awesome-cat-tracker.firebaseio.com",
+            storageBucket: "the-awesome-cat-tracker.appspot.com",
+            messagingSenderId: "571408272203"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+
+    <script>
+        var database = firebase.database();
+        var spor = database.ref("spor/");
+
+        spor.push({
+            test: "Tull"
+        });
+
+    </script>
+
+
+</body>
+</html>
