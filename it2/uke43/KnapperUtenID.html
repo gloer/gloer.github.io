@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Litt om knapper</title>
+</head>
+<body>
+
+    <button id="knapp1" data-sang="help.mp3" data-bilde="help.jpg">Help</button>
+    <button id="knapp2" data-sang="war2013.mp3" data-bilde="war.jpg">War</button>
+    <button id="knapp3" data-sang="spaceman.mp3" data-bilde="spaceman.jpg">Spaceman</button>
+    <button id="knapp4" data-sang="time.mp3" data-bilde="time.jpg">Time</button>
+
+
+    <script>
+        var knapp1 = document.getElementById("knapp1");
+        var knapp2 = document.getElementById("knapp2");
+        var knapp3 = document.getElementById("knapp3");
+        var knapp4 = document.getElementById("knapp4");
+
+        function spillSang() {
+            var sang = this.getAttribute("data-sang");
+            var bilde = this.getAttribute("data-bilde");
+
+            alert(sang);
+            alert(bilde);
+        }
+
+        knapp1.onclick = spillSang;
+        knapp2.onclick = spillSang;
+        knapp3.onclick = spillSang;
+        knapp4.onclick = spillSang;
+
+
+
+    </script>
+
+</body>
+</html>
