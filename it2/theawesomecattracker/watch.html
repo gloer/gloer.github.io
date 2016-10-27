@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation-flex.css">
+    <style>
+        body {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="info"></div>
+
+<script>
+    var info = document.getElementById("info");
+
+    var id, target, options;
+
+    function success(pos) {
+        var crd = pos.coords;
+        info.innerHTML += "<p>" + crd.latitude + " : " + crd.longitude + "</p>";
+
+        if (target.latitude === crd.latitude && target.longitude === crd.longitude) {
+            console.log('Congratulations, you reached the target');
+            navigator.geolocation.clearWatch(id);
+        }
+    }
+
+    function error(err) {
+        console.warn('ERROR(' + err.code + '): ' + err.message);
+    }
+
+    target = {
+        latitude : 0,
+        longitude: 0
+    };
+
+    options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+    };
+
+    id = navigator.geolocation.watchPosition(success, error, options);
+</script>
+
+</body>
+</html>
