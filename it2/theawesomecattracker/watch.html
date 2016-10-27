@@ -22,7 +22,7 @@
 
 <div id="map"></div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcgEzqSgdT6wue6GFhaawRj-XuNgfStLM&callback=initMap" async defer></script>
+
 <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
 <script>
     // Initialize Firebase
@@ -48,6 +48,31 @@
             center: {lat: 0, lng: 0},
             zoom: 18
         });
+
+        ref.on("child_added", function(snapshot){
+            var track = snapshot.val();
+
+            var pos = {
+                lat: track.lat,
+                lng: track.lng
+            };
+
+            map.setCenter(pos);
+
+
+            var marker = new google.maps.Marker({
+                position: map.getCenter(),
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 2
+                },
+                draggable: true,
+                map: map
+            });
+
+        });
+
+
     }
 
     function success(position) {
@@ -62,28 +87,7 @@
 
     }
 
-    ref.on("child_added", function(snapshot){
-        var track = snapshot.val();
 
-        var pos = {
-            lat: track.lat,
-            lng: track.lng
-        };
-
-        map.setCenter(pos);
-
-
-        var marker = new google.maps.Marker({
-            position: map.getCenter(),
-            icon: {
-                path: google.maps.SymbolPath.CIRCLE,
-                scale: 2
-            },
-            draggable: true,
-            map: map
-        });
-
-    });
 
     function error(err) {
         console.warn('ERROR(' + err.code + '): ' + err.message);
@@ -102,6 +106,7 @@
 
     id = navigator.geolocation.watchPosition(success, error, options);
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcgEzqSgdT6wue6GFhaawRj-XuNgfStLM&callback=initMap" async defer></script>
 
 </body>
 </html>
