@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Tegne ruter</title>
+    <style>
+        * {
+            margin: 0;
+        }
+        body {
+            background-color: antiquewhite;
+        }
+        #alleRutene > div {
+            width: 20px;
+            height: 20px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="color" id="velgFarge">
+    <div id="alleRutene"></div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA7yb872SjoLxAd81unFyKeC0upEW6cV_A",
+            authDomain: "todolist-be2e2.firebaseapp.com",
+            databaseURL: "https://todolist-be2e2.firebaseio.com",
+            storageBucket: "todolist-be2e2.appspot.com",
+            messagingSenderId: "648561001841"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        var database = firebase.database();
+        var ruter = database.ref("ruter");
+
+        var velgFarge = document.getElementById("velgFarge");
+        var alleRutene = document.getElementById("alleRutene");
+
+        velgFarge.onchange = function() {
+            ruter.push({
+                farge: velgFarge.value
+            });
+        };
+
+        function tegnRute(snap) {
+            var data = snap.val();
+            var farge = data.farge;
+
+            var rute = document.createElement("div");
+            rute.style.backgroundColor = farge;
+
+            alleRutene.appendChild(rute);
+
+            rute.animate([
+                    {transform: `translate(${Math.random() * 1000}px, ${Math.random() * 1000}px)`},
+                    {transform: `translate(0, 0)`}
+            ], 100);
+        }
+
+        ruter.on("child_added", tegnRute);
+
+
+    </script>
+
+</body>
+</html>
