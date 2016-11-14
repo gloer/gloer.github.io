@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Pig in space</title>
+    <style>
+        body {
+            height: 100vh;
+            background-image: url("space.jpg");
+            background-position: center bottom;
+            background-size: cover;
+        }
+        #imgPig {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="btnLeft">LEFT</button>
+    <button id="btnRight">RIGHT</button>
+    <button id="btnUp">UP</button>
+    <button id="btnDown">DOWN</button>
+    <img src="astropig.png" id="imgPig">
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA7yb872SjoLxAd81unFyKeC0upEW6cV_A",
+            authDomain: "todolist-be2e2.firebaseapp.com",
+            databaseURL: "https://todolist-be2e2.firebaseio.com",
+            storageBucket: "todolist-be2e2.appspot.com",
+            messagingSenderId: "648561001841"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        var database = firebase.database();
+        var pigdata = database.ref("pigdata");
+
+        var imgPig = document.getElementById("imgPig");
+        var btnLeft = document.getElementById("btnLeft");
+        var btnRight = document.getElementById("btnRight");
+        var btnUp = document.getElementById("btnUp");
+        var btnDown = document.getElementById("btnDown");
+
+
+        var pig = {
+            x: 200,
+            y: 100,
+            xdir: 1,
+            ydir: 0,
+            xspeed: 5,
+            yspeed: 3
+        };
+
+        btnLeft.onclick = function() {
+            pigdata.set({
+                xdir: -1,
+                ydir: 0
+            });
+        };
+        btnRight.onclick = function() {
+            pigdata.set({
+                xdir: 1,
+                ydir: 0
+            });
+        };
+        btnUp.onclick = function() {
+            pigdata.set({
+                xdir: 0,
+                ydir: -1
+            });
+        };
+        btnDown.onclick = function() {
+            pigdata.set({
+                xdir: 0,
+                ydir: 1
+            });
+        };
+
+        pigdata.on("value", function(snapshot){
+            var data = snapshot.val();
+            pig.xdir = data.xdir;
+            pig.ydir = data.ydir;
+        });
+
+        function fly() {
+
+            pig.x = pig.x + (pig.xspeed * pig.xdir);
+            pig.y = pig.y + (pig.yspeed * pig.ydir);
+
+            if(pig.x > innerWidth) {
+                pig.x = 0;
+            }
+
+            if(pig.x < 0) {
+                pig.x = innerWidth;
+            }
+
+            if(pig.y > innerHeight) {
+                pig.y = 0;
+            }
+
+            if(pig.y < 0) {
+                pig.y = innerHeight;
+            }
+
+            imgPig.style.left = pig.x + "px";
+            imgPig.style.top = pig.y + "px";
+
+            requestAnimationFrame(fly);
+        }
+
+        requestAnimationFrame(fly);
+
+    </script>
+
+</body>
+</html>
