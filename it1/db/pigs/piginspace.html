@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pigs in space</title>
+    <style>
+        body {
+            background-image: url("space.jpg");
+            height: 100vh;
+            background-size: cover;
+            background-position: center bottom;
+        }
+
+        #imgPig {
+            position: absolute;
+            left: 200px;
+            top: 300px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <button id="btnLeft" data-xdir="-1" data-ydir="0">Left</button>
+    <button id="btnRight" data-xdir="1" data-ydir="0">Right</button>
+    <button id="btnUp" data-xdir="0" data-ydir="-1">Up</button>
+    <button id="btnDown" data-xdir="0" data-ydir="1">Down</button>
+
+    <img src="astropig.png" id="imgPig">
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA7yb872SjoLxAd81unFyKeC0upEW6cV_A",
+            authDomain: "todolist-be2e2.firebaseapp.com",
+            databaseURL: "https://todolist-be2e2.firebaseio.com",
+            storageBucket: "todolist-be2e2.appspot.com",
+            messagingSenderId: "648561001841"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+
+    <script>
+        // Setting up the database
+        var database = firebase.database();
+        var grisedata = database.ref("mingris");
+
+
+        // DOM-elementer
+        var imgPig = document.getElementById("imgPig");
+
+        var gris = {
+            xpos: 200,
+            ypos: 300,
+            w: 67,
+            h: 108,
+            xspeed: 5,
+            yspeed: 3,
+            xdir: 1,
+            ydir: 0
+        };
+
+        function fly() {
+            gris.xpos = gris.xpos + (gris.xspeed * gris.xdir);
+            gris.ypos = gris.ypos + (gris.yspeed * gris.ydir);
+
+            if(gris.xpos > innerWidth + gris.w) {
+                gris.xpos = -gris.w;
+            }
+            if(gris.xpos < 0 - gris.w) {
+                gris.xpos = innerWidth;
+            }
+            if(gris.ypos > innerHeight) {
+                gris.ypos = -gris.h;
+            }
+            if(gris.ypos < -gris.h) {
+                gris.ypos = innerHeight;
+            }
+
+
+            imgPig.style.left = gris.xpos + "px";
+            imgPig.style.top = gris.ypos + "px";
+            // Rekursivt kall
+            requestAnimationFrame(fly);
+        }
+
+        function setDir() {
+            var xdir = Number(this.getAttribute("data-xdir"));
+            var ydir = Number(this.getAttribute("data-ydir"));
+
+            // Legge inn xdir og ydir i database
+            grisedata.set({
+                xdir: xdir,
+                ydir: ydir
+            });
+        }
+
+
+        function hentData(data) {
+            var retninger = data.val();
+            gris.xdir = retninger.xdir;
+            gris.ydir = retninger.ydir;
+        }
+
+        grisedata.on("value", hentData);
+
+
+        var knapper = document.querySelectorAll("button");
+        for(var knapp of knapper) {
+            knapp.onclick = setDir;
+        }
+
+        fly();
+
+
+    </script>
+
+</body>
+</html>
