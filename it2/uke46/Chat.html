@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Superchat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation-flex.min.css">
+    <style>
+        body {
+            max-width: 700px;
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="regMelding">
+        <input type="text" id="inpAvsender" placeholder="Hva heter du?" required>
+        <input type="text" id="inpMelding" placeholder="Hva sier du?" required>
+        <button class="button" type="submit">Kjør på!</button>
+    </form>
+
+    <table>
+        <tbody id="tblMeldinger"></tbody>
+    </table>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script>
+        // Sett inn din egen kode
+    </script>
+
+    <script>
+        var minDatabase = firebase.database();
+        var meldinger = minDatabase.ref("meldinger");
+
+        var regMelding = document.getElementById("regMelding");
+        var inpAvsender = document.getElementById("inpAvsender");
+        var inpMelding = document.getElementById("inpMelding");
+
+        var tblMeldinger = document.getElementById("tblMeldinger");
+
+
+        function visMeldinger(snapshot) {
+            var melding = snapshot.val();
+            var key = snapshot.key;
+            var avsender = melding.avsender;
+            var tekst = melding.tekst;
+
+            tblMeldinger.innerHTML =   `<tr>
+                                            <td>${key}</td>
+                                            <td>${avsender}</td>
+                                            <td>${tekst}</td>
+                                        </tr>` + tblMeldinger.innerHTML;
+        }
+
+        meldinger.on("child_added", visMeldinger);
+
+        regMelding.onsubmit = function(evt) {
+            evt.preventDefault();
+
+            var melding = {
+                avsender: inpAvsender.value,
+                tekst: inpMelding.value
+            };
+            meldinger.push(melding);
+
+            inpAvsender.value = inpMelding.value = "";
+            inpMelding.focus();
+        }
+
+
+
+    </script>
+
+</body>
+</html>
