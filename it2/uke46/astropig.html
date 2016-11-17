@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Grisen i verdensrommet</title>
+    <style>
+
+        body {
+            background-image: url("space.jpg");
+            background-size: cover;
+            height: 100vh; /* viewport height */
+            background-position: center bottom;
+        }
+        #astropig {
+            position: absolute;
+            left: 200px;
+            top: 300px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div id="griseknapper">
+        <button data-xdir="-1" data-ydir="0">Left</button>
+        <button data-xdir="1" data-ydir="0">Reft</button>
+        <button data-xdir="0" data-ydir="-1">Up</button>
+        <button data-xdir="0" data-ydir="1">Down</button>
+    </div>
+
+
+    <img src="astropig.png" width="67" height="108" id="astropig">
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCeIvHC6sB4I9uI6XbZrZuWxORB5KQoGH8",
+            authDomain: "itfredag-1c17a.firebaseapp.com",
+            databaseURL: "https://itfredag-1c17a.firebaseio.com",
+            storageBucket: "itfredag-1c17a.appspot.com",
+            messagingSenderId: "24994529692"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        // Setter opp databasen
+        var database = firebase.database();
+        // Definerer en tabell
+        var grisedata = database.ref("grisedata");
+
+        var astropig = document.getElementById("astropig");
+
+        var grisen = {
+            xpos: 200,
+            ypos: 300,
+            xspeed: 5,
+            yspeed: 3,
+            xdir: 1,
+            ydir: 0,
+            w: 67,
+            h: 108
+        };
+
+        function fly() {
+
+            grisen.xpos = grisen.xpos + (grisen.xspeed * grisen.xdir);
+            grisen.ypos = grisen.ypos + (grisen.yspeed * grisen.ydir);
+
+            if(grisen.xpos > innerWidth) {
+                grisen.xpos = -grisen.w;
+            }
+            if(grisen.xpos < -grisen.w) {
+                grisen.xpos = innerWidth;
+            }
+            if(grisen.ypos > innerHeight) {
+                grisen.ypos = -grisen.h;
+            }
+            if(grisen.ypos < -grisen.h) {
+                grisen.ypos = innerHeight;
+            }
+
+            // Flytter bildet
+            astropig.style.left = grisen.xpos + "px";
+            astropig.style.top = grisen.ypos + "px";
+
+            requestAnimationFrame(fly);
+        }
+
+        function snu(snapshot) {
+            var data = snapshot.val();
+            grisen.xdir = data.x;
+            grisen.ydir = data.y;
+        }
+
+        grisedata.on("value", snu);
+
+        function setDir() {
+            var xdir = Number(this.getAttribute("data-xdir"));
+            var ydir = Number(this.getAttribute("data-ydir"));
+
+            grisedata.set({
+                x: xdir,
+                y: ydir
+            });
+        }
+
+        var knappene = document.querySelectorAll("#griseknapper > button");
+        for(var knapp of knappene) {
+            knapp.onclick = setDir;
+        }
+
+        fly();
+
+    </script>
+
+</body>
+</html>
