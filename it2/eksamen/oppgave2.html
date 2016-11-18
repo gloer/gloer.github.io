@@ -79,7 +79,27 @@
         </tbody>
     </table>
 
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
     <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA7yb872SjoLxAd81unFyKeC0upEW6cV_A",
+            authDomain: "todolist-be2e2.firebaseapp.com",
+            databaseURL: "https://todolist-be2e2.firebaseio.com",
+            storageBucket: "todolist-be2e2.appspot.com",
+            messagingSenderId: "648561001841"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        // Setter opp en database-kobling
+        var database = firebase.database();
+        var matbestillinger = database.ref("bestillinger");
+
+
         // Et objekt til å lagre bestillingen
         var bestilling = {};
 
@@ -164,6 +184,8 @@
             bestilling.adresse = inpAdresse.value;
             bestilling.post = inpPost.value;
             bestilling.pris = pris;
+
+            matbestillinger.push(bestilling); // Slenger inn bestilingen i databasen
 
             alert("Følgende data burde ha blitt sendt til databasen " + JSON.stringify(bestilling));
         }
