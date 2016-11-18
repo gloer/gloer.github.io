@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.light {
+    background-color: azure;
+}
+
+.dark {
+    background-color: midnightblue;
+    color: white;
+}
+
+.default {
+    background-color: #039be5;
+}
+
+header, footer {
+    padding: 0 10px; /* På h.s. og v.s. */
+}
+
+main {
+    flex: 1;
+}
+
+.midstilt {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+
+main section {
+    min-height: 200px;
+}
+
+main section .midstilt {
+    padding: 0 10px;
+}
+
+header {
+    background-color: antiquewhite;
+}
+
+header nav {
+
+}
+
+
+footer section {
+
+}
