@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Bestill matkasse</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation-flex.css">
+    <style>
+        body {
+            max-width: 860px;
+            margin: auto;
+            padding: 10px;
+        }
+        h1 {
+            font-size: 22px;
+            text-align: center;
+        }
+        #bildeViser {
+            text-align: center;
+        }
+        #antMiddager {
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bestill matkasse</h1>
+    <form id="regBestilling">
+        <select id="inpTypeKasse" required>
+            <option value="0">Hvor mange middager vil dere ha i uka</option>
+            <option data-image="enMiddag.png" value="2">Matkasse med 2 middager</option>
+            <option data-image="toMiddager.png" value="3">Matkasse med 3 middager</option>
+        </select>
+        <select id="inpAntallPersoner" required>
+            <option value="0">Hvor mange personer er dere i husholdningen</option>
+            <option value="1">For 1 person</option>
+            <option value="2">For 2 personer</optionvalue>
+            <option value="3">For 3 personer</optionvalue>
+            <option value="4">For 4 personer</optionvalue>
+            <option value="5">For 5 personer</optionvalue>
+            <option value="6">For 6 personer</optionvalue>
+            <option value="7">For 7 personer</optionvalue>
+            <option value="8">For 8 personer</optionvalue>
+            <option value="9">For 9 personer</optionvalue>
+            <option value="10">For 10 personer</optionvalue>
+        </select>
+
+        <div id="bildeViser">
+            <img id="antMiddager">
+        </div>
+
+        <h1>Bestillingen sendes til</h1>
+        <input type="text" id="inpNavn" placeholder="Ola Nordmann" required>
+        <input type="text" id="inpAdresse" placeholder="Karvesvingen 22" required>
+        <input type="text" id="inpPost" placeholder="1350 Lommedalen" required>
+
+        <button type="submit" class="button">Send inn bestilling</button>
+
+    </form>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Antall middager per dag</th>
+                <th>Antall personer</th>
+                <th>Pris per uke</th>
+                <th>Sendes til</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="tdAntall"></td>
+                <td id="tdPersoner"></td>
+                <td id="tdPris"></td>
+                <td id="tdPerson"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        // Et objekt til å lagre bestillingen
+        var bestilling = {};
+
+        // Referanse til DOM-elementer
+        var inpTypeKasse = document.getElementById("inpTypeKasse");
+        var inpAntallPersoner = document.getElementById("inpAntallPersoner");
+        var regBestilling = document.getElementById("regBestilling");
+        var antMiddager = document.getElementById("antMiddager");
+        var tdAntall = document.getElementById("tdAntall");
+        var tdPersoner = document.getElementById("tdPersoner");
+        var tdPris = document.getElementById("tdPris");
+        var tdPerson = document.getElementById("tdPerson");
+        var inpNavn = document.getElementById("inpNavn");
+        var inpAdresse = document.getElementById("inpAdresse");
+        var inpPost = document.getElementById("inpPost");
+
+        // Verdier til prisberegning
+        var antallMiddager = 0;
+        var antallPersoner = 0;
+        var pris = 0;
+
+        // Legger inn adressen i tabellen
+        function visAdresse() {
+            tdPerson.innerHTML = inpNavn.value + "<br>" + inpAdresse.value + "<br>" + inpPost.value;
+        }
+        inpNavn.oninput = inpAdresse.oninput = inpPost.oninput = visAdresse;
+
+        // Bergegner prisen på bestillingen
+        function beregnPris() {
+            if(antallPersoner === 0 || antallMiddager === 0) {
+                return;
+            }
+            if(antallPersoner > 10) {
+                alert("Du har på mystisk vis klart å velge flere personer enn lovlig");
+                return;
+            }
+
+            var prisPerMiddag = 80;
+            if(antallPersoner >= 5) {
+                prisPerMiddag = 70;
+            }
+
+            pris = antallPersoner * antallMiddager * prisPerMiddag;
+            tdPris.innerHTML = pris;
+        }
+
+        // Setter antall personer og starter funksjonen beregnPris
+        inpAntallPersoner.onchange = function() {
+            antallPersoner = Number(this.value);
+            tdPersoner.innerHTML = antallPersoner;
+
+            beregnPris();
+        };
+
+        // Setter type matkasse og starter funksjonen beregnPris
+        inpTypeKasse.onchange = function() {
+
+            if(this.value === "2") {
+                antMiddager.src = "toMiddager.png";
+                antMiddager.style.display = "inline-block";
+                antallMiddager = 2;
+            } else if(this.value === "3") {
+                antMiddager.src = "treMiddager.png";
+                antMiddager.style.display = "inline-block";
+                antallMiddager = 3;
+            } else {
+                antMiddager.src = "";
+                antMiddager.style.display = "none";
+                antallMiddager = 0;
+            }
+
+            tdAntall.innerHTML = antallMiddager;
+            beregnPris();
+        };
+
+        // Behandler selve bestillingen
+        regBestilling.onsubmit = function(evt) {
+            evt.preventDefault();
+            bestilling.antallMiddager = antallMiddager;
+            bestilling.antallPersoner = antallPersoner;
+            bestilling.navn = inpNavn.value;
+            bestilling.adresse = inpAdresse.value;
+            bestilling.post = inpPost.value;
+            bestilling.pris = pris;
+
+            alert("Følgende data burde ha blitt sendt til databasen " + JSON.stringify(bestilling));
+        }
+
+
+
+    </script>
+
+</body>
+</html>
