@@ -26,7 +26,7 @@
         var katteposer = database.ref("katteposer");
 
         function leggTilKoordinater(position) {
-            ref.push({
+            katteposer.push({
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             });
