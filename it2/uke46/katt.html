@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>På kattens mobil</title>
+</head>
+<body>
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA7yb872SjoLxAd81unFyKeC0upEW6cV_A",
+            authDomain: "todolist-be2e2.firebaseapp.com",
+            databaseURL: "https://todolist-be2e2.firebaseio.com",
+            storageBucket: "todolist-be2e2.appspot.com",
+            messagingSenderId: "648561001841"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        var database = firebase.database();
+        var katteposer = database.ref("katteposer");
+
+        function leggTilKoordinater(position) {
+            ref.push({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            });
+        }
+
+        navigator.geolocation.watchPosition(leggTilKoordinater);
+
+    </script>
+
+</body>
+</html>
