@@ -15,7 +15,44 @@
 
 
 <div id='map'></div>
+
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
 <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyA7yb872SjoLxAd81unFyKeC0upEW6cV_A",
+        authDomain: "todolist-be2e2.firebaseapp.com",
+        databaseURL: "https://todolist-be2e2.firebaseio.com",
+        storageBucket: "todolist-be2e2.appspot.com",
+        messagingSenderId: "648561001841"
+    };
+    firebase.initializeApp(config);
+</script>
+
+<script>
+
+    function guid() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                s4() + '-' + s4() + s4() + s4();
+    }
+
+    var uid;
+
+    if(localStorage.uid) {
+        uid = localStorage.uid;
+    } else {
+        uid = guid();
+        localStorage.uid = uid;
+    }
+
+    var database = firebase.database();
+    var ref = database.ref("koordinater/" + uid);
+
     L.mapbox.accessToken = 'pk.eyJ1IjoiZ2xvZXIiLCJhIjoiY2l2cm4ya3hxMDAyYTJ6bHU5MzZjcHNnbSJ9.PmFpGo0iUpws5YtIBnzVBQ';
     var map = L.mapbox.map('map', 'mapbox.streets')
             .setView([40, -74.50], 9);
@@ -27,6 +64,10 @@
 
 
     function oppdater(position) {
+        ref.push({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        });
         map.setView([position.coords.latitude, position.coords.longitude], 17);
         marker.setLatLng([position.coords.latitude, position.coords.longitude]);
         polyline.addLatLng([position.coords.latitude, position.coords.longitude]);
