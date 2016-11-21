@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>A simple map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+
+<div id='map'></div>
+<script>
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZ2xvZXIiLCJhIjoiY2l2cm4ya3hxMDAyYTJ6bHU5MzZjcHNnbSJ9.PmFpGo0iUpws5YtIBnzVBQ';
+    var map = L.mapbox.map('map', 'mapbox.streets')
+            .setView([40, -74.50], 9);
+
+
+    function oppdater(position) {
+        map.setView([position.coords.latitude, position.coords.longitude], 17);
+    }
+
+    map.on("ready", function(){
+        console.log("Map is ready");
+        navigator.geolocation.getCurrentPosition(function(position) {
+            map.setView([position.coords.latitude, position.coords.longitude], 17);
+            console.log(position.coords.latitude + " " + position.coords.longitude);
+        });
+        navigator.geolocation.watchPosition(oppdater);
+    });
+
+
+
+</script>
+
+
+</body>
+</html>
