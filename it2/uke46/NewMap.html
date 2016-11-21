@@ -23,6 +23,12 @@
 
     function oppdater(position) {
         map.setView([position.coords.latitude, position.coords.longitude], 17);
+        var marker = L.marker([position.coords.latitude, position.coords.longitude], {
+            icon: L.mapbox.marker.icon({
+                'marker-color': '#f86767'
+            })
+        });
+        marker.addTo(map);
     }
 
     map.on("ready", function(){
