@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta type="viewport" content="width=device-width, initial-scale=1">
+    <title>Bildebloggen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation-flex.css">
+    <style>
+        body {
+            max-width: 700px;
+            margin: auto;
+            padding: 10px;
+        }
+        article img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="regInnlegg">
+        <input class="button" type="file" required id="inpImage">
+        <input type="text" required id="inpTekst" placeholder="Hva har du tatt bilde av nå?">
+        <button class="button" type="submit">Legg til i bildebloggen</button>
+    </form>
+
+    <section id="bloggen"></section>
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA7yb872SjoLxAd81unFyKeC0upEW6cV_A",
+            authDomain: "todolist-be2e2.firebaseapp.com",
+            databaseURL: "https://todolist-be2e2.firebaseio.com",
+            storageBucket: "todolist-be2e2.appspot.com",
+            messagingSenderId: "648561001841"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        // Set up database and storage
+        var database = firebase.database();
+        var storage = firebase.storage();
+
+        // Setting up DOM references
+        var regInnlegg = document.getElementById("regInnlegg");
+        var inpTekst = document.getElementById("inpTekst");
+        var inpImage = document.getElementById("inpImage");
+        var bloggen = document.getElementById("bloggen");
+
+        // Global variables
+        var blogginnleggene = database.ref("blogginnleggene");
+        var imageURL;
+
+        // Function to set the imageURL
+        function setImageURL(snap) {
+            imageURL = snap.downloadURL;
+        }
+
+        // Function to upload image to the storage database
+        function uploadImage() {
+            var image = this.files[0];
+            var imageStorage = storage.ref("bloggbilder/" + new Date());
+
+            imageStorage.put(image).then(setImageURL);
+        }
+
+        // Function to save data about the image to the database
+        function savePost(evt) {
+            evt.preventDefault();
+            var bilde = {
+                url: imageURL,
+                tekst: inpTekst.value
+            };
+
+            blogginnleggene.push(bilde);
+            inpImage.value = "";
+            inpTekst.value = "";
+
+        }
+
+        function showPosts(snap) {
+            var bilde = snap.val();
+            bloggen.innerHTML += `<article>
+                                    <img src="${bilde.url}">
+                                    <p>${bilde.tekst}</p>
+                                  </article>`;
+        }
+
+        // Add Event Listeners
+        inpImage.addEventListener("change", uploadImage);
+        regInnlegg.addEventListener("submit", savePost);
+        blogginnleggene.on("child_added", showPosts);
+
+
+
+    </script>
+</body>
+</html>
