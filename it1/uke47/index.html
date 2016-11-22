@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Min side</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        * {
+            margin: 0; /* Tar vekk all marg */
+            padding: 0;
+            border: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column; /* Ligger under hverandre */
+            min-height: 100vh; /* viewport height */
+        }
+
+        header {
+            background-color: chocolate;
+            min-height: 50px; /* Ikke sikkert dere trenger denne */
+            filter: drop-shadow(0 2px 2px black);
+        }
+
+        main {
+            background-color: cornflowerblue;
+            flex: 1; /* main tar resten av plassen i body */
+        }
+
+        footer {
+            background-color: blanchedalmond;
+            min-height: 50px;
+        }
+
+        .w970 {
+            max-width: 970px;
+            margin: 0 auto; /* 0 opp og ned, auto på sidene */
+            padding-left: 6px;
+            padding-right: 6px;
+        }
+
+        .light {
+            background-color: lightcyan;
+        }
+
+        .blue {
+            background-color: #039be5;
+        }
+
+        main > section > article {
+            padding-top: 20px;
+            padding-bottom: 30px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="w970">
+            Navigasjonen min - meny e.l.
+        </nav>
+    </header>
+
+    <main>
+        <section class="light">
+            <article class="w970">
+                Dette er en article i en section i main
+            </article>
+        </section>
+
+        <section class="blue">
+            <article class="w970">
+                Dette er en article i en section i main
+            </article>
+        </section>
+
+    </main>
+
+    <footer>
+        <section class="w970">
+            Dette er en section i footer
+        </section>
+    </footer>
+
+</body>
+</html>
