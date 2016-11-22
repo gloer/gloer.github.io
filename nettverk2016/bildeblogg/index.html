@@ -84,10 +84,10 @@
 
         function showPosts(snap) {
             var bilde = snap.val();
-            bloggen.innerHTML += `<article>
+            bloggen.innerHTML = `<article>
                                     <img src="${bilde.url}">
                                     <p>${bilde.tekst}</p>
-                                  </article>`;
+                                  </article>` + bloggen.innerHTML;
         }
 
         // Add Event Listeners
