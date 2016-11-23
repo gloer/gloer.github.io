@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Klikk og lag stjerner</title>
+    <style>
+        body {
+            background-color: black;
+            min-height: 100vh;
+        }
+        div {
+            background-color: hsl(40, 100%, 50%);
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+
+
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyA7yb872SjoLxAd81unFyKeC0upEW6cV_A",
+        authDomain: "todolist-be2e2.firebaseapp.com",
+        databaseURL: "https://todolist-be2e2.firebaseio.com",
+        storageBucket: "todolist-be2e2.appspot.com",
+        messagingSenderId: "648561001841"
+    };
+    firebase.initializeApp(config);
+</script>
+
+<script>
+
+    // Set up firebase
+    var database = firebase.database();
+    var stjerner = database.ref("stjerner");
+
+    function regStjerne(evt) {
+        var xpos = evt.clientX;
+        var ypos = evt.clientY;
+        var stjerne = {
+            x: xpos,
+            y: ypos
+        };
+        stjerner.push(stjerne);
+    }
+
+
+    function lagStjerner(snapshot) {
+        var stjerne = snapshot.val();
+        var x = stjerne.x;
+        var y = stjerne.y;
+
+        var i=1;
+        while(i < 30) {
+            var stjerne = document.createElement("div");
+            stjerne.style.left = x + "px";
+            stjerne.style.top = y + "px";
+            stjerne.style.backgroundColor = `hsl(${Math.random() * 200}, 100%, 50%)`;
+            document.body.appendChild(stjerne);
+
+            stjerne.animate(
+                    [
+                        {left: x + "px", top: y + "px"},
+                        {left: x + 500 - Math.random() * 1000 + "px", top: y + 300 - Math.random() * 600 + "px"}
+
+                    ],
+                    {
+                        duration: 1000,
+                        easing: "ease-out",
+                        fill: "forwards"
+                    }
+            );
+
+            i++;
+        }
+    }
+
+    stjerner.on("child_added", lagStjerner);
+    document.addEventListener("click", regStjerne);
+
+</script>
+</body>
+</html>
