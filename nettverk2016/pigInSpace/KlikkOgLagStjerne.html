@@ -41,6 +41,8 @@
     var database = firebase.database();
     var stjerner = database.ref("stjerner");
 
+    //stjerner.remove();
+
     function regStjerne(evt) {
         var xpos = evt.clientX;
         var ypos = evt.clientY;
@@ -84,6 +86,7 @@
 
     stjerner.on("child_added", lagStjerner);
     document.addEventListener("click", regStjerne);
+
 
 </script>
 </body>

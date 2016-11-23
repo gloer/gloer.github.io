@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pig in space</title>
+    <style>
+        body {
+            background-color: black;
+            min-height: 100vh;
+        }
+        div {
+            background-color: hsl(100, 50%, 100%);
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            position: absolute;
+            transition: 4s ease-in;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+
+    (function() {
+
+        // Decorate the web page with a number of stars
+        var i = 0;
+        while(i < 300) {
+            var stjerne = document.createElement("div");
+            stjerne.style.left = Math.random() * innerWidth + "px";
+            stjerne.style.top = Math.random() * innerHeight + "px";
+            document.body.appendChild(stjerne);
+            i++;
+        }
+
+        // Scramble the stars
+        function scramble() {
+            var stjerner = document.querySelectorAll("div");
+
+            for(var stjerne of stjerner) {
+                stjerne.style.left = Math.random() * innerWidth + "px";
+                stjerne.style.top = Math.random() * innerHeight + "px";
+                stjerne.style.width = Math.random() * 50 + "px";
+                stjerne.style.height = stjerne.style.width;
+                stjerne.style.backgroundColor = `hsl(${Math.random() *360}, 100%, 50%)`;
+            }
+        }
+
+
+        document.addEventListener("click", scramble);
+
+
+    })();
+
+
+</script>
+</body>
+</html>
