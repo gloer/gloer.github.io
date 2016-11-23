@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spacepig</title>
+    <style>
+
+
+
+        @keyframes rull {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: -1000px 0;
+            }
+        }
+
+        body {
+            background-image: url("space.png");
+            height: 100vh;
+            /* animation: rull 8s infinite linear; */
+        }
+
+        #astropig {
+            position: absolute;
+            left: 400px;
+            top: 250px;
+        }
+        
+    </style>
+</head>
+<body>
+    <button data-xdir="-1" data-ydir="0">LEFT</button>
+    <button data-xdir="1" data-ydir="0">RIGHT</button>
+    <button data-xdir="0" data-ydir="1">DOWN</button>
+    <button data-xdir="0" data-ydir="-1">UP</button>
+
+    <img src="astropig.png" id="astropig">
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA7yb872SjoLxAd81unFyKeC0upEW6cV_A",
+            authDomain: "todolist-be2e2.firebaseapp.com",
+            databaseURL: "https://todolist-be2e2.firebaseio.com",
+            storageBucket: "todolist-be2e2.appspot.com",
+            messagingSenderId: "648561001841"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+
+    <script>
+        var database = firebase.database();
+        var griseretning = database.ref("griseretning");
+
+        var astropig = document.getElementById("astropig");
+        var knapper = document.querySelectorAll("button");
+
+        var grisen = {
+            w: 67,
+            h: 108,
+            xpos: 400,
+            ypos: 250,
+            xdir: 0,
+            ydir: 0,
+            xspeed: 5,
+            yspeed: 3
+        };
+
+        // Function to save the pig´s directions to the database
+        function setDir() {
+
+            var grisedata = {
+                xdir: this.getAttribute("data-xdir"),
+                ydir: this.getAttribute("data-ydir")
+            };
+
+            griseretning.set(grisedata);
+        }
+
+        // Function to fetch the pig´s directions from the database
+        function fetchDir(snap) {
+            var directions = snap.val();
+            grisen.xdir = directions.xdir;
+            grisen.ydir = directions.ydir;
+
+        }
+
+        function fly() {
+            grisen.xpos += grisen.xdir * grisen.xspeed;
+            grisen.ypos += grisen.ydir * grisen.yspeed;
+
+            if(grisen.xpos > innerWidth) { grisen.xpos = -grisen.w }
+            if(grisen.xpos < -grisen.w) { grisen.xpos = innerWidth }
+            if(grisen.ypos > innerHeight) { grisen.ypos = -grisen.h }
+            if(grisen.ypos < -grisen.h) { grisen.ypos = innerHeight }
+
+            astropig.style.left = grisen.xpos + "px";
+            astropig.style.top = grisen.ypos + "px";
+
+            requestAnimationFrame(fly);
+        }
+
+        fly();
+
+        // Adding Event Listeners for the buttons
+        for(var knapp of knapper) {
+            knapp.addEventListener("click", setDir);
+        }
+
+        // Adding listener to changes in the database table
+        griseretning.on("value", fetchDir);
+
+    </script>
+</body>
+</html>
