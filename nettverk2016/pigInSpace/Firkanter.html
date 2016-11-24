@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Firkanter</title>
+</head>
+<body>
+
+    <button data-name="Pigge">Pig 1</button>
+    <button data-name="Nøff">Pig 2</button>
+    <button data-name="Stian">Pig 3</button>
+    <button data-name="Kåre">Pig 4</button>
+    <button data-name="Stine">Pig 5</button>
+
+    <script>
+
+        var knappene = document.querySelectorAll("button");
+
+        function visNavn() {
+            alert("Jeg heter " + this.getAttribute("data-name"));
+        }
+
+        for(var knapp of knappene) {
+            knapp.addEventListener("click", visNavn);
+        }
+
+    </script>
+</body>
+</html>

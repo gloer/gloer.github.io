@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>En haug av griser</title>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        body, #grisebingen {
+            height: 100vh;
+            background-color: #039be5;
+        }
+
+        #grisebingen > img {
+            width: 40px;
+            float: left;
+            cursor: url(bacon.png), pointer;
+            display: block;
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="grisebingen">
+
+    </div>
+
+    <script>
+        var grisebingen = document.getElementById("grisebingen");
+        var i=0;
+        while(i < 600) {
+            var gris = document.createElement("img");
+            gris.src = "astropig.png";
+            grisebingen.appendChild(gris);
+            i++;
+        }
+
+        function snurr() {
+            this.style.transform = `scale(${Math.random() * 3}) rotate(${Math.random()*6}turn)`;
+        }
+
+        var grisene = document.querySelectorAll("img");
+
+        for(var gris of grisene) {
+
+            gris.addEventListener("mouseover", snurr);
+
+        }
+
+
+
+    </script>
+</body>
+</html>
