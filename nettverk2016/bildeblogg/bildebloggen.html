@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bildebloggen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation-flex.css">
+    <style>
+        body {
+            max-width: 700px;
+            margin: auto;
+            padding: 10px;
+        }
+        #theBlog img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="regInnlegg">
+        <input type="file" required class="button" id="inpFile">
+        <input type="text" required id="inpTekst" placeholder="Hva har du tatt bilde av?">
+        <button type="submit" class="button">OK</button>
+    </form>
+
+    <section id="theBlog"></section>
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAEJB9V7ut590T6E9bz1ihakDnjxuR50oY",
+            authDomain: "it1-er-best.firebaseapp.com",
+            databaseURL: "https://it1-er-best.firebaseio.com",
+            storageBucket: "it1-er-best.appspot.com",
+            messagingSenderId: "87355636782"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        // Setting up the Firebase database and storage
+        var database = firebase.database();
+        var storage = firebase.storage();
+        var bloggen = database.ref("bloggen");
+
+
+        // DOM ELEMNTS
+        var regInnlegg = document.getElementById("regInnlegg");
+        var inpTekst = document.getElementById("inpTekst");
+        var inpFile = document.getElementById("inpFile");
+        var theBlog = document.getElementById("theBlog");
+
+
+        // A global variable to keep the url of the uploaded image
+        var bildeURL;
+
+        // Setting the url for the image
+        function setURL(snapshot) {
+            bildeURL = snapshot.downloadURL;
+        }
+
+        // Funksjon for å laste opp en fil til Firebase Storage
+        function lastOppFil() {
+            var fil = this.files[0];
+            var storageLocation = storage.ref("bilder/" + new Date());
+            storageLocation.put(fil).then(setURL);
+        }
+
+        // Add the blog post to the database
+        function leggTilIDatabase(evt) {
+            evt.preventDefault();
+            var post = {
+                bilde: bildeURL,
+                tekst: inpTekst.value
+            };
+            bloggen.push(post);
+
+            inpFile.value = inpTekst.value = "";
+
+        }
+
+        // Function to display the blog posts to the screen
+        function visInnlegg(snap) {
+            var post = snap.val();
+            theBlog.innerHTML = `<article>
+                                    <img src="${post.bilde}">
+                                    <p>${post.tekst}</p>
+                                 </article>` + theBlog.innerHTML;
+        }
+
+        // Event Listeners
+        inpFile.addEventListener("change", lastOppFil);
+        regInnlegg.addEventListener("submit", leggTilIDatabase);
+        bloggen.on("child_added", visInnlegg);
+
+    </script>
+</body>
+</html>
