@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bildebloggen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation-flex.css">
+    <style>
+        body {
+            max-width: 700px;
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="regInnlegg">
+        <input class="button" type="file" id="inpFile" required>
+        <input type="text" id="inpBildetekst" required>
+        <button class="button" type="submit">GO!</button>
+    </form>
+
+    <section id="bloggen"></section>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBfN2HPqMukCIxMJCyp21aH89w6HbgbCes",
+            authDomain: "supernettverk.firebaseapp.com",
+            databaseURL: "https://supernettverk.firebaseio.com",
+            storageBucket: "supernettverk.appspot.com",
+            messagingSenderId: "59995284086"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        // Setting up Firebase
+        var database = firebase.database();
+        var storage = firebase.storage();
+        var innleggene = database.ref("innleggene");
+
+        // URL som skal lagres i datbasen
+        var bildeURL;
+
+        // DOM Elements
+        var regInnlegg = document.getElementById("regInnlegg");
+        var inpFile = document.getElementById("inpFile");
+        var inpBildetekst = document.getElementById("inpBildetekst");
+        var bloggen = document.getElementById("bloggen");
+
+        function lagreData(snapshot) {
+            bildeURL = snapshot.downloadURL;
+            console.log(bildeURL);
+        }
+
+        function uploadImage() {
+            var file = inpFile.files[0];
+            var storageRef = storage.ref("bilder/" + new Date());
+            storageRef.put(file).then(lagreData);
+        }
+
+        function lagre(evt) {
+            evt.preventDefault();
+            var innlegg = {
+                url: bildeURL,
+                tekst: inpBildetekst.value
+            };
+            innleggene.push(innlegg);
+            inpBildetekst.value = "";
+            inpFile.value = "";
+        }
+
+        function visBilder(snapshot) {
+            var data = snapshot.val();
+            bloggen.innerHTML = `<img src="${data.url}">
+                                 <p>${data.tekst}</p><hr>` + bloggen.innerHTML;
+        }
+
+        // Add Event Listeners
+        inpFile.addEventListener("change", uploadImage);
+        regInnlegg.addEventListener("submit", lagre);
+        innleggene.on("child_added", visBilder);
+
+    </script>
+</body>
+</html>
