@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alle grisene</title>
+    <style>
+        * {
+            margin: 0;
+        }
+        img {
+            display: block;
+            float: left;
+            width: 40px;
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        var i = 0;
+        while(i < 350) {
+            var gris = document.createElement("img");
+            gris.src = "astropig.png";
+            document.body.appendChild(gris);
+
+            i++;
+        }
+
+        function snurr() {
+            this.style.transform = `scale(${Math.random() * 4}) rotate(3turn)`;
+        }
+
+        var grisene = document.querySelectorAll("img");
+        for(var gris of grisene) {
+            gris.addEventListener("mousemove", snurr);
+
+        }
+
+
+    </script>
+</body>
+</html>
