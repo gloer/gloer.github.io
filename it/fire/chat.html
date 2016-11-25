@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The awesome chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation-flex.css">
+    <style>
+        body {
+            max-width: 700px;
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="regMelding">
+        <input type="text" id="inpAvsender" required placeholder="Hva heter du?">
+        <input type="text" id="inpTekst" required placeholder="Hva mener du?">
+        <button type="submit" class="button">OK</button>
+    </form>
+    <table>
+        <tbody id="tblMeldinger"></tbody>
+    </table>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBfN2HPqMukCIxMJCyp21aH89w6HbgbCes",
+            authDomain: "supernettverk.firebaseapp.com",
+            databaseURL: "https://supernettverk.firebaseio.com",
+            storageBucket: "supernettverk.appspot.com",
+            messagingSenderId: "59995284086"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        // DOM references
+        var regMelding = document.getElementById("regMelding");
+        var inpAvsender = document.getElementById("inpAvsender");
+        var inpTekst = document.getElementById("inpTekst");
+        var tblMeldinger = document.getElementById("tblMeldinger");
+
+
+        var database = firebase.database();
+        var meldinger = database.ref("meldinger");
+
+        function lagreMelding(evt) {
+            evt.preventDefault();
+            var melding = {
+                avsender: inpAvsender.value,
+                tekst: inpTekst.value
+            };
+            meldinger.push(melding); // Legger melding i database
+            inpTekst.value = ""; // Nuller ut input-feltet
+        }
+
+        function visMeldinger(snapshot){
+            var melding = snapshot.val();
+            var key = snapshot.key;
+
+            tblMeldinger.innerHTML += `<tr>
+                                        <td>${key}</td>
+                                        <td>${melding.avsender}</td>
+                                        <td>${melding.tekst}</td>
+                                      </tr>`;
+
+        }
+
+        // Add event listeners
+        regMelding.addEventListener("submit", lagreMelding);
+        meldinger.on("child_added", visMeldinger);
+
+
+    </script>
+</body>
+</html>
