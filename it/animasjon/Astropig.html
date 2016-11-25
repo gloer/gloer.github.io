@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Astropig</title>
+    <style>
+        body {
+            background-color: aqua;
+        }
+        #pig {
+            position: absolute;
+            left: 300px;
+            top: 200px;
+        }
+        button {
+
+        }
+    </style>
+</head>
+<body>
+
+    <button data-xdir="-1" data-ydir="0">VENSTRE</button>
+    <button data-xdir="1" data-ydir="0">HØYRE</button>
+    <button data-xdir="0" data-ydir="-1">OPP</button>
+    <button data-xdir="0" data-ydir="1">NED</button>
+
+
+    <img src="astropig.png" id="pig">
+
+    <script>
+
+        var pig = document.getElementById("pig");
+
+        var grisen = {
+            xpos: 300,
+            ypos: 200,
+            xdir: 1,
+            ydir: 0,
+            xspeed: 5,
+            yspeed: 3
+        };
+
+        function fly() {
+            grisen.xpos += grisen.xspeed * grisen.xdir;
+            grisen.ypos += grisen.yspeed * grisen.ydir;
+
+            pig.style.left = grisen.xpos + "px";
+            pig.style.top = grisen.ypos + "px";
+
+            requestAnimationFrame(fly);
+        }
+        fly();
+
+        function setDir() {
+            grisen.xdir = Number(this.getAttribute("data-xdir"));
+            grisen.ydir = Number(this.getAttribute("data-ydir"));
+        }
+
+        var knappene = document.querySelectorAll("button");
+        for(var knapp of knappene) {
+            knapp.addEventListener("click", setDir);
+        }
+
+    </script>
+</body>
+</html>
