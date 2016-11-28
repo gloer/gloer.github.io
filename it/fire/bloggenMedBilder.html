@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laste opp filer</title>
+</head>
+<body>
+
+    <input type="file" id="inpFile" required>
+    <div id="info"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBfN2HPqMukCIxMJCyp21aH89w6HbgbCes",
+            authDomain: "supernettverk.firebaseapp.com",
+            databaseURL: "https://supernettverk.firebaseio.com",
+            storageBucket: "supernettverk.appspot.com",
+            messagingSenderId: "59995284086"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        // Setter opp Firebase Storage
+        var storage = firebase.storage();
+
+        // DOM-elementer
+        var inpFile = document.getElementById("inpFile");
+        var info = document.getElementById("info");
+
+        function visBilde(snapshot) {
+            info.innerHTML = `<img src="${snapshot.downloadURL}">`;
+        }
+
+        function lastOppBilde() {
+            var fil = inpFile.files[0]; // Filen som er valgt
+            var filnavn = fil.name; // Finner navnet på bildet
+            var lagringsplass = storage.ref("bilder/" + filnavn);
+            lagringsplass.put(fil).then(visBilde);
+        }
+
+        // Legger til en lytter som sørger for å starte funksjonen når brukeren velger bilde
+        inpFile.addEventListener("change", lastOppBilde);
+
+
+    </script>
+</body>
+</html>
