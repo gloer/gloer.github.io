@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Database</title>
+</head>
+<body>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBqF-5lQNMJArfDRK8VGLMSqVNFJ48WwjQ",
+            authDomain: "mitt-prosjekt-1053c.firebaseapp.com",
+            databaseURL: "https://mitt-prosjekt-1053c.firebaseio.com",
+            storageBucket: "mitt-prosjekt-1053c.appspot.com",
+            messagingSenderId: "416172345565"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <form id="frmMelding">
+        <input type="text" id="inpAvsender">
+        <input type="text" id="inpTekst">
+        <button type="submit">OK</button>
+    </form>
+
+    <div id="divMeldinger"></div>
+
+    <script>
+        // DOM-referanser
+        var divMeldinger = document.getElementById("divMeldinger");
+        var frmMelding = document.getElementById("frmMelding");
+        var inpAvsender = document.getElementById("inpAvsender");
+        var inpTekst = document.getElementById("inpTekst");
+
+
+
+
+        var minDatabase = firebase.database();
+        var meldinger = minDatabase.ref("meldinger");
+
+
+
+        function regMelding(evt) {
+            evt.preventDefault();
+            var melding = {
+                avsender: inpAvsender.value,
+                tekst: inpTekst.value
+            };
+            meldinger.push(melding);
+        }
+
+
+        function visMeldinger(snapshot) {
+            var melding = snapshot.val();
+            divMeldinger.innerHTML += `<p>${melding.avsender} sier ${melding.tekst}</p>`;
+        }
+
+        // Event Listeners
+        meldinger.on("child_added", visMeldinger);
+        frmMelding.addEventListener("submit", regMelding);
+
+    </script>
+</body>
+</html>
