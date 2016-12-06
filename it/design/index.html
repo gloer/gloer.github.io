@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dele opp siden</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        .container {
+            max-width: 970px;
+            margin: auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+
+        }
+        header {
+            background-color: antiquewhite;
+            min-height: 120px;
+        }
+        main {
+            background-color: dodgerblue;
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+        }
+
+        main > article {
+            flex: 1;
+            margin: 2px;
+            background-color: aliceblue;
+        }
+
+        footer {
+            background-color: sienna;
+            min-height: 120px;
+        }
+
+        @media screen and (max-width: 600px) {
+            main {
+                flex-direction: column;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header></header>
+        <main>
+            <article>Tekst 1</article>
+            <article>Tekst 2</article>
+            <article>Tekst 3</article>
+        </main>
+        <footer></footer>
+    </div>
+
+</body>
+</html>
