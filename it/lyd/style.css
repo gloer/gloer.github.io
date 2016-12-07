@@ -67,4 +67,14 @@ button:hover {
 }
 #divPaletter > div > div {
     flex: 1;
+    text-align: center;
+}
+
+#divPaletter > div > div > span {
+    opacity: 0;
+    transition: 0.2s;
+}
+
+#divPaletter > div:hover > div > span {
+    opacity: 1;
 }
