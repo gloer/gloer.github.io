@@ -58,7 +58,7 @@
         function leggTilPalett(evt) {
             evt.preventDefault();
             paletter.push({
-                skaper: inpNavn.value,
+                skaper: inpNavn.value || "anonym",
                 f1: farge1.value,
                 f2: farge2.value,
                 f3: farge3.value,
