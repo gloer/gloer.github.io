@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ta opp en sang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation-flex.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <style>
+        body {
+            max-width: 970px;
+            margin: auto;
+            padding: 10px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            background-image: url("bgr.jpg");
+            background-size: cover;
+            background-position: right center;
+        }
+        h1 {
+            font-family: 'Lato', sans-serif;
+            font-size: 18px;
+            color: white;
+        }
+
+        #container {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+
+        #container > div {
+            background-color: lightyellow;
+            padding: 2px;
+            width: 120px;
+            height: 60px;
+            margin: 2px;
+            border-radius: 5px;
+        }
+
+        #container > div > p{
+            margin: 0;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>Klikk på knappen når du ikke hører lyden mer</h1>
+        <input type="number" placeholder="Hvor gammel er du?" id="inpAlder">
+        <button class="button" id="btnFerdig">Der sluttet jeg å høre lyden</button>
+    </div>
+    <div id="container"></div>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAEJB9V7ut590T6E9bz1ihakDnjxuR50oY",
+            authDomain: "it1-er-best.firebaseapp.com",
+            databaseURL: "https://it1-er-best.firebaseio.com",
+            storageBucket: "it1-er-best.appspot.com",
+            messagingSenderId: "87355636782"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        var inpAlder = document.getElementById("inpAlder");
+        var btnFerdig = document.getElementById("btnFerdig");
+        var container = document.getElementById("container");
+
+
+
+        var database = firebase.database();
+        var frekvenser = database.ref("frekvenser");
+
+        var ac = new AudioContext();
+        var osc = ac.createOscillator();
+        osc.connect(ac.destination);
+        osc.frequency.value = 0;
+        osc.start(0);
+
+        var frekvens = 0;
+
+        function increaseFrequency() {
+            frekvens = ac.currentTime * 500;
+            osc.frequency.value = frekvens;
+            if(frekvens < 22500)
+                requestAnimationFrame(increaseFrequency);
+        }
+
+        increaseFrequency();
+
+        function visFrekvenser(snapshot) {
+            var data = snapshot.val();
+            var farge = `hsl(180, ${Math.random() * 100}%, 82%)`;
+            container.innerHTML = `<div style="background-color: ${farge}">
+                                        <p>Alder: ${data.alder}</p>
+                                        <p>${Math.round(data.hz)} Hz</p>
+                                   </div>` + container.innerHTML;
+
+        }
+
+        function lagreData() {
+            var alder = Number(inpAlder.value);
+            if(alder < 0 || alder > 120 || isNaN(alder)){
+                alder = "ukjent";
+            }
+            btnFerdig.style.display = "none";
+            frekvenser.push({
+                alder: alder,
+                hz: frekvens
+            });
+        }
+
+        inpAlder.focus();
+        btnFerdig.addEventListener("click", lagreData);
+        frekvenser.on("child_added", visFrekvenser);
+
+    </script>
+</body>
+</html>

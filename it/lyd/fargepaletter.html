@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fargepaletter</title>
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <form id="regPalett">
+        <input id="inpNavn" type="text" placeholder="Hva heter du?" required autocomplete="off">
+        <div id="fargevelgere">
+            <input type="color" value="#A8E6CE" id="farge1">
+            <input type="color" value="#DCEDC2" id="farge2">
+            <input type="color" value="#FFD3B5" id="farge3">
+            <input type="color" value="#FFAAA6" id="farge4">
+            <input type="color" value="#FF8C94" id="farge5">
+        </div>
+        <div>
+            <button type="submit">Lagre din fargepalett</button>
+        </div>
+    </form>
+
+    <div id="divPaletter"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAEJB9V7ut590T6E9bz1ihakDnjxuR50oY",
+            authDomain: "it1-er-best.firebaseapp.com",
+            databaseURL: "https://it1-er-best.firebaseio.com",
+            storageBucket: "it1-er-best.appspot.com",
+            messagingSenderId: "87355636782"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        // Firebase
+        var database = firebase.database();
+        var paletter = database.ref("paletter");
+
+        // DOM-elementer
+        var farge1 = document.getElementById("farge1");
+        var farge2 = document.getElementById("farge2");
+        var farge3 = document.getElementById("farge3");
+        var farge4 = document.getElementById("farge4");
+        var farge5 = document.getElementById("farge5");
+        var regPalett = document.getElementById("regPalett");
+        var divPaletter = document.getElementById("divPaletter");
+        var inpNavn = document.getElementById("inpNavn");
+
+
+        //Legger til en palett i databasen
+        function leggTilPalett(evt) {
+            evt.preventDefault();
+            paletter.push({
+                skaper: inpNavn.value,
+                f1: farge1.value,
+                f2: farge2.value,
+                f3: farge3.value,
+                f4: farge4.value,
+                f5: farge5.value
+            });
+        }
+
+        function visPaletter(snapshot) {
+            var palett = snapshot.val();
+            divPaletter.innerHTML = `<p>${palett.skaper}</p>
+                                     <div>
+                                        <div style="background-color: ${palett.f1}"></div>
+                                        <div style="background-color: ${palett.f2}"></div>
+                                        <div style="background-color: ${palett.f3}"></div>
+                                        <div style="background-color: ${palett.f4}"></div>
+                                        <div style="background-color: ${palett.f5}"></div>
+                                     </div>` + divPaletter.innerHTML;
+        }
+
+        inpNavn.focus();
+        regPalett.addEventListener("submit", leggTilPalett);
+        paletter.on("child_added", visPaletter);
+
+
+    </script>
+</body>
+</html>
