@@ -71,11 +71,21 @@
             var palett = snapshot.val();
             divPaletter.innerHTML = `<p>${palett.skaper}</p>
                                      <div>
-                                        <div style="background-color: ${palett.f1}"></div>
-                                        <div style="background-color: ${palett.f2}"></div>
-                                        <div style="background-color: ${palett.f3}"></div>
-                                        <div style="background-color: ${palett.f4}"></div>
-                                        <div style="background-color: ${palett.f5}"></div>
+                                        <div style="background-color: ${palett.f1}">
+                                            <span>${palett.f1}<span>
+                                        </div>
+                                        <div style="background-color: ${palett.f2}">
+                                            <span>${palett.f2}</span>
+                                        </div>
+                                        <div style="background-color: ${palett.f3}">
+                                            <span>${palett.f3}</span>
+                                        </div>
+                                        <div style="background-color: ${palett.f4}">
+                                            <span>${palett.f4}</span>
+                                        </div>
+                                        <div style="background-color: ${palett.f5}">
+                                            <span>${palett.f5}</span>
+                                        </div>
                                      </div>` + divPaletter.innerHTML;
         }
 
