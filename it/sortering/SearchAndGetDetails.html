@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The amazing Movie Database</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation-flex.min.css">
+    <style>
+        body {
+            max-width: 1024px;
+            margin: auto;
+            padding: 10px;
+        }
+
+        #info {
+            background-color: antiquewhite;
+            padding: 10px;
+        }
+        img {
+            width: 120px;
+            float: right;
+            margin-left: 8px;
+        }
+        h2 {
+            font-size: 1.5em;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>The amazing movie database</h1>
+
+    <form id="searchForm">
+        <input type="text" id="inpTitle" placeholder="Search by title" required>
+    </form>
+
+    <button class="button" id="btnTitle">Sorter etter tittel</button>
+    <button class="button" id="btnYear">Sorter etter år</button>
+    <button class="button" id="btnMetascore">Sorter etter Metascore</button>
+    <button class="button" id="btnCost">Sorter etter kostnader</button>
+    <div class="row">
+
+
+        <div class="small-12 medium-6 columns" style="padding-left: 0">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Cost</th>
+                        <th>Metascore</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody id="tbFilmer"></tbody>
+            </table>
+
+        </div>
+
+        <div id="info" class="small-12 medium-6 columns">
+            Klikk på en film for å få mer informasjon
+        </div>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDb2AKxm-t2hX4fjPoGGE4mkwm1I_osj_g",
+            authDomain: "project-8854204443765632852.firebaseapp.com",
+            databaseURL: "https://project-8854204443765632852.firebaseio.com",
+            storageBucket: "project-8854204443765632852.appspot.com",
+            messagingSenderId: "370282732144"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        let database = firebase.database();
+        let filmer = database.ref("filmer");
+        let btnYear = document.getElementById("btnYear");
+        let btnMetascore = document.getElementById("btnMetascore");
+        let btnCost = document.getElementById("btnCost");
+        let btnTitle = document.getElementById("btnTitle");
+        let searchForm = document.getElementById("searchForm");
+        let inpTitle = document.getElementById("inpTitle");
+        let info = document.getElementById("info");
+
+
+
+        let tbFilmer = document.getElementById("tbFilmer");
+        let reverse = false;
+
+        function visFilmer(snapshot) {
+            let film = snapshot.val();
+            let tr = `<tr id="${snapshot.key}" onclick="showMovie('${snapshot.key}')">
+                        <td>${film.Title}</td>
+                        <td>${film.Cost}</td>
+                        <td>${film.Metascore}</td>
+                        <td>${film.Year}</td>
+                      </tr>`;
+            if(reverse) {
+                tbFilmer.innerHTML = tr + tbFilmer.innerHTML;
+            } else {
+                tbFilmer.innerHTML = tbFilmer.innerHTML + tr;
+            }
+        }
+
+        function showMovie(key) {
+            let movie = database.ref("filmer/" + key);
+            movie.on("value", snapshot => {
+                let data = snapshot.val();
+                info.innerHTML = `<h2>${data.Title}</h2>
+                                  <img src="${data.Poster}">
+                                  <p>${data.Plot}</p>
+                                  <p><b>Runtime: </b>${data.Runtime}</p>
+                                  <p><b>Actors: </b>${data.Actors}</p>
+                                  <p><b>Director: </b>${data.Director}</p>
+                                  <p><b>Metascore: </b>${data.Metascore}</p>
+                                  <p><b>IMDB rating: </b>${data.imdbRating}</p>
+                                  <p><a href="http://www.imdb.com/title/${data.imdbID}">Read more on IMDB</a></p>`;
+            });
+        }
+
+        function sortByCost() {
+            reverse = true;
+            tbFilmer.innerHTML = "";
+            filmer.orderByChild("Cost")
+                .on("child_added", visFilmer);
+        }
+
+        function sortByYear() {
+            reverse = true;
+            tbFilmer.innerHTML = "";
+            filmer.orderByChild("Year")
+                .on("child_added", visFilmer);
+        }
+
+        function sortByMetascore() {
+            reverse = true;
+            tbFilmer.innerHTML = "";
+            filmer.orderByChild("Metascore")
+                .on("child_added", visFilmer);
+        }
+
+        function sortByTitle() {
+            reverse = false;
+            tbFilmer.innerHTML = "";
+            filmer.orderByChild("Title")
+                .on("child_added", visFilmer);
+        }
+
+
+        function search(evt) {
+            evt.preventDefault();
+            tbFilmer.innerHTML = "";
+            let q = inpTitle.value;
+            filmer.orderByChild("Title")
+                .startAt(q)
+                .endAt(q + '\uf8ff') // uf8ff ligger høyere i UNICODE enn alle bokstaver og tall
+                .on("child_added", visFilmer);
+        }
+
+        btnCost.addEventListener("click", sortByCost);
+        btnMetascore.addEventListener("click", sortByMetascore);
+        btnYear.addEventListener("click", sortByYear);
+        btnTitle.addEventListener("click", sortByTitle);
+        searchForm.addEventListener("input", search);
+
+        sortByTitle();
+
+    </script>
+</body>
+</html>
