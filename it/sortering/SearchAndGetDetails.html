@@ -161,6 +161,14 @@
                 .startAt(q)
                 .endAt(q + '\uf8ff') // uf8ff ligger høyere i UNICODE enn alle bokstaver og tall
                 .on("child_added", visFilmer);
+
+            let alleFilmer = document.querySelectorAll("#tbFilmer > tr");
+            console.log(alleFilmer);
+            if(alleFilmer.length === 1) {
+                // Bare en film å vise
+                let id = alleFilmer[0].id;
+                showMovie(id);
+            }
         }
 
         btnCost.addEventListener("click", sortByCost);
