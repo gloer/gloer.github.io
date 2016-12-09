@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Single Page Application</title>
+    <style>
+        * {
+            margin: 0;
+        }
+        #container {
+            max-width: 970px;
+            margin: auto;
+        }
+        header {
+            position: fixed; /* Hvis toppen skal være synlig hele tiden */
+        }
+        main > section {
+            min-height: 100vh;
+            padding-top: 100px;
+            box-sizing: border-box;
+        }
+        #one {
+            background-color: chocolate;
+        }
+        #two {
+            background-color: antiquewhite;
+        }
+        #three {
+            background-color: crimson;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+
+        <header>
+            <nav>
+                <a href="#one">Section one</a>
+                <a href="#two">Section two</a>
+                <a href="#three">Section three</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="one">Dette er section one</section>
+            <section id="two">Dette er section two</section>
+            <section id="three">Dette er section three</section>
+        </main>
+
+        <footer>Footer</footer>
+
+    </div>
+
+</body>
+</html>
