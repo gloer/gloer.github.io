@@ -6,18 +6,52 @@
     <title>The Cat Tracker</title>
 </head>
 <body>
-
+    <form id="regKatt">
+        <input type="text" id="inpNavn" placeholder="Hva heter katten din?" required>
+        <button type="submit">Start tracking the cat</button>
+    </form>
     <div id="info"></div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAIA8qWz10Q2L0htKVAaCKLTV5tFRG9qIc",
+            authDomain: "informasjonsteknologi1-46a87.firebaseapp.com",
+            databaseURL: "https://informasjonsteknologi1-46a87.firebaseio.com",
+            storageBucket: "informasjonsteknologi1-46a87.appspot.com",
+            messagingSenderId: "572122759210"
+        };
+        firebase.initializeApp(config);
+    </script>
 
     <script>
         let info = document.getElementById("info");
+        let regKatt = document.getElementById("regKatt");
+
+        let database = firebase.database();
+        let kattespor;
+
 
         function loggPosisjon(position) {
-            info.innerHTML += position.coords.latitude + " " +
-                    position.coords.longitude;
+            info.innerHTML += "Posisjonen til " + inpNavn.value + " er nå lat: " + position.coords.latitude + " long: " +
+                    position.coords.longitude + "<br>";
+
+            kattespor.push({
+                time: firebase.database.ServerValue.TIMESTAMP,
+                lat: position.coords.latitude,
+                long: position.coords.longitude
+            });
+
         }
 
-        navigator.geolocation.watchPosition(loggPosisjon);
+        regKatt.onsubmit = function(evt) {
+            evt.preventDefault();
+            kattespor = database.ref("kattespor/" + inpNavn.value);
+            navigator.geolocation.watchPosition(loggPosisjon);
+        }
+
 
 
     </script>
