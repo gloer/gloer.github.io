@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Cat Tracker</title>
+</head>
+<body>
+
+    <div id="info"></div>
+
+    <script>
+        let info = document.getElementById("info");
+
+        function loggPosisjon(position) {
+            info.innerHTML += position.coords.latitude + " " +
+                    position.coords.longitude;
+        }
+
+        navigator.geolocation.watchPosition(loggPosisjon);
+
+
+    </script>
+</body>
+</html>
