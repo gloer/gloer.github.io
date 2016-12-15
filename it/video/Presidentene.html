@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Topp 10 presidenter</title>
+    <style>
+
+        #container {
+            position: relative;
+            margin-top: 30px;
+            width: 700px;
+        }
+        #reklame {
+            display: none;
+            background-color: red;
+            color: white;
+            padding: 20px;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div>
+        <button id="btnPlay">Play</button>
+        <button id="btnPause">Pause</button>
+        <button id="btnRask">Fort film</button>
+        <button id="btnSakte">Sakte film</button>
+
+        <button id="btnRoosevelt">Roosevelt</button>
+
+    </div>
+
+    <div id="container">
+        <video src="presidents.mp4" width="700" id="minVideo" controls>
+            <track kind="subtitles" srclang="no" src="subtitles_no.vtt" label="Norsk">
+            <track kind="subtitles" srclang="en" src="subtitles_en.vtt" label="English" default>
+        </video>
+        <div id="reklame">Kjøp BUGG!</div>
+    </div>
+
+    </video>
+
+    <script>
+        var minVideo = document.getElementById("minVideo");
+        var btnPlay = document.getElementById("btnPlay");
+        var btnPause = document.getElementById("btnPause");
+        var btnRask = document.getElementById("btnRask");
+        var btnSakte = document.getElementById("btnSakte");
+        var btnRoosevelt = document.getElementById("btnRoosevelt");
+
+
+        btnRoosevelt.onclick = function() {
+            minVideo.currentTime = 253;
+            minVideo.play();
+        };
+
+        btnRask.onclick = function() {
+            minVideo.playbackRate = 4;
+        };
+        btnSakte.onclick = function() {
+            minVideo.playbackRate = 0.5;
+        };
+
+        btnPlay.onclick = function() {
+            minVideo.play();
+        };
+        btnPause.onclick = function() {
+            minVideo.pause();
+        };
+
+        minVideo.ontimeupdate = function() {
+            if(minVideo.currentTime > 4 && minVideo.currentTime < 4.3) {
+                minVideo.pause();
+                reklame.style.display = "block";
+            }
+        };
+        reklame.onclick = function() {
+            reklame.style.display = "none";
+            minVideo.currentTime = 4.3;
+            minVideo.play();
+        };
+
+
+    </script>
+</body>
+</html>
