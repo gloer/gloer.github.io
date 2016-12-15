@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IMDB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation-flex.min.css">
+    <style>
+        body {
+            max-width: 970px;
+            margin: auto;
+            padding: 10px;
+        }
+        #artInfo img {
+            float: right;
+            margin-left: 10px;
+            width: 220px;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="button" id="btnTitle">Sorter etter tittel</button>
+    <button class="button" id="btnDirector">Sorter etter regissør</button>
+    <button class="button" id="btnMetascore">Sorter etter Metascore</button>
+    <button class="button" id="btnCost">Sorter etter kostnader</button>
+
+    <input type="text" id="inpTitle" autocomplete="off">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Director</th>
+                <th>Metascore</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody id="tblFilmer"></tbody>
+    </table>
+
+    <article id="artInfo"></article>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDWmYyA357PQM6qYS7cbeYxN4tY_ZP6vTc",
+            authDomain: "filmdatabasen-326b7.firebaseapp.com",
+            databaseURL: "https://filmdatabasen-326b7.firebaseio.com",
+            storageBucket: "filmdatabasen-326b7.appspot.com",
+            messagingSenderId: "634475513086"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        // Firebase setup
+        let database = firebase.database();
+        let filmer = database.ref("filmer");
+        let tblFilmer = document.getElementById("tblFilmer");
+        let btnTitle = document.getElementById("btnTitle");
+        let btnDirector = document.getElementById("btnDirector");
+        let inpTitle = document.getElementById("inpTitle");
+        let artInfo = document.getElementById("artInfo");
+
+        function visInfo(snapshot) {
+            let data = snapshot.val();
+            artInfo.innerHTML = `<img src="${data.Poster}">
+                                 <h2>${data.Title}</h2>
+                                 <p><b>Director:</b> ${data.Director}</p>
+                                 <p><b>Actors:</b> ${data.Actors}</p>
+                                 <p><b>Plot:</b> ${data.Plot}</p>
+                                `;
+        }
+
+        function finnFilm(id) {
+            let film = database.ref("filmer/" + id);
+            film.on("value", visInfo);
+        }
+
+        function visFilmer(snapshot) {
+            let film = snapshot.val();
+            let rad = `<tr onclick="finnFilm('${snapshot.key}')">
+                          <td>${film.Title}</td>
+                          <td>${film.Director}</td>
+                          <td>${film.Metascore}</td>
+                          <td>${film.Cost}</td>
+                       </tr>`;
+            tblFilmer.innerHTML =  tblFilmer.innerHTML + rad;
+        }
+
+
+
+        function sorterEtterTittel() {
+            tblFilmer.innerHTML = "";
+            filmer
+                .orderByChild("Title")
+                .on("child_added", visFilmer);
+        }
+
+        function finnFilmer() {
+            tblFilmer.innerHTML = "";
+            let tittel = this.value;
+            filmer
+                .orderByChild("Title")
+                .startAt(tittel)
+                .endAt(tittel + '\uf8ff')
+                .on("child_added", visFilmer);
+        }
+
+        inpTitle.addEventListener("input", finnFilmer);
+        btnTitle.addEventListener("click", sorterEtterTittel);
+        //btnDirector.addEventListener("click", sorterEtterRegisor);
+
+    </script>
+
+
+</body>
+</html>
