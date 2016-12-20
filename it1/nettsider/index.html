@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nettside</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #container {
+            max-width: 970px;
+            margin: auto;
+        }
+        header {
+            background-color: aliceblue;
+        }
+        header h1 {
+            border-bottom: 4px solid gray;
+            padding-bottom: 40px;
+            padding-top: 40px;
+            text-align: center;
+        }
+
+        .topmenu {
+            display: flex;
+        }
+        .topmenu a {
+            flex: 1;
+            text-align: center;
+            border: 2px solid salmon;
+            min-height: 80px;
+        }
+
+        main {
+            display: flex;
+        }
+        main article {
+            flex: 1;
+            text-align: center;
+            padding-top: 20px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        main article img {
+            width: 100%;
+        }
+
+        .boks {
+            background-color: royalblue;
+            color: white;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        @media screen and (max-width: 480px) {
+
+            .topmenu {
+                flex-direction: column;
+            }
+
+            main {
+                flex-direction: column;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <header>
+            <h1>Treningsmagasinet</h1>
+            <img src="kalk.png">
+        </header>
+
+        <nav class="topmenu">
+            <a href="informasjon.html">Informajon</a>
+            <a href="informasjon.html">Øvelser</a>
+            <a href="butikk.html">Butikk</a>
+        </nav>
+
+        <main>
+            <article>
+                <img src="arnold.jpeg">
+                <p>Hvordan se ut som Arnold</p>
+            </article>
+            <article class="red">
+                <h1 class="boks">Om oss</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad alias aliquid atque beatae consectetur ducimus eius est eum facere laborum laudantium, odit, quo repellat sit soluta tenetur, velit voluptatum.</p>
+            </article>
+            <article>
+                <img src="muskler.jpg">
+                <p>4 tips for større biceps</p>
+                <img src="melk.jpg">
+                <p>Beste pre-workouten?</p>
+            </article>
+        </main>
+
+        <foooter>
+            <article>
+                Kontakt oss
+            </article>
+            <article>
+                Tekst
+            </article>
+            <article>
+                Lokasjon
+            </article>
+        </foooter>
+
+
+    </div>
+
+</body>
+</html>
