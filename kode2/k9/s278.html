@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Firkanter</title>
+    <style>
+        body {
+            background-color: saddlebrown;
+        }
+        div {
+            float: left;
+            width: 20px;
+            height: 10px;
+            margin-right: 5px;
+            background-color: goldenrod;
+        }
+    </style>
+</head>
+<body>
+    <section id="container">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </section>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61811/web-animations-next-2.2.0.min.js"></script>
+    <script>
+
+
+        var divs = document.querySelectorAll("#container > div");
+
+        var animasjon = [
+            {transform: 'translateY(0px)', opacity: 1},
+            {transform: 'translateY(200px)', opacity: 0}
+        ];
+        var kontrollobjekt = {
+            duration: 1000,
+            direction: 'alternate',
+            iterations: Infinity,
+            easing: 'ease-in-out'
+        };
+        var i = 0;
+        for(var div of divs){
+            kontrollobjekt.delay = i * 100;
+            div.animate(animasjon, kontrollobjekt);
+            i++;
+            console.log(div.getAnimations());
+        }
+
+        document.onclick = function() {
+            for(var div of divs){
+                var animasjoner = div.getAnimations();
+                // animasjoner er et array med animasjoner på elementet
+                // Vi snur den første (og eneste)
+                animasjoner[0].reverse();
+            }
+        }
+
+    </script>
+</body>
+</html>
