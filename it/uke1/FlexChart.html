@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flex Chart</title>
+    <style>
+        #chart {
+            display: flex;
+            width: 800px;
+            height: 400px;
+            background-color: aliceblue;
+            filter: drop-shadow(0 0 1px black);
+            margin: auto;
+            flex-direction: row; /* column eller row */
+            align-items: flex-end;
+        }
+        #chart > div {
+            flex: 1;
+            margin: 2px;
+            background-color: slateblue;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="chart">
+
+    </div>
+
+    <script>
+
+        var chart = document.getElementById("chart");
+        var temperaturer = [];
+
+
+        function finnMaks(arr) {
+            var maks = -Infinity;
+
+            for(var temp of arr){
+                if(temp > maks){
+                    maks = temp;
+                }
+            }
+            return maks;
+        }
+
+
+        function tegnStolper() {
+            chart.innerHTML = "";
+            var maks = finnMaks(temperaturer);
+            for(var temp of temperaturer) {
+                chart.innerHTML += `<div style="height: ${temp * 90 / maks}%"></div>`;
+            }
+        }
+
+        tegnStolper();
+
+        function leggTilStolpe(evt){
+            temperaturer.push(evt.clientX);
+            tegnStolper();
+        }
+
+        document.onclick = leggTilStolpe;
+
+
+
+
+    </script>
+</body>
+</html>
