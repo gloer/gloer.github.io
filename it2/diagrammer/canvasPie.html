@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Canvas Pie</title>
+</head>
+<body>
+
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+
+    <script>
+        var myCanvas = document.getElementById("myCanvas");
+        var ctx = myCanvas.getContext("2d");
+
+        function degToRad(deg) {
+            return Math.PI * deg / 180;
+        }
+
+        var meetingPoint = 10;
+        var startPoint = 180;
+
+        function join() {
+
+            ctx.clearRect(0,0, 500,500);
+
+            ctx.beginPath();
+            ctx.fillStyle = "green";
+            ctx.moveTo(250, 250);
+            ctx.arc(250, 250, 240, degToRad(0), degToRad(startPoint), false);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.fillStyle = "orange";
+            ctx.moveTo(250, 250);
+            ctx.arc(250, 250, 240, degToRad(360), degToRad(startPoint), true);
+            ctx.closePath();
+            ctx.fill();
+
+            if(startPoint > meetingPoint) {
+                startPoint--;
+            }
+
+            if(startPoint < meetingPoint) {
+                startPoint++;
+            }
+        }
+
+        setInterval(join, 10);
+
+
+    </script>
+</body>
+</html>

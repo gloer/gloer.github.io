@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Canvas Pie Data</title>
+</head>
+<body>
+
+    <canvas width="500" height="500" id="myCanvas"></canvas>
+
+    <script>
+
+        var myCanvas = document.getElementById("myCanvas");
+        var ctx = myCanvas.getContext("2d");
+
+        function degToRad(deg) {
+            return Math.PI * deg / 180;
+        }
+
+        var vinkler = [90, 180, 270, 360];
+        var startvinkel = 0;
+
+        for(var vinkel of vinkler) {
+
+            ctx.fillStyle = `hsl(${startvinkel}, 100%, 50%)`; // random color
+            ctx.beginPath();
+                ctx.moveTo(250, 250);
+                ctx.arc(250, 250, 240, degToRad(startvinkel), degToRad(vinkel));
+            ctx.closePath();
+            ctx.fill();
+
+            startvinkel = vinkel;
+
+
+        }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Temperaturer på Sicilia</title>
+    <style>
+        #chart > div {
+            height: 15px;
+            margin-bottom: 5px;
+            background-color: darkorange;
+            color: white;
+            padding: 5px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <p>Temperaturer på Sicilia</p>
+    <div id="chart"></div>
+
+    <script>
+
+        let chart = document.getElementById("chart");
+        let temperaturer = [16, 16, 18, 21, 25, 30, 33, 30, 25, 20, 17, 12];
+
+        for(let temp of temperaturer) {
+            let tempDiv = document.createElement("div");
+            tempDiv.style.width = temp * 10 + "px";
+            tempDiv.innerHTML = temp;
+            chart.appendChild(tempDiv);
+            tempDiv.animate([{width: `20px`}, {width: `${temp * 10}px`}], temp * 20);
+        }
+
+    </script>
+</body>
+</html>

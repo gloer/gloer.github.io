@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flex Chart</title>
+    <style>
+        #chart {
+            display: flex;
+            width: 800px;
+            height: 400px;
+            background-color: aliceblue;
+            filter: drop-shadow(0 0 1px black);
+            margin: 20px auto;
+            padding-left: 2px;
+            padding-right: 2px;
+            flex-direction: row;
+            align-items: flex-end;
+        }
+        #chart > div {
+            flex: 1;
+            margin: 4px;
+            background-color: darkorange;
+            text-align: center;
+            color: darkblue;
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+            height: 1%;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="chart"></div>
+
+    <script>
+        let chart = document.getElementById("chart");
+        let innbyggere = [200, 300, 500, 180, 340, 600, 800, 120];
+
+        // Finner den største
+        let maks = -Infinity;
+        for(let innbygger of innbyggere) {
+            if(innbygger > maks) {
+                maks = innbygger;
+            }
+        }
+
+        for(let innbygger of innbyggere) {
+            chart.innerHTML += `<div style="height: ${innbygger/maks * 90}%">Stavanger</div>`;
+        }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SVG</title>
+    <style>
+        svg {
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+
+
+    <svg width="600" height="400">
+        <polyline id="line" fill="none" stroke="green"></polyline>
+    </svg>
+
+    <script>
+        var line = document.getElementById("line");
+
+        var x = 10;
+        var points="0,0";
+        var left = 10;
+
+        function disrupt() {
+            x += 10;
+
+            var newPoint = ` ${x},${400 - Math.random() * 400}`;
+            points += newPoint;
+            line.setAttribute("points", points);
+
+            if (x > 500){
+                line.style.transform = `translateX(${-left}px)`;
+                left += 10;
+            }
+        }
+        setInterval(disrupt, 80);
+
+    </script>
+</body>
+</html>

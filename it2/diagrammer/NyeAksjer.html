@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aksjekurser</title>
+    <style>
+        #chart {
+            display: block;
+            position: relative;
+            margin: auto;
+            background-color: moccasin;
+            filter: drop-shadow(0 0 1px black);
+        }
+        #ruter {
+            stroke: lightgray;
+        }
+        #linje {
+            stroke: darkgray;
+            stroke-width: 3px;
+            fill: none;
+        }
+    </style>
+</head>
+<body>
+
+    <svg id="chart" width="800" height="400">
+
+        <g id="ruter"></g>
+        <polyline id="linje"></polyline>
+
+    </svg>
+
+    <script>
+        let ruter = document.getElementById("ruter");
+        let linje = document.getElementById("linje");
+
+        function tegnLinjer() {
+            var y = 20;
+            var x = 20;
+            while(y < 400) {
+                ruter.innerHTML += `<line
+                                        x1="0"
+                                        y1="${y}"
+                                        x2="800"
+                                        y2="${y}"
+                                        ></line>`;
+                y += 20;
+            }
+            while(x < 800){
+                ruter.innerHTML += `<line x1="${x}" y1="0" x2="${x}" y2="400"></line>`;
+                x += 20;
+            }
+        }
+
+
+        var punkter = [];
+        var xpos = 0;
+        var skyv = 20;
+        function tegnGraf() {
+            punkter += ` ${xpos},${Math.random()*400} `;
+            linje.setAttribute("points", punkter);
+            xpos += 20;
+
+            if(xpos > 700){
+                linje.style.transform = `translateX(${-skyv}px)`;
+                skyv += 20;
+            }
+        }
+
+        tegnLinjer();
+
+        setInterval(tegnGraf, 500);
+
+
+    </script>
+</body>
+</html>

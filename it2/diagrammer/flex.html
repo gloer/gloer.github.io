@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flex</title>
+    <style>
+        #chart {
+            display: flex;
+            width: 200px;
+            height: 100px;
+            flex-direction: row;
+            align-items: flex-end;
+        }
+        #chart > div {
+            background-color: darkorange;
+            margin: 5px;
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="chart">
+        <div style="height: 30px"></div>
+        <div style="height: 80px"></div>
+        <div style="height: 60px"></div>
+        <div style="height: 40px"></div>
+        <div style="height: 30px"></div>
+        <div style="height: 80px"></div>
+        <div style="height: 60px"></div>
+        <div style="height: 40px"></div>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+</html>

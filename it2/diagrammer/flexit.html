@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flex diagrammer</title>
+    <style>
+        #chart {
+            display: flex;
+            width: 600px;
+            height: 400px;
+            background-color: darkorange;
+            align-items: flex-end;
+        }
+        #chart > div {
+            background-color: slateblue;
+            flex: 1;
+            margin: 5px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="chart">
+
+
+    </div>
+
+    <script>
+        var chart = document.getElementById("chart");
+
+        var temperaturer = [12, 18, 24, 35, 32, 43, 23, 12];
+        for(var temp of temperaturer) {
+            chart.innerHTML += `<div style="height: ${temp * 8}px"></div>`;
+        }
+    </script>
+</body>
+</html>

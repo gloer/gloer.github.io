@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flexandeler</title>
+    <style>
+        #chart {
+            background-color: slateblue;
+            width: 800px;
+            height:100px;
+            display: flex;
+        }
+        #chart > div {
+            flex: 1;
+            margin: 1px;
+            background-color: navajowhite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 1s;
+        }
+        #inputfelter {
+            width: 800px;
+            display: flex;
+        }
+        #inputfelter > input {
+            flex: 1;
+            margin: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div style="margin-bottom: 20px" id="inputfelter">
+        <input type="number" id="inpFisk">
+        <input type="number" id="inpMeat">
+        <input type="number" id="inpVegetar">
+    </div>
+
+    <div id="chart">
+        <div id="divFisk">Fisk</div>
+        <div id="divMeat">Kjøtt</div>
+        <div id="divVegetar">Vegetar</div>
+    </div>
+
+    <script>
+
+        var inpFisk = document.getElementById("inpFisk");
+        var inpMeat = document.getElementById("inpMeat");
+        var inpVegetar = document.getElementById("inpVegetar");
+        var divFisk = document.getElementById("divFisk");
+        var divMeat = document.getElementById("divMeat");
+        var divVegetar = document.getElementById("divVegetar");
+
+        function visFordeling() {
+
+            var fisk = Number(inpFisk.value);
+            var meat = Number(inpMeat.value);
+            var vegetar = Number(inpVegetar.value);
+
+            var sum = fisk + meat + vegetar;
+
+            divFisk.style.flex = fisk/sum;
+            divMeat.style.flex = meat/sum;
+            divVegetar.style.flex = vegetar/sum;
+
+        }
+
+        inpFisk.oninput = inpMeat.oninput = inpVegetar.oninput = visFordeling;
+
+
+
+    </script>
+</body>
+</html>

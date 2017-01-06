@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aksje-Live</title>
+    <style>
+        svg {
+            background-color: aliceblue;
+            filter: drop-shadow(0 0 2px black);
+            position: absolute;
+            left: 50%;
+            margin-left: -400px;
+        }
+        line:hover {
+            stroke-width: 2px;
+            stroke: blue;
+        }
+    </style>
+</head>
+<body>
+
+    <svg width="800" height="400">
+        <g id="chart"></g>
+        <polyline id="graf" stroke="darkgray" fill="none" stroke-width="3"></polyline>
+    </svg>
+
+    <script>
+        let chart = document.getElementById("chart");
+        let graf = document.getElementById("graf");
+
+        function tegnHLinjer() {
+
+            let x = 20;
+            while(x < 800) {
+                chart.innerHTML += `<line x1="${x}" y1="0" x2="${x}" y2="400" stroke="lightgray"></line>`;
+                x += 20;
+            }
+
+        }
+
+        function tegnVLinjer() {
+
+            let y = 20;
+            while(y < 400) {
+                chart.innerHTML += `<line x1="0" y1="${y}" x2="800" y2="${y}" stroke="lightgray"></line>`;
+                y+= 20;
+            }
+        }
+
+        let punkter = "";
+        let x = 0;
+        let left = 20;
+
+        function oppdaterGraf() {
+            punkter += `${x},${Math.random()*400} `;
+            graf.setAttribute("points", punkter);
+            x += 20;
+
+            if(x > 700) {
+                graf.style.transform = `translateX(${-left}px)`;
+                left += 20;
+            }
+
+        }
+
+        tegnHLinjer();
+        tegnVLinjer();
+
+        setInterval(oppdaterGraf, 300);
+
+    </script>
+</body>
+</html>

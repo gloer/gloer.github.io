@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flex diagrammer</title>
+    <style>
+        #chart {
+            display: flex;
+            width: 600px;
+            height: 400px;
+            background-color: darkorange;
+            align-items: flex-start;
+            flex-direction: column;
+        }
+        #chart > div {
+            background-color: slateblue;
+            flex: 1;
+            margin: 5px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="chart">
+
+
+    </div>
+
+    <script>
+        var chart = document.getElementById("chart");
+
+        function finnMaks(arr) {
+
+            var maks = -Infinity;
+            for(var a of arr){
+                if(a > maks){
+                    maks = a;
+                }
+            }
+            return maks;
+
+        }
+
+        var temperaturer = [12, 12, 22, 35, 32, 43, 23, 12, 39, 110];
+        var maks = finnMaks(temperaturer);
+
+        for(var temp of temperaturer) {
+            var stolpe = document.createElement("div");
+            chart.appendChild(stolpe);
+            stolpe.animate([
+                {width: "0px"},
+                {width: temp/maks * 95 + "%"}
+                ], {duration: 900, fill: "forwards", easing: "ease-out"});
+        }
+
+    </script>
+</body>
+</html>

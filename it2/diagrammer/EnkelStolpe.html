@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Enkel stolpe</title>
+    <style>
+        #chart > div {
+            width: 200px;
+            height: 20px;
+            background-color: darkorange;
+            margin-bottom: 10px;
+            padding-left: 2px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="chart">
+
+    </div>
+
+    <script>
+
+        let chart = document.getElementById("chart");
+        let temperaturer = [4, 8, 12, 14, 17, 22, 28, 43, 34, 28, 14, 12, 4];
+
+        for(let temp of temperaturer) {
+            let nyStolpe = document.createElement("div");
+            nyStolpe.innerHTML = temp + "&deg;";
+            nyStolpe.style.width = 30 + "px";
+            chart.appendChild(nyStolpe);
+
+            nyStolpe.animate([
+                {width: "30px"},
+                {width: temp * 12 + "px"}
+            ], {
+                duration: temp * 30,
+                delay: 1000 - temp * 20,
+                easing: "ease-out",
+                fill: "forwards"
+            });
+        }
+
+    </script>
+</body>
+</html>
