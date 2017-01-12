@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Transitions</title>
+    <style>
+
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #firkant {
+            background-color: #039be5;
+            width: 400px;
+            height: 300px;
+            transition: background-color 1s, transform 3s;
+            transition-delay: 2s, 1s;
+            transition-timing-function: linear, linear;
+        }
+        #firkant:active {
+            transform: rotate(20deg);
+            background-color: lightgreen;
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <div id="firkant"></div>
+
+</body>
+</html>
