@@ -17,7 +17,7 @@
     <script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
     <script>
         // Initialize Firebase
-        var config = {
+        let config = {
             apiKey: "AIzaSyDqym8brxa8zty4kyvFtXQ4TqXftQrw-u8",
             authDomain: "the-awesome-cat-tracker.firebaseapp.com",
             databaseURL: "https://the-awesome-cat-tracker.firebaseio.com",
@@ -29,15 +29,15 @@
 
 
 <script>
-    var database = firebase.database();
-    var spor = database.ref("spor");
+    let database = firebase.database();
+    let spor = database.ref("spor");
 
     L.mapbox.accessToken = 'pk.eyJ1IjoiZ2xvZXIiLCJhIjoiY2l2cm4ya3hxMDAyYTJ6bHU5MzZjcHNnbSJ9.PmFpGo0iUpws5YtIBnzVBQ';
-    var map = L.mapbox.map('map', 'mapbox.streets')
-            .setView([40, -74.50], 16);
+    let map = L.mapbox.map('map', 'mapbox.streets')
+            .setView([40, -74.50], 18);
 
     // Add a new line to the map with no points.
-    var polyline = L.polyline([]).addTo(map);
+    let polyline = L.polyline([]).addTo(map);
 
     // Add marker
     marker = L.marker([40, -74.50], {
@@ -49,9 +49,9 @@
     marker.addTo(map);
 
     function lagSpor(snap) {
-        var pos = snap.val();
+        let pos = snap.val();
 
-        map.setView([pos.lat, pos.lng], 19);
+        map.setView([pos.lat, pos.lng], 18);
         marker.setLatLng([pos.lat, pos.lng]);
         polyline.addLatLng([pos.lat, pos.lng]);
 
