@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>A simple map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+<div id='map'></div>
+
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyA7yb872SjoLxAd81unFyKeC0upEW6cV_A",
+        authDomain: "todolist-be2e2.firebaseapp.com",
+        databaseURL: "https://todolist-be2e2.firebaseio.com",
+        storageBucket: "todolist-be2e2.appspot.com",
+        messagingSenderId: "648561001841"
+    };
+    firebase.initializeApp(config);
+</script>
+
+
+<script>
+    var database = firebase.database();
+    var katteposisjoner = database.ref("katteposisjoneer");
+
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZ2xvZXIiLCJhIjoiY2l2cm4ya3hxMDAyYTJ6bHU5MzZjcHNnbSJ9.PmFpGo0iUpws5YtIBnzVBQ';
+    var map = L.mapbox.map('map', 'mapbox.streets')
+            .setView([40, -74.50], 17);
+
+    // Add a new line to the map with no points.
+    var polyline = L.polyline([]).addTo(map);
+
+    // Add marker
+    marker = L.marker([40, -74.50], {
+        icon: L.mapbox.marker.icon({
+            'marker-color': '#f86767'
+        })
+    });
+
+    marker.addTo(map);
+
+    function oppdaterPosisjon(snap) {
+        var pos = snap.val();
+
+        map.setView([pos.lat, pos.lng], 17);
+        marker.setLatLng([pos.lat, pos.lng]);
+        polyline.addLatLng([pos.lat, pos.lng]);
+
+    }
+
+    katteposisjoner.on("child_added", oppdaterPosisjon);
+
+
+
+
+
+</script>
+</body>
+</html>
