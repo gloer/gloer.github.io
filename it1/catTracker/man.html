@@ -30,7 +30,7 @@
 
 <script>
     var database = firebase.database();
-    var katteposisjoner = database.ref("katteposisjoneer");
+    var spor = database.ref("spor");
 
     L.mapbox.accessToken = 'pk.eyJ1IjoiZ2xvZXIiLCJhIjoiY2l2cm4ya3hxMDAyYTJ6bHU5MzZjcHNnbSJ9.PmFpGo0iUpws5YtIBnzVBQ';
     var map = L.mapbox.map('map', 'mapbox.streets')
@@ -48,16 +48,16 @@
 
     marker.addTo(map);
 
-    function oppdaterPosisjon(snap) {
+    function lagSpor(snap) {
         var pos = snap.val();
 
-        map.setView([pos.lat, pos.lng], 17);
+        map.setView([pos.lat, pos.lng], 19);
         marker.setLatLng([pos.lat, pos.lng]);
         polyline.addLatLng([pos.lat, pos.lng]);
 
     }
 
-    katteposisjoner.on("child_added", oppdaterPosisjon);
+    spor.on("child_added", lagSpor);
 
 
 
