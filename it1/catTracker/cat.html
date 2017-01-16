@@ -38,12 +38,12 @@
 
     <script>
 
-        var database = firebase.database();
-        var spor = database.ref("spor");
+        let database = firebase.database();
+        let spor = database.ref("spor");
 
         function trackTheCat(position) {
 
-            var posisjon = {
+            let posisjon = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
