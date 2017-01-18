@@ -64,7 +64,7 @@
         var stage = document.getElementById("stage");
 
 
-        function addMe(snap) {
+        function addAstronauts(snap) {
             var user = snap.val();
             var astronaut = document.createElement("div");
             astronaut.className = "spaceman";
@@ -80,11 +80,10 @@
 
             stage.appendChild(astronaut);
 
-
         }
 
 
-        me.on("value", addMe);
+        all.on("child_added", addAstronauts);
 
     </script>
 </body>
