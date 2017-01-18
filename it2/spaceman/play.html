@@ -58,7 +58,7 @@
 
     <script>
         var db = firebase.database();
-        var id = localStorage.spacemanID;
+        var id = localStorage.spaceID;
         var all = db.ref("astronauter");
         var me = db.ref("astronauter/" + id);
         var stage = document.getElementById("stage");

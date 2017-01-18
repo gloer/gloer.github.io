@@ -96,11 +96,11 @@
 
         var id;
 
-        if(localStorage.spacemanID) {
-            id = localStorage.spacemanID;
+        if(localStorage.spaceID) {
+            id = localStorage.spaceID;
         } else {
             id = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
-            localStorage.setItem("spacemanID", id);
+            localStorage.setItem("spaceID", id);
         }
 
         inpName.oninput = function() {
@@ -111,7 +111,9 @@
             evt.preventDefault();
             var ref = db.ref("astronauter/" + id);
             ref.set({
-                name: inpName.value
+                name: inpName.value,
+                xdir: 1,
+                ydir: 0
             });
             document.location.href = "remote.html";
         };
