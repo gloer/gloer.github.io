@@ -67,9 +67,9 @@
             console.log(user.name);
         }
 
-        if(localStorage.spaceman) {
+        if(localStorage.spacemanID) {
 
-            var id = localStorage.spaceman;
+            var id = localStorage.spacemanID;
             var me = db.ref("astronauter/" + id);
 
             me.once("value", findMe);
@@ -78,7 +78,7 @@
 
         function setDirection(evt) {
 
-            var id = localStorage.spaceman;
+            var id = localStorage.spacemanID;
             var me = db.ref("astronauter/" + id);
             var name = user.name;
 
