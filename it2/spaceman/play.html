@@ -65,6 +65,7 @@
 
 
         var astronauter = new Map();
+        var viFlyr;
 
         function fly() {
 
@@ -89,7 +90,7 @@
             }
 
 
-            requestAnimationFrame(fly);
+            viFlyr = requestAnimationFrame(fly);
 
         }
 
@@ -153,9 +154,18 @@
 
             astronaut.xdir = newXDIR;
             astronaut.ydir = newYDIR;
+
+            if(newXDIR === undefined) {
+                astronaut.xdir = 1;
+                astronaut.ydir = 0;
+            }
+
             astronaut.innerHTML = "<p>" + user.name + "</p>";
 
-            console.log("Farten er " + astronaut.xspeed);
+            cancelAnimationFrame(viFlyr);
+            viFlyr = requestAnimationFrame(fly);
+
+            console.log(astronauter);
 
         }
 
