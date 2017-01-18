@@ -64,26 +64,102 @@
         var stage = document.getElementById("stage");
 
 
+        var astronauter = new Map();
+
+        function fly() {
+
+            for(var a of astronauter.values()) {
+                a.x += a.xspeed * a.xdir;
+                a.y += a.yspeed * a.ydir;
+                a.style.left = a.x + "px";
+                a.style.top = a.y + "px";
+
+                if(a.x > innerWidth) {
+                    a.x = 0;
+                }
+                if(a.x < 0) {
+                    a.x = innerWidth;
+                }
+                if(a.y > innerHeight){
+                    a.y = 0;
+                }
+                if(a.y < 0) {
+                    a.y = innerHeight;
+                }
+            }
+
+
+            requestAnimationFrame(fly);
+
+        }
+
+
+        function leggTilAstronaut(astronaut, x, y, key) {
+
+            var meg = db.ref("astronauter/" + key);
+
+            astronaut.xspeed = 1;
+            astronaut.yspeed = 3;
+            astronaut.w = 100;
+            astronaut.h = 120;
+            astronaut.x = x;
+            astronaut.y = y;
+            astronaut.key = key;
+
+            astronaut.xdir = 1;
+            astronaut.ydir = 0;
+
+            astronauter.set(astronaut.key, astronaut);
+            console.log(astronaut.key);
+
+            fly();
+
+        }
+
         function addAstronauts(snap) {
             var user = snap.val();
             var astronaut = document.createElement("div");
             astronaut.className = "spaceman";
             astronaut.innerHTML = "<p>" + user.name + "</p>";
-            astronaut.animate([
-                {transform: "scale(8)", left: innerWidth/2 + "px"},
-                {transform: "scale(1)", left: Math.random() * innerWidth + "px"}
+
+            stage.appendChild(astronaut);
+
+            var xpos = Math.random() * innerWidth;
+            var ypos = Math.random() * innerHeight;
+            astronaut.style.left = xpos + "px";
+            astronaut.style.top = ypos + "px";
+
+            var enterSpace = astronaut.animate([
+                {transform: "scale(8)", left: innerWidth/2 + "px", top: innerHeight/2 + "px"},
+                {transform: "scale(1)", left: xpos + "px", top: ypos + "px"}
             ], {
                 duration: 1000,
-                fill: "forwards",
                 easing: "ease-out"
             });
 
-            stage.appendChild(astronaut);
+            enterSpace.onfinish = function() {
+                leggTilAstronaut(astronaut, xpos, ypos, snap.key);
+            }
+
+        }
+
+        function setDirection(snap) {
+            var user = snap.val();
+            var newXDIR = user.xdir;
+            var newYDIR = user.ydir;
+
+            var astronaut = astronauter.get(snap.key);
+
+            astronaut.xdir = newXDIR;
+            astronaut.ydir = newYDIR;
+
+            console.log("Farten er " + astronaut.xspeed);
 
         }
 
 
         all.on("child_added", addAstronauts);
+        all.on("child_changed", setDirection);
 
     </script>
 </body>
