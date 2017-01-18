@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Localstorage KEY</title>
+</head>
+<body>
+
+    <form id="skjemaRomfarer">
+        <input type="text" id="inpNavn" required placeholder="Hva heter du?">
+        <button type="text">OK</button>
+    </form>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAx9CN3CUznidoFKY8JcWizSsGBlwP-GpA",
+            authDomain: "it02-59ba5.firebaseapp.com",
+            databaseURL: "https://it02-59ba5.firebaseio.com",
+            storageBucket: "it02-59ba5.appspot.com",
+            messagingSenderId: "1060632066649"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        var skjemaRomfarer = document.getElementById("skjemaRomfarer");
+        var inpNavn = document.getElementById("inpNavn");
+
+        var db = firebase.database();
+
+        // Lage en unik nøkkel for localstorage
+        // og knytte den til et objekt i Firebase
+        // La oss si vi skal lagre navn på en romfareren
+        // Bruker nøkkelen som key i Firebase
+
+        function registrerBruker(evt) {
+            evt.preventDefault();
+
+            //Sjekker om localstorage har lagret "romfareren"
+            var id;
+            if(localStorage.romfareren) {
+                id = localStorage.romfareren;
+            } else {
+                // Hvis ikke, lager vi en unik String, som blir nøkkelen
+                id = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
+                localStorage.romfareren = id;
+            }
+
+
+            var ref = db.ref("romfarere/" + id);
+            ref.set({
+                navn: inpNavn.value
+            });
+
+            // Hopper til siden som viser alle romfarere
+            document.location.href = "VisAlleBrukere.html";
+
+        }
+
+        skjemaRomfarer.addEventListener("submit", registrerBruker);
+
+    </script>
+</body>
+</html>

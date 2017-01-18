@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Viser alle romfarere</title>
+</head>
+<body>
+
+    <h1>Alle romfarere</h1>
+    <ul id="listeOverRomfarere"></ul>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAx9CN3CUznidoFKY8JcWizSsGBlwP-GpA",
+            authDomain: "it02-59ba5.firebaseapp.com",
+            databaseURL: "https://it02-59ba5.firebaseio.com",
+            storageBucket: "it02-59ba5.appspot.com",
+            messagingSenderId: "1060632066649"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        var db = firebase.database();
+        var ref = db.ref("romfarere");
+
+        //DOM
+        let listeOverRomfarere = document.getElementById("listeOverRomfarere");
+
+        function visRomfarere(snap) {
+            var romfarer = snap.val();
+            listeOverRomfarere.innerHTML += "<li>" + romfarer.navn + "</li>";
+        }
+
+        ref.on("child_added", visRomfarere);
+
+    </script>
+</body>
+</html>
