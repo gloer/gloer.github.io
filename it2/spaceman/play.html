@@ -58,7 +58,7 @@
 
     <script>
         var db = firebase.database();
-        var id = localStorage.spaceman;
+        var id = localStorage.spacemanID;
         var all = db.ref("astronauter");
         var me = db.ref("astronauter/" + id);
         var stage = document.getElementById("stage");
@@ -98,8 +98,8 @@
 
             var meg = db.ref("astronauter/" + key);
 
-            astronaut.xspeed = 1;
-            astronaut.yspeed = 3;
+            astronaut.xspeed = 3;
+            astronaut.yspeed = 5;
             astronaut.w = 100;
             astronaut.h = 120;
             astronaut.x = x;
@@ -112,7 +112,7 @@
             astronauter.set(astronaut.key, astronaut);
             console.log(astronaut.key);
 
-            fly();
+
 
         }
 
@@ -145,6 +145,7 @@
 
         function setDirection(snap) {
             var user = snap.val();
+
             var newXDIR = user.xdir;
             var newYDIR = user.ydir;
 
@@ -152,6 +153,7 @@
 
             astronaut.xdir = newXDIR;
             astronaut.ydir = newYDIR;
+            astronaut.innerHTML = "<p>" + user.name + "</p>";
 
             console.log("Farten er " + astronaut.xspeed);
 
@@ -160,6 +162,8 @@
 
         all.on("child_added", addAstronauts);
         all.on("child_changed", setDirection);
+
+        fly();
 
     </script>
 </body>
