@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spaceman</title>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            font-family: 'PT Sans Narrow', sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        h1 {
+            color: white;
+        }
+        #inpName {
+            text-align: center;
+            font-size: 22px;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            outline-style: none;
+        }
+        button {
+            border: none;
+            background-color: slateblue;
+            color: white;
+            font-family: 'PT Sans Narrow', sans-serif;
+            font-size: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .nav {
+            height: 100px;
+
+        }
+        .spaceman {
+            background-image: url("spaceman100.svg");
+            min-width: 100px;
+            min-height: 126px;
+            margin-left: -98px;
+            transform-origin: center top;
+            margin-top: 10px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            transform: scale(3);
+            flex: 1;
+        }
+        .spaceman > p {
+            color: white;
+            position: absolute;
+            text-align: center;
+            left: 12px;
+            width: 100%;
+            text-shadow: 2px 2px 0 black;
+
+        }
+
+    </style>
+</head>
+<body>
+    <h1>What´s your name, spaceman?</h1>
+    <form id="playGame">
+    <input type="text" id="inpName" placeholder="Enter your name" required>
+    <p class="nav">
+        <button type="submit">Play the game</button>
+    </p>
+    </form>
+    <div class="spaceman">
+        <p id="theName"></p>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAx9CN3CUznidoFKY8JcWizSsGBlwP-GpA",
+            authDomain: "it02-59ba5.firebaseapp.com",
+            databaseURL: "https://it02-59ba5.firebaseio.com",
+            storageBucket: "it02-59ba5.appspot.com",
+            messagingSenderId: "1060632066649"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        var inpName = document.getElementById("inpName");
+        var theName = document.getElementById("theName");
+        var playGame = document.getElementById("playGame");
+
+        var db = firebase.database();
+
+        var id;
+
+        if(localStorage.spaceman) {
+            id = localStorage.spaceman;
+        } else {
+            id = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
+            localStorage.setItem("spaceman", id);
+        }
+
+        inpName.oninput = function() {
+            theName.innerHTML = this.value;
+        };
+
+        playGame.onsubmit = function(evt) {
+            evt.preventDefault();
+            var ref = db.ref("astronauter/" + id);
+            ref.set({
+                name: inpName.value
+            });
+            document.location.href = "game.html";
+        };
+
+
+
+    </script>
+</body>
+</html>

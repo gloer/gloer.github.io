@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Play the game</title>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            font-family: 'PT Sans Narrow', sans-serif;
+            text-align: center;
+            height: 100vh;
+        }
+        #stage {
+            height: 100vh;
+        }
+        .spaceman {
+            background-image: url("spaceman100.svg");
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            min-width: 100px;
+            min-height: 126px;
+            margin-left: -60px;
+            margin-top: -50px;
+            transform: scale(1);
+        }
+        .spaceman > p {
+            color: white;
+            position: absolute;
+            text-align: center;
+            left: 12px;
+            width: 100%;
+            text-shadow: 2px 2px 0 black;
+
+        }
+    </style>
+</head>
+<body>
+
+    <div id="stage">
+
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAx9CN3CUznidoFKY8JcWizSsGBlwP-GpA",
+            authDomain: "it02-59ba5.firebaseapp.com",
+            databaseURL: "https://it02-59ba5.firebaseio.com",
+            storageBucket: "it02-59ba5.appspot.com",
+            messagingSenderId: "1060632066649"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        var db = firebase.database();
+        var id = localStorage.spaceman;
+        var all = db.ref("astronauter");
+        var me = db.ref("astronauter/" + id);
+        var stage = document.getElementById("stage");
+
+
+        function addMe(snap) {
+            var user = snap.val();
+            var astronaut = document.createElement("div");
+            astronaut.className = "spaceman";
+            astronaut.innerHTML = "<p>" + user.name + "</p>";
+            astronaut.animate([
+                {transform: "scale(8)", left: innerWidth/2 + "px"},
+                {transform: "scale(1)", left: Math.random() * innerWidth + "px"}
+            ], {
+                duration: 1000,
+                fill: "forwards",
+                easing: "ease-out"
+            });
+
+            stage.appendChild(astronaut);
+
+
+        }
+
+
+        me.on("value", addMe);
+
+    </script>
+</body>
+</html>
