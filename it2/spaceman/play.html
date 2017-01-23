@@ -121,6 +121,7 @@
             var user = snap.val();
             var astronaut = document.createElement("div");
             astronaut.className = "spaceman";
+            astronaut.id = snap.key;
             astronaut.innerHTML = "<p>" + user.name + "</p>";
 
             stage.appendChild(astronaut);
@@ -167,6 +168,17 @@
 
             console.log(astronauter);
 
+        }
+
+        function snurr() {
+            let astronaut = document.getElementById(id);
+            astronaut.animate(
+                [
+                    {transform: "rotate(0deg)"},
+                    {transform: "rotate(360deg)"}
+                ],
+                {duration: 1000, easing: "ease-in-out"}
+            );
         }
 
 
