@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ond bie</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+
+
+    <img src="blomst.svg" id="blomst">
+    <img src="EvilBee.svg" id="bie">
+    <img src="honning.svg" id="honning">
+
+
+
+    <script>
+
+        var blomst = document.getElementById("blomst");
+        var bie = document.getElementById("bie");
+        var honning = document.getElementById("honning");
+
+        var keyframes = [
+            {transform: "scale(1)"},
+            {transform: "scale(6)"}
+        ];
+        var settings = {
+            duration: 5000,
+            fill: "forwards"
+        };
+
+        var animasjon = bie.animate(keyframes, settings);
+        animasjon.pause();
+
+        function voks() {
+            animasjon.play();
+        }
+
+        function stopp() {
+            animasjon.pause();
+        }
+
+
+        blomst.addEventListener("mousedown", voks);
+        blomst.addEventListener("touchstart", voks);
+        blomst.addEventListener("mouseup", stopp);
+        blomst.addEventListener("touchend", stopp);
+
+    </script>
+</body>
+</html>
