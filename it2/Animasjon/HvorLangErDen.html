@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hvor lang er den?</title>
+    <style>
+        #stolpe {
+            width: 300px;
+            height: 100px;
+            background-color: orange;
+            padding: 50px;
+            border: 10px solid blue;
+            margin: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+    <div id="stolpe"></div>
+
+    <script>
+
+        function sjekkLengde() {
+
+            let stolpe = document.getElementById("stolpe");
+            console.log(stolpe.offsetWidth);
+            console.log(stolpe.getBoundingClientRect().width);
+
+        }
+
+        stolpe.onclick = function() {
+
+            sjekkLengde();
+
+
+        }
+
+    </script>
+</body>
+</html>

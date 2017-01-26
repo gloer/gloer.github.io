@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Den onde bien</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="blomst.svg" id="blomst">
+    <img src="EvilBee.svg" id="bie">
+    <img src="honning.svg" id="honning">
+
+    <script>
+
+        let blomst = document.getElementById("blomst");
+        let bie = document.getElementById("bie");
+        let honning = document.getElementById("honning");
+
+        let keyframes = [
+            {transform: "scale(1)"},
+            {transform: "scale(6)"}
+        ];
+        let settings = {
+            duration: 5000,
+            fill: "forwards"
+        };
+
+        let animasjon = bie.animate(keyframes, settings);
+        animasjon.pause();
+
+        function voks() {
+            animasjon.playbackRate = 1;
+            animasjon.play();
+        }
+
+        function krymp() {
+            animasjon.playbackRate = -1;
+            animasjon.play();
+        }
+
+        function stopp() {
+            animasjon.pause();
+        }
+
+        animasjon.onfinish = function() {
+            bie.animate([
+                {transform: "scale(5) rotate(0)"},
+                {transform: "scale(0) rotate(720deg)"},
+                {transform: "scale(1) rotate(720deg)"}
+            ], {
+                duration: 1000,
+                fill: "forwards"
+            });
+        };
+
+        blomst.addEventListener("mousedown", voks);
+        honning.addEventListener("mousedown", krymp);
+        blomst.addEventListener("mouseup", stopp);
+        honning.addEventListener("mouseup", stopp);
+
+    </script>
+</body>
+</html>

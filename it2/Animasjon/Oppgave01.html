@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation-flex.css">
+    <style>
+        body {
+            max-width: 700px;
+            margin: auto;
+            padding: 10px;
+        }
+        h1 {
+            font-size: 1.3rem;
+        }
+        h2 {
+            font-size: 1.2rem;
+        }
+        label {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bestill din matkasse i dag</h1>
+
+    <form id="skjemaFisk">
+        <h2>Antall personer som skal ha matkasse</h2>
+        <input type="radio" name="rbPersoner" id="p1" value="1"><label for="p1">1</label>
+        <input type="radio" name="rbPersoner" id="p2" value="2"><label for="p2">2</label>
+        <input type="radio" name="rbPersoner" id="p3" value="3"><label for="p3">3</label>
+        <input type="radio" name="rbPersoner" id="p4" value="4"><label for="p4">4</label>
+        <input type="radio" name="rbPersoner" id="p5" value="5"><label for="p5">5</label>
+        <input type="radio" name="rbPersoner" id="p6" value="6"><label for="p6">6</label>
+
+        <h2>Antall middager i kassen</h2>
+        <input type="radio" name="rbMiddager" id="m2" value="2"><label for="m2">2</label>
+        <input type="radio" name="rbMiddager" id="m3" value="3"><label for="m3">3</label>
+
+        <div id="bilde"></div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Antall middager per uke</th>
+                    <th>Antall personer</th>
+                    <th>Pris per uke</th>
+                    <th>Sendes til</th>
+                </tr>
+            </thead>
+            <tbody id="tb"></tbody>
+        </table>
+
+    </form>
+
+    <script>
+        let skjemaFisk = document.getElementById("skjemaFisk");
+        let bilde = document.getElementById("bilde");
+        let rbPersoner = document.querySelectorAll("input[name=rbPersoner]");
+        let rbMiddager = document.querySelectorAll("input[name=rbMiddager]");
+
+        function settMiddager() {
+
+            let antall = Number(this.value);
+            if(antall === 2) {
+                bilde.innerHTML = `<img src="toMiddager.png">`;
+            } else {
+                bilde.innerHTML = `<img src="treMiddager.png">`;
+            }
+            bilde.animate([
+                {transform: "translateX(-1000px)"},
+                {transform: "translateX(0)"}
+            ],{
+                duration: 200
+            });
+
+        }
+
+        function visBestilling() {
+            tb.innerHTML = "";
+        }
+
+        function settPersoner() {
+
+        }
+
+
+        for(let rb of rbPersoner) {
+            rb.addEventListener("click", settPersoner);
+        }
+        for(let rb of rbMiddager) {
+            rb.addEventListener("click", settMiddager);
+        }
+
+
+    </script>
+</body>
+</html>

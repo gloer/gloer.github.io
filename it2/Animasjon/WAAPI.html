@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>What is the Web Animations API?</title>
+</head>
+<body>
+
+    <img src="kiss.jpg" id="kiss">
+
+    <script>
+
+        let keyframes = [
+            {filter: "invert(0)"},
+            {filter: "invert(100%)"}
+        ];
+
+        let settings = {
+            duration: 2000,
+            fill: "forwards"
+        };
+
+        let animasjon = kiss.animate(keyframes, settings);
+
+
+    </script>
+</body>
+</html>

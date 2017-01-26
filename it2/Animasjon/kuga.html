@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html {
+            background-color: #a8a8a8;
+            font-family: sans-serif;
+        }
+        .oppgave {
+            position: relative;
+            max-width: 30em;
+            padding: 2em;
+            background-color: white;
+            margin: auto;
+            font-size: 1.2em;
+            color: #3c3c3c;
+
+        }
+        label {
+            display: flex;
+            line-height: 2em;
+        }
+        input, select {
+            border: none;
+            padding: 1em;
+            background-color: #e8e8e8;
+            flex: 1;
+        }
+        label > select {
+            margin-left: 5em;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            font-size: 1em;
+            color: dimgray;
+        }
+        table {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        td, th {
+            padding: 0.2em;
+            font-size: 0.7em;
+            border-right: solid 0.1em lightgray;
+            text-align: center;
+        }
+        #pBil {
+            min-height: 10em;
+            background-color: #e8e8e8;
+            padding: 0.5em;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+<div class="oppgave">
+    <h1>E_H14</h1>
+    <h2>Oppgave 2: <small>Kalkulator for bensin</small></h2>
+    <form id="form1">
+        <label>Hvor langt skal du kjøre? (km)<input type="number" id="inpAvstand" placeholder="Distanse (km)"></label>
+
+        <label>Bensinpris (kr/liter): <input type="number" id="inpPris" placeholder="kr/l"></label>
+        <label>Hvor skal du kjøre?
+            <select id="selectSted">
+                <option value="by" >Byen</option>
+                <option value="land" selected>Landevei</option>
+                <option value="byogland">Landevei og i byen</option>
+            </select>
+        </label>
+    </form>
+    <p id="p1"></p>
+</div>
+<script>
+    let inpAvstand = document.getElementById("inpAvstand");
+    let form1 = document.getElementById("form1");
+    let selectSted = document.getElementById("selectSted");
+    let p1 = document.getElementById("p1");
+    let inpPris = document.getElementById("inpPris");
+
+
+    inpAvstand.oninput = selectSted.oninput = inpPris.oninput = function regnUt() {
+        if(selectSted.options[selectSted.selectedIndex].value = "by") {
+            p1.innerHTML = "<b>Du sparer: </b>" + Math.round(inpAvstand.value * inpPris.value * 0.1) + "kr";
+        } else
+        if(selectSted.options[selectSted.selectedIndex].value = "land" ) {
+            p1.innerHTML = "<b>Du sparer: </b>" + Math.round(inpAvstand.value * inpPris.value * 0.05) + "kr";
+        }
+        else
+        if(selectSted.options[selectSted.selectedIndex].value = "byogland" ) {
+            p1.innerHTML = "<b>Du sparer: </b>" + Math.round(inpAvstand.value * inpPris.value * 0.075) + "kr";
+        }
+        else {
+            p1.innerHTML = "Velg verdier i formen."
+        }
+        console.log(selectSted.value)
+    }
+
+</script>
+<div class="oppgave">
+    <h2>Oppgave 4: <small>Pris av bilpakke</small></h2>
+    <table>
+        <tr>
+            <th>Modell</th>
+            <th>Trend</th>
+            <th>Titanium</th>
+            <th>Familiepakke</th>
+            <th>Førerassistentpakke</th>
+            <th>Stilpakke</th>
+        </tr>
+        <tr>
+            <th>Kuga</th>
+            <td>401 000</td>
+            <td>420 000</td>
+            <td>1000</td>
+            <td>10200</td>
+            <td>9200</td>
+        </tr>
+        <tr>
+            <th>C-max</th>
+            <td>320 000</td>
+            <td>335 000</td>
+            <td>1000</td>
+            <td>9400</td>
+            <td>3600</td>
+        </tr>
+        <tr>
+            <th>Focus</th>
+            <td>255 000</td>
+            <td>325 000</td>
+            <td>900</td>
+            <td>12500</td>
+            <td>9000</td>
+        </tr>
+        <tr>
+            <th>Mondeo</th>
+            <td>281 000</td>
+            <td>361 000</td>
+            <td>1100</td>
+            <td>9900</td>
+            <td>7200</td>
+        </tr>
+    </table>
+    <form id="bilForm">
+        <p>Velg modell</p>
+        <select name="bil" id="selectBil">
+            <option value="kuga">Kuga</option>
+            <option value="cmax">C-max</option>
+            <option value="focus">Focus</option>
+            <option value="mondeo">Mondeo</option>
+        </select>
+        <p>Velg variant</p>
+        <select name="variant" id="selectVariant">
+            <option value="trend">Trend</option>
+            <option value="titanium">Titanium</option>
+        </select>
+        <p>Velg pakke</p>
+        <select name="pakke" id="selectPakke">
+            <option value="familie">Familiepakke</option>
+            <option value="forerassistent">Førerassistentpakke</option>
+            <option value="stil">Stilpakke</option>
+        </select>
+    </form>
+    <p id="pBil"></p>
+</div>
+<script>
+
+    let bilForm = document.getElementById("bilForm");
+    let selectBil = document.getElementById("selectBil");
+    let selectVariant = document.getElementById("selectVariant");
+    let selectPakke = document.getElementById("selectPakke");
+    let pBil = document.getElementById("pBil");
+
+
+    selectVariant.oninput = selectPakke.oninput = selectBil.oninput = function hentBil() {
+
+        let result = biler.filter(function (obj) {
+            return obj.id === selectBil.value
+        });
+        let variant = "trend";
+
+        pBil.innerHTML = `
+                <p><b>Modellnavn: </b>${result[0].modell}</p>
+                <p><b>Variantpris: </b>${result[0]/* Her ønsker jeg å sette inn .selectVariant.value slik at den henter den valgte bilens variant */}</p>
+                <p><b>Pakkepris: </b>${result[0].forerassistent}</p>
+
+            `;
+        console.log(result[0]);
+
+
+
+    };
+
+    let biler = [
+        {
+            id: "kuga",
+            modell: "Kuga",
+            trend: 401000,
+            familie: 1000,
+            forerassistent: 10200,
+            stil: 9200
+
+        },
+        {
+            id: "cmax",
+            modell: "C-max",
+            trend: 320000,
+            familie: 1000,
+            forerassistent: 9400,
+            stil: 3600
+
+        },
+        {
+            id: "focus",
+            modell: "Focus",
+            trend: 255000,
+            familie: 900,
+            forerassistent: 12500,
+            stil: 9000
+
+        },
+        {
+            id: "mondeo",
+            modell: "Mondeo",
+            trend: 281000,
+            familie: 1100,
+            forerassistent: 9900,
+            stil: 7200
+
+        }
+
+    ]
+
+
+
+
+
+</script>
+</body>
+</html>
