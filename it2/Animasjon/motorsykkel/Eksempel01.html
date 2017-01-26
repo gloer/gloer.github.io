@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Enkel animasjon</title>
+    <style>
+        #stage {
+            width: 800px;
+            height: 300px;
+            border: 1px solid gray;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+        }
+        #motorsykkel {
+            position: absolute;
+            left: 200px;
+            top: 100px;
+            width: 190px;
+            height: 156px;
+            transform-origin: left bottom;
+            animation: drive 5s infinite;
+        }
+        #stage > div > img {
+            position: absolute;
+        }
+        #bakhjul {
+            left: 4px;
+            bottom: 0;
+            animation: snurr 5s infinite;
+        }
+        #forhjul {
+            right: 0;
+            bottom: 0;
+            animation: snurr 5s infinite;
+        }
+
+        @keyframes snurr {
+            0% {
+                transform: rotate(0turn);
+            }
+            40% {
+                transform: rotate(3turn);
+            }
+            100% {
+                transform: rotate(5turn);
+            }
+        }
+
+        @keyframes drive {
+            0% {
+                transform: translateX(-400px) rotate(0deg);
+            }
+            40% {
+                transform: translateX(200px) rotate(-30deg);
+            }
+            100% {
+                transform: translateX(610px) rotate(0deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="stage">
+        <div id="motorsykkel">
+            <img src="bakhjul2.png" id="bakhjul">
+            <img src="forhjul2.png" id="forhjul">
+            <img src="sykkel2.png">
+        </div>
+    </div>
+
+</body>
+</html>
