@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2a</title>
+    <style>
+        input[type=number] {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <form id="regAar">
+        <input type="number" required min="2002" max="2007" id="inpAar1"  list="aarstall">
+        <input type="number" required min="2002" max="2007" id="inpAar2" list="aarstall">
+        <button type="submit">Sjekk utvikling</button>
+    </form>
+    <p id="info" style="margin-top: 10px">Tast inn to årstall mellom 2002 og 2007</p>
+
+    <!-- Valg til input-feltene -->
+    <datalist id="aarstall">
+        <option value="2002">
+        <option value="2003">
+        <option value="2004">
+        <option value="2005">
+        <option value="2006">
+        <option value="2007">
+    </datalist>
+
+
+    <script>
+        let regAar = document.getElementById("regAar");
+        let inpAar1 = document.getElementById("inpAar1");
+        let inpAar2 = document.getElementById("inpAar2");
+        let info = document.getElementById("info");
+
+        let promille = new Map();
+        promille.set("2002", 9631);
+        promille.set("2003", 8593);
+        promille.set("2004", 8363);
+        promille.set("2005", 8128);
+        promille.set("2006", 8514);
+        promille.set("2007", 8534);
+
+
+        regAar.onsubmit = function(evt){
+            evt.preventDefault();
+            let aar1 = promille.get(inpAar1.value);
+            let aar2 = promille.get(inpAar2.value);
+
+            if(aar1 < aar2) {
+                info.innerHTML = "Negativ utvikling";
+            } else {
+                info.innerHTML = "Positiv utvikling";
+            }
+        }
+
+
+    </script>
+</body>
+</html>
