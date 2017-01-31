@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Template String</title>
+</head>
+<body>
+
+    <p id="avsnitt"></p>
+    <script>
+
+        let avsnitt = document.getElementById("avsnitt");
+
+
+        let navn = "Ben Hur"; // String
+        let alder = 50; // Number
+
+
+        avsnitt.innerHTML = `Hei <b>${navn}</b> Du er ${alder} år`;
+
+    </script>
+</body>
+</html>

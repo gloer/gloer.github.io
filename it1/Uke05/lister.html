@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lister</title>
+</head>
+<body>
+
+    <h1>Hva skal jeg gjøre i dag?</h1>
+    <ul id="todolist">
+        <li>Spise middag</li>
+        <li>Vaske opp</li>
+    </ul>
+
+    <script>
+
+        let todolist = document.getElementById("todolist");
+
+        // Nå erstatter vi alt som ligger inne i lista
+        todolist.innerHTML = "<li>Spise masse is</li>";
+
+        // Men vi ønsker å legge til et nytt punkt
+        // uten å slette det som er der fra før
+        // todolist.innerHTML = todolist.innerHTML + "<li>Gå på kino</li>";
+        // Men vi kan gjøre det enklere:
+        todolist.innerHTML += "<li>Gå på kino</li>";
+        todolist.innerHTML += "<li>Gå tur med bestemor</li>";
+        todolist.innerHTML += "<li>Lufte katten</li>";
+
+        // todolist.style.transform = "rotate(180deg)";
+
+    </script>
+
+
+</body>
+</html>

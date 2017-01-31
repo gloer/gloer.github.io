@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tabell med template String</title>
+</head>
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Vare</th>
+                <th>Pris</th>
+            </tr>
+        </thead>
+        <tbody id="vareliste"></tbody>
+    </table>
+
+    <script>
+        let vareliste = document.getElementById("vareliste");
+
+        let vare = {
+            navn: "MUM for Men",
+            pris: 39
+        };
+
+        vareliste.innerHTML = `
+                                <tr>
+                                    <td>${vare.navn}</td>
+                                    <td>${vare.pris}</td>
+                                </tr>
+                              `;
+
+    </script>
+</body>
+</html>
