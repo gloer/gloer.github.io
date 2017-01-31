@@ -3,12 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title</title>
+    <title>Klikk</title>
+    <style>
+        #minKnapp {
+            transition: 1s;
+        }
+    </style>
 </head>
 <body>
 
-<script>
-    
-</script>
+    <button id="minKnapp">TRYKK HER</button>
+
+    <script>
+
+        let minKnapp = document.getElementById("minKnapp");
+
+        function visMelding() {
+            minKnapp.style.transform = "scale(2)";
+        }
+
+
+        minKnapp.addEventListener("click", visMelding);
+
+    </script>
+
 </body>
 </html>
