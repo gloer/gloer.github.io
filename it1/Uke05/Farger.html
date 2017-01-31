@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Farger</title>
+    <style>
+        body {
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+
+    <input id="farge" type="text" placeholder="Hva er din farge?">
+    <h1 id="info"></h1>
+
+    <script>
+
+        let farge = document.getElementById("farge");
+        let info = document.getElementById("info");
+
+        function visFarge() {
+            info.innerHTML = farge.value;
+            document.body.style.backgroundColor = farge.value;
+        }
+
+        farge.addEventListener("input", visFarge);
+
+    </script>
+</body>
+</html>
