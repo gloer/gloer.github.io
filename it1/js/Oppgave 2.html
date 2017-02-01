@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oppgave 2</title>
+</head>
+<body>
+
+Registere brukere:
+
+Fornavn:<input type="text" id="id_txt_fornavn"  /><br>
+Etternavn: <input type="text" id="id_txt_etternavn"  /><br>
+Fødselsdato: <input id="id_cal_fodselsdato" type="date" value="1991-01-13"  />
+<input id="id_btn_1" type="button" value="Registrer bruker" onclick="onclick_id_btn_regbruker(this)" />
+<p id="id_p_regsiteringer">
+</p>
+
+<script>
+    var txt_fornavn = document.getElementById("id_txt_fornavn");
+    var txt_etternavn = document.getElementById("id_txt_etternavn");
+    var cal_fodselsdato = document.getElementById("id_cal_fodselsdato");
+    var p_regsiteringer = document.getElementById("id_p_regsiteringer");
+    var arr_personer = [];
+
+
+    function onclick_id_btn_regbruker(evt) {
+        var person = {  fornavn: txt_fornavn.value,
+                        etternavn: txt_etternavn.value,
+                        fodsesldato: cal_fodselsdato.value};
+       arr_personer.push(person);
+        localStorage.setItem("personer", arr_personer);
+        localStorage.setItem("person",person);
+
+            print_arr_personer();
+    }
+function print_arr_personer() {
+    var tbl_string = "<table border='1'><tr><td>Person</td>";
+
+    for (var egenskap in arr_personer[0]){
+        tbl_string += "<td><input type='button' value='Sortèr på " + egenskap + "' onclick='btn_click_" + egenskap +"(this)' /></td>";
+        //console.log("' onclick='btn_click_" + egenskap);
+
+    }
+    tbl_string += "</tr>"
+    for (var i = 0; i < arr_personer.length; i++){
+        tbl_string  += "<tr><td><input type='button' value='Èdit' onclick='onclick_btn_edit("+ i+ ")' > </td>";
+        for (var egenskap in arr_personer[i]){
+            tbl_string += "<td>" + arr_personer[i][egenskap] + "</td>";
+        }
+    }
+    tbl_string += "</table>";
+    p_regsiteringer.innerHTML = tbl_string ;
+}
+
+    function btn_click_fornavn(evt) {
+        //Gjøre sortering
+        console.log("btn_click_fornavn");
+
+    }
+    function btn_click_etternavn(evt) {
+        //Gjøre sortering
+        console.log("btn_click_etternavn");
+
+    }
+    function btn_click_fodsesldato(evt) {
+        //Gjøre sortering
+        console.log("btn_click_fodselsdato");
+
+    }
+    function onclick_btn_edit(indeks) {
+        //Gjøre edit av oppføring
+        print_arr_personer_edit(indeks);
+        console.log("onclick_btn_edit. Edit nr:" + indeks);
+    }
+
+    function print_arr_personer_edit(f_indeks) {
+        var tbl_string = "<table border='1'><tr><td>Person</td>";
+
+        for (var egenskap in arr_personer[0]){
+            tbl_string += "<td>" + egenskap + "</td>";
+
+        }
+        tbl_string += "</tr>"
+        for (var i = 0; i < arr_personer.length; i++){
+            if (i==f_indeks) {
+                tbl_string += "<tr><td><input type='button' value='Lagre' onclick='onclick_btn_lagre(" + i + ")' > </td>";
+                for (var egenskap in arr_personer[i]) {
+                    tbl_string += "<td><input type='text' id='id_txtedit_" + egenskap + "' value='" + arr_personer[i][egenskap] + "' /></td>";
+                    console.log("<td><input type='text' id='id_txtedit_" + egenskap + "' value='" + arr_personer[i][egenskap] + "' /></td>");
+                }
+            }
+            else
+            {
+                tbl_string  += "<tr><td><input type='button' value='Èdit' onclick='onclick_btn_edit("+ i+ ")' > </td>";
+                for (var egenskap in arr_personer[i]){
+                    tbl_string += "<td>" + arr_personer[i][egenskap] + "</td>";
+                }
+            }
+        }
+        tbl_string += "</table>";
+        p_regsiteringer.innerHTML = tbl_string ;
+    }
+
+    function onclick_btn_lagre(f_indeks) {
+        //Lagre ny oppføring
+        arr_personer[f_indeks].fornavn = document.getElementById("id_txtedit_fornavn").value;
+        console.log("Tekst fornavn: " + document.getElementById("id_txtedit_fornavn").value);
+        arr_personer[f_indeks].etternavn =document.getElementById("id_txtedit_etternavn").value;
+        arr_personer[f_indeks].fodsesldato =document.getElementById("id_txtedit_fodsesldato").value;
+        console.log("f_indeks: " + f_indeks);
+        print_arr_personer();
+
+    }
+</script>
+</body>
+</html>
