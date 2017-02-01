@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Storing object literals with localStorage</title>
+</head>
+<body>
+
+    <p>På denne siden lagrer vi data om Dracula</p>
+    <a href="visMonster.html">Her kan du se data om monsteret</a>
+
+    <script>
+
+        let monster = {
+
+            name: "Dracula",
+            skill: "Drink Blood",
+            age: 2940
+
+        };
+
+        localStorage.lagretMonster = JSON.stringify(monster);
+
+    </script>
+</body>
+</html>

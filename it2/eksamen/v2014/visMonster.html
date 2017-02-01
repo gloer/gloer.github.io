@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Viser frem et lokalt lagret monster</title>
+</head>
+<body>
+
+    <article id="monsterinfo"></article>
+
+    <script>
+
+        let monsterinfo = document.getElementById("monsterinfo");
+        let monster;
+
+        if(localStorage.lagretMonster) {
+
+            monster = JSON.parse(localStorage.lagretMonster);
+            monsterinfo.innerHTML = `
+                <ul>
+                    <li>Navn: ${monster.name}</li>
+                    <li>Egenskap: ${monster.skill}</li>
+                    <li>Alder: ${monster.age}</li>
+                </ul>
+            `;
+
+
+        } else {
+            monsterinfo.innerHTML = "Du har ikke lagret noe monster.";
+        }
+
+
+    </script>
+</body>
+</html>
