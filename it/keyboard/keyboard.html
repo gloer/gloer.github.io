@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+
+    <div id="keyboard"></div>
+
+    <script src="qwerty-hancock.min.js"></script>
+    <script>
+
+        var keyboard = new QwertyHancock({
+            id: 'keyboard',
+            width: 600,
+            height: 150,
+            octaves: 2,
+            startNote: 'A2',
+            whiteNotesColour: 'white',
+            blackNotesColour: 'black',
+            hoverColour: '#f3e939'
+        });
+
+        var AudioContext = window.AudioContext || window.webkitAudioContext;
+
+        var ac = new AudioContext();
+        var masterGain = ac.createGain();
+
+        masterGain.gain.value = 0.3;
+        masterGain.connect(ac.destination);
+
+        var toner = new Map();
+
+        keyboard.keyDown = function (note, frequency) {
+            var osc = ac.createOscillator();
+            osc.frequency.value = frequency;
+            osc.type = "sawtooth";
+            osc.connect(masterGain);
+            osc.start(0);
+            toner.set(note, osc);
+        };
+
+        keyboard.keyUp = function (note, frequency) {
+            toner.get(note).stop(0);
+        };
+
+    </script>
+</body>
+</html>
