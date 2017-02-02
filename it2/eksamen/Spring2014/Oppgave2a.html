@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2a</title>
+    <link rel="stylesheet" href="foundation-flex.css">
+    <style>
+        body {
+            max-width: 720px;
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Sjekk utviklingen mellom to år for antall promillekjørere</h1>
+    <form id="skjema">
+
+        <input list="aarstall" id="inpAar1" type="number" required min="2002" max="2007" placeholder="År 1">
+        <input list="aarstall" id="inpAar2" type="number" required min="2002" max="2007" placeholder="År 2">
+        <button class="button" type="submit">Sjekk differansen</button>
+
+        <datalist id="aarstall">
+            <option value="2002">
+            <option value="2003">
+            <option value="2004">
+            <option value="2005">
+            <option value="2006">
+            <option value="2007">
+        </datalist>
+
+    </form>
+
+    <div class="callout" id="tilbakemelding">
+        Sjekk differansen mellom to år...
+    </div>
+
+    <script>
+
+        let skjema = document.getElementById("skjema");
+        let inpAar1 = document.getElementById("inpAar1");
+        let inpAar2 = document.getElementById("inpAar2");
+        let tilbakemelding = document.getElementById("tilbakemelding");
+
+
+        let lovbruddene = new Map();
+        lovbruddene.set("2002", 9631);
+        lovbruddene.set("2003", 8593);
+        lovbruddene.set("2004", 8363);
+        lovbruddene.set("2005", 8128);
+        lovbruddene.set("2006", 8514);
+        lovbruddene.set("2007", 8534);
+
+        function visTilbakemelding(evt) {
+            evt.preventDefault();
+            let aar1 = inpAar1.value;
+            let aar2 = inpAar2.value;
+
+            let promille1 = lovbruddene.get(aar1);
+            let promille2 = lovbruddene.get(aar2);
+
+            let diff = promille1 - promille2;
+
+            if(diff > 0) {
+                tilbakemelding.className = "callout alert";
+                tilbakemelding.innerHTML = "<h2>Negativ utvikling.</h2>"
+            } else {
+                tilbakemelding.className = "callout success";
+                tilbakemelding.innerHTML = "<h2>Positiv utvikling.</h2>";
+            }
+
+            tilbakemelding.innerHTML += `<p>Differansen er <b>${diff}.</b></p>`;
+
+
+        }
+
+        skjema.addEventListener("submit", visTilbakemelding);
+
+
+
+    </script>
+</body>
+</html>
