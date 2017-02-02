@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 3</title>
+    <link rel="stylesheet" href="foundation-flex.css">
+    <style>
+        body {
+            max-width: 780px;
+            margin: auto;
+            padding: 10px;
+        }
+        input[type=number] {
+            display: inline-block;
+            width: 30%;
+        }
+        #tabell .tiny {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h3>Anmeldte lovbrudd</h3>
+    <form id="skjema">
+
+        <input type="number" id="inpAar" placeholder="yyyy" required>
+        <input type="number" id="inpPromille" placeholder="12345" required>
+        <input type="number" id="inpFart" placeholder="12345" required>
+        <button class="button" type="submit">Lagre data</button>
+
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>År</th>
+                <th>Promillekjøring</th>
+                <th>Ulovlig hastighet</th>
+                <th>Sum</th>
+                <th>Slett</th>
+            </tr>
+        </thead>
+        <tbody id="tabell"></tbody>
+    </table>
+
+    <script>
+        let skjema = document.getElementById("skjema");
+        let inpAar = document.getElementById("inpAar");
+        let inpPromille = document.getElementById("inpPromille");
+        let inpFart = document.getElementById("inpFart");
+        let tabell = document.getElementById("tabell");
+
+
+        let lovbruddene = new Map();
+        lovbruddene.set("2008", { promille: 9631, fart: 9863 });
+        lovbruddene.set("2009", { promille: 8593, fart: 12217 });
+        lovbruddene.set("2010", { promille: 8363, fart: 14920 });
+        lovbruddene.set("2011", { promille: 8128, fart: 14929 });
+        lovbruddene.set("2012", { promille: 8514, fart: 15425 });
+
+
+        function registrerData(evt) {
+            evt.preventDefault();
+
+            // Hvis det ikke fins lovbrudd for dette året
+            // må vi opprette et nytt lovbrudd
+            if( !lovbruddene.has(inpAar.value) ) {
+                lovbruddene.set(inpAar.value, {});
+            }
+
+            let lovbrudd = lovbruddene.get(inpAar.value);
+            lovbrudd.promille = Number(inpPromille.value);
+            lovbrudd.fart = Number(inpFart.value);
+
+            lagTabell();
+
+        }
+
+
+        function finnLovbrudd() {
+            if( lovbruddene.has(inpAar.value) ) {
+
+                let lovbrudd = lovbruddene.get(inpAar.value);
+                inpPromille.value = lovbrudd.promille;
+                inpFart.value = lovbrudd.fart;
+
+            } else {
+                inpPromille.value = "";
+                inpFart.value = "";
+            }
+        }
+
+        function slett(key) {
+            lovbruddene.delete(key);
+            lagTabell();
+        }
+
+        function lagTabell() {
+
+            tabell.innerHTML = "";
+            for( let [key, lovbrudd] of lovbruddene ) {
+
+                tabell.innerHTML += `
+                    <tr>
+                        <td>${key}</td>
+                        <td>${lovbrudd.promille}</td>
+                        <td>${lovbrudd.fart}</td>
+                        <td>${lovbrudd.promille + lovbrudd.fart}</td>
+                        <td>
+                            <button class="button tiny" onclick="slett('${key}')">X</button>
+                        </td>
+                    </tr>
+                `;
+
+            }
+
+        }
+
+        lagTabell();
+        inpAar.addEventListener("input", finnLovbrudd);
+        skjema.addEventListener("submit", registrerData);
+
+    </script>
+</body>
+</html>
