@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Snurr</title>
+    <style>
+        #firkant {
+            margin-left: 300px;
+            margin-top: 200px;
+            background-color: fuchsia;
+            width: 100px;
+            height: 100px;
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+    <input type="range" id="inpRotasjon" min="-360" max="360">
+    <div id="firkant"></div>
+
+    <script>
+        let inpRotasjon = document.getElementById("inpRotasjon");
+        let firkant = document.getElementById("firkant");
+
+        function snurr() {
+            firkant.style.transform = `rotate(${inpRotasjon.value}deg) scale(${inpRotasjon.value / 60})`;
+            firkant.style.backgroundColor = `hsl(${inpRotasjon.value}, 100%, 50%)`;
+        }
+
+        inpRotasjon.addEventListener("input", snurr);
+
+    </script>
+</body>
+</html>
