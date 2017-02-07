@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Min Chat</title>
+</head>
+<body>
+
+
+<input type="text" id="inpMelding" placeholder="Hva mener du?">
+<div id="info"></div>
+
+
+<script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyBLyW3Zax8BZZHhc2SgrOeGfsFKbTq8ixA",
+        authDomain: "nobel-90e4c.firebaseapp.com",
+        databaseURL: "https://nobel-90e4c.firebaseio.com",
+        storageBucket: "nobel-90e4c.appspot.com",
+        messagingSenderId: "863119177437"
+    };
+    firebase.initializeApp(config);
+</script>
+
+
+<script>
+    let inpMelding = document.getElementById("inpMelding");
+    let info = document.getElementById("info");
+
+    let db = firebase.database();
+    let meldinger = db.ref("meldinger");
+
+    function lagreMelding() {
+        meldinger.push(inpMelding.value);
+    }
+
+    function visMelding(snapshot) {
+        let melding = snapshot.val();
+        info.innerHTML += `<p>En bruker sier: <i>${melding}</i></p>`;
+    }
+
+    inpMelding.addEventListener("change", lagreMelding);
+    meldinger.on("child_added", visMelding);
+
+</script>
+
+</body>
+</html>
