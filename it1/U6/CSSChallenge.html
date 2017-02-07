@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSS Challenge</title>
+    <style>
+        * {
+            transition: 1s;
+        }
+        #myCSS {
+            width: 600px;
+            height: 300px;
+        }
+    </style>
+    <style id="sharedCSS">
+
+    </style>
+</head>
+<body>
+
+    <textarea id="myCSS"></textarea>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBLyW3Zax8BZZHhc2SgrOeGfsFKbTq8ixA",
+            authDomain: "nobel-90e4c.firebaseapp.com",
+            databaseURL: "https://nobel-90e4c.firebaseio.com",
+            storageBucket: "nobel-90e4c.appspot.com",
+            messagingSenderId: "863119177437"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        let myCSS = document.getElementById("myCSS");
+        let sharedCSS = document.getElementById("sharedCSS");
+
+        let db = firebase.database();
+        let theCSS = db.ref("theCSS");
+
+        function editCSS() {
+            theCSS.set(myCSS.value);
+        }
+
+        function updateCSS(snap) {
+            let css = snap.val();
+            sharedCSS.innerHTML = css;
+            myCSS.value = css;
+        }
+
+        myCSS.addEventListener("input", editCSS);
+        theCSS.on("value", updateCSS);
+
+    </script>
+</body>
+</html>
