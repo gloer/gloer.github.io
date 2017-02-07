@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rundinger</title>
+    <style>
+        body {
+            background-color: #0c3d5d;
+        }
+        div {
+            background-color: yellowgreen;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBLyW3Zax8BZZHhc2SgrOeGfsFKbTq8ixA",
+            authDomain: "nobel-90e4c.firebaseapp.com",
+            databaseURL: "https://nobel-90e4c.firebaseio.com",
+            storageBucket: "nobel-90e4c.appspot.com",
+            messagingSenderId: "863119177437"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        let db = firebase.database();
+        let rundinger = db.ref("rundinger");
+
+        function lagrePosisjon(klikk) {
+            rundinger.push({
+                xpos: klikk.clientX,
+                ypos: klikk.clientY
+            });
+        }
+
+        function tegnRunding(snapshot) {
+            let klikket = snapshot.val();
+            document.body.innerHTML += `
+                <div style="left: ${klikket.xpos}px; top: ${klikket.ypos}px;"></div>
+            `;
+        }
+
+        document.addEventListener("click", lagrePosisjon);
+        rundinger.on("child_added", tegnRunding);
+
+    </script>
+</body>
+</html>
