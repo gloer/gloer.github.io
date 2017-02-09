@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Firebase chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation-flex.min.css">
+    <style>
+        body {
+            max-width: 700px;
+            padding: 10px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="chatForm">
+        <input id="inpuser" type="text" required placeholder="Hva heter du?">
+        <input id="inpText" type="text" required placeholder="Hva mener du?">
+        <button class="button" type="submit">OK</button>
+    </form>
+
+    <div id="chatView"></div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAltYlTG6-wa9fKv5pCvr40GIvrbp_ypkw",
+            authDomain: "bokhandelen-138fd.firebaseapp.com",
+            databaseURL: "https://bokhandelen-138fd.firebaseio.com",
+            storageBucket: "bokhandelen-138fd.appspot.com",
+            messagingSenderId: "830198223481"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        let chatForm = document.getElementById("chatForm");
+        let inpuser = document.getElementById("inpuser");
+        let inpText = document.getElementById("inpText");
+        let chatView = document.getElementById("chatView");
+
+        // Add firebase
+        let db = firebase.database();
+        let messages = db.ref("messages");
+
+        function saveMessage(evt) {
+            evt.preventDefault();
+
+            let message = {
+                user: inpuser.value,
+                text: inpText.value
+            };
+
+            messages.push(message);
+            inpText.value = ""; // Reset
+
+
+        }
+
+        function showMessages(snapshot) {
+            let message = snapshot.val();
+            chatView.innerHTML += `
+                <p>
+                    <b>${message.user}</b> sier <i>${message.text}</i>
+                </p>
+            `
+        }
+
+        chatForm.addEventListener("submit", saveMessage);
+        messages.on("child_added", showMessages);
+
+    </script>
+</body>
+</html>
