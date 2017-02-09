@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test</title>
+    <style>
+        #animasjon > div {
+            border: 2px solid green;
+            padding: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div id="animasjon">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+
+<script>
+
+
+    let keyframes = [
+        { transform: "translateY(0)" },
+        { transform: "translateY(200px)" },
+        { transform: "translateY(0)" }
+    ];
+
+    function animateIt() {
+
+        let elementer = document.querySelectorAll("#animasjon > div");
+        for(let i=0; i<elementer.length; i++) {
+
+            let settings = {duration: 1000, delay: i * 1000};
+            elementer[i].animate(keyframes, settings);
+
+        }
+
+    }
+
+    animateIt();
+
+    document.onclick = animateIt;
+
+</script>
+</body>
+</html>
