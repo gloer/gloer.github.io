@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2b</title>
+    <style>
+        #chart {
+            width: 400px;
+            height: 300px;
+            background-color: lightcoral;
+            margin-top: 20px;
+            display: flex;
+            align-items: flex-end;
+        }
+        #chart > div {
+            background-color: whitesmoke;
+            margin: 3px;
+            flex: 1;
+
+        }
+    </style>
+</head>
+<body>
+
+    <button id="btnFuru">Furu</button>
+    <button id="btnGran">Gran</button>
+    <button id="btnLauvtre">Lauvtre</button>
+
+    <div id="info">Velg et tre</div>
+    <div id="chart"></div>
+
+    <p id="aar1">her kommer første året</p>
+    <p id="aar2">her kommer andre året</p>
+
+    <script>
+
+        let btnFuru = document.getElementById("btnFuru");
+        let btnGran = document.getElementById("btnGran");
+        let btnLauvtre = document.getElementById("btnLauvtre");
+        let info = document.getElementById("info");
+        let chart = document.getElementById("chart");
+
+
+        let furu = new Map();
+        furu.set("1915", 20);
+        furu.set("1950", 31);
+        furu.set("1970", 53);
+        furu.set("1990", 89);
+        furu.set("1992", 102);
+        furu.set("2000", 117);
+
+        let gran = new Map();
+        gran.set("1915", 23);
+        gran.set("1950", 39);
+        gran.set("1970", 72);
+        gran.set("1990", 89);
+        gran.set("1992", 92);
+        gran.set("2000", 99);
+
+        let lauvtre = new Map();
+        lauvtre.set("1915", 33);
+        lauvtre.set("1950", 59);
+        lauvtre.set("1970", 32);
+        lauvtre.set("1990", 39);
+        lauvtre.set("1992", 82);
+        lauvtre.set("2000", 92);
+
+        let valgtTre = "Furu";
+        let valgtMap = furu;
+
+        let bytt = true;
+
+        function velgAar(key) {
+
+
+
+            if(bytt) {
+                aar1.innerHTML = valgtMap.get(key);
+            } else {
+                aar2.innerHTML = valgtMap.get(key);
+            }
+
+            bytt = !bytt;
+        }
+
+
+        function lagDiagram() {
+
+            chart.innerHTML = "";
+            for(var [key, value] of valgtMap ) {
+
+                chart.innerHTML += `<div onclick="velgAar('${key}')" style="height: ${value * 2}px">${value}</div>`;
+
+            }
+
+        }
+
+        function velgTre() {
+            if(this.id === "btnFuru") {
+                valgtTre = "Furu";
+                valgtMap = furu;
+            }
+            if(this.id === "btnGran") {
+                valgtTre = "Gran";
+                valgtMap = gran;
+            }
+            if(this.id === "btnLauvtre") {
+                valgtTre = "Lauvtre";
+                valgtMap = lauvtre;
+            }
+
+            info.innerHTML = "Du har valgt " + valgtTre;
+            lagDiagram();
+
+        }
+
+        btnFuru.onclick = velgTre;
+        btnGran.onclick = velgTre;
+        btnLauvtre.onclick = velgTre;
+
+
+
+    </script>
+</body>
+</html>
