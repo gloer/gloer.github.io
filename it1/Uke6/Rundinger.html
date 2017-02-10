@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tegne rundinger</title>
+    <style>
+        body {
+            background-color: black;
+        }
+        div {
+            width: 15px;
+            height: 15px;
+            border: 1px solid lightgreen;
+            border-radius: 50%;
+            left: 50%;
+            top: 80%;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBLyW3Zax8BZZHhc2SgrOeGfsFKbTq8ixA",
+            authDomain: "nobel-90e4c.firebaseapp.com",
+            databaseURL: "https://nobel-90e4c.firebaseio.com",
+            storageBucket: "nobel-90e4c.appspot.com",
+            messagingSenderId: "863119177437"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        var db = firebase.database();
+        var rundinger = db.ref("rundinger");
+
+        rundinger.remove();
+
+        function lagreKlikk(klikk) {
+
+            var posisjon = {
+                xpos: klikk.clientX,
+                ypos: klikk.clientY
+            };
+
+            rundinger.push(posisjon);
+        }
+
+        function visRunding(snapshot) {
+            var runding = snapshot.val();
+            var div = document.createElement("div");
+            div.style.left = runding.xpos + "px";
+            div.style.top = runding.ypos + "px";
+            document.body.appendChild(div);
+
+            var animasjon = div.animate([
+                {opacity: 1, width: "2px", height: "2px"},
+                {opacity: 0, width: "120px", height: "120px"}
+            ], {
+                duration: 3000,
+                fill: "forwards"
+            });
+
+            animasjon.onfinish = function() {
+                document.body.removeChild(div);
+            }
+
+        }
+
+        document.addEventListener("mousemove", lagreKlikk);
+        rundinger.on("child_added", visRunding);
+
+    </script>
+</body>
+</html>
