@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 6</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <th>Navn</th>
+            <th>Favorittmat</th>
+        </thead>
+        <tbody id="tabell"></tbody>
+    </table>
+
+    <script>
+        let tabell = document.getElementById("tabell");
+
+        let sverre = {
+            navn: "Sverre",
+            favorittmat: "Cheeseburger"
+        };
+
+        let anneMarie = {
+            navn: "Anne Marie",
+            favorittmat: "Laks"
+        };
+
+        let per = {
+            navn: "Per",
+            favorittmat: "Tunfisk"
+        };
+
+        tabell.innerHTML += `
+            <tr>
+                <td>${sverre.navn}</td>
+                <td>${sverre.favorittmat}</td>
+            </tr>
+        `;
+
+        tabell.innerHTML += `
+            <tr>
+                <td>${anneMarie.navn}</td>
+                <td>${anneMarie.favorittmat}</td>
+            </tr>
+        `;
+
+        tabell.innerHTML += `
+            <tr>
+                <td>${per.navn}</td>
+                <td>${per.favorittmat}</td>
+            </tr>
+        `;
+
+    </script>
+</body>
+</html>

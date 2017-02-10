@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>O5</title>
+</head>
+<body>
+
+    <h1 id="overskrift">Her kommer det noe</h1>
+    <button id="btn1">Hei</button>
+    <button id="btn2">Hadet</button>
+
+    <script>
+        let overskrift = document.getElementById("overskrift");
+        let btn1 = document.getElementById("btn1");
+        let btn2 = document.getElementById("btn2");
+
+        function visHei() {
+            overskrift.innerHTML = "Hei Sveis";
+        }
+
+        function visHadet() {
+            overskrift.innerHTML = "Ha det på badet";
+        }
+
+        btn1.onclick = visHei;
+        btn2.onclick = visHadet;
+
+
+    </script>
+</body>
+</html>

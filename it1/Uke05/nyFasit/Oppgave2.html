@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Min Edamer og herrer</title>
+</head>
+<body>
+
+    <div id="tekst"></div>
+
+    <script>
+        let tekst = document.getElementById("tekst");
+        let ost = "Gouda";
+
+        // tekst.innerHTML = "God dag til dere. I dag skal vi spise " + ost + " som er god. " + ost + " smaker bra"
+
+        tekst.innerHTML = `God dag yil dere. Vi skal spise <b>${ost}</b> nå. ${ost} er godt.`;
+
+
+    </script>
+</body>
+</html>

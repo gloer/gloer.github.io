@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>O7</title>
+    <style>
+        #firkant {
+            background-color: slateblue;
+            border-radius: 0;
+            width: 600px;
+            height: 100px;
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+
+    <input id="inpHoyde" type="range" min="10" max="600" value="100">
+    <input id="inpCorner" type="range" min="0" max="50" value="0">
+    <div id="firkant"></div>
+
+    <script>
+        let inpHoyde = document.getElementById("inpHoyde");
+        let inpCorner = document.getElementById("inpCorner");
+
+        let firkant = document.getElementById("firkant");
+
+        function endreHoyde() {
+            firkant.style.height = inpHoyde.value + "px";
+        }
+
+        function endreCorner() {
+            firkant.style.borderRadius = inpCorner.value + "%";
+        }
+
+        inpHoyde.addEventListener("input", endreHoyde);
+        inpCorner.addEventListener("input", endreCorner);
+
+    </script>
+</body>
+</html>
