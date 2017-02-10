@@ -68,6 +68,8 @@
 
             animasjon.onfinish = function() {
                 document.body.removeChild(div);
+                var fjern = db.ref("rundinger/" + snapshot.key);
+                fjern.remove();
             }
 
         }
