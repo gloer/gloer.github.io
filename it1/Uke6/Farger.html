@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Farger</title>
+    <style>
+        #stage > div {
+            width: 250px;
+            height: 100px;
+            background-color: seagreen;
+            display: inline-block;
+            text-align: center;
+            padding-top: 20px;
+            color: white;
+            text-shadow: 1px 1px 1px black;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="color" id="inpFarge" value="#f3c544">
+    <input type="text" id="inpNavn" placeholder="Hva heter du" autocomplete="off">
+    <button id="btn">Vis din farge</button>
+
+    <div id="stage"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBLyW3Zax8BZZHhc2SgrOeGfsFKbTq8ixA",
+            authDomain: "nobel-90e4c.firebaseapp.com",
+            databaseURL: "https://nobel-90e4c.firebaseio.com",
+            storageBucket: "nobel-90e4c.appspot.com",
+            messagingSenderId: "863119177437"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        var inpNavn = document.getElementById("inpNavn");
+        var inpFarge = document.getElementById("inpFarge");
+        var btn = document.getElementById("btn");
+        var stage = document.getElementById("stage");
+
+
+
+        var db = firebase.database();
+        var farger = db.ref("farger");
+
+        function lagreFarge() {
+            var minFarge = {
+                navn: inpNavn.value,
+                farge: inpFarge.value
+            };
+
+            farger.push(minFarge);
+        }
+
+        function visFarger(snap) {
+            var palett = snap.val();
+            stage.innerHTML += `<div style="background-color: ${palett.farge}">${palett.navn}</div>`;
+
+        }
+
+        btn.addEventListener("click", lagreFarge);
+        farger.on("child_added", visFarger);
+
+
+    </script>
+</body>
+</html>
