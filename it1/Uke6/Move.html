@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Move IT</title>
+    <style>
+        body {
+            background-color: lightgreen;
+        }
+
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: darkgreen;
+            position: absolute;
+            left: 200px;
+            top: 200px;
+            transition: 0.5s;
+        }
+        #f2 {opacity: 0.9}
+        #f3 {opacity: 0.8}
+        #f4 {opacity: 0.7}
+        #f5 {opacity: 0.6}
+        #f6 {opacity: 0.5}
+        #f7 {opacity: 0.4}
+        #f8 {opacity: 0.3}
+        #f9 {opacity: 0.2}
+        #f10 {opacity: 0.1}
+    </style>
+</head>
+<body>
+
+    <div id="f1"></div>
+    <div id="f2"></div>
+    <div id="f3"></div>
+    <div id="f4"></div>
+    <div id="f5"></div>
+    <div id="f6"></div>
+    <div id="f7"></div>
+    <div id="f8"></div>
+    <div id="f9"></div>
+    <div id="f10"></div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBLyW3Zax8BZZHhc2SgrOeGfsFKbTq8ixA",
+            authDomain: "nobel-90e4c.firebaseapp.com",
+            databaseURL: "https://nobel-90e4c.firebaseio.com",
+            storageBucket: "nobel-90e4c.appspot.com",
+            messagingSenderId: "863119177437"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        var f1 = document.getElementById("f1");
+        var f2 = document.getElementById("f2");
+        var f3 = document.getElementById("f3");
+        var f4 = document.getElementById("f4");
+        var f5 = document.getElementById("f5");
+        var f6 = document.getElementById("f6");
+        var f7 = document.getElementById("f7");
+        var f8 = document.getElementById("f8");
+        var f9 = document.getElementById("f9");
+        var f10 = document.getElementById("f10");
+
+        var db = firebase.database();
+        var firkantPos = db.ref("firkantPos");
+
+        function setPosition(evt) {
+
+            var pos = {
+                x: evt.clientX,
+                y: evt.clientY
+            };
+
+            firkantPos.set(pos);
+
+        }
+
+        function moveIt(snap) {
+            var pos = snap.val();
+            f1.style.left = pos.x + "px";
+            f1.style.top = pos.y + "px";
+            f1.style.transform = `rotate(${Math.random() * 720}deg)`;
+            f1.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
+
+            f2.style.left = pos.x + "px";
+            f2.style.top = pos.y + "px";
+            f2.style.transform = `rotate(${Math.random() * 720}deg)`;
+            f2.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
+
+            f3.style.left = pos.x + "px";
+            f3.style.top = pos.y + "px";
+            f3.style.transform = `rotate(${Math.random() * 720}deg)`;
+            f3.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
+
+            f4.style.left = pos.x + "px";
+            f4.style.top = pos.y + "px";
+            f4.style.transform = `rotate(${Math.random() * 720}deg)`;
+            f4.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
+
+            f5.style.left = pos.x + "px";
+            f5.style.top = pos.y + "px";
+            f5.style.transform = `rotate(${Math.random() * 720}deg)`;
+            f5.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
+
+            f6.style.left = pos.x + "px";
+            f6.style.top = pos.y + "px";
+            f6.style.transform = `rotate(${Math.random() * 720}deg)`;
+            f6.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
+
+            f7.style.left = pos.x + "px";
+            f7.style.top = pos.y + "px";
+            f7.style.transform = `rotate(${Math.random() * 720}deg)`;
+            f7.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
+
+            f8.style.left = pos.x + "px";
+            f8.style.top = pos.y + "px";
+            f8.style.transform = `rotate(${Math.random() * 720}deg)`;
+            f8.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
+
+            f9.style.left = pos.x + "px";
+            f9.style.top = pos.y + "px";
+            f9.style.transform = `rotate(${Math.random() * 720}deg)`;
+            f9.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
+
+            f10.style.left = pos.x + "px";
+            f10.style.top = pos.y + "px";
+            f10.style.transform = `rotate(${Math.random() * 720}deg)`;
+            f10.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 50%)`;
+
+        }
+
+        document.addEventListener("click", setPosition);
+        firkantPos.on("value", moveIt);
+
+    </script>
+</body>
+</html>
