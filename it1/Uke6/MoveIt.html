@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Move IT</title>
+    <style>
+        body {
+            background-color: lightgreen;
+        }
+
+        #firkant {
+            width: 100px;
+            height: 100px;
+            background-color: darkgreen;
+            position: absolute;
+            left: 200px;
+            top: 200px;
+            transition: 0.5s;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="firkant"></div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBLyW3Zax8BZZHhc2SgrOeGfsFKbTq8ixA",
+            authDomain: "nobel-90e4c.firebaseapp.com",
+            databaseURL: "https://nobel-90e4c.firebaseio.com",
+            storageBucket: "nobel-90e4c.appspot.com",
+            messagingSenderId: "863119177437"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        var firkant = document.getElementById("firkant");
+
+        var db = firebase.database();
+        var firkantPos = db.ref("firkantPos");
+
+        function setPosition(evt) {
+
+            var pos = {
+                x: evt.clientX,
+                y: evt.clientY
+            };
+
+            firkantPos.set(pos);
+
+        }
+
+        function moveIt(snap) {
+            var pos = snap.val();
+            firkant.style.left = pos.x + "px";
+            firkant.style.top = pos.y + "px";
+            firkant.style.transform = `rotate(${Math.random() * 720}deg)`;
+        }
+
+        document.addEventListener("click", setPosition);
+        firkantPos.on("value", moveIt);
+
+    </script>
+</body>
+</html>
