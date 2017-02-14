@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Min blogg</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation-flex.css">
+    <style>
+        body {
+            max-width: 780px;
+            margin: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bildene mine</h1>
+    <form id="skjema">
+        <input type="text" id="inpTekst" required placeholder="Hva har du tatt bilde av?">
+        <input class="button" type="file" id="inpBilde" required>
+        <button class="button success" type="submit">Lagre blogginnlegg</button>
+    </form>
+
+    <main id="main"></main>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBLyW3Zax8BZZHhc2SgrOeGfsFKbTq8ixA",
+            authDomain: "nobel-90e4c.firebaseapp.com",
+            databaseURL: "https://nobel-90e4c.firebaseio.com",
+            storageBucket: "nobel-90e4c.appspot.com",
+            messagingSenderId: "863119177437"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+
+    <script>
+        let db = firebase.database();
+        let storage = firebase.storage();
+
+        let bloggen = db.ref("bloggen");
+
+        let skjema = document.getElementById("skjema");
+        let inpTekst = document.getElementById("inpTekst");
+        let inpBilde = document.getElementById("inpBilde");
+        let main = document.getElementById("main");
+
+        function lagreData(evt) {
+            evt.preventDefault(); // Stopper skjemaet fra å oppdater siden
+
+            let mittfinebilde = storage.ref("bloggen/" + new Date());
+
+            mittfinebilde.put(inpBilde.files[0])
+                .then(function(snapshot){
+                    bloggen.push({
+                        tekst: inpTekst.value,
+                        url: snapshot.downloadURL
+                    });
+                });
+
+        }
+
+        function visBlogg(snapshot) {
+            let post = snapshot.val();
+            main.innerHTML = `<p>${post.tekst}</p>
+                                <img src="${post.url}">
+                               ` + main.innerHTML;
+        }
+
+
+        skjema.addEventListener("submit", lagreData);
+        bloggen.on("child_added", visBlogg);
+
+    </script>
+
+</body>
+</html>
