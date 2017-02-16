@@ -68,6 +68,16 @@
                 bilde: snapshot.downloadURL
             };
             biler.push(bil);
+
+            // Nuller ut input-felt
+            inpRegnr.value = "";
+            inpFarge.value = "";
+            inpMerke.value = "";
+            inpPris.value = "";
+            inpBilde.value = "";
+            inpRegnr.focus();
+
+
         }
 
         function lagreBilde(evt) {
