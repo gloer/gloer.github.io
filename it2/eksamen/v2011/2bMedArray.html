@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title</title>
+    <title>Alle de vakre trærne</title>
     <style>
         body {
             color: white;
@@ -80,6 +80,7 @@
 
             // Bruker en for of-løkke med indeks og verdi
             // Indeksen er i og verdien er antall trær
+            // Kunne også ha brukt en tradisjonell for-løkke her
             for(let [i, antall] of valgtTresort.entries()) {
                 // nth-child finner søylene. nth-child(1) er den første nth-child(2) den neste osv
                 let divElement = document.querySelector(`#chart > div:nth-child(${i+1})`);
