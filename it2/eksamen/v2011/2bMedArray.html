@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <style>
+        body {
+            color: white;
+            font-family: sans-serif;
+        }
+
+        #chart {
+            background-color: orange;
+            width: 400px;
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            margin-top: 10px;
+        }
+        #chart > div {
+            background-color: papayawhip;
+            margin: 5px;
+            flex: 1;
+            height: 50px;
+            text-align: center;
+            color: #0c3d5d;
+            transition: 1s;
+        }
+        #legend {
+            background-color: orange;
+            width: 400px;
+            display: flex;
+        }
+        #legend > div {
+            flex: 1;
+            margin: 5px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <select id="selTresort">
+        <option value="furu">Furu</option>
+        <option value="gran">Gran</option>
+        <option value="lauvtre">Lauvtre</option>
+    </select>
+
+    <div id="chart">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div id="legend">
+        <div>1915</div>
+        <div>1950</div>
+        <div>1970</div>
+        <div>1990</div>
+        <div>1992</div>
+        <div>2000</div>
+    </div>
+
+    <script>
+
+        let selTresort = document.getElementById("selTresort");
+
+
+        let furu = [20, 31, 53, 89, 102, 117];
+        let gran = [23, 39, 72, 89, 92, 99];
+        let lauvtre = [33, 59, 32, 39, 82, 92];
+
+        let valgtTresort = furu;
+
+        function lagDiagram() {
+
+            for(let [i, antall] of valgtTresort.entries()) {
+                let divElement = document.querySelector(`#chart > div:nth-child(${i+1})`);
+                divElement.innerHTML = antall;
+                divElement.style.height = antall * 2 + "px";
+                divElement.setAttribute("data-antall", antall);
+            }
+        }
+
+        function velgTresort() {
+            if(selTresort.value === "furu") {
+                valgtTresort = furu;
+            }
+            else if(selTresort.value === "gran") {
+                valgtTresort = gran;
+            }
+            else {
+                valgtTresort = lauvtre;
+            }
+            lagDiagram();
+        }
+
+        setTimeout(lagDiagram, 100);
+        selTresort.onchange = velgTresort;
+
+    </script>
+</body>
+</html>
