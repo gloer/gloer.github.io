@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ta opp lyd</title>
+</head>
+<body>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAEJB9V7ut590T6E9bz1ihakDnjxuR50oY",
+            authDomain: "it1-er-best.firebaseapp.com",
+            databaseURL: "https://it1-er-best.firebaseio.com",
+            storageBucket: "it1-er-best.appspot.com",
+            messagingSenderId: "87355636782"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        let db = firebase.database();
+        let toner = db.ref("toner");
+
+        let ac = new AudioContext();
+
+        function lagreTone(evt) {
+            toner.push({
+                frekvens: evt.clientX,
+                starttid: ac.currentTime
+            });
+        }
+
+        function spillLyd(snapshot) {
+            let lyd = snapshot.val();
+            let osc = ac.createOscillator();
+            osc.connect(ac.destination);
+            osc.frequency.value = lyd.frekvens;
+            osc.start(lyd.starttid);
+            osc.stop(lyd.starttid + 0.1);
+        }
+
+        document.onclick = lagreTone;
+        // Samme som
+        // document.addEventListener("click", lagreTone);
+
+        toner.on("child_added", spillLyd);
+
+    </script>
+</body>
+</html>
