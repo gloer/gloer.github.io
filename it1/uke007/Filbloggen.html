@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laste opp filer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation-flex.min.css">
+    <style>
+        body {
+            max-width: 700px;
+            margin: auto;
+            padding: 10px;
+        }
+        img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="skjema">
+        <input id="inpTekst" type="text" placeholder="Hva har du tatt bilde av?" required autocomplete="off">
+        <input class="button" id="inpFil" type="file" required>
+        <button class="button success" type="submit">Lagre</button>
+    </form>
+
+    <main id="main"></main>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAEJB9V7ut590T6E9bz1ihakDnjxuR50oY",
+            authDomain: "it1-er-best.firebaseapp.com",
+            databaseURL: "https://it1-er-best.firebaseio.com",
+            storageBucket: "it1-er-best.appspot.com",
+            messagingSenderId: "87355636782"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        let db = firebase.database();
+        let storage = firebase.storage();
+
+        let bloggposter = db.ref("bloggposter");
+
+        let skjema = document.getElementById("skjema");
+        let inpTekst = document.getElementById("inpTekst");
+        let inpFil = document.getElementById("inpFil");
+        let main = document.getElementById("main");
+
+        function lagreData(fil) {
+            bloggposter.push({
+                tekst: inpTekst.value,
+                url: fil.downloadURL
+            });
+            inpTekst.value = "";
+            inpFil.value = "";
+            inpTekst.focus();
+        }
+
+        function lagreBilde(evt) {
+            evt.preventDefault(); // Stopper default oppførsel til skjemaet
+
+            let bildenavn = storage.ref("deltebilder/" + new Date());
+            bildenavn.put(inpFil.files[0])
+                .then(lagreData);
+
+        }
+
+        function visBilde(snapshot) {
+            let fil = snapshot.val();
+            main.innerHTML = `
+                <h1>${fil.tekst}</h1>
+                <img src="${fil.url}">
+            ` + main.innerHTML;
+        }
+
+        skjema.addEventListener("submit", lagreBilde);
+        bloggposter.on("child_added", visBilde);
+
+
+    </script>
+</body>
+</html>
