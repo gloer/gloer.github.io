@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Bestill matkasse</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation-flex.css">
+    <style>
+        body {
+            max-width: 860px;
+            margin: auto;
+            padding: 10px;
+        }
+        h1 {
+            font-size: 22px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Alle bestillinger som er lagt inn av kundene våre</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Navn</th>
+                <th>Adresse</th>
+                <th>Antall middager per dag</th>
+                <th>Antall personer</th>
+                <th>Pris per uke</th>
+            </tr>
+        </thead>
+        <tbody id="tbBestillinger"></tbody>
+    </table>
+
+
+    <p class="callout">
+        <a href="Oppgave2MedDatabase.html">Bestill matkasse du også</a>
+    </p>
+
+    <!-- Kode som er automatisk generert av Firebase. Logg deg inn på firebase.google.com for å skaffe deg din egen Firebase-konto -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD7FS8R-au_1gSp57YuQIjiAGIoZL5rUZw",
+            authDomain: "min-database.firebaseapp.com",
+            databaseURL: "https://min-database.firebaseio.com",
+            storageBucket: "min-database.appspot.com",
+            messagingSenderId: "614855754958"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <!-- Slutt på koden fra Firebase -->
+
+    <script>
+
+        // Refererer til HTML-tabellen
+        var tbBestillinger = document.getElementById("tbBestillinger");
+
+
+        // Setter opp en kobling til databasen
+        var database = firebase.database();
+        // Navn på objektet i databasen vi lagrer data i
+        var bestillinger = database.ref("bestillinger");
+
+
+        // Når det legges inn en bestilling oppdatares tabellen med data fra databasen
+        // Dette skjer realtime - prøv å åpne et nettleservindu med bestillingsskjema og et med tabellen som viser bestillinger
+        // I det du legger inn en ny bestilling dukker den opp på den andre nettsiden
+        // Firebase pusher en melding om at det er lagt inn en ny bestilling til alle klienter som er inne på nettsiden
+        function visBestillinger(snapshot) {
+            var bestilling = snapshot.val(); // Dette er objektet som er lagt inn
+
+            var nyRad = `
+                <tr>
+                    <td>${bestilling.navn}</td>
+                    <td>${bestilling.adresse}, ${bestilling.postnummer} ${bestilling.poststed}</td>
+                    <td>${bestilling.antallMiddager}</td>
+                    <td>${bestilling.antallPersoner}</td>
+                    <td>${bestilling.pris}</td>
+                </tr>
+            `;
+
+            // Legger den nye bestillingen på toppen av tabellen
+            tbBestillinger.innerHTML = nyRad + tbBestillinger.innerHTML;
+        }
+
+        // Funksjonen skal starte når det legges inn en ny bestilling - child added to database object
+        bestillinger.on("child_added", visBestillinger);
+
+
+    </script>
+
+</body>
+</html>

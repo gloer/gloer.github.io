@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Bestill matkasse</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation-flex.css">
+    <style>
+        body {
+            max-width: 860px;
+            margin: auto;
+            padding: 10px;
+        }
+        h1 {
+            font-size: 22px;
+            text-align: center;
+        }
+        #bildeViser {
+            text-align: center;
+        }
+        #antMiddager {
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bestill matkasse</h1>
+    <form id="regBestilling">
+        <select id="inpTypeKasse" required>
+            <option value="">Hvor mange middager vil dere ha i uka</option>
+            <option data-image="enMiddag.png" value="2">Matkasse med 2 middager</option>
+            <option data-image="toMiddager.png" value="3">Matkasse med 3 middager</option>
+        </select>
+        <select id="inpAntallPersoner" required>
+            <option value="">Hvor mange personer er dere i husholdningen</option>
+            <option value="1">For 1 person</option>
+            <option value="2">For 2 personer</option>
+            <option value="3">For 3 personer</option>
+            <option value="4">For 4 personer</option>
+            <option value="5">For 5 personer</option>
+            <option value="6">For 6 personer</option>
+            <option value="7">For 7 personer</option>
+            <option value="8">For 8 personer</option>
+            <option value="9">For 9 personer</option>
+            <option value="10">For 10 personer</option>
+        </select>
+
+        <div id="bildeViser">
+            <img id="antMiddager">
+        </div>
+
+        <h1>Bestillingen sendes til</h1>
+        <input type="text" id="inpNavn" placeholder="Ola Nordmann" required name="name">
+        <input type="text" id="inpAdresse" placeholder="Karvesvingen 22" required name="address">
+        <input type="text" id="inpPostnummer" placeholder="1350" required>
+        <input type="text" id="inpPoststed" placeholder="Lommedalen" required>
+        <button type="submit" class="button">Send inn bestilling</button>
+
+    </form>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Antall middager per dag</th>
+                <th>Antall personer</th>
+                <th>Pris per uke</th>
+                <th>Sendes til</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="tdAntall"></td>
+                <td id="tdPersoner"></td>
+                <td id="tdPris"></td>
+                <td id="tdPerson"></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <p class="callout">
+        <a href="visBestillinger.html">Vis alle bestillinger som er lagt inn av kundene våre</a>
+    </p>
+
+    <!-- Kode som er automatisk generert av Firebase. Logg deg inn på firebase.google.com for å skaffe deg din egen Firebase-konto -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD7FS8R-au_1gSp57YuQIjiAGIoZL5rUZw",
+            authDomain: "min-database.firebaseapp.com",
+            databaseURL: "https://min-database.firebaseio.com",
+            storageBucket: "min-database.appspot.com",
+            messagingSenderId: "614855754958"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <!-- Slutt på koden fra Firebase -->
+
+    <script>
+
+        // Setter opp en kobling til databasen
+        var database = firebase.database();
+        // Navn på objektet i databasen vi lagrer data i
+        var bestillinger = database.ref("bestillinger");
+
+
+        // Referanse til DOM-elementer
+        var inpTypeKasse = document.getElementById("inpTypeKasse");
+        var inpAntallPersoner = document.getElementById("inpAntallPersoner");
+        var regBestilling = document.getElementById("regBestilling");
+        var antMiddager = document.getElementById("antMiddager");
+        var tdAntall = document.getElementById("tdAntall");
+        var tdPersoner = document.getElementById("tdPersoner");
+        var tdPris = document.getElementById("tdPris");
+        var tdPerson = document.getElementById("tdPerson");
+        var inpNavn = document.getElementById("inpNavn");
+        var inpAdresse = document.getElementById("inpAdresse");
+        var inpPostnummer = document.getElementById("inpPostnummer");
+        var inpPoststed = document.getElementById("inpPoststed");
+
+        // Verdier til prisberegning
+        var antallMiddager = 0;
+        var antallPersoner = 0;
+        var pris = 0;
+
+        // Legger inn adressen i tabellen
+        function visAdresse() {
+            tdPerson.innerHTML = inpNavn.value + "<br>" + inpAdresse.value + "<br>" + inpPostnummer.value + " " + inpPoststed.value;
+        }
+        inpNavn.oninput = inpAdresse.oninput = inpPostnummer.oninput = inpPoststed.oninput = visAdresse;
+
+        // Bergegner prisen på bestillingen
+        function beregnPris() {
+            if(antallPersoner === 0 || antallMiddager === 0) {
+                return;
+            }
+            if(antallPersoner > 10) {
+                alert("Du har på mystisk vis klart å velge flere personer enn lovlig");
+                return;
+            }
+
+            var prisPerMiddag = 80;
+            if(antallPersoner >= 5) {
+                prisPerMiddag = 70;
+            }
+
+            pris = antallPersoner * antallMiddager * prisPerMiddag;
+            tdPris.innerHTML = pris;
+        }
+
+        // Setter antall personer og starter funksjonen beregnPris
+        inpAntallPersoner.onchange = function() {
+            antallPersoner = Number(this.value);
+            tdPersoner.innerHTML = antallPersoner;
+
+            beregnPris();
+        };
+
+        // Setter type matkasse og starter funksjonen beregnPris
+        inpTypeKasse.onchange = function() {
+
+            // Sjekker hvor mange kasser som er valgt
+            if(this.value === "2") {
+                antMiddager.src = "toMiddager.png";
+                antMiddager.style.display = "inline-block";
+                antallMiddager = 2;
+            } else if(this.value === "3") {
+                antMiddager.src = "treMiddager.png";
+                antMiddager.style.display = "inline-block";
+                antallMiddager = 3;
+            } else {
+                antMiddager.src = "";
+                antMiddager.style.display = "none";
+                antallMiddager = 0;
+            }
+
+            tdAntall.innerHTML = antallMiddager;
+            beregnPris();
+        };
+
+        // Behandler selve bestillingen
+        regBestilling.onsubmit = function(evt) {
+            evt.preventDefault();
+            // Et objekt til å lagre bestillingen
+            var bestilling = {
+                antallMiddager: antallMiddager,
+                antallPersoner: antallPersoner,
+                pris: pris,
+                navn: inpNavn.value,
+                adresse: inpAdresse.value,
+                postnummer: inpPostnummer.value,
+                poststed: inpPoststed.value
+            };
+
+            // I dette eksempelet legger vi bestillingen inn i databasen
+            bestillinger.push(bestilling);
+
+            alert("Følgende data burde ha blitt sendt til databasen " + JSON.stringify(bestilling));
+        }
+
+
+
+    </script>
+
+</body>
+</html>

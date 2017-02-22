@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lag bestillingsliste</title>
+    <link rel="stylesheet" href="foundation-flex.css">
+    <style>
+        body {
+            max-width: 970px;
+            margin: auto;
+            padding: 10px;
+        }
+        input[type=number] {
+            display: inline-block;
+            width: 18%;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="skjema">
+        <input type="number" id="inpUkenr" placeholder="ukenummer" required value="26">
+        <input type="number" id="inpAntMiddager" placeholder="Antall middager" required min="2" max="3">
+        <input type="number" id="inpAntBarn" placeholder="Antall barn" required>
+        <input type="number" id="inpAntUngdom" placeholder="Antall ungdom" required>
+        <input type="number" id="inpAntVoksne" placeholder="Antall voksne" required>
+        <button class="button" type="submit">Registrer ny bestilling</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Veke nr.</th>
+                <th>Tal på middager</th>
+                <th>Barn</th>
+                <th>Ungdom</th>
+                <th>Voksne</th>
+            </tr>
+            <tbody id="tabell"></tbody>
+        </thead>
+    </table>
+
+    <div class="callout success" id="divBestilling"></div>
+
+    <script>
+        let skjema = document.getElementById("skjema");
+        let inpUkenr = document.getElementById("inpUkenr");
+        let inpAntMiddager = document.getElementById("inpAntMiddager");
+        let inpAntBarn = document.getElementById("inpAntBarn");
+        let inpAntUngdom = document.getElementById("inpAntUngdom");
+        let inpAntVoksne = document.getElementById("inpAntVoksne");
+        let tabell = document.getElementById("tabell");
+        let divBestilling = document.getElementById("divBestilling");
+
+
+        let bestillinger = [];
+
+        let raavarer = new Map();
+        raavarer.set("torsk", {barn: 200, ungdom: 300, voksne: 350});
+        raavarer.set("sei", {barn: 200, ungdom: 300, voksne: 350});
+        raavarer.set("makrell", {barn: 200, ungdom: 300, voksne: 350});
+        raavarer.set("reker", {barn: 250, ungdom: 500, voksne: 500});
+        raavarer.set("krabbe", {barn: 300, ungdom: 500, voksne: 600});
+        raavarer.set("laks", {barn: 200, ungdom: 300, voksne: 350});
+
+        let menyer = new Map();
+        menyer.set(26, {dag1: "krabbe", dag2: "torsk", dag3: "laks"});
+
+        function lagTabell() {
+            tabell.innerHTML = "";
+            for(let bestilling of bestillinger) {
+                tabell.innerHTML += `
+                    <tr>
+                        <td>${bestilling.uke}</td>
+                        <td>${bestilling.antMiddager}</td>
+                        <td>${bestilling.antBarn}</td>
+                        <td>${bestilling.antUngdom}</td>
+                        <td>${bestilling.antVoksne}</td>
+                    </tr>
+                `;
+            }
+        }
+
+        function beregnTotalbehov() {
+            // Vi skal beregne for uke 26
+            let meny = menyer.get(26);
+            let total = {
+                torsk: 0,
+                sei: 0,
+                makrell: 0,
+                reker: 0,
+                krabbe: 0,
+                laks: 0
+            };
+
+
+            for(let bestilling of bestillinger) {
+
+                if(bestilling.uke === 26) {
+
+                    total.krabbe += raavarer.get("krabbe").barn * bestilling.antBarn;
+                    total.krabbe += raavarer.get("krabbe").ungdom * bestilling.antUngdom;
+                    total.krabbe += raavarer.get("krabbe").voksne * bestilling.antVoksne;
+
+                    total.torsk += raavarer.get("torsk").barn * bestilling.antBarn;
+                    total.torsk += raavarer.get("torsk").ungdom * bestilling.antUngdom;
+                    total.torsk += raavarer.get("torsk").voksne * bestilling.antVoksne;
+
+                    if(bestilling.antMiddager > 2) {
+                        total.laks += raavarer.get("laks").barn * bestilling.antBarn;
+                        total.laks += raavarer.get("laks").ungdom * bestilling.antUngdom;
+                        total.laks += raavarer.get("laks").voksne * bestilling.antVoksne;
+                    }
+
+                }
+            }
+
+            divBestilling.innerHTML = "<p>Fiskebehov for uke 26</p>";
+            divBestilling.innerHTML += "<div>Vi trenger <b>" + total.krabbe + "g</b> krabbe</div>";
+            divBestilling.innerHTML += "<div>Vi trenger <b>" + total.torsk + "g</b> torsk</div>";
+            divBestilling.innerHTML += "<div>Vi trenger <b>" + total.laks + "g</b> laks</div>";
+
+        }
+
+        function leggInnOrdre(evt) {
+            evt.preventDefault();
+
+            bestillinger.push({
+                uke: Number(inpUkenr.value),
+                antMiddager: Number(inpAntMiddager.value),
+                antBarn: Number(inpAntBarn.value),
+                antUngdom: Number(inpAntUngdom.value),
+                antVoksne: Number(inpAntVoksne.value)
+            });
+            inpAntMiddager.value = "";
+            inpAntBarn.value = "";
+            inpAntUngdom.value = "";
+            inpAntVoksne.value = "";
+            inpAntMiddager.focus();
+
+            lagTabell();
+            beregnTotalbehov();
+        }
+
+
+
+        skjema.addEventListener("submit", leggInnOrdre);
+
+    </script>
+</body>
+</html>
