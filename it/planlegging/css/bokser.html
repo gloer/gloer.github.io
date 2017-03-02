@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hva slags koffert ønsker du?</title>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        #vesker {
+            font-size: 0;
+        }
+        #vesker > a {
+            display: inline-block;
+            box-sizing: border-box;
+            border: 2px solid whitesmoke;
+            height: 200px;
+            width: 25%;
+            background-position: center bottom;
+            background-size: cover;
+            font-size: 22px;
+            color: #0c3d5d;
+            text-decoration: none;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-align: center;
+            padding-top: 12px;
+            transition: 0.5s;
+        }
+        
+        #fritid {
+            background-image: url("fritid.png");
+        }
+        #jobb {
+            background-image: url("jobb.png");
+        }
+        #reise {
+            background-image: url("reise.png");
+        }
+        #turer {
+            background-image: url("turer.png");
+        }
+
+        @media (max-width: 900px) {
+            #vesker > a {
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            #vesker > a {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="vesker">
+        <a href="fritid.html" id="fritid">Til fritid</a>
+        <a href="jobb.html" id="jobb">Til jobb</a>
+        <a href="reise.html" id="reise">Til reise</a>
+        <a href="turer.html" id="turer">Til turer</a>
+    </section>
+
+</body>
+</html>
