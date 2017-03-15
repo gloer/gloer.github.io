@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation-flex.css">
+    <style>
+        body {
+            min-height: 100vh;
+            padding: 10px;
+            background-image: url("moon.jpg");
+            background-size: cover;
+            background-position: left bottom;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+        }
+        .top-bar {
+            background-color: transparent;
+        }
+        .top-bar-left {
+            background-color: transparent;
+        }
+        .dropdown.menu {
+            background-color: transparent;
+        }
+        li > a {
+            color: white;
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li><a href="index.html">Forside</a></li>
+                <li><a href="tabell.html">Tabell</a></li>
+                <li><a href="diagram.html">Kakediagram</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="hcontainer" style="height: 100%"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <script>
+        $(function () {
+            Highcharts.chart('hcontainer', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: 0,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Favoritt-<br>sport<br>2017',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    y: 40
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            distance: -50,
+                            style: {
+                                fontWeight: 'bold',
+                                color: 'white'
+                            }
+                        },
+                        startAngle: -90,
+                        endAngle: 90,
+                        center: ['50%', '75%']
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Andel',
+                    innerSize: '50%',
+                    data: [
+                        ['Fotball',   4],
+                        ['Hockey',       2],
+                        ['Dans', 1],
+                        ['Basket',    1],
+                        ['Langrenn',     2],
+
+                    ]
+                }]
+            });
+
+        });
+    </script>
+</body>
+</html>
