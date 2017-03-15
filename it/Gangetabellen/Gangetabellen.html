@@ -38,11 +38,18 @@
             font-family: sans-serif;
             font-size: 22px;
         }
+        #toppliste {
+            width: 300px;
+
+        }
     </style>
 </head>
 <body>
 
     <img id="userImage" style="width: 200px; position: absolute; left: 5px; top: 5px;">
+    <table id="toppliste">
+        <tbody></tbody>
+    </table>
 
     <div id="poengDIV">0</div>
     <div id="stage">
@@ -76,13 +83,15 @@
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
 
-
+                    let db = firebase.database();
+                    let ref = db.ref("gangetabellen");
 
                     let regnestykke = document.getElementById("regnestykke");
                     let inpSvar = document.getElementById("inpSvar");
                     let poengDIV = document.getElementById("poengDIV");
                     let inpUser = document.getElementById("inpUser");
                     let userImage = document.getElementById("userImage");
+                    let toppliste = document.querySelector("#toppliste > tbody");
 
 
                     // User is signed in.
@@ -146,6 +155,15 @@
                         animasjon = regnestykke.animate(keyframes, settings);
 
                         animasjon.onfinish = function() {
+
+                            // Legger inn resultater
+                            ref.push({
+                                user: uid,
+                                name: displayName,
+                                poeng: poeng
+                            });
+
+
                             poeng = 0;
                         }
                     }
@@ -160,6 +178,20 @@
                     }
 
                     inpSvar.oninput = sjekkSvar;
+
+                    function lagToppliste(snap) {
+
+                        let data = snap.val();
+                        toppliste.innerHTML += `
+                                                   <tr>
+                                                    <td>${data.name}</td>
+                                                    <td>${data.poeng}</td>
+                                                   </tr>
+                                                `;
+
+                    }
+
+                    ref.orderByChild("poeng").on("child_added", lagToppliste);
 
 
 
