@@ -40,6 +40,10 @@
         }
         #toppliste {
             width: 300px;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-family: sans-serif;
 
         }
     </style>
@@ -182,16 +186,19 @@
                     function lagToppliste(snap) {
 
                         let data = snap.val();
-                        toppliste.innerHTML += `
+                        toppliste.innerHTML = `
                                                    <tr>
                                                     <td>${data.name}</td>
                                                     <td>${data.poeng}</td>
                                                    </tr>
-                                                `;
+                                                ` + toppliste.innerHTML;
 
                     }
 
-                    ref.orderByChild("poeng").on("child_added", lagToppliste);
+                    ref
+                        .orderByChild("poeng")
+                        .limitToLast(30)
+                        .on("child_added", lagToppliste);
 
 
 
