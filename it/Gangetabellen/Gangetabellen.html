@@ -42,7 +42,7 @@
 </head>
 <body>
 
-    <input type="text" id="inpUser" placeholder="NICKNAME">
+    <img id="userImage">
 
     <div id="poengDIV">0</div>
     <div id="stage">
@@ -75,11 +75,17 @@
         initApp = function() {
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
+
+
+
                     // User is signed in.
                     var displayName = user.displayName;
                     var email = user.email;
                     var emailVerified = user.emailVerified;
                     var photoURL = user.photoURL;
+
+                    userImage.src = photoURL;
+
                     var uid = user.uid;
                     var providerData = user.providerData;
                     user.getToken().then(function(accessToken) {
@@ -95,8 +101,69 @@
                             providerData: providerData
                         }, null, '  ');
                     });
+
+
+                    let regnestykke = document.getElementById("regnestykke");
+                    let inpSvar = document.getElementById("inpSvar");
+                    let poengDIV = document.getElementById("poengDIV");
+                    let inpUser = document.getElementById("inpUser");
+
+
+
+                    inpSvar.focus();
+
+                    let fasit = 4;
+                    let poeng = 0;
+                    let tid = 4000;
+
+                    let keyframes = [
+                        {transform: "translateY(-50px)"},
+                        {transform: "translateY(490px)"}
+                    ];
+                    let settings = {
+                        duration: tid,
+                        fill: "forwards"
+                    };
+
+
+                    let animasjon = regnestykke.animate(keyframes, settings);
+
+                    function lagOppgave() {
+
+                        poeng++;
+                        poengDIV.innerHTML = poeng;
+
+                        var faktor1 = Math.ceil(Math.random() * 10);
+                        var faktor2 = Math.ceil(Math.random() * 10);
+
+                        fasit = faktor1 * faktor2;
+
+                        animasjon.cancel();
+
+                        regnestykke.innerHTML = faktor1 + " x " + faktor2;
+                        animasjon = regnestykke.animate(keyframes, settings);
+
+                        animasjon.onfinish = function() {
+                            poeng = 0;
+                        }
+                    }
+
+                    function sjekkSvar() {
+
+                        if(Number(this.value) === fasit) {
+                            this.value = "";
+                            lagOppgave();
+
+                        }
+                    }
+
+                    inpSvar.oninput = sjekkSvar;
+
+
+
                 } else {
                     // User is signed out.
+                    document.location.href = "index.html";
                     document.getElementById('sign-in-status').textContent = 'Signed out';
                     document.getElementById('sign-in').textContent = 'Sign in';
                     document.getElementById('account-details').textContent = 'null';
@@ -112,61 +179,7 @@
     </script>
 
     <script>
-        let regnestykke = document.getElementById("regnestykke");
-        let inpSvar = document.getElementById("inpSvar");
-        let poengDIV = document.getElementById("poengDIV");
-        let inpUser = document.getElementById("inpUser");
 
-
-
-        inpSvar.focus();
-
-        let fasit = 4;
-        let poeng = 0;
-        let tid = 4000;
-
-        let keyframes = [
-            {transform: "translateY(-50px)"},
-            {transform: "translateY(490px)"}
-        ];
-        let settings = {
-            duration: tid,
-            fill: "forwards"
-        };
-
-
-        let animasjon = regnestykke.animate(keyframes, settings);
-
-        function lagOppgave() {
-
-            poeng++;
-            poengDIV.innerHTML = poeng;
-
-            var faktor1 = Math.ceil(Math.random() * 10);
-            var faktor2 = Math.ceil(Math.random() * 10);
-
-            fasit = faktor1 * faktor2;
-
-            animasjon.cancel();
-
-            regnestykke.innerHTML = faktor1 + " x " + faktor2;
-            animasjon = regnestykke.animate(keyframes, settings);
-
-            animasjon.onfinish = function() {
-                poeng = 0;
-            }
-        }
-
-        function sjekkSvar() {
-
-            if(Number(this.value) === fasit) {
-                this.value = "";
-                lagOppgave();
-
-            }
-        }
-
-        inpSvar.oninput = sjekkSvar;
 
 
     </script>
