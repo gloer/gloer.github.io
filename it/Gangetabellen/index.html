@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Log in to Gangetabellen</title>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+</head>
+<body>
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD7FS8R-au_1gSp57YuQIjiAGIoZL5rUZw",
+            authDomain: "min-database.firebaseapp.com",
+            databaseURL: "https://min-database.firebaseio.com",
+            storageBucket: "min-database.appspot.com",
+            messagingSenderId: "614855754958"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+    <script type="text/javascript">
+        // FirebaseUI config.
+        var uiConfig = {
+            signInSuccessUrl: 'Gangetabellen.html',
+            signInOptions: [
+                // Leave the lines as is for the providers you want to offer your users.
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                firebase.auth.GithubAuthProvider.PROVIDER_ID,
+                firebase.auth.EmailAuthProvider.PROVIDER_ID
+            ],
+            // Terms of service url.
+            tosUrl: '<your-tos-url>'
+        };
+
+        // Initialize the FirebaseUI Widget using Firebase.
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        // The start method will wait until the DOM is loaded.
+        ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+
+    <h1>Welcome to My Awesome App</h1>
+    <div id="firebaseui-auth-container"></div>
+
+</body>
+</html>
