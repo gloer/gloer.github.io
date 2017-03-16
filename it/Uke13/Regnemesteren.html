@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kan du gangetabellen?</title>
+    <style>
+        #stage {
+            width: 400px;
+            height: 600px;
+            margin: auto;
+            background-color: slateblue;
+            position: relative;
+        }
+        #regnestykke {
+            border: 5px solid white;
+            box-sizing: border-box;
+            text-align: center;
+            color: white;
+            font-family: sans-serif;
+            font-size: 48px;
+            position: absolute;
+            height: 60px;
+            width: 300px;
+            left: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="stage">
+        <div id="regnestykke">2 x 2</div>
+    </div>
+
+    <script>
+        let regnestykke = document.getElementById("regnestykke");
+
+        let keyframes = [
+            {top: "0px"},
+            {top: "350px"}
+        ];
+        let settings = {
+            duration: 4000,
+            fill: "forwards"
+        };
+
+        regnestykke.animate(keyframes, settings);
+
+    </script>
+</body>
+</html>
