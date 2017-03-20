@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Klokke som virker</title>
+    <style>
+
+        body {
+            background-color: darkorange;
+        }
+
+        #spill {
+            flex: 1;
+        }
+
+        #urskive {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: olive;
+            border-radius: 50%;
+        }
+
+        #urskive > * {
+            position: absolute;
+            background-color: antiquewhite;
+            bottom: 200px;
+            transform-origin: center bottom;
+        }
+        #timeviser {
+            height: 140px;
+            width: 20px;
+            left: 190px;
+            z-index: 1000;
+        }
+        #minuttviser {
+            height: 150px;
+            width: 8px;
+            left: 196px;
+            z-index: 1001;
+        }
+        #sekundviser {
+            height: 180px;
+            width: 4px;
+            left: 198px;
+            z-index: 1002;
+            display: none;
+        }
+        #lokk {
+            width: 30px;
+            height: 30px;
+            left: 185px;
+            top: 185px;
+            box-shadow: 0 0 3px black;
+            border-radius: 50%;
+        }
+
+        .merke {
+            width: 4px;
+            height: 8px;
+            background-color: white;
+            bottom: 50%;
+            left: 198px;
+            transform: rotate(0deg) translateY(-192px);
+        }
+
+        #urskive > .h {
+            width: 20px;
+            height: 30px;
+            bottom: 50%;
+            left: 190px;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        #urskive > .h > div {
+            font-size: 28px;
+            font-family: sans-serif;
+        }
+
+        #digital {
+            margin-top: 15px;
+            text-align: center;
+        }
+        #inpTime, #inpMinutt {
+            width: 100px;
+            height: 50px;
+            border: none;
+            outline-style: none;
+            font-size: 48px;
+            font-family: sans-serif;
+            text-align: center;
+            padding: 5px;
+        }
+        #skjema > span {
+            font-size: 48px;
+        }
+
+        #data {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            font-family: sans-serif;
+            font-size: 32px;
+        }
+
+        #brukernavn {
+            font-size: 32px;
+            border: none;
+            outline-style: none;
+            font-family: sans-serif;
+            width: 220px;
+        }
+
+        #timeviser, #minuttviser {
+            transition: 0.2s;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="data">
+    <div id="info">Poeng: 0</div>
+    <input id="brukernavn" placeholder="Hva heter du?" autocomplete="off" maxlength="10">
+    <h4>Toppliste</h4>
+    <ul id="toppliste">
+
+    </ul>
+</div>
+<div id="spill">
+    <div id="urskive">
+
+
+
+        <div id="timeviser"></div>
+        <div id="minuttviser"></div>
+        <div id="sekundviser"></div>
+        <div id="lokk"></div>
+
+
+    </div>
+
+
+    <div id="digital">
+        <form id="skjema">
+            <input type="text" id="inpTime" required placeholder="22" autocomplete="off">
+            <span>:</span>
+            <input type="text" id="inpMinutt" required placeholder="22" autocomplete="off">
+            <button type="submit" style="display: none"></button>
+        </form>
+    </div>
+
+</div>
+
+
+
+<script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCrc0W-sfwbUMmOlsfBn3mcVqAVmF_FKwQ",
+        authDomain: "biblioteket-24706.firebaseapp.com",
+        databaseURL: "https://biblioteket-24706.firebaseio.com",
+        storageBucket: "biblioteket-24706.appspot.com",
+        messagingSenderId: "800553232764"
+    };
+    firebase.initializeApp(config);
+</script>
+
+<script>
+
+    var db = firebase.database();
+    var scores = db.ref("scores");
+
+    var urskive = document.getElementById("urskive");
+    var info = document.getElementById("info");
+
+    var toppliste = document.getElementById("toppliste");
+
+
+
+    var timeviser = document.getElementById("timeviser");
+    var minuttviser = document.getElementById("minuttviser");
+    var sekundviser = document.getElementById("sekundviser");
+    var skjema = document.getElementById("skjema");
+    var inpTime = document.getElementById("inpTime");
+    var inpMinutt = document.getElementById("inpMinutt");
+
+
+
+    var poeng = 0;
+
+    function tegnMarkeringer() {
+
+        for(var i=0; i<60; i++) {
+            var minuttmerke = document.createElement("div");
+            minuttmerke.className = "merke";
+            urskive.appendChild(minuttmerke);
+            // Hver femte skal være sort
+            if(i % 5 === 0) {
+                minuttmerke.style.backgroundColor = "black";
+            }
+            /*minuttmerke.animate(
+                [
+                    {transform: `rotate(0deg) translateY(-182px)`},
+                    {transform: `rotate(${i * 6}deg) translateY(-192px)`}
+                ],
+                {duration: 5000, fill: "forwards", easing: "ease-out" }
+            );*/
+            minuttmerke.style.transform = `rotate(${i * 6}deg) translateY(-192px)`;
+
+        }
+
+        for(var i=1; i<=12; i++) {
+            let h = document.createElement("div");
+            h.className = "h";
+            //h.innerHTML = i;
+            urskive.appendChild(h);
+            h.style.transform = `rotate(${i * 30}deg) translateY(-150px)`;
+
+            let tall = document.createElement("div");
+            tall.innerHTML = i;
+            h.appendChild(tall);
+
+            tall.style.transform = `rotate(${-i * 30}deg)`;
+
+        }
+
+
+
+    }
+
+    var time = 0;
+    var minutt = 0;
+
+    function lagTilfeldigKlokkeslett() {
+        time = Math.floor(Math.random() * 12);
+        minutt = Math.floor(Math.random() * 60);
+
+        timeviser.style.transform = `rotate(${(time + minutt/60) / 12 * 360}deg)`;
+        minuttviser.style.transform = `rotate(${minutt * 360/60}deg`;
+
+    }
+
+
+    function sjekkSvar() {
+        var gjettetTime = Number(inpTime.value);
+        var gjettetMinutt = Number(inpMinutt.value);
+
+        if(gjettetTime === time + 12  && gjettetMinutt === minutt) {
+            poeng++;
+
+        } else {
+            // Lagrer poengsummen til brukeren
+            var navn = "Anonym";
+            if(brukernavn.value != "") {
+                navn = brukernavn.value;
+            }
+            scores.push({
+                bruker: navn,
+                poeng: poeng
+            });
+
+            poeng = 0;
+        }
+
+        info.innerHTML = "Poeng: " + poeng;
+        lagTilfeldigKlokkeslett();
+
+        inpTime.value = "";
+        inpMinutt.value = "";
+        inpTime.focus();
+    }
+
+    function visTid() {
+
+        var dato = new Date();
+        var timer = dato.getHours();
+        var minutter = dato.getMinutes();
+        var sekunder = dato.getSeconds();
+        var millisekunder = dato.getMilliseconds();
+
+        timeviser.style.transform = `rotate(${(timer + minutter/60) / 12 * 360}deg)`;
+        minuttviser.style.transform = `rotate(${(minutter + sekunder / 60) * 6}deg)`;
+        // sekundviser.style.transform = `rotate(${(sekunder + millisekunder / 1000) * 6}deg)`;
+
+    }
+
+
+
+    skjema.onsubmit = function(evt) {
+        evt.preventDefault();
+        sjekkSvar();
+    };
+
+    inpTime.oninput = function() {
+        if(this.value.length === 2) {
+            inpMinutt.focus();
+        }
+    }
+
+    tegnMarkeringer();
+
+    lagTilfeldigKlokkeslett();
+
+    // visTid();
+    // setInterval(visTid, 1);
+
+    inpTime.focus();
+
+    function visHighscoreliste(snap) {
+
+        toppliste.innerHTML = "";
+        var liste = [];
+        snap.forEach(function(child){
+            var data = child.val();
+            liste.unshift("<li>" + data.bruker + " : " + data.poeng + "</li>");
+        });
+
+        for(var p of liste) {
+            toppliste.innerHTML += p;
+        }
+
+    }
+
+    scores.orderByChild("poeng").limitToLast(15).on("value", visHighscoreliste);
+
+</script>
+
+</body>
+
+</html>
