@@ -212,7 +212,7 @@
                 ],
                 {duration: 5000, fill: "forwards", easing: "ease-out" }
             );*/
-            minuttmerke.style.transform = `rotate(${i * 6}deg) translateY(-192px)`;
+            minuttmerke.style.transform = "rotate(" + (i * 6) + "deg) translateY(-192px)";
 
         }
 
@@ -221,13 +221,13 @@
             h.className = "h";
             //h.innerHTML = i;
             urskive.appendChild(h);
-            h.style.transform = `rotate(${i * 30}deg) translateY(-150px)`;
+            h.style.transform = "rotate(" + (i * 30) + "deg) translateY(-150px)";
 
             let tall = document.createElement("div");
             tall.innerHTML = i;
             h.appendChild(tall);
 
-            tall.style.transform = `rotate(${-i * 30}deg)`;
+            tall.style.transform = "rotate(" + (-i * 30) + "deg)";
 
         }
 
@@ -242,8 +242,8 @@
         time = Math.floor(Math.random() * 12);
         minutt = Math.floor(Math.random() * 60);
 
-        timeviser.style.transform = `rotate(${(time + minutt/60) / 12 * 360}deg)`;
-        minuttviser.style.transform = `rotate(${minutt * 360/60}deg`;
+        timeviser.style.transform = "rotate(" + ((time + minutt/60) / 12 * 360) + "deg)";
+        minuttviser.style.transform = "rotate(" + (minutt * 360/60) + "deg)";
 
     }
 
@@ -285,8 +285,8 @@
         var sekunder = dato.getSeconds();
         var millisekunder = dato.getMilliseconds();
 
-        timeviser.style.transform = `rotate(${(timer + minutter/60) / 12 * 360}deg)`;
-        minuttviser.style.transform = `rotate(${(minutter + sekunder / 60) * 6}deg)`;
+        timeviser.style.transform = "rotate(" + ((timer + minutter/60) / 12 * 360) + "deg)";
+        minuttviser.style.transform = "rotate(" + ((minutter + sekunder / 60) * 6) + "deg)";
         // sekundviser.style.transform = `rotate(${(sekunder + millisekunder / 1000) * 6}deg)`;
 
     }
