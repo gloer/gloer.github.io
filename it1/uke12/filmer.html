@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IMDB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation-flex.css">
+    <style>
+        body {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="text" id="inpTittel" placeholder="Søk etter tittel">
+
+    <table>
+        <thead>
+
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+
+    <article id="filminfo"></article>
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCzIRilgm7mVsb8Fhkh8M8vW93HdCePs44",
+            authDomain: "imdb-1d2ee.firebaseapp.com",
+            databaseURL: "https://imdb-1d2ee.firebaseio.com",
+            storageBucket: "imdb-1d2ee.appspot.com",
+            messagingSenderId: "646153103605"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        var filminfo = document.getElementById("filminfo");
+
+        var tbody = document.getElementById("tbody");
+        var inpTittel = document.getElementById("inpTittel");
+        
+
+        var db = firebase.database();
+        var filmer = db.ref("filmer");
+
+        function visFilm(id) {
+            var film = db.ref("filmer/" + id);
+            film.on("value", function(snapshot){
+                var minfilm = snapshot.val();
+
+                filminfo.innerHTML = `
+                    <h1>${minfilm.Title}</h1>
+                    <h2>${minfilm.Director}</h2>
+                    <p>${minfilm.Plot}</p>
+                    <img src="${minfilm.Poster}">
+                `;
+
+            });
+        }
+
+        function visFilmer(snapshot) {
+            var film = snapshot.val();
+            tbody.innerHTML += `
+                <tr onclick="visFilm('${snapshot.key}')">
+                    <td>${film.Title}</td>
+                    <td>${film.Director}</td>
+                    <td>${film.Metascore}</td>
+                </tr>
+            `;
+        }
+
+
+        function finnFilm() {
+
+            tbody.innerHTML = "";
+
+            filmer
+                .orderByChild("Title")
+                .startAt(inpTittel.value)
+                .endAt(inpTittel.value + "\uf8ff")
+                .on("child_added", visFilmer);
+
+        }
+
+        inpTittel.oninput = finnFilm;
+
+    </script>
+</body>
+</html>
