@@ -9,6 +9,14 @@
         body {
             padding: 10px;
         }
+        tr:hover td {
+            background-color: darkorange;
+            cursor: pointer;
+        }
+        img {
+            margin-right: 10px;
+            float: left;
+        }
     </style>
 </head>
 <body>
@@ -55,10 +63,12 @@
                 var minfilm = snapshot.val();
 
                 filminfo.innerHTML = `
+                    <img src="${minfilm.Poster}">
                     <h1>${minfilm.Title}</h1>
                     <h2>${minfilm.Director}</h2>
                     <p>${minfilm.Plot}</p>
-                    <img src="${minfilm.Poster}">
+                    <h3>Skuespillere</h3>
+                    <p>${minfilm.Actors}</p>
                 `;
 
             });
