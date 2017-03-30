@@ -4,11 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laste opp filer</title>
+    <style>
+
+        #alleBildene {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #alleBildene > img {
+            height: 150px;
+            margin: 10px;
+            border: 2px solid darkgray;
+
+        }
+
+
+    </style>
 </head>
 <body>
 
     <input type="file" id="inpFile">
-    <image id="mittBilde"></image>
+    <section id="alleBildene"></section>
 
 
     <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
@@ -27,13 +43,17 @@
     <script>
         // DOM-elementer
         var inpFile = document.getElementById("inpFile");
-        var mittBilde = document.getElementById("mittBilde");
+        var alleBildene = document.getElementById("alleBildene");
+
 
 
         var storage = firebase.storage();
+        var db = firebase.database();
 
-        function visBilde(snap) {
-            mittBilde.src = snap.downloadURL;
+        var bilder = db.ref("bilder");
+
+        function lagreBilde(snap) {
+            bilder.push(snap.downloadURL);
         }
 
         function lastOppBilde() {
@@ -42,11 +62,21 @@
             var plassering = storage.ref("minebilder/" + new Date());
 
             plassering.put(bilde)
-                .then(visBilde);
+                .then(lagreBilde);
+
+        }
+
+        function visBilder(snap) {
+
+            var bilde = snap.val();
+            alleBildene.innerHTML += `
+                <img src="${bilde}">
+            `;
 
         }
 
         inpFile.onchange = lastOppBilde;
+        bilder.on("child_added", visBilder);
 
     </script>
 </body>
