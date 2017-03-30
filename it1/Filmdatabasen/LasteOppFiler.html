@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laste opp filer</title>
+</head>
+<body>
+
+    <input type="file" id="inpFile">
+    <image id="mittBilde"></image>
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDWmYyA357PQM6qYS7cbeYxN4tY_ZP6vTc",
+            authDomain: "filmdatabasen-326b7.firebaseapp.com",
+            databaseURL: "https://filmdatabasen-326b7.firebaseio.com",
+            storageBucket: "filmdatabasen-326b7.appspot.com",
+            messagingSenderId: "634475513086"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        // DOM-elementer
+        var inpFile = document.getElementById("inpFile");
+        var mittBilde = document.getElementById("mittBilde");
+
+
+        var storage = firebase.storage();
+
+        function visBilde(snap) {
+            mittBilde.src = snap.downloadURL;
+        }
+
+        function lastOppBilde() {
+
+            var bilde = inpFile.files[0];
+            var plassering = storage.ref("minebilder/" + new Date());
+
+            plassering.put(bilde)
+                .then(visBilde);
+
+        }
+
+        inpFile.onchange = lastOppBilde;
+
+    </script>
+</body>
+</html>
