@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Samskriving</title>
+    <style>
+        textarea {
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDSpCueIZP_yMcwGQNy3dlUyjYZLrXeNkY",
+            authDomain: "fagkurs-kode.firebaseapp.com",
+            databaseURL: "https://fagkurs-kode.firebaseio.com",
+            projectId: "fagkurs-kode",
+            storageBucket: "fagkurs-kode.appspot.com",
+            messagingSenderId: "308712492959"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        let database = firebase.database();
+        let bokser = database.ref("bokser");
+
+        let antallBokser = 100;
+
+        function lagreTekst() {
+            let minBoks = database.ref("bokser/" + this.id);
+            minBoks.set(this.value);
+        }
+
+        for(let i=1; i<antallBokser; i++) {
+
+            let boks = document.createElement("textarea");
+            boks.id = "boks" + i;
+            boks.oninput = lagreTekst;
+            document.body.appendChild(boks);
+
+        }
+
+        function visInnhold(snap) {
+            let id = snap.key;
+            let tekst = snap.val();
+
+            let boks = document.getElementById(id);
+            boks.value = tekst;
+        }
+
+        bokser.on("child_added", visInnhold);
+        bokser.on("child_changed", visInnhold);
+
+
+    </script>
+</body>
+</html>
