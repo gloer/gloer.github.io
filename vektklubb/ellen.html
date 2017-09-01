@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vektklubb</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.1/css/foundation-float.css">
+    <style>
+        body {
+            max-width: 900px;
+            margin: auto;
+            padding: 10px;
+        }
+        #container {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="vektskjema">
+        <input id="inpVekt" type="text" required placeholder="Hvor mye veier du i dag?">
+        <button class="button" type="submit">Registrer dagens vekt</button>
+
+    </form>
+
+    <div id="container"></div>
+
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD3ndbFWap_5tp033MM1sYdgOraNIdUHAc",
+            authDomain: "vektklubb-61417.firebaseapp.com",
+            databaseURL: "https://vektklubb-61417.firebaseio.com",
+            projectId: "vektklubb-61417",
+            storageBucket: "",
+            messagingSenderId: "869713203496"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+
+
+    <script>
+        let database = firebase.database();
+        let registreringer = database.ref("registreringer");
+        let vektskjema = document.getElementById("vektskjema");
+        let inpVekt = document.getElementById("inpVekt");
+
+
+        vektskjema.onsubmit = function(evt) {
+
+            evt.preventDefault();
+
+            let vekt = inpVekt.value;
+            vekt.replace(",", ".");
+
+            registreringer.push({
+                "bruker" : "ellen@langslet.com",
+                "vekt" : Number(vekt),
+                "tid" : firebase.database.ServerValue.TIMESTAMP
+            });
+
+        };
+
+        // Charting stuff
+        let vekter = [];
+        function tegnGraf(snap) {
+
+            let vektdata = snap.val();
+            vekter.push([vektdata.tid, vektdata.vekt]);
+
+            Highcharts.chart('container', {
+
+                title: {
+                    text: 'Vektklubben'
+                },
+
+                subtitle: {
+                    text: 'Klarer vi 5 kg?'
+                },
+
+                xAxis: {
+                    type: 'datetime',
+                    title: {
+                        text: 'Dato'
+                    }
+                },
+
+                yAxis: {
+                    title: {
+                        text: 'Vekt'
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+                },
+
+
+
+                series: [{
+                    name: 'Ellen',
+                    data: vekter
+                }]
+
+            });
+        }
+
+
+        registreringer
+            .orderByChild("bruker")
+            .equalTo("ellen@langslet.com")
+            .on("child_added", tegnGraf);
+
+
+    </script>
+</body>
+</html>
