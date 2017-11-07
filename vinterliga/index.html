@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-float.css">
+    <style>
+        body {
+            padding: 10px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        table > thead {
+            border-bottom: 8px solid darkorange;
+        }
+        table > tbody > tr:nth-child(6) {
+            border-bottom: 8px solid darkorange;
+        }
+        table  input[type=text] {
+            margin-bottom: 0;
+        }
+
+    </style>
+    <title>Vinterligaen</title>
+</head>
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Kamp nr</th>
+                <th>Dato</th>
+                <th>Tidspunkt</th>
+                <th>Bane</th>
+                <th>Hjemmelag</th>
+                <th>Bortelag</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCsTw8o1FWOXfmeW5cxz7OIs6X3F3eJ9bk",
+            authDomain: "my-great-app-14bcc.firebaseapp.com",
+            databaseURL: "https://my-great-app-14bcc.firebaseio.com",
+            projectId: "my-great-app-14bcc",
+            storageBucket: "my-great-app-14bcc.appspot.com",
+            messagingSenderId: "868569791651"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script>
+        var db = firebase.database();
+        var kamper = db.ref("kamper");
+
+
+        var tbody = document.querySelector("table > tbody");
+
+        function endreTid(kampnr) {
+
+
+            var rad = document.getElementById(kampnr);
+            var inpTid = rad.querySelector(".tid");
+            nyTid = inpTid.value;
+            console.log(nyTid);
+            var kamp = kamper.child(kampnr);
+            kamp.update({
+               tidspunkt : nyTid
+            });
+
+
+        }
+
+        function endreBane(kampnr) {
+
+
+            var rad = document.getElementById(kampnr);
+            var inpBane = rad.querySelector(".bane");
+            nyBane = inpBane.value;
+            console.log(nyBane);
+            var kamp = kamper.child(kampnr);
+            kamp.update({
+                bane : nyBane
+            });
+
+
+        }
+
+        function visKamp(snap) {
+
+            var kamp = snap.val();
+            var tr = document.createElement("tr");
+            var knr = document.createElement("td");
+            var dato = document.createElement("td");
+            var tid = document.createElement("td");
+            var bane = document.createElement("td");
+            var hjemme = document.createElement("td");
+            var borte = document.createElement("td");
+
+            tr.id = kamp.kampnr;
+
+            knr.innerHTML = kamp.kampnr;
+            dato.innerHTML = kamp.dato;
+
+            tid.innerHTML = "<input class=\"tid\" type=\"text\" onchange=\"endreTid('" + kamp.kampnr + "')\" value=\"" + kamp.tidspunkt + "\">";
+            bane.innerHTML = "<input class=\"bane\" type=\"text\" onchange=\"endreBane('" + kamp.kampnr + "')\" value=\"" + kamp.bane + "\">";
+
+            hjemme.innerHTML = kamp.hjemmelag;
+            borte.innerHTML = kamp.bortelag;
+
+            tr.appendChild(knr);
+            tr.appendChild(dato);
+            tr.appendChild(tid);
+            tr.appendChild(bane);
+            tr.appendChild(hjemme);
+            tr.appendChild(borte);
+
+
+            tbody.appendChild(tr);
+
+
+
+        }
+
+        function visInfo(snap){
+
+            var kamp = snap.val();
+            var rad = document.getElementById(kamp.kampnr);
+
+            var inpTid = rad.querySelector(".tid");
+            inpTid.value = kamp.tidspunkt;
+
+            var inpBane = rad.querySelector(".bane");
+            inpBane.value = kamp.bane;
+
+
+        }
+
+        kamper.on("child_added", visKamp);
+        kamper.on("child_changed", visInfo);
+
+    </script>
+
+</body>
+</html>
