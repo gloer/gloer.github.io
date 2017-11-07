@@ -19,6 +19,12 @@
         table  input[type=text] {
             margin-bottom: 0;
         }
+        th:nth-child(1){
+            width: 90px;
+        }
+        th:nth-child(3) {
+            width: 120px;
+        }
 
     </style>
     <title>Vinterligaen</title>
@@ -32,6 +38,7 @@
                 <th>Dato</th>
                 <th>Tidspunkt</th>
                 <th>Bane</th>
+                <th>&#10003;</th>
                 <th>Hjemmelag</th>
                 <th>Bortelag</th>
             </tr>
@@ -62,13 +69,28 @@
 
         var tbody = document.querySelector("table > tbody");
 
+
+        function bekreftTid(kampnr){
+
+            var rad = document.getElementById(kampnr);
+            var cb = rad.querySelector(".bekreft");
+            var done = cb.checked;
+
+            var kamp = kamper.child(kampnr);
+            kamp.update({
+                bekreftet: done
+            });
+
+
+        }
+
         function endreTid(kampnr) {
 
 
             var rad = document.getElementById(kampnr);
             var inpTid = rad.querySelector(".tid");
-            nyTid = inpTid.value;
-            console.log(nyTid);
+            var nyTid = inpTid.value;
+
             var kamp = kamper.child(kampnr);
             kamp.update({
                tidspunkt : nyTid
@@ -100,8 +122,14 @@
             var dato = document.createElement("td");
             var tid = document.createElement("td");
             var bane = document.createElement("td");
+            var bekreft = document.createElement("td");
             var hjemme = document.createElement("td");
             var borte = document.createElement("td");
+
+            var yes = "";
+            if(kamp.bekreftet){
+                yes = "checked";
+            }
 
             tr.id = kamp.kampnr;
 
@@ -111,6 +139,8 @@
             tid.innerHTML = "<input class=\"tid\" type=\"text\" onchange=\"endreTid('" + kamp.kampnr + "')\" value=\"" + kamp.tidspunkt + "\">";
             bane.innerHTML = "<input class=\"bane\" type=\"text\" onchange=\"endreBane('" + kamp.kampnr + "')\" value=\"" + kamp.bane + "\">";
 
+            bekreft.innerHTML = "<input class=\"bekreft\" type=\"checkbox\" onchange=\"bekreftTid('" + kamp.kampnr + "')\"" + yes + ">";
+
             hjemme.innerHTML = kamp.hjemmelag;
             borte.innerHTML = kamp.bortelag;
 
@@ -118,6 +148,7 @@
             tr.appendChild(dato);
             tr.appendChild(tid);
             tr.appendChild(bane);
+            tr.appendChild(bekreft);
             tr.appendChild(hjemme);
             tr.appendChild(borte);
 
@@ -138,6 +169,9 @@
 
             var inpBane = rad.querySelector(".bane");
             inpBane.value = kamp.bane;
+
+            var cb = rad.querySelector(".bekreft");
+            cb.checked = kamp.bekreftet;
 
 
         }
