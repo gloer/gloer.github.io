@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hvilken side er opp?</title>
+    <style>
+        body {
+            background-color: #3c3c3c;
+            color: white;
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        @media (orientation: landscape) {
+            #portrait {
+                display: none;
+            }
+        }
+        @media (orientation: portrait) {
+            #landscape {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1 id="landscape">Du er i landscape mode</h1>
+    <h1 id="portrait">Du er i portrait mode</h1>
+
+</body>
+</html>
