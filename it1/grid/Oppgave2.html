@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2</title>
+    <style>
+        main {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-gap: 10px;
+            grid-auto-rows: 60px;
+        }
+        div {
+            font-family: sans-serif;
+            background-color: #ffb553;
+            display: flex;
+            color: black;
+            font-size: 2rem;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 3px 0 #ff8f00;
+        }
+        .light {
+            background-color: #feff94;
+        }
+        .kol-1 { grid-column: span 1;  }
+        .kol-2 { grid-column: span 2;  }
+        .kol-3 { grid-column: span 3;  }
+        .kol-4 { grid-column: span 4;  }
+        .kol-5 { grid-column: span 5;  }
+        .kol-6 { grid-column: span 6;  }
+        .kol-7 { grid-column: span 7;  }
+        .kol-8 { grid-column: span 8;  }
+        .kol-9 { grid-column: span 9;  }
+        .kol-10 { grid-column: span 10;  }
+        .kol-11 { grid-column: span 11;  }
+        .kol-12 { grid-column: span 12;  }
+
+        .rad-1 { grid-row: span 1; }
+        .rad-2 { grid-row: span 2; }
+        .rad-3 { grid-row: span 3; }
+        .rad-4 { grid-row: span 4; }
+        .rad-5 { grid-row: span 5; }
+    </style>
+</head>
+<body>
+
+    <main>
+        <div>L</div>
+        <div>Æ</div>
+        <div>R</div>
+        <div class="rad-2 light"></div>
+        <div>D</div>
+        <div>E</div>
+        <div>G</div>
+        <div class="kol-2 light"></div>
+        <div>C</div>
+        <div>S</div>
+        <div>S</div>
+        <div>M</div>
+        <div>E</div>
+        <div>D</div>
+        <div class="kol-4 light"></div>
+        <div>G</div>
+        <div>R</div>
+        <div>I</div>
+        <div>D</div>
+    </main>
+
+</body>
+</html>

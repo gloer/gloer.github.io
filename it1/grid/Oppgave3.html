@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2</title>
+    <style>
+        main {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-gap: 10px;
+            max-width: 600px;
+            margin: auto;
+        }
+        div {
+            font-family: sans-serif;
+            background-color: #ffb553;
+            color: black;
+            box-shadow: 0 3px 0 #ff8f00;
+            text-align: center;
+        }
+        img {
+            width: 100%;
+        }
+        .light {
+            background-color: #feff94;
+        }
+        .kol-1 { grid-column: span 1;  }
+        .kol-2 { grid-column: span 2;  }
+        .kol-3 { grid-column: span 3;  }
+        .kol-4 { grid-column: span 4;  }
+        .kol-5 { grid-column: span 5;  }
+        .kol-6 { grid-column: span 6;  }
+        .kol-7 { grid-column: span 7;  }
+        .kol-8 { grid-column: span 8;  }
+        .kol-9 { grid-column: span 9;  }
+        .kol-10 { grid-column: span 10;  }
+        .kol-11 { grid-column: span 11;  }
+        .kol-12 { grid-column: span 12;  }
+
+        .rad-1 { grid-row: span 1; }
+        .rad-2 { grid-row: span 2; }
+        .rad-3 { grid-row: span 3; }
+        .rad-4 { grid-row: span 4; }
+        .rad-5 { grid-row: span 5; }
+    </style>
+</head>
+<body>
+
+    <main>
+        <div class="kol-12">
+            <img src="firenze.jpg">
+            <h1>Broene i Firenze</h1>
+        </div>
+        <div class="kol-6 rad-2">
+            <img src="pisa.jpeg">
+            <h1>Pisa</h1>
+        </div>
+        <div class="kol-6">
+            <img src="roma.jpg">
+            <h1>Roma</h1>
+        </div>
+        <div class="kol-6">
+            <img src="orvietto.jpg">
+            <h1>Orvietto</h1>
+        </div>
+    </main>
+
+</body>
+</html>
