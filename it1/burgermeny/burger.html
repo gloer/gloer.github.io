@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Burger</title>
+    <style>
+
+        body {
+            background-color: black;
+        }
+        #burger {
+            cursor: pointer;
+            display: grid;
+            width: 16px;
+            height: 16px;
+            /* Legger luft mellom delene av burgeren */
+            align-content: space-between;
+        }
+        #burger > div {
+            height: 2px;
+            background-color: white;
+        }
+        #menu {
+            background-color: purple;
+            position: absolute;
+            width: 300px;
+            min-height: calc(100vh - 64px);
+            left: -300px;
+            top: 64px;
+            transition: 1s;
+        }
+        #cb {
+            display: none;
+        }
+        #cb:checked ~ #menu {
+            left: 0;
+        }
+        #burger > div {
+            transition: 1s;
+        }
+        #cb:checked ~ #burger > div:first-child {
+            transform: translateY(7px) rotate(45deg);
+        }
+        #cb:checked ~ #burger > div:nth-child(2) {
+            opacity: 0;
+        }
+        #cb:checked ~ #burger > div:last-child {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+    </style>
+</head>
+<body>
+
+    <input type="checkbox" id="cb">
+    <label for="cb" id="burger">
+        <div></div>
+        <div></div>
+        <div></div>
+    </label>
+    <nav id="menu"></nav>
+
+</body>
+</html>
