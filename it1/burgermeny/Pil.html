@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pil som flytter seg</title>
+    <style>
+        * {
+            margin: 0;
+        }
+        #pil {
+            width: 20px;
+            height: 20px;
+            background-color: #7F695A;
+            position: absolute;
+            left: 400px;
+            top: 20px;
+            transition: 1s;
+        }
+        button {
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="pil"></div>
+
+    <button id="btn1">TEST DETTE</button>
+    <button id="btn2">TEST DETTE</button>
+    <button id="btn3">TEST DETTE</button>
+
+    <script>
+
+        var pil = document.getElementById("pil");
+
+        var btn1 = document.getElementById("btn1");
+        var btn2 = document.getElementById("btn2");
+        var btn3 = document.getElementById("btn3");
+
+        function flyttPil() {
+
+            console.log(this.offsetLeft);
+            var xpos = this.offsetLeft + 75 - 10;
+            pil.style.left = xpos + "px";
+
+        }
+
+        btn1.onclick = flyttPil;
+        btn2.onclick = flyttPil;
+        btn3.onclick = flyttPil;
+
+
+
+    </script>
+
+</body>
+</html>
