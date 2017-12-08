@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Burgeren</title>
+    <style>
+
+        #cb {
+            display: none;
+        }
+
+        #burger {
+            display: flex;
+            width: 16px;
+            height: 16px;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        #burger > div {
+            background-color: #3c3c3c;
+            height: 2px;
+        }
+        #menu {
+            width: 300px;
+            background-color: darkorange;
+            position: absolute;
+            top: 64px;
+            left: -300px;
+            min-height: calc(100vh - 64px);
+            transition: 0.8s;
+        }
+        #cb:checked ~ #menu {
+            left: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <input type="checkbox" id="cb">
+    <label id="burger" for="cb">
+        <div></div>
+        <div></div>
+        <div></div>
+    </label>
+    <nav id="menu">
+
+    </nav>
+
+
+</body>
+</html>
