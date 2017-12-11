@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flyt meg</title>
+    <style>
+
+        @keyframes flytt {
+
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(800px, 0);
+            }
+            50% {
+                transform: translate(800px, 800px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+
+        }
+
+        #firkant {
+            width: 80px;
+            height: 80px;
+            background-color: #7F695A;
+            animation-name: flytt;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-timing-function: ease-in-out;
+
+            animation: flytt 4s infinite alternate ease-in-out;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+
+    <div id="firkant"></div>
+
+</body>
+</html>
