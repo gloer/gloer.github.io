@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Books</title>
+</head>
+<body>
+
+
+    <script>
+
+
+        function visBiler(bilregister) {
+            const biler = bilregister.biler;
+            for(const bil of biler) {
+                console.log(bil.reg);
+            }
+        }
+
+        fetch('bilregister.json')
+            .then(response => { return response.json(); })
+            .then(json => { visBiler(json); })
+            .catch(error => { document.body.innerHTML = "Du må kjøre denne nettsiden fra en webserver" });
+
+
+        
+
+    </script>
+
+</body>
+</html>

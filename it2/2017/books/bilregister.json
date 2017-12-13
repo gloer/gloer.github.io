@@ -1,0 +1,11 @@
+{
+  "name": "biler",
+  "version": "0.0.1",
+  "biler": [
+    { "reg" : "BN 99973", "type" : "Peugeot", "modell" : "205" },
+    { "reg" : "BR 45453", "type" : "Volvo", "modell" : "Amazon" },
+    { "reg" : "DJ 77453", "type" : "Fiat", "modell" : "Uno" },
+    { "reg" : "VV 37453", "type" : "Ford", "modell" : "Escort" }
+
+  ]
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Books</title>
+</head>
+<body>
+
+
+    <script>
+
+        function updateBestsellers(bestsellers) {
+            for(const book of bestsellers.results) {
+
+                const isbn = book.isbns[1].isbn10;
+                console.log(isbn);
+
+            }
+        }
+
+        fetch('https://api.nytimes.com/svc/books/v3/lists.json?list-name=hardcover-fiction&api-key=91d12d941a7d49bb956621af703ad4c7')
+            .then(response => { return response.json(); })
+            .then(json => { updateBestsellers(json); });
+
+
+        fetch('et-eller-annet-json-api')
+            .then(response => {return response.json(); })
+            .then(json => { doSomethingWith(json) });
+
+
+
+    </script>
+
+</body>
+</html>
