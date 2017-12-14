@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Utvalg</title>
+</head>
+<body>
+
+    <a href="#" onclick="visSport()">VIS SPORT</a>
+    <a href="#" onclick="visKultur()">VIS KULTUR</a>
+    <a href="#" onclick="visUtenriks()">VIS UTENRIKS</a>
+
+    <div class="sport">SPORT</div>
+    <div class="sport">SPORT</div>
+    <div class="sport">SPORT</div>
+    <div class="sport">SPORT</div>
+
+    <div class="kultur">KULTUR</div>
+    <div class="kultur">KULTUR</div>
+    <div class="kultur">KULTUR</div>
+    <div class="kultur">KULTUR</div>
+    <div class="kultur">KULTUR</div>
+
+    <div class="utenriks">UTENRIKS</div>
+    <div class="utenriks">UTENRIKS</div>
+    <div class="utenriks">UTENRIKS</div>
+    <div class="utenriks">UTENRIKS</div>
+
+
+    <script>
+
+        let sportsaker = document.querySelectorAll(".sport");
+        let kultursaker = document.querySelectorAll(".kultur");
+        let utenrikssaker = document.querySelectorAll(".utenriks");
+
+        let sportSynlig = false;
+        let kulturSynlig = false;
+        let utenriksSynlig = false;
+
+
+        function visSaker() {
+            for(let sak of sportsaker) {
+                if(sportSynlig) {
+                    sak.style.display = "block";
+                } else {
+                    sak.style.display = "none";
+                }
+            }
+
+            for(let sak of kultursaker) {
+                if(kulturSynlig) {
+                    sak.style.display = "block";
+                } else {
+                    sak.style.display = "none";
+                }
+            }
+
+            for(let sak of utenrikssaker) {
+                if(utenriksSynlig) {
+                    sak.style.display = "block";
+                } else {
+                    sak.style.display = "none";
+                }
+            }
+
+        }
+
+        function visSport() {
+            sportSynlig = !sportSynlig;
+            visSaker();
+        }
+        function visKultur() {
+            kulturSynlig = !kulturSynlig;
+            visSaker();
+        }
+        function visUtenriks() {
+            utenriksSynlig = !utenriksSynlig;
+            visSaker();
+        }
+
+
+    </script>
+</body>
+</html>
