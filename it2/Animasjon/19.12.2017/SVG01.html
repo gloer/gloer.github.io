@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SVG</title>
+</head>
+<body>
+
+    <svg width="800" height="400">
+
+        <polygon id="trekant" points="10,10 100,10 50,100" fill="blue"></polygon>
+
+    </svg>
+
+    <script>
+
+        const trekant = document.getElementById("trekant");
+
+        const pos = {
+          x: 50,
+          y: 100
+        };
+
+        function flyttPunkt() {
+
+            pos.x = 100;
+            pos.y = 200;
+
+            trekant.setAttribute("points", `10,10 100,10 ${pos.x},${pos.y}`);
+
+        }
+
+        document.onclick = flyttPunkt;
+
+
+    </script>
+</body>
+</html>

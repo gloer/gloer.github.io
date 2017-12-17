@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sirkler</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        #page {
+            background-color: black;
+            width: 100vw;
+            height: 100vh;
+        }
+        circle {
+            stroke: white;
+            stroke-width: 2;
+            r: 10;
+            fill: blue;
+        }
+    </style>
+</head>
+<body>
+
+    <svg width="100" height="100" id="page">
+
+    </svg>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61811/web-animations-next-2.2.0.min.js"></script>
+    <script>
+
+        const page = document.getElementById("page");
+
+        const keyframes = [
+            {r: "10", opacity: 1},
+            {r: "100", opacity: 0}
+        ];
+        const settings = {
+            duration: 1500,
+            fill: 'forwards'
+        };
+
+        function tegnSirkel(evt) {
+
+            const sirkel = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            sirkel.setAttribute("cx", evt.clientX);
+            sirkel.setAttribute("cy", evt.clientY);
+            sirkel.setAttribute("r", 30);
+            page.appendChild(sirkel);
+
+            const animasjon = sirkel.animate(keyframes, settings);
+            animasjon.onfinish = function() {
+                page.removeChild(sirkel);
+            }
+
+        }
+
+        page.onmousemove = tegnSirkel;
+
+
+
+    </script>
+
+</body>
+</html>
