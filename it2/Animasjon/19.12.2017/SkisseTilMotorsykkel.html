@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Motorsykkel som kjører</title>
+    <style>
+        #container {
+            width: 800px;
+            height: 400px;
+            position: relative;
+            background-color: darkblue;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+        #sykkel {
+            width: 190px;
+            height: 156px;
+            position: absolute;
+            left: 100px;
+            bottom: 120px;
+            transform-origin: 12px 140px;
+
+        }
+        #sykkelbilde {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #bakhjul {
+            position: absolute;
+            bottom: 0;
+            left: 6px;
+        }
+        #forhjul {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="range" min="-5" value="1" max="5" id="inpFart">
+
+    <div id="container">
+        <div id="sykkel">
+            <img src="bakhjul2.png" id="bakhjul">
+            <img src="forhjul2.png" id="forhjul">
+            <img src="sykkel2.png" id="sykkelbilde">
+        </div>
+    </div>
+
+    <script>
+        var sykkel = document.getElementById("sykkel");
+        var bakhjul = document.getElementById("bakhjul");
+        var forhjul = document.getElementById("forhjul");
+        var inpFart = document.getElementById("inpFart");
+
+
+        var sykkelKeyframes = [
+            {left: "-200px"},
+            {left: "810px"}
+        ];
+        var snurr = [
+            {transform: "rotate(0)"},
+            {transform: "rotate(4turn)"}
+        ];
+        var settings = {
+            duration: 4000,
+            iterations: Infinity
+        };
+
+        var hoppKeyframes = [
+            { transform: "rotate(-12deg) translateY(0)", offset: 0 },
+            { transform: "rotate(-12deg) translateY(-50px)", offset: 0.4},
+            { transform: "rotate(-12deg) translateY(0)", offset: 0.7},
+            { transform: "rotate(-12deg) translateY(-10px)", offset: 0.8 },
+            { transform: "rotate(-12deg) translateY(0)" , offset: 0.9},
+            { transform: "rotate(-12deg) translateY(-5px)", offset: 0.95 },
+            { transform: "rotate(-12deg) translateY(0)", offset: 1 }
+        ];
+        var hoppSettings = {
+            duration: 1000,
+            easing: 'ease-out'
+        };
+
+        var sykkelAnimasjon = sykkel.animate(sykkelKeyframes, settings);
+        var fhjul = forhjul.animate(snurr, settings);
+        var bhjul = bakhjul.animate(snurr, settings);
+
+        sykkelAnimasjon.currentTime = 100 * settings.duration;
+        fhjul.currentTime = 100 * settings.duration;
+        bhjul.currentTime = 100 * settings.duration;
+
+        inpFart.oninput = function() {
+            var fart = Number(inpFart.value);
+            sykkelAnimasjon.playbackRate = fart;
+            fhjul.playbackRate = fart;
+            bhjul.playbackRate = fart;
+        };
+
+        container.onclick = function() {
+            sykkel.animate(hoppKeyframes, hoppSettings);
+        };
+
+    </script>
+
+</body>
+</html>
