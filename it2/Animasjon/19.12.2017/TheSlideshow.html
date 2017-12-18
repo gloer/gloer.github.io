@@ -11,22 +11,32 @@
         }
 
         main {
-            max-width: 300px;
+            max-width: 600px;
             margin: 0 auto;
             background-color: white;
             min-height: 100vh;
+            overflow: hidden;
 
         }
 
         #slideshow {
             width: 500%;
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-auto-flow: column;
 
             transition: 1s;
         }
 
         #slideshow img {
+            width: 100%;
+        }
+
+        #thumbs {
+            display: grid;
+            grid-auto-flow: column;
+            grid-gap: 5px;
+        }
+        #thumbs img {
             width: 100%;
         }
 
@@ -42,6 +52,14 @@
             <div> <img src="shark03.jpg"> </div>
             <div> <img src="shark04.jpg"> </div>
             <div> <img src="shark05.jpg"> </div>
+        </div>
+
+        <div id="thumbs">
+            <img src="shark01.jpg" data-marg="0">
+            <img src="shark02.jpg" data-marg="-100%">
+            <img src="shark03.jpg" data-marg="-200%">
+            <img src="shark04.jpg" data-marg="-300%">
+            <img src="shark05.jpg" data-marg="-400%">
         </div>
 
     </main>
@@ -82,6 +100,18 @@
                 bakover();
             }
 
+        }
+
+        function hoppDirekte() {
+            var margen = this.getAttribute("data-marg");
+            slideshow.style.marginLeft = margen;
+            console.log(margen);
+        }
+
+        var knapper = document.querySelectorAll("#thumbs img");
+
+        for(var knapp of knapper) {
+            knapp.onclick = hoppDirekte;
         }
 
     </script>
