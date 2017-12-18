@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Slide Show</title>
+    <style>
+
+        body {
+            background-color: #eee;
+        }
+
+        main {
+            max-width: 300px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+
+        }
+
+        #slideshow {
+            width: 500%;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+
+            transition: 1s;
+        }
+
+        #slideshow img {
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+
+    <main>
+
+        <div id="slideshow">
+            <div> <img src="shark01.jpg"> </div>
+            <div> <img src="shark02.jpg"> </div>
+            <div> <img src="shark03.jpg"> </div>
+            <div> <img src="shark04.jpg"> </div>
+            <div> <img src="shark05.jpg"> </div>
+        </div>
+
+    </main>
+
+    <script>
+
+        var slideshow = document.getElementById("slideshow");
+
+        var marg = 0;
+
+        function forover() {
+            console.log("FOROVER");
+
+            if(marg > -400) {
+                marg -= 100; //Minsker margen med 100
+                slideshow.style.marginLeft = marg + "%";
+            } else {
+                // Riste den
+            }
+        }
+        function bakover() {
+            console.log("BAKOVER");
+
+
+            if(marg < 0) {
+                marg += 100; // Øker marg med 100
+                slideshow.style.marginLeft = marg + "%";
+            } else {
+                // Riste den
+            }
+        }
+
+        slideshow.onclick = function(evt) {
+            var x = evt.clientX; // Hvor langt til høyre
+            if(x > innerWidth / 2) {
+                forover();
+            } else {
+                bakover();
+            }
+
+        }
+
+    </script>
+
+
+</body>
+</html>
