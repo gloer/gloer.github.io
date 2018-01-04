@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSS-kampen</title>
+    <style>
+        * {
+            transition: 1s;
+        }
+        #minCSS {
+            font-family: sans-serif;
+            font-size: 16px;
+            padding: 8px;
+            width: 400px;
+            height: 350px;
+            background-color: darkblue;
+            color: greenyellow;
+        }
+    </style>
+    <style id="styleElement"></style>
+</head>
+<body>
+
+    <textarea id="minCSS"></textarea>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBpaB8AiZpO7OHOScaWlpxsA6EXZ_8AMSY",
+            authDomain: "min-utrolige-database.firebaseapp.com",
+            databaseURL: "https://min-utrolige-database.firebaseio.com",
+            projectId: "min-utrolige-database",
+            storageBucket: "min-utrolige-database.appspot.com",
+            messagingSenderId: "296496588831"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+
+    <script>
+
+        let db = firebase.database();
+        let stil = db.ref("stil");
+
+        let styleElement = document.getElementById("styleElement");
+        let minCSS = document.getElementById("minCSS");
+
+        function endreCSS() {
+            stil.set(minCSS.value);
+        }
+        function endreSide(snap) {
+            styleElement.innerHTML = snap.val();
+            minCSS.value = snap.val();
+        }
+
+        minCSS.oninput = endreCSS;
+        stil.on("value", endreSide);
+
+
+    </script>
+
+</body>
+</html>
