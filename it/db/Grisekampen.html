@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Grisekampen</title>
+    <style>
+
+        body {
+            background-color: darkblue;
+        }
+
+        #pig {
+            position: absolute;
+            left: 45%;
+            top: 45%;
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="astropig.png" id="pig">
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCsTw8o1FWOXfmeW5cxz7OIs6X3F3eJ9bk",
+            authDomain: "my-great-app-14bcc.firebaseapp.com",
+            databaseURL: "https://my-great-app-14bcc.firebaseio.com",
+            projectId: "my-great-app-14bcc",
+            storageBucket: "my-great-app-14bcc.appspot.com",
+            messagingSenderId: "868569791651"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        let db = firebase.database();
+        let grisen = db.ref("grisen");
+
+        let pig = document.getElementById("pig");
+
+        function settPosisjon(evt) {
+            grisen.set({
+               "left" : evt.clientX,
+               "top" : evt.clientY
+            });
+        }
+
+        function flyttGrisen(snap) {
+
+            let pos = snap.val();
+            pig.style.left = pos.left + "px";
+            pig.style.top = pos.top + "px";
+
+        }
+
+        document.onclick = settPosisjon;
+        grisen.on("value", flyttGrisen);
+
+
+    </script>
+
+</body>
+</html>
