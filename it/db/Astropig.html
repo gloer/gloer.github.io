@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Astropig</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: darkblue;
+        }
+        #astropig {
+            position: absolute;
+            left: 300px;
+            top: 200px;
+        }
+     </style>
+</head>
+<body>
+
+    <img src="astropig.png" id="astropig">
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBpaB8AiZpO7OHOScaWlpxsA6EXZ_8AMSY",
+            authDomain: "min-utrolige-database.firebaseapp.com",
+            databaseURL: "https://min-utrolige-database.firebaseio.com",
+            projectId: "min-utrolige-database",
+            storageBucket: "min-utrolige-database.appspot.com",
+            messagingSenderId: "296496588831"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        const astropig = document.getElementById("astropig");
+
+        const db = firebase.database();
+        const griseretning = db.ref("griseretning");
+
+        let xfart = 5;
+        let yfart = 3;
+
+        let xpos = 300;
+        let ypos = 200;
+
+        let retning = {
+            xdir: 1,
+            ydir: 0
+        };
+
+        function settRetning(evt) {
+            let kode = evt.keyCode;
+
+            if(kode === 37) {
+                retning.xdir = -1;
+                retning.ydir = 0;
+            }
+            if(kode === 39) {
+                retning.xdir = 1;
+                retning.ydir = 0;
+            }
+            if(kode === 38) {
+                retning.ydir = -1;
+                retning.xdir = 0;
+            }
+            if(kode === 40) {
+                retning.ydir = 1;
+                retning.xdir = 0;
+            }
+
+            griseretning.set(retning);
+
+        }
+
+        function endreRetning(snap) {
+            r = snap.val();
+            retning.xdir = r.xdir;
+            retning.ydir = r.ydir;
+        }
+
+        function flyttGrisen() {
+            xpos += xfart * retning.xdir;
+            ypos += yfart * retning.ydir;
+
+
+
+            if(xpos > innerWidth && retning.xdir === 1) {
+                xpos = -67; // Grisen er 67 bred
+            }
+            if(xpos < 0 && retning.xdir === -1) {
+                xpos = innerWidth;
+            }
+            if(ypos > innerHeight && retning.ydir === 1) {
+                ypos = - 108; // Grisen er 108 høy
+            }
+            if(ypos < -108 && retning.ydir === -1) {
+                ypos = innerHeight;
+            }
+
+            astropig.style.left = xpos + "px";
+            astropig.style.top = ypos + "px";
+            astropig.style.transform = `rotate(${retning.xdir * 12}deg)`;
+
+            requestAnimationFrame(flyttGrisen);
+        }
+
+        flyttGrisen();
+
+        document.onkeyup = settRetning;
+        griseretning.on("value", endreRetning);
+
+    </script>
+
+</body>
+</html>
