@@ -13,6 +13,7 @@
             position: absolute;
             left: 300px;
             top: 200px;
+            transition: transform 0.2s;
         }
      </style>
 </head>
@@ -102,7 +103,7 @@
 
             astropig.style.left = xpos + "px";
             astropig.style.top = ypos + "px";
-            astropig.style.transform = `rotate(${retning.xdir * 12}deg)`;
+            astropig.style.transform = `rotate(${retning.xdir * 30}deg)`;
 
             requestAnimationFrame(flyttGrisen);
         }
