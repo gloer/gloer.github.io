@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fargekampen</title>
+    <style>
+        body {
+            background-color: khaki;
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+
+<input type="text" id="velgFarge" placeholder="Velg farge">
+
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyBpaB8AiZpO7OHOScaWlpxsA6EXZ_8AMSY",
+        authDomain: "min-utrolige-database.firebaseapp.com",
+        databaseURL: "https://min-utrolige-database.firebaseio.com",
+        projectId: "min-utrolige-database",
+        storageBucket: "min-utrolige-database.appspot.com",
+        messagingSenderId: "296496588831"
+    };
+    firebase.initializeApp(config);
+</script>
+
+<script>
+    let velgFarge = document.getElementById("velgFarge");
+
+    let db = firebase.database();
+    let farge = db.ref("farge");
+
+    function byttFarge() {
+        farge.set(velgFarge.value);
+    }
+
+    function visFarge(snapshot) {
+        document.body.style.backgroundColor = snapshot.val();
+    }
+
+    velgFarge.onchange = byttFarge;
+
+    // Når dataene endres i databasen, endrer vi
+    // fargen på nettsiden med funksjonen visFarge
+    farge.on("value", visFarge);
+
+
+
+
+</script>
+
+</body>
+</html>
