@@ -17,14 +17,42 @@
 
     <img id="astropig" src="astropig.png">
 
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyC8nG0qKKT-mBzoc0Q3h-rlUZdD4D2dEco",
+            authDomain: "fruktbutikken.firebaseapp.com",
+            databaseURL: "https://fruktbutikken.firebaseio.com",
+            projectId: "fruktbutikken",
+            storageBucket: "fruktbutikken.appspot.com",
+            messagingSenderId: "44451318197"
+        };
+        firebase.initializeApp(config);
+    </script>
+
     <script>
         let astropig = document.getElementById("astropig");
-        function flyttGrisen(klikk) {
-            astropig.style.left = klikk.clientX + "px";
-            astropig.style.top = klikk.clientY + "px";
+        let db = firebase.database();
+        let grisepos = db.ref("grisepos");
+
+
+        function settPosisjon(klikk) {
+            grisepos.set({
+                x: klikk.clientX,
+                y: klikk.clientY
+            });
         }
 
-        document.onclick = flyttGrisen;
+        function flyttGrisen(snap) {
+            let pos = snap.val();
+            astropig.style.left = pos.x + "px";
+            astropig.style.top = pos.y + "px";
+        }
+
+        document.onclick = settPosisjon;
+        grisepos.on("value", flyttGrisen);
 
 
 
