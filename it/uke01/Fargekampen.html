@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fargekampen</title>
+    <style>
+        body {
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+
+
+    <input type="text" id="velgFarge">
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyC8nG0qKKT-mBzoc0Q3h-rlUZdD4D2dEco",
+            authDomain: "fruktbutikken.firebaseapp.com",
+            databaseURL: "https://fruktbutikken.firebaseio.com",
+            projectId: "fruktbutikken",
+            storageBucket: "fruktbutikken.appspot.com",
+            messagingSenderId: "44451318197"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        let db = firebase.database();
+        let farge = db.ref("farge");
+        let velgFarge = document.getElementById("velgFarge");
+
+        function settFarge() {
+            farge.set(velgFarge.value);
+        }
+
+        velgFarge.onchange = settFarge;
+
+
+    </script>
+
+</body>
+</html>
