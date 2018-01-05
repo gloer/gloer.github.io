@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Grisekampen</title>
+    <style>
+        #astropig {
+            position: absolute;
+            left: 400px;
+            top: 100px;
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+
+    <img id="astropig" src="astropig.png">
+
+    <script>
+        let astropig = document.getElementById("astropig");
+        function flyttGrisen(klikk) {
+            astropig.style.left = klikk.clientX + "px";
+            astropig.style.top = klikk.clientY + "px";
+        }
+
+        document.onclick = flyttGrisen;
+
+
+
+    </script>
+
+</body>
+</html>
