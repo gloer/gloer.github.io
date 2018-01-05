@@ -40,7 +40,14 @@
             farge.set(velgFarge.value);
         }
 
+        function byttFarge(snapshot) {
+            document.body.style.backgroundColor = snapshot.val();
+        }
+
         velgFarge.onchange = settFarge;
+        // Når fargen endres i databasen
+        // skal vi bytte farge på nettsiden
+        farge.on("value", byttFarge);
 
 
     </script>
