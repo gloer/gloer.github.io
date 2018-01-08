@@ -60,6 +60,15 @@
             }
         }
 
+        function visFilmer() {
+            tbFilmer.innerHTML = "";
+
+            for(let film of filmer) {
+                tbFilmer.innerHTML += film.rad;
+            }
+
+        }
+
         function registrerFilm(evt) {
             evt.preventDefault();
             let tittel = inpFilm.value;
@@ -69,19 +78,13 @@
 
             filmer.push(film);
 
-            tbFilmer.innerHTML += film.rad;
+            visFilmer();
 
             skjema.reset();
             inpFilm.focus();
         }
 
-        let it = new Film("IT", 200);
-        let benhur = new Film("Ben Hur", 300);
-        let spartacus = new Film("Spartacus", 400);
 
-        tbFilmer.innerHTML += it.rad;
-        tbFilmer.innerHTML += benhur.rad;
-        tbFilmer.innerHTML += spartacus.rad;
 
         skjema.onsubmit = registrerFilm;
 
