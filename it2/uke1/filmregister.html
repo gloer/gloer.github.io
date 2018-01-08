@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Filmregister</title>
+    <link rel="stylesheet" href="foundation-float.css">
+    <style>
+        body {
+            padding: 10px;
+        }
+        table .button {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="skjema">
+        <input type="text" id="inpFilm" placeholder="Tittel" autocomplete="off">
+        <input type="number" id="inpPris" placeholder="Pris" autocomplete="off">
+        <button type="submit" class="button">Registrer ny film</button>
+    </form>
+
+
+    <table>
+        <thead>
+            <th>Film</th>
+            <th>Pris</th>
+            <th></th>
+        </thead>
+        <tbody id="tbFilmer"></tbody>
+    </table>
+
+    <script>
+        let skjema = document.getElementById("skjema");
+        let inpFilm = document.getElementById("inpFilm");
+        let inpPris = document.getElementById("inpPris");
+        let tbFilmer = document.getElementById("tbFilmer");
+
+        // Definerer et tomt array
+        let filmer = [];
+
+
+        class Film {
+            constructor(tittel, pris) {
+                this.tittel = tittel;
+                this.pris = pris;
+            }
+            get rad() {
+                return `
+                    <tr>
+                        <td>${this.tittel}</td>
+                        <td>${this.pris}</td>
+                        <td>
+                            <button class="button tiny">KJØP</button>
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        function registrerFilm(evt) {
+            evt.preventDefault();
+            let tittel = inpFilm.value;
+            let pris = Number( inpPris.value );
+
+            let film = new Film(tittel, pris);
+
+            filmer.push(film);
+
+            tbFilmer.innerHTML += film.rad;
+
+            skjema.reset();
+            inpFilm.focus();
+        }
+
+        let it = new Film("IT", 200);
+        let benhur = new Film("Ben Hur", 300);
+        let spartacus = new Film("Spartacus", 400);
+
+        tbFilmer.innerHTML += it.rad;
+        tbFilmer.innerHTML += benhur.rad;
+        tbFilmer.innerHTML += spartacus.rad;
+
+        skjema.onsubmit = registrerFilm;
+
+    </script>
+
+</body>
+</html>
