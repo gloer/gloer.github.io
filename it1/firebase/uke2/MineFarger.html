@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Våre Farger</title>
+    <style>
+        body {
+            background-color: black;
+            font-family: sans-serif;
+            color: white;
+        }
+        header {
+            padding-bottom: 10px;
+        }
+        main {
+            display: grid;
+            grid-template-columns: repeat(40, 1fr);
+            grid-auto-rows: 20px;
+            grid-gap: 2px;
+        }
+        main > div {
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <input type="color" id="inpFarge">
+        <span>Hva er din farge?</span>
+    </header>
+    <main id="main"></main>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyC8nG0qKKT-mBzoc0Q3h-rlUZdD4D2dEco",
+            authDomain: "fruktbutikken.firebaseapp.com",
+            databaseURL: "https://fruktbutikken.firebaseio.com",
+            projectId: "fruktbutikken",
+            storageBucket: "fruktbutikken.appspot.com",
+            messagingSenderId: "44451318197"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        let main  = document.getElementById("main");
+        let inpFarge = document.getElementById("inpFarge");
+
+        let db = firebase.database();
+        let fargene = db.ref("fargene");
+
+        function lagreMinFarge() {
+            fargene.push(inpFarge.value);
+        }
+
+        function visFarge(snap) {
+            let firkant = document.createElement("div");
+            firkant.style.backgroundColor = snap.val();
+            main.appendChild(firkant);
+
+            firkant.animate(
+                [
+                    {transform: `scale(3) translate(${innerWidth/2 - Math.random()*innerWidth}px, ${innerHeight/2 - Math.random()*innerHeight}px)`},
+                    {transform: `scale(1) translate(0, 0)`}
+                ],
+                {
+                    duration: 500
+                }
+            );
+        }
+
+        fargene.on("child_added", visFarge);
+
+        inpFarge.onchange = lagreMinFarge;
+
+
+    </script>
+
+</body>
+</html>
