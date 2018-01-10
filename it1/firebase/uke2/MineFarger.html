@@ -19,8 +19,10 @@
             grid-auto-rows: 20px;
             grid-gap: 2px;
         }
-        main > div {
-            background-color: blue;
+        @media (max-width: 600px) {
+            main {
+                grid-template-columns: repeat(20, 1fr);
+            }
         }
     </style>
 </head>
