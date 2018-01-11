@@ -37,6 +37,74 @@
         <button type="submit" class="button">Registrer ny kontakt</button>
     </form>
 
+    <table>
+        <thead>
+            <tr>
+                <th>Navn</th>
+                <th>Epost</th>
+                <th>Telefon</th>
+            </tr>
+        </thead>
+        <tbody id="tbKontakter">
+
+        </tbody>
+    </table>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyC8nG0qKKT-mBzoc0Q3h-rlUZdD4D2dEco",
+            authDomain: "fruktbutikken.firebaseapp.com",
+            databaseURL: "https://fruktbutikken.firebaseio.com",
+            projectId: "fruktbutikken",
+            storageBucket: "fruktbutikken.appspot.com",
+            messagingSenderId: "44451318197"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        const db = firebase.database();
+        const kontakter = db.ref("kontakter");
+
+        const skjema = document.getElementById("skjema");
+        const inpNavn = document.getElementById("inpNavn");
+        const inpEpost = document.getElementById("inpEpost");
+        const inpTelefon = document.getElementById("inpTelefon");
+        const tbKontakter = document.getElementById("tbKontakter");
+
+        function registrerKontakt(evt) {
+            evt.preventDefault();
+            const kontakt = {
+              navn: inpNavn.value,
+              epost: inpEpost.value,
+              telefon: inpTelefon.value
+            };
+            kontakter.push(kontakt);
+            skjema.reset();
+            inpNavn.focus();
+        }
+
+        function visKontakt(snap) {
+            const kontakt = snap.val();
+            tbKontakter.innerHTML += `
+                <tr>
+                    <td>${kontakt.navn}</td>
+                    <td>${kontakt.epost}</td>
+                    <td>${kontakt.telefon}</td>
+                </tr>
+            `;
+        }
+
+        kontakter.on("child_added", visKontakt);
+        skjema.onsubmit = registrerKontakt;
+
+
+
+    </script>
+
 
 </body>
 </html>
