@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rutenett med farger</title>
+    <style>
+
+        body {
+            background-color: black;
+        }
+        header {
+            padding-bottom: 10px;
+        }
+        #rutenett {
+            display: grid;
+            grid-template-columns: repeat(40, 1fr);
+            grid-auto-rows: 20px;
+            grid-gap: 3px;
+        }
+        @media (max-width: 600px) {
+            #rutenett {
+                grid-template-columns: repeat(20, 1fr);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <input type="color" id="inpFarge">
+    </header>
+    <main id="rutenett">
+
+    </main>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBpaB8AiZpO7OHOScaWlpxsA6EXZ_8AMSY",
+            authDomain: "min-utrolige-database.firebaseapp.com",
+            databaseURL: "https://min-utrolige-database.firebaseio.com",
+            projectId: "min-utrolige-database",
+            storageBucket: "min-utrolige-database.appspot.com",
+            messagingSenderId: "296496588831"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        const db = firebase.database();
+        const ruter = db.ref("ruter");
+
+        const rutenett = document.getElementById("rutenett");
+        const inpFarge = document.getElementById("inpFarge");
+
+        function lagreFarge() {
+            // Legger inn en fargekode i databasen
+            ruter.push(inpFarge.value);
+        }
+
+        function lagRute(snap) {
+            const rute = document.createElement("div");
+            rute.style.backgroundColor = snap.val();
+            rutenett.appendChild(rute);
+        }
+
+        ruter.on("child_added", lagRute);
+        inpFarge.onchange = lagreFarge;
+
+    </script>
+
+</body>
+</html>
