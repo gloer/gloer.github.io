@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mine kontakter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-float.css">
+    <style>
+        body {
+            padding: 8px;
+            max-width: 700px;
+            margin: auto;
+        }
+        #skjema {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 4px;
+        }
+        #skjema > button {
+            grid-column-start: 1;
+            grid-column-end: 4;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="skjema">
+        <div>
+            <input type="text" id="inpNavn" placeholder="Kari Nordmann" required>
+        </div>
+        <div>
+            <input type="email" id="inpEmail" placeholder="kari@mail.com" required>
+        </div>
+        <div>
+            <input type="tel" id="inpTelefon" placeholder="22 22 22 22" required>
+        </div>
+
+        <button class="button" type="submit">OK</button>
+    </form>
+
+    <script>
+        const skjema = document.getElementById("skjema");
+
+        function lagreKontakt(evt) {
+            evt.preventDefault();
+        }
+
+        skjema.onsubmit = lagreKontakt;
+
+
+    </script>
+
+</body>
+</html>
