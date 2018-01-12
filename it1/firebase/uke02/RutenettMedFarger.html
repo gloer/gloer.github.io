@@ -67,6 +67,20 @@
             const rute = document.createElement("div");
             rute.style.backgroundColor = snap.val();
             rutenett.appendChild(rute);
+
+            const x = 200 - Math.random() * 400;
+            const y = 200 - Math.random() * 400;
+
+            const keyframes = [
+                {transform: `scale(3) translate(${x}px, ${y}px)`},
+                {transform: `scale(1) translate(0, 0)`}
+            ];
+            const settings = {
+                duration: 800
+            };
+
+            rute.animate(keyframes, settings);
+
         }
 
         ruter.on("child_added", lagRute);
