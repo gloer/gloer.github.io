@@ -38,8 +38,39 @@
         <button class="button" type="submit">OK</button>
     </form>
 
+    <table>
+        <thead>
+            <tr>
+                <th>Navn</th>
+                <th>Epost</th>
+                <th>Telefon</th>
+            </tr>
+        </thead>
+        <tbody id="tbKontakter"></tbody>
+    </table>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBpaB8AiZpO7OHOScaWlpxsA6EXZ_8AMSY",
+            authDomain: "min-utrolige-database.firebaseapp.com",
+            databaseURL: "https://min-utrolige-database.firebaseio.com",
+            projectId: "min-utrolige-database",
+            storageBucket: "min-utrolige-database.appspot.com",
+            messagingSenderId: "296496588831"
+        };
+        firebase.initializeApp(config);
+    </script>
+
     <script>
         const skjema = document.getElementById("skjema");
+        const inpNavn = document.getElementById("inpNavn");
+        const inpEmail = document.getElementById("inpEmail");
+        const inpTelefon = document.getElementById("inpTelefon");
+        const tbKontakter = document.getElementById("tbKontakter");
+
 
         function lagreKontakt(evt) {
             evt.preventDefault();
