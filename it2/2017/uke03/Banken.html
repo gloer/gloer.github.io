@@ -83,11 +83,10 @@
         function lagTransaksjon(evt) {
             evt.preventDefault();
 
-            let belop = -Number(inpBelop.value);
+            let belop = Number(inpBelop.value);
             let type = "uttak";
             if(cbType.checked) {
                 type = "innskudd";
-                belop = -belop; // minus minus blir pluss
             }
 
             let transaksjon = new Transaksjon(type, belop, inpTekst.value);
