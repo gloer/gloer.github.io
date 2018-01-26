@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Meta Critics - The Awesome movie page</title>
+</head>
+<body>
+
+<main id="main"></main>
+
+<script>
+    const main = document.getElementById("main");
+    function visArtikler(json) {
+
+        const artikler = json.results;
+        for(const artikkel of artikler) {
+
+            main.innerHTML += `
+                <h1>${artikkel.display_title}</h1>
+                <h2>by ${artikkel.byline}</h2>
+                <p>${artikkel.summary_short}</p>
+                <p>
+                    <a href="${artikkel.link.url}">Les hele artikkelen</a>
+                </p>
+            `;
+
+        }
+
+
+    }
+    fetch('https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=Kurosawa&api-key=91d12d941a7d49bb956621af703ad4c7')
+        .then(response => { return response.json(); })
+        .then(json => { visArtikler(json); })
+        .catch(error => { document.body.innerHTML = error + " Du må kjøre denne nettsiden fra en webserver" });
+</script>
+
+
+</body>
+</html>
