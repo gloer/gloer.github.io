@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+
+    <select id="velgHotell">
+        <option value="0">Spidsbergseter</option>
+        <option value="1">Rondablikk</option>
+        <option value="2">Rondane SPA</option>
+    </select>
+
+    <h1 id="txtNavn"></h1>
+
+    <script>
+
+        const velgHotell = document.getElementById("velgHotell");
+        const txtNavn = document.getElementById("txtNavn");
+
+
+        const hoteller = [
+            {
+                navn: "Spidsbergseter",
+                telefon : "2323232323",
+                epost : "sp@fjellstue.no",
+                bilde : "spidsberg.jpg",
+                temperaturer : [4, 6, 2, -5, -3, 7]
+            },
+            {
+                navn: "RONFDABLIKK",
+                telefon : "2323232323",
+                epost : "sp@fjellstue.no",
+                temperaturer : [4, 6, 2, -5, -3, 7]
+            },
+            {
+                navn: "RONDANE SPA",
+                telefon : "2323232323",
+                epost : "sp@fjellstue.no",
+                temperaturer : [4, 6, 2, -5, -3, 7]
+            }
+        ];
+
+        velgHotell.onchange = function() {
+            let nr = Number(velgHotell.value);
+            let hotell = hoteller[nr];
+
+            txtNavn.innerText = hotell.navn;
+        }
+
+    </script>
+
+
+</body>
+</html>
