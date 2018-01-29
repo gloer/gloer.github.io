@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Slideshow</title>
+    <style>
+        #loading {
+            display: none;
+        }
+        body {
+            background-color: darkorange;
+        }
+        #ramme {
+            background-image: url("b1.jpg");
+            width: 250px;
+            height: 200px;
+            border: 4px solid white;
+            transition: 0.5s;
+        }
+    </style>
+</head>
+<body>
+
+    <audio src="VindOgMusikk.mp3" id="lyd" autoplay loop></audio>
+
+    <div id="loading">
+        <img src="b1.jpg">
+        <img src="b2.jpg">
+        <img src="b3.jpg">
+        <img src="b4.jpg">
+        <img src="b5.jpg">
+    </div>
+
+    <div id="ramme"></div>
+
+    <script>
+        const ramme = document.getElementById("ramme");
+        const bilder = ["b1.jpg", "b2.jpg", "b3.jpg", "b4.jpg", "b5.jpg"];
+        let nr = 1;
+
+        function byttBilde() {
+
+            const bilde = bilder[nr];
+            ramme.style.backgroundImage = `url(${bilde})`;
+            nr++;
+
+            if(nr === bilder.length) {
+                nr = 0;
+            }
+        }
+
+        setInterval(byttBilde, 2000);
+
+    </script>
+
+</body>
+</html>
