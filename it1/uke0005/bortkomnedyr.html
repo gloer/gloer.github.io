@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bortkomne dyr</title>
+</head>
+<body>
+
+    <main id="main"></main>
+
+    <script>
+
+        const main = document.getElementById("main");
+
+
+        function visDyra(json) {
+            main.innerHTML = json;
+        }
+
+        fetch('dyrene.json')
+            .then( response => { return response.json() })
+            .then( json => { visDyra(json) } )
+            .catch( error => { main.innerHTML = error } );
+
+    </script>
+
+</body>
+</html>
