@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chuck Norris</title>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        body {
+            text-align: center;
+            font-family: sans-serif;
+            padding: 10px;
+        }
+        main {
+
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 10px;
+            padding-top: 20px;
+
+        }
+
+        main > p {
+
+            padding: 5px;
+            background-color: lemonchiffon;
+
+        }
+        main > p:nth-child(odd) {
+            background-color: steelblue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="theJoke"></h1>
+    <img id="avatar">
+    <p>
+        <input id="inpSok" placeholder="Søk i Chuck Norris-vitsene">
+    </p>
+    <main id="main"></main>
+
+    <script>
+
+        const theJoke = document.getElementById("theJoke");
+        const avatar = document.getElementById("avatar");
+        const inpSok = document.getElementById("inpSok");
+        const main = document.getElementById("main");
+
+
+
+        function showMeTheJoke(json) {
+            theJoke.innerHTML = json.value;
+            avatar.src = json.icon_url;
+        }
+
+        function showResults(json) {
+            main.innerHTML = "";
+            for(const joke of json.result) {
+                main.innerHTML += `
+                    <p>${joke.value}</p>
+                `;
+            }
+
+        }
+
+        fetch('https://api.chucknorris.io/jokes/random')
+            .then (response => { return response.json(); })
+            .then (json => { showMeTheJoke(json); } );
+
+
+        inpSok.onchange = function() {
+
+            fetch('https://api.chucknorris.io/jokes/search?query=' + inpSok.value)
+                .then(response => {return response.json(); } )
+                .then(json => { showResults(json); });
+
+        }
+
+    </script>
+
+</body>
+</html>
