@@ -16,13 +16,25 @@
 
 
         function visDyra(json) {
-            main.innerHTML = json;
+            const dyrene = json.dyrene;
+
+            for (const dyr of dyrene) {
+                main.innerHTML += `
+                    <article>
+                        <h1>${dyr.navn} er en ${dyr.type}</h1>
+                        <img src="${dyr.bilde}">
+                    </article>
+                `;
+            }
+
         }
 
         fetch('dyrene.json')
             .then( response => { return response.json() })
             .then( json => { visDyra(json) } )
             .catch( error => { main.innerHTML = error } );
+
+
 
     </script>
 
