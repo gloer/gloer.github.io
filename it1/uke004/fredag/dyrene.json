@@ -1,0 +1,25 @@
+{
+  "results" : [
+    {
+      "navn" : "Klaus Knegg",
+      "type" : "Hest",
+      "bilde" : "klaus.jpg",
+      "telefon" : "+4793458934",
+      "beskrivelse" : "Klaus rømte fra stallen på torsdag."
+    },
+    {
+      "navn" : "Warren",
+      "type" : "Varan",
+      "bilde" : "warren.jpg",
+      "telefon" : "+4742358924",
+      "beskrivelse" : "Warren hoppet ut ut av vinduet i dag."
+    },
+    {
+      "navn" : "Fido",
+      "type" : "Hund",
+      "bilde" : "fido.jpg",
+      "telefon" : "+4723438924",
+      "beskrivelse" : "Forsvant under lufetur på Kolsås."
+    }
+  ]
+}

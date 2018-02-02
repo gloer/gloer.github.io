@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Savnede dyr</title>
+</head>
+<body>
+    <h1>Savnede dyr</h1>
+    <main id="main"></main>
+
+    <script>
+
+        const main = document.getElementById("main");
+
+        function lagHTML(json) {
+            const dyrene = json.results;
+            for(const dyr of dyrene) {
+                main.innerHTML += `
+                    <article>
+                        <h1>${dyr.navn} er en ${dyr.type}</h1>
+                        <img src="${dyr.bilde}">
+                        <p>${dyr.beskrivelse}</p>
+                        <a href="tel:${dyr.telefon}">
+                            ${dyr.telefon}
+                        </a>
+                    </article>
+                `;
+            }
+        }
+
+        fetch('dyrene.json')
+            .then(response => { return response.json() })
+            .then( json => { lagHTML(json) } )
+            .catch( error => { main.innerHTML = error } )
+
+
+    </script>
+
+</body>
+</html>
