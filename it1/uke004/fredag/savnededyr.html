@@ -4,6 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Savnede dyr</title>
+    <style>
+
+        body {
+            background-color: darkorange;
+            font-family: sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            display: grid;
+            grid-gap: 10px;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        main > article {
+            background-color: white;
+            padding: 10px;
+        }
+        main > article:nth-child(2) {
+            background-color: black;
+            color: white;
+        }
+        main > article:nth-child(2) a {
+            color: white;
+        }
+
+        article > img {
+            width: 100%;
+        }
+        @media (max-width: 1100px) {
+            main {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 900px) {
+            main {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 700px) {
+            main {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+    </style>
+
+
 </head>
 <body>
     <h1>Savnede dyr</h1>

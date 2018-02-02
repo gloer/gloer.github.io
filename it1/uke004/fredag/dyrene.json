@@ -20,6 +20,14 @@
       "bilde" : "fido.jpg",
       "telefon" : "+4723438924",
       "beskrivelse" : "Forsvant under lufetur på Kolsås."
+    },
+    {
+      "navn" : "Fido",
+      "type" : "Hund",
+      "bilde" : "fido.jpg",
+      "telefon" : "+4723438924",
+      "beskrivelse" : "Forsvant under lufetur på Kolsås."
     }
+
   ]
 }
