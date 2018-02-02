@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alle filmene</title>
+    <style>
+        img {
+            float: right;
+        }
+        p {
+            float: left;
+        }
+    </style>
+</head>
+<body>
+
+<main id="main"></main>
+
+<script>
+
+    const main = document.getElementById("main");
+
+
+    function visFilmer(json) {
+
+        main.innerHTML = `
+            <h1>${json.original_title}</h1>
+            <p>
+                <img src="https://image.tmdb.org/t/p/w500${json.poster_path}">
+                ${json.overview}
+            </p>
+
+
+        `;
+    }
+
+    fetch('https://api.themoviedb.org/3/movie/550?api_key=fbe2e7e0b56f9bf6b6494c16e380deb4')
+        .then(response => { return response.json(); })
+        .then(json => { visFilmer(json); });
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
+

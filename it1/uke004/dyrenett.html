@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dyrenett</title>
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Fredoka One", sans-serif;
+            background-color: darkorange;
+        }
+        h1 {
+            text-align: center;
+        }
+        main {
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 10px;
+            margin: auto;
+        }
+        article > img {
+            width: 100%;
+        }
+        article {
+            background-color: white;
+            padding: 8px;
+        }
+        p {
+            font-family: sans-serif;
+        }
+        @media (max-width: 900px) {
+            main {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 640px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Missing animals</h1>
+    <main id="main"></main>
+
+
+    <script>
+        const main = document.getElementById("main");
+
+        function visDyr(json) {
+
+            const dyrene = json.dyrene;
+
+            for(const dyr of dyrene) {
+
+                main.innerHTML += `
+                    <article>
+                        <h1>${dyr.navn} er en ${dyr.type}</h1>
+                        <img src="${dyr.bilde}">
+                        <p>${dyr.tekst}</p>
+                        <p>Ring <b>${dyr.telefon}</b> hvis du vet noe!</p>
+                    </article>
+                `;
+
+            }
+
+        }
+
+        fetch('dyrene.json')
+            .then(response => { return response.json(); })
+            .then(json => { visDyr(json) })
+            .catch(err => { main.innerHTML = "Noe gikk galt: " + err });
+
+    </script>
+
+</body>
+</html>

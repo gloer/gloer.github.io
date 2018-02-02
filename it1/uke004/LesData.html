@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Les Data</title>
+    <style>
+
+        body {
+            font-family: sans-serif;
+            background-color: #eee;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        main {
+            display: grid;
+            grid-gap: 8px;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        main img {
+            width: 100%;
+        }
+
+        article {
+            background-color: white;
+            padding: 10px;
+        }
+
+        @media (max-width: 1200px) {
+            main {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 900px) {
+            main {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 700px) {
+            main {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Missing animals</h1>
+    <main id="main">
+
+    </main>
+
+    <script>
+
+        const main = document.getElementById("main");
+
+
+        function lagHTML(json) {
+
+            const dyrene = json.dyrene;
+            for(const dyr of dyrene) {
+
+                main.innerHTML += `
+                    <article>
+                        <h1>${dyr.navn} er en ${dyr.type}</h1>
+                        <img src="${dyr.bilde}">
+                        <p>${dyr.tekst}</p>
+                        <p>Ring <a href="tel:+47${dyr.telefon}">${dyr.telefon}</a> hvis har sett om ${dyr.navn}</p>
+                    </article>
+                `;
+
+            }
+
+        }
+
+        fetch('dyrene.json')
+            .then( response => { return response.json() } )
+            .then( json => { lagHTML(json) } )
+            .catch( error => { console.log(error) } );
+
+    </script>
+
+</body>
+</html>

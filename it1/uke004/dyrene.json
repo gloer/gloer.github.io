@@ -1,0 +1,34 @@
+{
+  "dyrene" : [
+
+    {
+      "navn" : "Dagros",
+      "type" : "Ku",
+      "bilde" : "dagros.jpg",
+      "tekst" : "Dagros stakk av etter melking på torsdag. Sist sett i Kongsvinger.",
+      "telefon" : "904345423"
+    },
+    {
+      "navn" : "Fido",
+      "type" : "Hund",
+      "bilde" : "fido.jpg",
+      "tekst" : "Fido rømte etter en slåsskamp med naboens katt.",
+      "telefon" : "304435423"
+    },
+    {
+      "navn" : "Warren",
+      "type" : "Varan",
+      "bilde" : "varan.jpg",
+      "tekst" : "Warren ble bortført av maskerte ranere fredag 12.01.",
+      "telefon" : "2232343424"
+    },
+    {
+      "navn" : "Paddy",
+      "type" : "Panda",
+      "bilde" : "panda.jpg",
+      "tekst" : "Paddy stakk av under et besøk i dyrehagen.",
+      "telefon" : "4234235234235"
+    }
+
+  ]
+}

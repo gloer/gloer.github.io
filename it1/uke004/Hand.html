@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+
+    <button id="btnLeft">Left hand is dominant</button>
+    <button id="btnRight">Right hand is dominant</button>
+
+    <script>
+
+        const btnLeft = document.getElementById("btnLeft");
+        const btnRight = document.getElementById("btnRight");
+
+        let trail = [];
+        let dominant = "";
+
+        const rightHand = [
+            "Right hand",
+            "Right hand",
+            "Left hand",
+            "Left hand",
+            "Right hand",
+            "Right hand",
+            "Left hand",
+            "Left hand",
+            "Right hand",
+            "Left hand"
+        ];
+
+        const leftHand = [
+            "Left hand",
+            "Left hand",
+            "Right hand",
+            "Right hand",
+            "Left hand",
+            "Left hand",
+            "Right hand",
+            "Right hand",
+            "Left hand",
+            "Right hand"
+        ];
+
+        btnLeft.onclick = function() {
+            trail = leftHand;
+            dominatnt = "left";
+            console.log(trail);
+            console.log(dominant);
+        };
+
+        btnRight.onclick = function() {
+            trail = rightHand;
+            dominant = "right";
+            console.log(trail);
+            console.log(dominant);
+        };
+
+
+    </script>
+
+</body>
+</html>

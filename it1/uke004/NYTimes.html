@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NY Times Articles</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <main id="main"></main>
+
+
+    <script>
+
+        const main = document.getElementById("main");
+
+
+        function visArtikler(json) {
+
+            //console.log(JSON.stringify(json));
+            const results = json.results;
+
+            for(artikkel of results) {
+
+                let bilde = "";
+                if(artikkel.multimedia.length > 0) {
+
+                    let nr = artikkel.multimedia.length - 1;
+                    bilde = `<img src="${artikkel.multimedia[nr].url}">`;
+
+                }
+
+                main.innerHTML += `
+                    <article>
+                        ${bilde}
+                        <h1>${artikkel.title}</h1>
+                        <p>${artikkel.abstract}</p>
+                    </article>
+                `;
+
+
+            }
+
+
+
+
+        }
+
+        fetch('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=91d12d941a7d49bb956621af703ad4c7')
+            .then(response => { return response.json(); })
+            .then(json => { visArtikler(json); })
+            .catch(error => { document.body.innerHTML = error + " Du må kjøre denne nettsiden fra en webserver" });
+
+    </script>
+
+</body>
+</html>

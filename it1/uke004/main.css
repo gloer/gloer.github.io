@@ -1,0 +1,16 @@
+body {
+    max-width: 970px;
+    margin: auto;
+}
+
+img {
+    width: 100%;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 8px;
+
+
+}

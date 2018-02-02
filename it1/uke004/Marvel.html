@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Meta Critics - The Awesome movie page</title>
+</head>
+<body>
+
+<main id="main"></main>
+
+<script>
+    const main = document.getElementById("main");
+    function visArtikler(json) {
+
+        for(const comic of json.data.results) {
+
+            if(comic.images[0]) {
+                main.innerHTML += `
+                    <img src="${comic.images[0].path}/portrait_xlarge.jpg">
+                `;
+            }
+
+
+        }
+
+
+    }
+    fetch('https://gateway.marvel.com:443/v1/public/comics?&apikey=d03132450af9de1a93832e28bf8a6ed7')
+        .then(response => { return response.json(); })
+        .then(json => { visArtikler(json); })
+        .catch(error => { document.body.innerHTML = error + " Du må kjøre denne nettsiden fra en webserver" });
+</script>
+
+
+</body>
+</html>
