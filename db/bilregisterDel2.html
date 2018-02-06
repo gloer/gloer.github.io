@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bilregister</title>
+    <style>
+        main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        main > table {
+            grid-column: span 2;
+            margin-top: 50px;
+            width: 100%;
+        }
+        th {
+            text-align: left;
+        }
+
+    </style>
+</head>
+<body>
+
+    <main>
+
+        <form id="kundeskjema">
+            <input type="text" placeholder="Kundennummer" required id="inpKundenummer">
+            <input type="text" placeholder="Fornavn" required id="inpFornavn">
+            <input type="text" placeholder="Etternavn" required id="inpEtternavn">
+            <button type="submit">Register ny kunde</button>
+        </form>
+
+        <form id="bilskjema">
+            <select id="selKunde">
+                <option value="">Velg eier</option>
+            </select>
+            <input type="text" id="inpRegnr" placeholder="Reg nr" required>
+            <input type="text" id="inpMerke" placeholder="Bilmerke" required>
+            <input type="text" id="inpModell" placeholder="Modell" required>
+            <button type="submit">Registrer ny bil</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Kundenr</th>
+                    <th>Fornavn</th>
+                    <th>Etternavn</th>
+                    <th>Reg. nr.</th>
+                    <th>Merke</th>
+                    <th>Modell</th>
+                </tr>
+            </thead>
+            <tbody id="tbContent"></tbody>
+        </table>
+
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBa85pwjE-32AILVjT2PjFkXQ_NyvdwPXo",
+            authDomain: "kode1-3f49a.firebaseapp.com",
+            databaseURL: "https://kode1-3f49a.firebaseio.com",
+            projectId: "kode1-3f49a",
+            storageBucket: "",
+            messagingSenderId: "430009678974"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        //DOM-elementer
+        var tbContent = document.getElementById("tbContent");
+
+
+        var kundeskjema = document.getElementById("kundeskjema");
+        var inpKundenummer = document.getElementById("inpKundenummer");
+        var inpFornavn = document.getElementById("inpFornavn");
+        var inpEtternavn = document.getElementById("inpEtternavn");
+
+        var bilskjema = document.getElementById("bilskjema");
+        var selKunde = document.getElementById("selKunde");
+        var inpMerke = document.getElementById("inpMerke");
+        var inpModell = document.getElementById("inpModell");
+        var inpRegnr = document.getElementById("inpRegnr");
+
+
+        var database = firebase.database();
+        var kunder = database.ref("bilregister/kunder");
+        var biler = database.ref("bilregister/biler");
+
+        function registrerKunde(evt) {
+            evt.preventDefault();
+            var kunde = kunder.child(inpKundenummer.value);
+            kunde.set({
+               fornavn: inpFornavn.value,
+               etternavn: inpEtternavn.value
+            });
+            kundeskjema.reset();
+            inpKundenummer.focus();
+        }
+
+        function registrerBil(evt) {
+            evt.preventDefault();
+            var bil = biler.child(inpRegnr.value);
+            bil.set({
+                eier: selKunde.value,
+                merke: inpMerke.value,
+                modell: inpModell.value
+            });
+
+            bilskjema.reset();
+            inpRegnr.focus();
+
+        }
+
+
+        function visBil(bilSnap) {
+            var regnr = bilSnap.key;
+            var bil = bilSnap.val();
+            var merke = bil.merke;
+            var modell = bil.modell;
+            var eier = kunder.child(bil.eier);
+
+            eier.on("value", function(kundeSnap){
+
+                var kunde = kundeSnap.val();
+                var kundenr = kundeSnap.key;
+                var fornavn = kunde.fornavn;
+                var etternavn = kunde.etternavn;
+
+                tbContent.innerHTML += `
+                    <tr>
+                        <td>${kundenr}</td>
+                        <td>${fornavn}</td>
+                        <td>${etternavn}</td>
+                        <td>${regnr}</td>
+                        <td>${merke}</td>
+                        <td>${modell}</td>
+                    </tr>
+                `;
+
+            });
+
+
+
+
+        }
+
+        function visKunde(kundeSnap) {
+            var kunde = kundeSnap.val();
+            var kundenummer = kundeSnap.key;
+
+            selKunde.innerHTML += `<option value="${kundenummer}">${kunde.fornavn} ${kunde.etternavn}</option>`;
+        }
+
+        kundeskjema.onsubmit = registrerKunde;
+        kunder.on("child_added", visKunde);
+
+        bilskjema.onsubmit = registrerBil;
+        biler.on("child_added", visBil);
+
+
+
+    </script>
+
+</body>
+</html>
