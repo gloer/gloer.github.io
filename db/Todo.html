@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-float.css">
+    <title>TodoList</title>
+    <style>
+        main {
+            padding: 10px;
+            max-width: 600px;
+            margin: 20px auto;
+            box-shadow: black 0px 0px 2px;
+        }
+        h1 {
+            text-align: center;
+            color: #3adb76;
+        }
+
+        #todolist {
+            display: grid;
+            grid-row-gap: 5px;
+            grid-template-columns: 1fr;
+            align-items: center;
+        }
+        #todolist > div {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+        }
+        #inpTODO {
+            background-color: #feff94;
+        }
+        #todolist > div > label {
+            padding: 0.5rem 0;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        #todolist > div > [type=checkbox]:checked ~ .todolabel {
+            text-decoration: line-through;
+        }
+        #todolist > div [type=checkbox] {
+            margin: 0;
+            margin-right: 10px;
+        }
+        #todolist > div [type=text] {
+            margin: 0;
+            display: none;
+        }
+        .delete {
+            margin-left: 10px;
+            margin-right: 5px;
+            opacity: 0.1;
+        }
+        .delete:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <main>
+
+        <h1>Huskeliste</h1>
+        <input type="text" id="inpTODO" placeholder="Hva må du huske å gjøre?" autofocus>
+
+        <section id="todolist">
+
+        </section>
+
+    </main>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBa85pwjE-32AILVjT2PjFkXQ_NyvdwPXo",
+            authDomain: "kode1-3f49a.firebaseapp.com",
+            databaseURL: "https://kode1-3f49a.firebaseio.com",
+            projectId: "kode1-3f49a",
+            storageBucket: "kode1-3f49a.appspot.com",
+            messagingSenderId: "430009678974"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+
+    <script>
+
+        var inpTODO = document.getElementById("inpTODO");
+        var todolist = document.getElementById("todolist");
+
+        var database = firebase.database();
+        var todos = database.ref("todos");
+
+
+
+        function lagreTodo() {
+
+            todos.push({
+               tekst: inpTODO.value,
+               done: false
+            });
+
+            inpTODO.value = "";
+            inpTODO.focus();
+
+
+        }
+
+        function slett(pk) {
+            var todo = todos.child(pk);
+            todo.remove();
+            var div = document.getElementById(pk);
+            todolist.removeChild(div);
+        }
+
+        function edit(pk) {
+            var todo = todos.child(pk);
+
+            var label = document.querySelector(`#${pk} .todolabel`);
+            label.style.display = "none";
+            var tekst = label.innerText;
+
+            var inputfelt = document.querySelector(`#${pk} .editItem`);
+            inputfelt.style.display = "block";
+            inputfelt.value = tekst;
+            inputfelt.focus();
+
+            inputfelt.onblur = function() {
+                inputfelt.style.display = "none";
+                label.style.display = "block";
+            };
+
+            inputfelt.onchange = function() {
+                todo.update( {tekst: inputfelt.value } );
+                inputfelt.style.display = "none";
+                label.style.display = "block";
+                label.innerText = inputfelt.value;
+            };
+
+
+        }
+
+        function visTodo(snap) {
+
+            var pk = snap.key;
+            var todo = snap.val();
+
+            todolist.innerHTML += `
+                <div id="${pk}">
+                    <input type="checkbox">
+                    <input type="text" class="editItem" style="display: none">
+                    <label class="todolabel" ondblclick="edit('${pk}')">${todo.tekst}</label>
+                    <label class="delete" onclick="slett('${pk}')">X</label>
+                </div>
+            `;
+
+        }
+
+        inpTODO.onchange = lagreTodo;
+        todos.on("child_added", visTodo);
+
+
+
+
+    </script>
+
+</body>
+</html>
