@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data som skal sendes</title>
+</head>
+<body>
+
+    <script>
+
+        const data = {};
+
+        data.receiver = "gloer.langslet@gmail.com";
+        data.nondominant = [23, 43, 23, 34, 23];
+        data.dominant = [43, 33, 53, 14, 73];
+        data.nondominantAverage = 39;
+        data.dominantAverage = 33;
+        data.tittel = "Resultat fra test " + new Date();
+
+        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+        xmlhttp.open("POST", "http://langslet.com/tapmail/sendMail.php");
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+        xmlhttp.send(JSON.stringify(data));
+
+
+
+    </script>
+
+</body>
+</html>
