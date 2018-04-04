@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-float.css">
+    <style>
+        body {
+            padding: 10px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        table > thead {
+            border-bottom: 8px solid darkorange;
+        }
+        table > tbody > tr:nth-child(6) {
+            border-bottom: 8px solid darkorange;
+        }
+        table  input[type=text], table input[type=date] {
+            margin-bottom: 0;
+        }
+        th:nth-child(3), th:nth-child(4){
+            width: 90px;
+        }
+        th:nth-child(3) {
+            width: 120px;
+        }
+
+    </style>
+    <title>OBOS-kamper</title>
+</head>
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Hjemmelag</th>
+                <th>Bortelag</th>
+                <th>Dato</th>
+                <th>Tidspunkt</th>
+                <th>Bane</th>
+                <th title="Bekreftet av bortelag">&#10003;</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCsTw8o1FWOXfmeW5cxz7OIs6X3F3eJ9bk",
+            authDomain: "my-great-app-14bcc.firebaseapp.com",
+            databaseURL: "https://my-great-app-14bcc.firebaseio.com",
+            projectId: "my-great-app-14bcc",
+            storageBucket: "my-great-app-14bcc.appspot.com",
+            messagingSenderId: "868569791651"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        var db = firebase.database();
+        var kamper = db.ref("obos/kamper");
+
+
+        var tbody = document.querySelector("table > tbody");
+
+
+        function bekreftTid(kampnr){
+
+            var rad = document.getElementById(kampnr);
+            var cb = rad.querySelector(".bekreft");
+            var done = cb.checked;
+
+            var kamp = kamper.child(kampnr);
+            kamp.update({
+                bekreftet: done
+            });
+
+
+        }
+
+        function endreTid(kampnr) {
+
+
+            var rad = document.getElementById(kampnr);
+            var inpTid = rad.querySelector(".tid");
+            var nyTid = inpTid.value;
+
+            var kamp = kamper.child(kampnr);
+            kamp.update({
+               tidspunkt : nyTid
+            });
+
+
+        }
+
+        function endreDato(kampnr) {
+
+
+            var rad = document.getElementById(kampnr);
+            var inpDato = rad.querySelector(".dato");
+            var nyDato = inpDato.value;
+
+            var kamp = kamper.child(kampnr);
+            kamp.update({
+                dato : nyDato
+            });
+
+
+        }
+
+        function endreBane(kampnr) {
+
+
+            var rad = document.getElementById(kampnr);
+            var inpBane = rad.querySelector(".bane");
+            nyBane = inpBane.value;
+            console.log(nyBane);
+            var kamp = kamper.child(kampnr);
+            kamp.update({
+                bane : nyBane
+            });
+
+
+        }
+
+        function visKamp(snap) {
+
+            var kamp = snap.val();
+            var tr = document.createElement("tr");
+            var knr = document.createElement("td");
+            var dato = document.createElement("td");
+            var tid = document.createElement("td");
+            var bane = document.createElement("td");
+            var bekreft = document.createElement("td");
+            var hjemme = document.createElement("td");
+            var borte = document.createElement("td");
+
+            var yes = "";
+            if(kamp.bekreftet){
+                yes = "checked";
+            }
+
+            tr.id = kamp.kampnr;
+
+            knr.innerHTML = kamp.kampnr;
+            //dato.innerHTML = kamp.dato;
+
+            dato.innerHTML = "<input class=\"dato\" type=\"date\" onchange=\"endreDato('" + kamp.kampnr + "')\" value=\"" + kamp.dato + "\">";
+            tid.innerHTML = "<input class=\"tid\" type=\"text\" onchange=\"endreTid('" + kamp.kampnr + "')\" value=\"" + kamp.tidspunkt + "\">";
+            bane.innerHTML = "<input class=\"bane\" type=\"text\" onchange=\"endreBane('" + kamp.kampnr + "')\" value=\"" + kamp.bane + "\">";
+
+            bekreft.innerHTML = "<input class=\"bekreft\" type=\"checkbox\" onchange=\"bekreftTid('" + kamp.kampnr + "')\"" + yes + ">";
+
+            hjemme.innerHTML = kamp.hjemmelag;
+            borte.innerHTML = kamp.bortelag;
+
+            tr.appendChild(hjemme);
+            tr.appendChild(borte);
+            tr.appendChild(dato);
+            tr.appendChild(tid);
+            tr.appendChild(bane);
+            tr.appendChild(bekreft);
+
+
+
+            tbody.appendChild(tr);
+
+
+
+        }
+
+        function visInfo(snap){
+
+            var kamp = snap.val();
+            var rad = document.getElementById(kamp.kampnr);
+
+            var inpTid = rad.querySelector(".tid");
+            inpTid.value = kamp.tidspunkt;
+
+            var inpBane = rad.querySelector(".bane");
+            inpBane.value = kamp.bane;
+
+            var cb = rad.querySelector(".bekreft");
+            cb.checked = kamp.bekreftet;
+
+
+        }
+
+        kamper.on("child_added", visKamp);
+        kamper.on("child_changed", visInfo);
+
+    </script>
+
+</body>
+</html>
