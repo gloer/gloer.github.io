@@ -25,6 +25,28 @@
         th:nth-child(3) {
             width: 120px;
         }
+        main {
+            display: grid;
+            grid-gap: 10px;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        main > div > textarea {
+            min-height: 180px;
+        }
+
+        @media (max-width: 1200px) {
+            main {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+        @media (max-width: 800px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+
+        }
 
 
     </style>
@@ -48,6 +70,25 @@
         </tbody>
     </table>
 
+    <main>
+        <div>
+            <label>Kommentarer fra Heggedal</label>
+            <textarea id="taHeggedal"></textarea>
+        </div>
+        <div>
+            <label>Kommentarer fra Klemetsrud</label>
+            <textarea id="taKlemetsrud"></textarea>
+        </div>
+        <div>
+            <label>Kommentarer fra Lommedalen</label>
+            <textarea id="taLommedalen"></textarea>
+        </div>
+        <div>
+            <label>Kommentarer fra Vollen</label>
+            <textarea id="taVollen"></textarea>
+        </div>
+    </main>
+
 
 
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
@@ -67,6 +108,15 @@
     <script>
         var db = firebase.database();
         var kamper = db.ref("obos/kamper");
+        var kommentarer_heggedal = db.ref("obos/kommentarer/heggedal");
+        var kommentarer_klemetsrud = db.ref("obos/kommentarer/klemetsrud");
+        var kommentarer_lommedalen = db.ref("obos/kommentarer/lommedalen");
+        var kommentarer_vollen = db.ref("obos/kommentarer/vollen");
+
+        var taHeggedal = document.getElementById("taHeggedal");
+        var taKlemmetsrud = document.getElementById("taKlemmetsrud");
+        var taLommedalen = document.getElementById("taLommedalen");
+        var taVollen = document.getElementById("taVollen");
 
 
         var tbody = document.querySelector("table > tbody");
@@ -194,8 +244,39 @@
 
         }
 
+        taHeggedal.oninput = function() {
+          kommentarer_heggedal.set(taHeggedal.value);
+        };
+        taKlemetsrud.oninput = function() {
+            kommentarer_klemetsrud.set(taKlemetsrud.value);
+        };
+        taLommedalen.oninput = function() {
+            kommentarer_lommedalen.set(taLommedalen.value);
+        };
+        taVollen.oninput = function() {
+            kommentarer_vollen.set(taVollen.value);
+        };
+
         kamper.on("child_added", visKamp);
         kamper.on("child_changed", visInfo);
+
+        function endreHeggedal(snap) {
+            taHeggedal.value = snap.val();
+        }
+        function endreKlemetsrud(snap) {
+            taKlemetsrud.value = snap.val();
+        }
+        function endreLommedalen(snap) {
+            taLommedalen.value = snap.val();
+        }
+        function endreVollen(snap) {
+            taVollen.value = snap.val();
+        }
+
+        kommentarer_heggedal.on("value", endreHeggedal);
+        kommentarer_klemetsrud.on("value", endreKlemetsrud);
+        kommentarer_lommedalen.on("value", endreLommedalen);
+        kommentarer_vollen.on("value", endreVollen);
 
     </script>
 
