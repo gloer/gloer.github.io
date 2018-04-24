@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Splash</title>
+    <style>
+        @keyframes splash {
+            to {
+                background-position: -2100px;
+            }
+        }
+
+        body {
+            background-color: aqua;
+        }
+
+        #ani {
+            background-image: url("bilder/splash2.png");
+            height: 66px;
+            width: 175px;
+
+            animation: splash 2s steps(12);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="ani"></div>
+
+</body>
+</html>

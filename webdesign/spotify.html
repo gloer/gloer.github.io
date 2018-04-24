@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spotify</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            background-color: #eee;
+        }
+
+        h1 {
+            margin-bottom: 40px;
+        }
+
+        section {
+            padding-right: 40px;
+            padding-left: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-gap: 10px;
+        }
+        article > img {
+            width: 70%;
+        }
+
+
+        @media (max-width: 990px) {
+            section {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <h1>Why go premium?</h1>
+
+    <section>
+
+        <p>
+            This is the text part of HTML
+        </p>
+        <article>
+            <img src="bilder/download.svg">
+            <h2>Download music</h2>
+            <p>Listen anywhere.</p>
+        </article>
+
+        <article>
+            <img src="bilder/no-ads.svg">
+            <h2>No ads</h2>
+            <p>Enjoy nonstop music.</p>
+        </article>
+
+        <article>
+            <img src="bilder/play.svg">
+            <h2>Play any song</h2>
+            <p>Even in mobile.</p>
+        </article>
+
+        <article>
+            <img src="bilder/skip.svg">
+            <h2>Unlimited skips</h2>
+            <p>Just hit next.</p>
+        </article>
+
+    </section>
+
+
+</body>
+</html>
