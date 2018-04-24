@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Messenger</title>
+    <style>
+
+        * {
+            margin: 0;
+        }
+
+        body {
+            background-color: #eeeeee;
+            font-family: "Helvetica Neue", sans-serif;
+        }
+
+        section {
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: white;
+            display: grid;
+            grid-gap: 12px;
+        }
+
+        p.minemeldinger {
+            text-align: right;
+        }
+
+        p > span {
+            background-color: #f1f0f0;
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 16px;
+        }
+
+        p.minemeldinger > span {
+            background-color: slateblue;
+            color: white;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <section>
+        <p>
+            <span>Kan ikke i morgen heller 😒</span>
+        </p>
+        <p class="minemeldinger">
+            <span>Er du sikker?</span>
+        </p>
+        <p>
+            <span>Ja. Dessverre!</span>
+        </p>
+        <p class="minemeldinger">
+            <span>Da får vi ta det en annen gang 😃</span>
+        </p>
+        <p>
+            <span>OK!</span>
+        </p>
+    </section>
+
+
+
+</body>
+</html>
