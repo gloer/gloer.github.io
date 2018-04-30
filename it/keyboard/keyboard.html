@@ -40,10 +40,13 @@
             osc.connect(masterGain);
             osc.start(0);
             toner.set(note, osc);
+            console.log(toner);
         };
 
         keyboard.keyUp = function (note, frequency) {
             toner.get(note).stop(0);
+            toner.delete(note);
+            console.log(toner);
         };
 
     </script>
