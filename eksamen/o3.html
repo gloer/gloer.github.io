@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation-flex.min.css">
+    <style>
+        body {
+            max-width: 700px;
+            margin: auto;
+            padding: 10px;
+        }
+        h1 {
+            font-size: 1.6rem;
+        }
+    </style>
+    <title>Oppgave 3</title>
+
+</head>
+<body>
+
+<h1>Hvor mye strøm gir møllen på et døgn</h1>
+<select>
+    <option value="">Gjennomsnittlig vindstyrke kl 02-08</option>
+    <option value="0">Stille</option>
+    <option value="0">Flau vind</option>
+    <option value="2">Svak vind</option>
+    <option value="10">Lett bris</option>
+    <option value="60">Laber bris</option>
+    <option value="150">Frisk bris</option>
+    <option value="400">Liten kuling</option>
+    <option value="500">Stiv kuling</option>
+    <option value="0">Sterk kuling</option>
+    <option value="0">Liten storm</option>
+    <option value="0">Sterk kuling</option>
+    <option value="0">Sterk kuling</option>
+    <option value="0">Sterk kuling</option>
+</select>
+<select>
+    <option value="">Gjennomsnittlig vindstyrke kl 08-14</option>
+    <option value="0">Stille</option>
+    <option value="0">Flau vind</option>
+    <option value="2">Svak vind</option>
+    <option value="10">Lett bris</option>
+    <option value="60">Laber bris</option>
+    <option value="150">Frisk bris</option>
+    <option value="400">Liten kuling</option>
+    <option value="500">Stiv kuling</option>
+    <option value="0">Sterk kuling</option>
+    <option value="0">Liten storm</option>
+    <option value="0">Sterk kuling</option>
+    <option value="0">Sterk kuling</option>
+    <option value="0">Sterk kuling</option>
+</select>
+<select>
+    <option value="">Gjennomsnittlig vindstyrke kl 14-20</option>
+    <option value="0">Stille</option>
+    <option value="0">Flau vind</option>
+    <option value="2">Svak vind</option>
+    <option value="10">Lett bris</option>
+    <option value="60">Laber bris</option>
+    <option value="150">Frisk bris</option>
+    <option value="400">Liten kuling</option>
+    <option value="500">Stiv kuling</option>
+    <option value="0">Sterk kuling</option>
+    <option value="0">Liten storm</option>
+    <option value="0">Sterk kuling</option>
+    <option value="0">Sterk kuling</option>
+    <option value="0">Sterk kuling</option>
+</select>
+<select>
+    <option value="">Gjennomsnittlig vindstyrke kl 20-02</option>
+    <option value="0">Stille</option>
+    <option value="0">Flau vind</option>
+    <option value="2">Svak vind</option>
+    <option value="10">Lett bris</option>
+    <option value="60">Laber bris</option>
+    <option value="150">Frisk bris</option>
+    <option value="400">Liten kuling</option>
+    <option value="500">Stiv kuling</option>
+    <option value="0">Sterk kuling</option>
+    <option value="0">Liten storm</option>
+    <option value="0">Sterk kuling</option>
+    <option value="0">Sterk kuling</option>
+    <option value="0">Sterk kuling</option>
+</select>
+
+<div id="info" class="callout success">Velg vindstyrker for tidsintervallene</div>
+
+
+<script>
+
+    const valgbokser = document.querySelectorAll("select");
+    const info = document.getElementById("info");
+
+
+    for(let valgboks of valgbokser) {
+
+        valgboks.onchange = regnUtWattproduksjon;
+
+    }
+
+    function regnUtWattproduksjon() {
+
+        let watt = 0;
+        for(let valgboks of valgbokser){
+
+            let antWatt = Number(valgboks.value);
+            watt += 6 * antWatt;
+
+        }
+
+        info.innerHTML = `På et døgn vil møllen produsere <b>${watt} watt</b>`;
+
+    }
+
+</script>
+
+</body>
+</html>
