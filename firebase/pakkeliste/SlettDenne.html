@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lag bestilling</title>
+</head>
+<body>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBa85pwjE-32AILVjT2PjFkXQ_NyvdwPXo",
+            authDomain: "kode1-3f49a.firebaseapp.com",
+            databaseURL: "https://kode1-3f49a.firebaseio.com",
+            projectId: "kode1-3f49a",
+            storageBucket: "kode1-3f49a.appspot.com",
+            messagingSenderId: "430009678974"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        const db = firebase.database();
+        const pakkelister = db.ref("pakkelister");
+
+        const bestilling = pakkelister.child("Test " + new Date());
+
+        bestilling.set({
+            "v009" : {
+                antall: 5,
+                pris: 300
+            },
+            "v019" : {
+                antall: 10,
+                pris: 3000
+            }
+        });
+
+
+    </script>
+
+</body>
+</html>

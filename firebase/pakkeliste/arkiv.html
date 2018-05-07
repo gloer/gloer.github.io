@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pakkelister</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-float.min.css">
+    <style>
+        h1 {
+            font-size: 18px;
+        }
+        body {
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <main id="main"></main>
+
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBa85pwjE-32AILVjT2PjFkXQ_NyvdwPXo",
+            authDomain: "kode1-3f49a.firebaseapp.com",
+            databaseURL: "https://kode1-3f49a.firebaseio.com",
+            projectId: "kode1-3f49a",
+            storageBucket: "kode1-3f49a.appspot.com",
+            messagingSenderId: "430009678974"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+
+        const db = firebase.database();
+        const betillinger = db.ref("betillinger");
+
+        function visPakkeliste(snap){
+
+
+            let h1 = document.createElement("h1");
+            h1.innerHTML = snap.key;
+
+            main.appendChild(h1);
+
+            let tabell = document.createElement("table");
+            let thead = document.createElement("thead");
+            let tbody = document.createElement("tbody");
+
+            thead.innerHTML = `
+                <tr>
+                    <th>Utstyr</th>
+                    <th>Antall</th>
+                    <th>Pris</th>
+                    <th>Sum</th>
+                </tr>
+            `;
+
+            tabell.appendChild(thead);
+            tabell.appendChild(tbody);
+            main.appendChild(tabell);
+
+            console.log("Bestilling: " + snap.key);
+
+            alert(snap.key);
+
+            let sum = 0;
+
+            snap.forEach(function(ordre) {
+                // key will be "ada" the first time and "alan" the second time
+                var key = ordre.key;
+                console.log(key);
+                // childData will be the actual contents of the child
+                var data = ordre.val();
+
+                sum += data.pris * data.antall;
+
+                console.log("Pris: " + data.pris + " Antall: " + data.antall + " Sum: " + data.pris * data.antall);
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${data.navn}</td>
+                        <td>${data.antall}</td>
+                        <td>${data.pris}</td>
+                        <td>${data.pris * data.antall}</td>
+                    </tr>
+                `;
+            });
+
+            main.innerHTML += `<p>Totalsum: ${sum}</p>`;
+
+
+
+
+        }
+
+        betillinger.on("child_added", visPakkeliste);
+
+
+    </script>
+
+</body>
+</html>
