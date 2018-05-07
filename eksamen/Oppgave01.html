@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 1</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+    <style>
+        i {
+            color: seagreen;
+            font-size: 32px;
+        }
+        #banner {
+            width: 900px;
+            height: 200px;
+            background-color: blueviolet;
+            position: relative;
+            margin: auto;
+            overflow: hidden;
+        }
+        #fly {
+            position: absolute;
+        }
+        #btnLyd {
+            padding: 10px;
+            display: inline-block;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <audio src="lyder/flydur.mp3" id="lyd" autoplay loop></audio>
+
+    <header id="banner">
+        <span id="btnLyd">
+            <i class="fas fa-volume-off"></i>
+        </span>
+
+        <img src="fly.png" id="fly">
+
+    </header>
+
+    <script>
+
+        const lyd = document.getElementById("lyd");
+        const btnLyd = document.getElementById("btnLyd");
+        const fly = document.getElementById("fly");
+
+
+        // Animasjon av flyet
+        const keyframes = [
+            {left: "-200px", top: "300px", transform: "rotate(0deg)"},
+            {left: "1300px", top: "-200px" , transform: "rotate(360deg)"}
+        ];
+        const settings = {
+          duration: 6000,
+          iterations: Infinity
+        };
+
+        let animasjon = fly.animate(keyframes, settings);
+
+        let isPlaying = true;
+
+        btnLyd.onclick = function() {
+
+            // animasjon.playbackRate = 3;
+
+            if(isPlaying) {
+                lyd.pause();
+                btnLyd.innerHTML = `<i class="fas fa-volume-up"></i>`;
+            } else {
+                lyd.play();
+                btnLyd.innerHTML = `<i class="fas fa-volume-off"></i>`;
+            }
+
+            isPlaying = !isPlaying;
+
+        }
+
+    </script>
+
+
+
+
+</body>
+</html>
