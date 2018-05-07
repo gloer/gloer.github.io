@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 3</title>
+</head>
+<body>
+
+
+    <form id="skjema">
+
+        <select id="dep" required>
+            <option value="">Hvor skal du fly fra?</option>
+            <option value="gardermoen">Gardermoen</option>
+            <option value="flesland">Flesland</option>
+        </select>
+
+        <select id="arrival" required>
+            <option value="">Hvor skal du?</option>
+            <option value="gardermoen">Gardermoen</option>
+            <option value="flesland">Flesland</option>
+        </select>
+
+        <input type="number" id="inpFart" required placeholder="Fart i km/t">
+
+        <button type="submit">Finn flytid</button>
+
+    </form>
+
+    <script>
+
+        const skjema = document.getElementById("skjema");
+        const dep = document.getElementById("dep");
+        const arrival = document.getElementById("arrival");
+        const inpFart = document.getElementById("inpFart");
+
+
+
+        let gardermoen = new Map();
+        gardermoen.set("navn", "Gardermoen");
+        gardermoen.set("flesland", 400);
+        gardermoen.set("værnes", 600);
+        gardermoen.set("bodø", 1000);
+        gardermoen.set("evenes", 1500);
+        gardermoen.set("tromsø", 2000);
+
+        let flesland = new Map();
+        flesland.set("navn", "Flesland");
+        flesland.set("gardermoen", 400);
+        flesland.set("værnes", 500);
+        flesland.set("bodø", 800);
+        flesland.set("evenes", 1300);
+        flesland.set("tromsø", 1800);
+
+        let flyplasser = new Map();
+        flyplasser.set("gardermoen", gardermoen);
+        flyplasser.set("flesland", flesland);
+
+
+        skjema.onsubmit = function(evt) {
+            evt.preventDefault();
+
+
+            let fart = Number(inpFart.value);
+            let flyplassFra = flyplasser.get(dep.value);
+            let flyplassTil = flyplasser.get(arrival.value);
+
+            let avstand = flyplassFra.get(arrival.value);
+
+            let tid = avstand / fart;
+
+            console.log("Du flyr fra " + flyplassFra.get("navn") + " til " + flyplassTil.get("navn") );
+            console.log("Avstande er " + avstand + " km");
+            console.log("Tiden det tar er " + tid + " timer");
+        }
+
+
+
+
+    </script>
+
+
+</body>
+</html>
