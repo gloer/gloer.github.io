@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eksamen V2016 IT2</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: darkorange;
+            margin: 0;
+        }
+        main {
+            max-width: 800px;
+            margin: 30px auto;
+            display: flex;
+        }
+        main > a {
+            flex: 1;
+            border: 2px solid white;
+            margin: 10px;
+            transition: 0.5s;
+
+        }
+
+        main > a {
+            background-size: cover;
+            background-position: center center;
+            height: 200px;
+            text-decoration: none;
+        }
+        main > a:hover {
+            flex: 1.5;
+            transform: scale(1.3);
+            z-index: 1;
+        }
+        main > a:nth-child(1) { background-image: url(vedlegg/Parken.jpg) }
+        main > a:nth-child(2) { background-image: url(vedlegg/Roma2.jpg) }
+        main > a:nth-child(3) { background-image: url(vedlegg/wtc.jpg) }
+
+        main > a > h1 {
+            color: white;
+            text-align: center;
+            line-height: 200px;
+        }
+
+        header {
+            background-color: seashell;
+            filter: drop-shadow(0 0 2px black);
+        }
+
+        header > h1 {
+            margin: 0;
+            padding: 10px;
+            color: lightseagreen;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Eksamen i IT2 - Våren 2016</h1>
+    </header>
+
+    <main>
+        <a href="oppgave1.html">
+            <h1>Oppgave 1</h1>
+        </a>
+        <a href="oppgave2.html">
+            <h1>Oppgave 2</h1>
+        </a>
+        <a href="oppgave3/index.html">
+            <h1>Oppgave 3</h1>
+        </a>
+
+    </main>
+
+</body>
+</html>

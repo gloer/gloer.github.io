@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Planlegg din reise </title>
+    <link rel="stylesheet" href="foundation-flex.css">
+    <style>
+        body {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 8px;
+        }
+
+        h1 {
+            font-size: 1.6em;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <h1>Bestill kultur-reise her</h1>
+    <form id="bookingform">
+        <label for="velgBy">Velg by</label>
+        <select id="velgBy" required>
+            <!-- Listen fylles med data fra filen byerOgHoteller.js -->
+        </select>
+
+        <input type="radio" name="rbSesong" id="rbSommer" checked required>
+        <label for="rbSommer">Jeg vil reise om sommeren</label>
+
+        <input type="radio" name="rbSesong" id="rbVinter" required>
+        <label for="rbVinter">Jeg vil reise om vinteren</label>
+
+
+        <label for="antDobbel">Antall dobbeltrom</label>
+        <input type="number" min="0" max="10" value="1" id="antDobbel">
+
+        <label for="antEnkel">Antall enkeltrom</label>
+        <input type="number" min="0" max="10" value="0" id="antEnkel">
+
+
+        <label for="velgHotell">Velg hotell</label>
+        <select id="velgHotell" required>
+            <!-- Fylles opp når kunden velger by -->
+        </select>
+
+        <input type="radio" name="rbKultur" id="rbValgtKultur">
+        <label for="rbValgtKultur">Jeg vil ha et kulturpass (700 kroner)</label>
+
+        <input type="radio" name="rbKultur" id="rbIkkeValgtKultur" checked>
+        <label for="rbIkkeValgtKultur">Jeg vil ikke ha et kulturpass</label>
+
+        <div>
+            <button type="submit" class="button">Bestill reise</button>
+        </div>
+    </form>
+
+    <div id="info" class="callout success">
+        Velg by og hotell for å se pris.
+    </div>
+
+    <script src="byerOgHoteller.js"></script>
+    <script>
+        // Fra filen byerOgHoteller har vi et array med byene. Arrayet heter "byer".
+
+        // Referanse til HTML-elementer
+        var velgBy = document.getElementById("velgBy");
+        var velgHotell = document.getElementById("velgHotell");
+        var rbSommer = document.getElementById("rbSommer");
+        var rbVinter = document.getElementById("rbVinter");
+        var antDobbel = document.getElementById("antDobbel");
+        var antEnkel = document.getElementById("antEnkel");
+        var rbValgtKultur = document.getElementById("rbValgtKultur");
+        var rbIkkeValgtKultur = document.getElementById("rbIkkeValgtKultur");
+        var info = document.getElementById("info");
+        var bookingform = document.getElementById("bookingform");
+
+
+        const TILLEG_ENKELTROM = 300; // Tillegg for enkeltrom er konstant
+
+        var valgtBy; // Hvilken by som er valgt lagres globalt siden den brukes i flere funksjoner
+        var valgtHotell; // Samme med hotell
+
+
+        // Bygger listen med byer som hentes fra filen byerOgHoteller.js
+        // I filen ligger det et array som heter byer.
+        // Går gjennom arrayet, og legger inn et option-element for hver by
+        for(var by of byer) {
+            velgBy.innerHTML += `<option>${by.navn}</option>`;
+        }
+
+        // Når vi velger en by, skal vi vise frem hotellene for byen
+        // Default er første byen valgt, den byen har indeks 0 i select-boksen
+        function visHoteller(indeks) {
+            velgHotell.innerHTML = ""; // Nuller ut valglisten
+            velgHotell.selectedIndex = 0; // Setter det første hotellet til valgt
+            valgtBy = byer[indeks]; // Hvilken by som er valgt
+            if(valgtBy.hoteller) { // Siden vi har noen byer uten hoteller må vi legge inn en sjekk
+                for(var hotell of valgtBy.hoteller) { // Bygger option-elementer for hvert hotell
+                    velgHotell.innerHTML += `<option>${hotell.navn}</option>`;
+                }
+                valgtHotell = valgtBy.hoteller[0]; // Første hotellet i listen
+                beregnPris(); // Beregner prisen
+            } else {
+                info.innerHTML = "Velg en by hvor vi har hoteller (Kun New York p.t.)";
+            }
+
+        }
+
+        // Når de velger en annen by, må vi lage en ny liste med hoteller
+        // Kaller opp funksjonen visHoteller(indeks)
+        velgBy.onchange = function() {
+            var valgtByIndeks = velgBy.selectedIndex;
+            visHoteller(valgtByIndeks);
+        };
+
+        // Når vi velger et nytt hotell endrer vi den globale variabelen valgtHotell
+        // Beregner prisen på nytt.
+        velgHotell.onchange = function() {
+            var valgtHotellIndeks = velgHotell.selectedIndex;
+            valgtHotell = valgtBy.hoteller[valgtHotellIndeks];
+            beregnPris();
+        };
+
+        function beregnPris() {
+            // Sjekker om et hotell er valgt
+            if(valgtHotell) {
+
+                var sesongpris;
+                var antallDobbeltrom = Number(antDobbel.value);
+                var antallEnkeltrom = Number(antEnkel.value);
+                var kulturtillegg = 0;
+
+                // Er kulturpass valgt eller ikke?
+                if(rbValgtKultur.checked) {
+                    kulturtillegg = 700;
+                }
+
+                // Er det sommer eller vinter?
+                if(rbSommer.checked) {
+                    sesongpris = valgtHotell.sommerpris;
+                } else {
+                    sesongpris = valgtHotell.vinterpris;
+                }
+
+                // Setter sammen prisen for bookingen
+                // Husk på at det er 2 personer i et dobbeltrom
+                var sum =   antallDobbeltrom * 2 * sesongpris +
+                            antallEnkeltrom * (sesongpris + TILLEG_ENKELTROM) +
+                            kulturtillegg;
+
+                info.innerHTML = "Prisen for reisen er kr. " + sum;
+
+            }
+
+        }
+
+        // Viser hotellene til den første byen i listen
+        visHoteller(0);
+
+        // Beregner prisen på nytt hver gang brukeren gjør nye valg
+        rbSommer.onclick = beregnPris;
+        rbVinter.onclick = beregnPris;
+        rbValgtKultur.onclick = beregnPris;
+        rbIkkeValgtKultur.onclick = beregnPris;
+        antDobbel.oninput = beregnPris;
+        antEnkel.oninput = beregnPris;
+
+        bookingform.onsubmit = function(evt){
+            evt.preventDefault(); // For ikke å oppdatere siden
+            alert("Bookingen din skulle nå i teorien bli sendt avgårde. Det er ikke en del av oppgaven");
+        }
+
+    </script>
+</body>
+
+</html>

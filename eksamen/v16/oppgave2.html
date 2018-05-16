@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-float.css">
+    <style>
+        body {
+            background-color: #eee;
+        }
+
+        main {
+            padding: 10px;
+            max-width: 900px;
+            margin: auto;
+            background-color: white;
+        }
+        aside {
+            max-width: 900px;
+            margin: auto;
+            background-color: white;
+            padding: 10px;
+            border-top: 3px solid steelblue;
+        }
+
+        h1 {
+            font-size: 1.25rem;
+        }
+        p {
+            color: #0c3d5d;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <main></main>
+    <aside></aside>
+
+    <script>
+
+        // Referanser til de to HTML-elementene
+        const main = document.querySelector("main");
+        const aside = document.querySelector("aside");
+
+
+        // Definerer et JSON-lignende objekt som inneholder alle oppgaver til quizen
+        // Dette vil gjøre det enklere å bytte til andre språk
+        // Oppgavene ligger i et array i objektet amerikansk
+        // I hver oppgave ligger det et array med alternativer til spørmålene
+        const amerikansk = {
+            "overskrift" : "Hvor god er du i amerikansk?",
+            "lang" : "Amerikansk",
+            "oppgaver" : [
+                {
+                    "tittel" : "Hva betyr ordet Where?",
+                    "undertittel" : "",
+                    "alternativer" : [
+                        {
+                            "tekst" : "Hvor",
+                            "rett" : true
+                        },
+                        {
+                            "tekst" : "Vi er",
+                            "rett" : false
+                        },
+                        {
+                            "tekst" : "Var",
+                            "rett" : false
+                        },
+                        {
+                            "tekst" : "Hvorfor",
+                            "rett" : false
+                        }
+                    ]
+                },
+                {
+                    "tittel" : "Hvilke(t) ord kan legges til her?",
+                    "undertittel" : "How are ...",
+                    "alternativer" : [
+                        {
+                            "tekst" : "you",
+                            "rett" : true
+                        },
+                        {
+                            "tekst" : "John doing",
+                            "rett" : false
+                        },
+                        {
+                            "tekst" : "things",
+                            "rett" : true
+                        },
+                        {
+                            "tekst" : "the house",
+                            "rett" : false
+                        },
+                        {
+                            "tekst" : "the wife",
+                            "rett" : false
+                        }
+                    ]
+                },
+                {
+                    "tittel" : "Spill av lydfilen \"Oversetting.mp3\" og velg riktig oversettelse",
+                    "media" : {
+                        "type" : "audio",
+                        "file" : "Oversetting.mp3"
+                    },
+                    "alternativer" : [
+                        {
+                            "tekst" : "Hei, mitt navn er Tom",
+                            "rett" : true
+                        },
+                        {
+                            "tekst" : "Jeg er Tom",
+                            "rett" : false
+                        },
+                        {
+                            "tekst" : "Kjenner du Tom",
+                            "rett" : true
+                        },
+                        {
+                            "tekst" : "Når kommer Tom?",
+                            "rett" : false
+                        }
+                    ]
+                }
+            ]
+        };
+
+
+        function lagOppgaver() {
+
+            // Henter ut overskriften fra data-objektet
+            main.innerHTML = `<h1>${amerikansk.overskrift}</h1>`;
+
+            // Traverserer alle oppgavene
+            for(let [indeks, oppgave] of amerikansk.oppgaver.entries()) {
+                // Legger til tittel
+                main.innerHTML += `
+                    <p>${oppgave.tittel}</p>
+                `;
+
+                // Sjekker om det er en undertittel i oppgaven
+                // Viser den frem hvis det er
+                if(oppgave.undertittel) {
+                    main.innerHTML += `
+                        <p>${oppgave.undertittel}</p>
+                    `;
+                }
+
+                // Sjekker om det er en mediafil
+                // Sjekker om det er audio, og legger inn et audio-element hvis det stemmer
+                if(oppgave.media) {
+                    if(oppgave.media.type === "audio") {
+                        main.innerHTML += `
+                            <div>
+                                <audio controls src="${oppgave.media.file}">
+                            </div>
+                        `;
+                    }
+                }
+
+                // Lager sjekkbokser av alle alternativene
+                // Setter på label med teksten til alternativet
+                for(let [indeks2, alternativ] of oppgave.alternativer.entries()) {
+                    let poeng = -1;
+                    if(alternativ.rett) {
+                        poeng = 1;
+                    }
+                    main.innerHTML += `
+                        <input type="checkbox" id="opppg${indeks}${indeks2}" data-poeng="${poeng}">
+                        <label for="opppg${indeks}${indeks2}">${alternativ.tekst}</label>
+                    `;
+                }
+                main.innerHTML += "<hr>";
+            }
+
+            // Nå er alle oppgavene laget
+            // Legger til en knapp som kan trykkes på for å sjekke antall poeng
+
+            main.innerHTML += `<button class="button" onclick="beregnPoeng()">Avgi svar</button>`;
+
+        }
+
+        // Beregner poengene
+        // Går gjennom alle sjekkbokser som er huket av
+        // Hver sjekkboks inneholder et attributt som heter data-poeng.
+        // Verdien er -1 hvis det er feil alternativ
+        // Verdien er 1 hvis det er riktig alternativ
+        // Definerer variabelen poeng, og legger til verdien av
+        // attributtet i sjekkboksen for hvert alternativ
+        function beregnPoeng() {
+            let poeng = 0;
+            let sjekkbokser = document.querySelectorAll("input[type=checkbox]:checked");
+            for(let sjekkboks of sjekkbokser) {
+                poeng += Number(sjekkboks.getAttribute("data-poeng"));
+            }
+
+            // Viser antall poeng
+            aside.innerHTML = `<h3>Du fikk ${poeng} poeng</h3>`;
+
+
+            // Viser en melding basert på hvor mange poeng brukeren fikk
+            if(poeng > 3)
+                aside.innerHTML += `Du er skitgod!`;
+            else if(poeng <= 3 && poeng >= 0)
+                aside.innerHTML += "Ikke så verst. Vi tilbyr språkkurs i " + amerikansk.lang;
+            else
+                aside.innerHTML += "Du stinker i " + amerikansk.lang;
+
+        }
+
+
+        // Starter funksjonen som lager oppgavene
+        lagOppgaver();
+
+
+    </script>
+
+
+</body>
+</html>

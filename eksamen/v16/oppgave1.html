@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tid for ferie</title>
+    <style>
+
+        html {
+            font-family: 16px;
+        }
+
+        main {
+            max-width: 750px;
+            height: 400px;
+            margin: auto;
+            padding: 20px;
+            display: flex;
+            transition: 1s;
+        }
+
+        main > div {
+            flex: 1;
+            background-size: cover;
+            background-position: center center;
+            cursor: pointer;
+        }
+
+        #divPetersburg {
+            background-image: url(vedlegg/Parken.jpg);
+            transform-origin: center top;
+            transition: 0.1s;
+        }
+
+        #divPetersburg:active {
+            flex: 15;
+            transform: scale(1.4) translateX(30px);
+        }
+        #divNY {
+            background-image: url(vedlegg/wtc.jpg);
+        }
+        #divRoma {
+            background-image: url(vedlegg/Roma2.jpg);
+        }
+
+        aside {
+            max-width: 750px;
+            margin: auto;
+            padding: 10px;
+            display: none;
+        }
+
+        #video {
+            background-color: beige;
+        }
+
+        #quiz {
+            background-color: beige;
+            height: 400px;
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        #video > video {
+            width: 100%;
+
+        }
+
+        aside > div {
+            text-align: right;
+            cursor: pointer;
+            background-color: skyblue;
+            color: white;
+            font-family: sans-serif;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        #tilbakemelding {
+            margin-top: 30px;
+            font-size: 2rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <main>
+        <div id="divPetersburg"></div>
+        <div id="divNY"></div>
+        <div id="divRoma"></div>
+    </main>
+    <aside id="video">
+        <div id="divLukkVideo">X</div>
+        <video src="vedlegg/film.mp4" controls id="videofil"></video>
+    </aside>
+
+    <aside id="quiz">
+        <div id="divLukkQuiz">X</div>
+        <h1>Hvilken bygning fra NY så du på bildet?</h1>
+        <button id="knapp1" data-tilbakemelding="Det var ikke rett! Ta deg en tur til New York!">Empire state building</button>
+        <button id="knapp2" data-tilbakemelding="Bra! Du kan allerede noe om New York - Hva med å lære mer? ">World Trade Center</button>
+        <article id="tilbakemelding"></article>
+    </aside>
+
+    <script>
+
+        let main = document.querySelector("main");
+        let video = document.getElementById("video");
+        let divRoma = document.getElementById("divRoma");
+        let divNY = document.getElementById("divNY");
+        let divLukkVideo = document.getElementById("divLukkVideo");
+        let divLukkQuiz = document.getElementById("divLukkQuiz");
+
+        let videofil = document.getElementById("videofil");
+        let quiz = document.getElementById("quiz");
+
+        let knapp1 = document.getElementById("knapp1");
+        let knapp2 = document.getElementById("knapp2");
+        let tilbakemelding = document.getElementById("tilbakemelding");
+
+
+
+        function visFilm() {
+
+            main.style.height = 0;
+            video.style.display = "block";
+            videofil.play();
+
+        }
+
+        function visQuiz() {
+            main.style.height = 0;
+            quiz.style.display = "block";
+
+        }
+
+
+        function lukkFilm() {
+            main.style.height = "400px";
+            videofil.pause();
+            video.style.display = "none";
+        }
+
+        function lukkQuiz() {
+            main.style.height = "400px";
+            quiz.style.display = "none";
+            tilbakemelding.innerHTML = "";
+        }
+
+        function visTilbakemelding() {
+            tilbakemelding.innerHTML = this.getAttribute("data-tilbakemelding");
+        }
+
+        divRoma.onclick = visFilm;
+        divNY.onclick = visQuiz;
+        divLukkVideo.onclick = lukkFilm;
+        divLukkQuiz.onclick = lukkQuiz;
+
+        knapp1.onclick = knapp2.onclick = visTilbakemelding;
+
+
+    </script>
+
+
+</body>
+</html>
