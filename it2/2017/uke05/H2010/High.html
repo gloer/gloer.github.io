@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+
+    <div id="container" style="width:100%; height:400px;"></div>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <script>
+
+        const myChart = Highcharts.chart('container', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Fruit Consumption'
+            },
+            xAxis: {
+                categories: ['Mandag', 'Tirsdag', 'Onsdag']
+            },
+            yAxis: {
+                title: {
+                    text: 'Fruit eaten'
+                }
+            },
+            series: [{
+                name: 'Jane',
+                data: [-23, 2, 4]
+            }]
+        });
+
+    </script>
+
+
+</body>
+</html>

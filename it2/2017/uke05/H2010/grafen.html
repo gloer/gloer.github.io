@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Grafen</title>
+    <style>
+
+        #container {
+            width: 500px;
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            border: 1px solid blueviolet;
+        }
+        #container > div {
+            background-color: blueviolet;
+            flex: 1;
+            margin: 5px;
+            height: 40px;
+            transition: height 0.5s;
+            text-align: center;
+            color: white;
+            font-family: sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+
+    <select id="velgHotell">
+        <option value="0">Spidsbergseter</option>
+        <option value="1">Spidsbergseter</option>
+        <option value="2">Spidsbergseter</option>
+        <option value="3">Spidsbergseter</option>
+    </select>
+    <div id="container">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <script>
+
+        const container = document.getElementById("container");
+        const velgHotell = document.getElementById("velgHotell");
+
+
+        const hoteller = [
+            {
+                temperaturer : [-2, -5, -6, 0, 3, 5, 9]
+            },
+            {
+                temperaturer : [-1, -2, 3, 0, -4, 2, 5]
+            },
+            {
+                temperaturer : [1, 2, 3, 4, 6, 4, 7]
+            },
+            {
+                temperaturer : [-4, 2, -2, 6, 0, 2, 5]
+            }
+        ];
+
+
+
+        function visGraf(data) {
+
+            for(let i=1; i<=7; i++) {
+
+                let temp = data[i - 1];
+                let h = 150 + (temp * 10);
+                let soyle = container.querySelector(`:nth-child(${i})`);
+                soyle.innerHTML = temp + "ºC";
+                soyle.style.height = h + "px";
+                if(temp > 0) {
+                    soyle.style.backgroundColor = "red";
+                } else {
+                    soyle.style.backgroundColor = "blue";
+                }
+            }
+
+        }
+
+        velgHotell.onchange = function() {
+
+            let valg = Number(velgHotell.value);
+            let data = hoteller[valg];
+            visGraf(data.temperaturer);
+
+
+        }
+
+
+
+
+    </script>
+
+
+</body>
+</html>

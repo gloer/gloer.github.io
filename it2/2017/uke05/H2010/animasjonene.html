@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Animasjonen</title>
+    <style>
+        #lastInn, #lastInn > img {
+            display: none;
+        }
+        body {
+            background-color: darkorange;
+        }
+        #ramme {
+            border: 4px solid white;
+            background-image: url("h1.jpg");
+            width: 250px;
+            height: 200px;
+            transition: 0.5s;
+
+        }
+    </style>
+
+</head>
+<body>
+
+
+    <div id="lastInn">
+        <img src="h1.jpg">
+        <img src="h2.jpg">
+        <img src="h3.jpg">
+        <img src="h4.jpg">
+        <img src="h5.jpg">
+        <img src="h6.jpg">
+        <img src="h7.jpg">
+    </div>
+
+    <div id="ramme"></div>
+
+    <script>
+
+        const ramme = document.getElementById("ramme");
+        const bilder = ["h1.jpg", "h2.jpg", "h3.jpg", "h4.jpg", "h5.jpg", "h6.jpg", "h7.jpg"];
+
+        let nr = 1;
+        function byttBilde() {
+            console.log("BYTT");
+
+            ramme.style.backgroundImage = "url(" + bilder[nr] + ")";
+            nr++;
+            if(nr === bilder.length) {
+                nr = 0;
+            }
+
+        }
+
+        setInterval(byttBilde, 1000);
+
+
+    </script>
+
+
+</body>
+</html>
