@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oppgave 1</title>
+</head>
+<body>
+
+    <form id="skjema">
+
+        <input type="text" id="inpPassord">
+        <button>LOGG INN</button>
+
+    </form>
+
+    <div id="info"></div>
+
+    <script>
+
+        const skjema = document.getElementById("skjema");
+        const inpPassord = document.getElementById("inpPassord");
+        const info = document.getElementById("info");
+
+
+
+        const passordene = [
+            "Passord1",
+            "Passord2",
+            "Passord3",
+            "Passord4",
+            "Passord5"
+        ];
+
+
+        let passord; // Definerer globalt
+
+        function finn(element){
+            return element === passord;
+        }
+
+        function sjekkPassord() {
+            let indeks = passordene.findIndex(finn);
+            if(indeks >= 0) {
+                passordene.splice(indeks, 1);
+                // Gjør det som skal til
+            } else {
+                console.log("Passordet kan ikke brukes")
+            }
+            console.log(passordene);
+        }
+
+        skjema.onsubmit = function(evt) {
+
+            evt.preventDefault();
+            passord = inpPassord.value;
+            sjekkPassord();
+
+        }
+
+
+    </script>
+
+</body>
+</html>
