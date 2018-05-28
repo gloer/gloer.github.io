@@ -42,6 +42,7 @@
         function sjekkPassord() {
             let indeks = passordene.findIndex(finn);
             if(indeks >= 0) {
+                // Fjerner nå dette passordet
                 passordene.splice(indeks, 1);
                 // Gjør det som skal til
             } else {
