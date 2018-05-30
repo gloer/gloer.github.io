@@ -36,7 +36,6 @@
 </head>
 <body>
 
-
     <audio id="lydFeil" src="lyder/feil.mp3"></audio>
     <audio id="lydRiktig" src="lyder/riktig.mp3"></audio>
     <main>
@@ -64,22 +63,28 @@
         const lydRiktig = document.getElementById("lydRiktig");
         const hs = document.getElementById("hs");
 
+        // Highscore er egentlig her minst mulig
+        // Setter den til 1000 først. Den blir garantert slått i første runde
         let highscore = 1000;
 
+        // Hvis det er lagret en highscore i localStorage henter vi den ut.
         if(localStorage.highscore) {
             highscore = localStorage.highscore;
         }
 
         hs.innerHTML = highscore;
 
-
+        // Bruker et array med keys som vi finner igjen i mapen med instrumentene
+        // Primært for å kunne spille en tilfeldig lyd på en grei måte
         let keys = ["obo", "fagott", "klarinett", "floyte", "valthorn"];
+
+        // Hvis det legges til flere instrumenter, økes antallinstrumenter
         let antallinstrumenter = keys.length;
         let lyd = new Audio();
-        let gjettet = false;
         let riktiginstrument;
         let instrument;
         let antallgjetninger = 0;
+        let skalfinnenylyd = true; // Hvis det er gjettet riktig og første gang
 
         let instrumenter = new Map();
         instrumenter.set("obo", {
@@ -113,7 +118,6 @@
             key: "valthorn"
         });
 
-        let skalfinnenylyd = true;
 
         function spillTilfeldigLyd() {
             if(skalfinnenylyd) {
