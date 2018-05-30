@@ -67,9 +67,13 @@
     let info = document.getElementById("info");
 
 
+    // Bruker Map til å lagre info om arrangementer
     let arrangementer = new Map();
-    let handlekurv = new Map();
+    // Et objekt som lagrer info om en bestilling
+    let bestilling = {};
 
+
+    // Legger inn alle arrangementene. Denne kan lett utvides
     arrangementer.set(1, {
         navn: "Trondheim kammermusikkfestival: Fabelaktig formiddag",
         prisvoksen: 100,
@@ -106,9 +110,8 @@
         informasjon: "En vandring i samisk musikkhistorie ved Lena Jansen"
     });
 
-    // Et objekt som lagrer info om en bestilling
-    let bestilling = {};
-
+    // Funksjon som viser en bestilling
+    // All informasjon hentes ut av bestilling-objektet
     function visBestilling() {
 
         let voksen = "voksen";
@@ -153,12 +156,15 @@
         info.innerHTML += `</p>`;
     }
 
+    // Legger et arrangement i "handlekurven"
+    // Id på arrangementet sendes inn som en paramter til funksjonen
+    // Slik finner vi rett arrangement
     function leggVareIHandlekurv(ant, arrangementid, erbarn) {
 
-        // Nullstiller alle bortsett fra valgte arrangement
-
+        // Finner arrangement fra mapen vha id
         const arrangement = arrangementer.get(arrangementid);
 
+        // Nullstiller alle bortsett fra valgte arrangement
         const radene = document.querySelectorAll("#tb tr");
 
         for(const rad of radene) {
@@ -166,10 +172,14 @@
             const inputfeltbarn = rad.querySelector("input.barn");
             const inputfeltvoksen = rad.querySelector("input.voksen");
 
+            // Hvis et arrangement ikke har blitt endret på
+            // skal det settes til 0 siden det kun
+            // er lov å bestille til ett arrangement
             if(rad.id != arrangementid) {
                 inputfeltbarn.value = 0;
                 inputfeltvoksen.value = 0;
             } else {
+                // Oppdaterer objektet med bestillingen
                 bestilling =  {
                     antallbarn: Number(inputfeltbarn.value),
                     antallvoksne: Number(inputfeltvoksen.value),
@@ -183,9 +193,11 @@
 
     }
 
-
+    // Funksjon som lager en tabell med rader for arrangementene i mapen
     function lagTabell() {
 
+        // Looper gjennom mapen, og tar med både key og value
+        // dvs. id til arrangementet og selve objektet med data for hvert arrangement
         for (let [id, arrangement] of arrangementer) {
             tb.innerHTML += `
                     <tr id="${id}">
