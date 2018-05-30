@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <main>
+
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+
+    </main>
+    <style>
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-gap: 10px;
+        }
+
+        main > div {
+            background-color: blue;
+        }
+
+        @media (max-width: 800px) {
+            body {
+                background-color: red;
+            }
+
+            main {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+</body>
+</html>

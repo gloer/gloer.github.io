@@ -3,61 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Oppgave 1</title>
+    <link rel="stylesheet" href="css/foundation-float.css">
+    <title>Ringve musikkhistoriske museum</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background-color: black;
+        }
+        header {
+            text-align: center;
+        }
+        header > h1 {
+            color: white;
+            font-size: 22px;
+        }
+        main {
+            margin: auto;
+            background-image: url("bilder/intro1.jpg");
+            width: 800px;
+            height: 486px;
+            transition: 1s;
+            position: relative;
+        }
+        main > button {
+            position: absolute;
+            top: 226px;
+        }
+        main > button:first-child {
+            left: 0;
+        }
+        main > button:last-child {
+            right: 0;
+        }
+        #infomeny {
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+        }
+        #infomeny > img {
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 0.2s;
+            box-sizing: border-box;
+        }
+        #infomeny > img:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 2px white);
+        }
+        #infomeny > img:hover + article {
+            display: block;
+        }
+        #infomeny > article {
+            position: absolute;
+            bottom: 100px;
+            padding: 10px 20px;
+            left: 0;
+            background-color: white;
+            display: none;
+        }
+        #infomeny > article > h1 {
+            font-size: 22px;
+        }
+    </style>
 </head>
 <body>
 
-    <form id="skjema">
 
-        <input type="text" id="inpPassord">
-        <button>LOGG INN</button>
 
-    </form>
+    <header>
+        <h1>Velkommen til Ringve musikkhistoriske museum</h1>
+        <nav>
+            <a class="button" href="../oppgave02/index.html">Bestill billetter</a>
+            <a class="button" href="../oppgave03/index.html">Test kunnskapene dine</a>
+        </nav>
+    </header>
+    <main id="main">
+        <button onclick="forrige()" class="button success">⇐</button>
+        <button onclick="neste()" class="button success">⇒</button>
+    </main>
+    <footer>
+        <nav></nav>
+    </footer>
 
-    <div id="info"></div>
+    <aside id="infomeny">
+        <img src="bilder/aapningstider.jpg" alt="Åpningstider">
+        <article id="aapningstider">
+            <h1>Åpningstider</h1>
+            <p>Tirsdag – søndag 11.00-16.00</p>
+        </article>
+        <img src="bilder/informasjon.jpg" alt="Informasjon">
+        <article id="informasjon">
+            <h1>Informasjon</h1>
+            <p>Besøksadresse: Lade allé 60, 7041 Trondheim 73 87 02 80 post@ringve.no </p>
+            <p>Postadresse: Postboks 6289 Torgarden, 7489 Trondheim</p>
+        </article>
+        <img src="bilder/priser.jpg" alt="Priser">
+        <article id="billetter">
+            <h1>Billetter</h1>
+            <p>Voksen: 120 kr</p>
+            <p>Student/honnør: 100 kr</p>
+            <p>Barn (0-15 år): Gratis</p>
+        </article>
+    </aside>
 
     <script>
 
-        const skjema = document.getElementById("skjema");
-        const inpPassord = document.getElementById("inpPassord");
-        const info = document.getElementById("info");
+        const main = document.getElementById("main");
 
 
-
-        const passordene = [
-            "Passord1",
-            "Passord2",
-            "Passord3",
-            "Passord4",
-            "Passord5"
+        const bilder = [
+            "intro1.jpg",
+            "intro2.jpg",
+            "intro3.jpg",
+            "intro4.jpg"
         ];
 
+        let indeks = 0;
 
-        let passord; // Definerer globalt
-
-        function finn(element){
-            return element === passord;
-        }
-
-        function sjekkPassord() {
-            let indeks = passordene.findIndex(finn);
-            if(indeks >= 0) {
-                // Fjerner nå dette passordet
-                passordene.splice(indeks, 1);
-                // Gjør det som skal til
-            } else {
-                console.log("Passordet kan ikke brukes")
+        function neste() {
+            indeks++;
+            if(indeks >= bilder.length) {
+                indeks = 0;
             }
-            console.log(passordene);
+            const bilde = bilder[indeks];
+            main.style.backgroundImage = `url("bilder/${bilde}")`;
+        }
+        function forrige() {
+            indeks--;
+            if(indeks < 0) {
+                indeks = bilder.length - 1;
+            }
+            const bilde = bilder[indeks];
+            main.style.backgroundImage = `url("bilder/${bilde}")`;
         }
 
-        skjema.onsubmit = function(evt) {
-
-            evt.preventDefault();
-            passord = inpPassord.value;
-            sjekkPassord();
-
-        }
 
 
     </script>

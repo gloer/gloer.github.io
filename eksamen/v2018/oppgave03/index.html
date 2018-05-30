@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gjett hvilket instrument</title>
+    <link rel="stylesheet" href="css/foundation-float.css">
+    <style>
+        main {
+            max-width: 700px;
+            margin: auto;
+            padding: 10px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 22px;
+        }
+
+        #instr {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin-bottom: 20px;
+
+        }
+        #instr > article {
+            border: 2px solid gainsboro;
+            width: 120px;
+            cursor: pointer;
+        }
+        #instr > article:hover {
+            border-color: #0c4d78;
+
+        }
+    </style>
+</head>
+<body>
+
+
+    <audio id="lydFeil" src="lyder/feil.mp3"></audio>
+    <audio id="lydRiktig" src="lyder/riktig.mp3"></audio>
+    <main>
+
+        <h1>Hvilket instrument lager lyden</h1>
+        <button class="button" onclick="spillTilfeldigLyd()">Spill av lyden</button>
+        <h2>Klikk på det instrumentet du tror lager lyden!</h2>
+        <section id="instr">
+
+        </section>
+
+        <section id="res">
+            <div>Antall gjetninger: <span id="spanAntallGjetninger">0</span></div>
+        </section>
+
+        <h1>Highscore: <span id="hs"></span></h1>
+
+    </main>
+
+    <script>
+
+        const instr = document.getElementById("instr");
+        const spanAntallGjetninger = document.getElementById("spanAntallGjetninger");
+        const lydFeil = document.getElementById("lydFeil");
+        const lydRiktig = document.getElementById("lydRiktig");
+        const hs = document.getElementById("hs");
+
+        let highscore = 1000;
+
+        if(localStorage.highscore) {
+            highscore = localStorage.highscore;
+        }
+
+        hs.innerHTML = highscore;
+
+
+        let keys = ["obo", "fagott", "klarinett", "floyte", "valthorn"];
+        let antallinstrumenter = keys.length;
+        let lyd = new Audio();
+        let gjettet = false;
+        let riktiginstrument;
+        let instrument;
+        let antallgjetninger = 0;
+
+        let instrumenter = new Map();
+        instrumenter.set("obo", {
+            navn: "Obo",
+            lyd: "obo.mp3",
+            bilde: "obo.jpg",
+            key: "obo"
+        });
+        instrumenter.set("fagott", {
+            navn: "Fagott",
+            lyd: "fagott.mp3",
+            bilde: "fagott.jpg",
+            key: "fagott"
+        });
+        instrumenter.set("klarinett", {
+            navn: "Klarinett",
+            lyd: "klarinett.mp3",
+            bilde: "klarinett.jpg",
+            key: "klarinett"
+        });
+        instrumenter.set("floyte", {
+            navn: "Fløyte",
+            lyd: "floyte.mp3",
+            bilde: "floyte.jpg",
+            key: "floyte"
+        });
+        instrumenter.set("valthorn", {
+            navn: "Valthorn",
+            lyd: "valthorn.mp3",
+            bilde: "valthorn.jpg",
+            key: "valthorn"
+        });
+
+        let skalfinnenylyd = true;
+
+        function spillTilfeldigLyd() {
+            if(skalfinnenylyd) {
+                //Finn tilfeldig lyd
+                let random = Math.floor(Math.random() * keys.length);
+                let key = keys[random];
+                instrument = instrumenter.get(key);
+                riktiginstrument = instrument;
+                skalfinnenylyd = false;
+
+            } else {
+                console.log("Har ikke gjettet");
+            }
+
+
+            lyd.src = "lyder/" + instrument.lyd;
+            lyd.play();
+
+            console.log(instrument.navn);
+        }
+
+        function restart() {
+            document.location.href = "index.html";
+        }
+
+        function gjett(key) {
+            antallgjetninger++;
+
+            // Du har gjettet riktig
+            if(key === instrument.key) {
+                // Sletter instrumentet
+                instrumenter.delete(key);
+                // Slette key i arrayet
+                let indeks = keys.indexOf(key);
+                keys.splice(indeks, 1);
+                // Slette elementet fra DOM
+                let elem = document.getElementById(`${key}`);
+                instr.removeChild(elem);
+                lydRiktig.play();
+
+                // Sjekker om alle er gjettet
+                if(keys.length === 0) {
+                    antallfeil = antallgjetninger - antallinstrumenter;
+
+
+                    if(antallfeil === highscore) {
+                        alert("Det er tangering av gammel highscore");
+                    }
+                    if(antallfeil < highscore) {
+                        alert("Det er ny highscore!");
+                        localStorage.highscore = antallfeil;
+                        hs.innerHTML = antallfeil;
+                    }
+
+                    instr.style.padding = "30px";
+                    instr.innerHTML = `
+                        <h3>Du gjettet ${antallfeil} feil!</h3>
+                        <button class="button" onclick="restart()">START PÅ NYTT</button>
+                    `;
+                }
+
+            } else {
+                lydFeil.play();
+                console.log("FEIL");
+            }
+
+
+            spanAntallGjetninger.innerHTML = antallgjetninger;
+            skalfinnenylyd = true;
+        }
+
+        function init() {
+
+            for(let [key, instrument] of instrumenter) {
+                instr.innerHTML += `
+                    <article id="${key}" onclick="gjett('${key}')">
+                        <img src="bilder/${instrument.bilde}">
+                        <p>${instrument.navn}</p>
+                    </article>
+                `;
+            }
+
+        }
+
+        init();
+
+    </script>
+
+</body>
+</html>

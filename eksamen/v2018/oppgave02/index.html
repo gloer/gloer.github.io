@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bestill billetter</title>
+    <link rel="stylesheet" href="css/foundation-float.css">
+    <style>
+        body {
+
+            margin: auto;
+            padding: 10px;
+        }
+
+        th:last-child {
+            width: 100px;
+        }
+        th:nth-child(5) {
+            width: 100px;
+        }
+        tr > td:last-child > input {
+            margin: 0;
+        }
+        tr > td:nth-child(5) > input {
+            margin: 0;
+        }
+
+
+        #helekurven {
+            margin-top: 20px;
+            border-top: 6px solid lightskyblue;
+            display: none;
+        }
+
+
+        #info {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>Dato</th>
+        <th>Tidspunkt</th>
+        <th>Arrangement</th>
+        <th>Informasjon</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody id="tb"></tbody>
+</table>
+
+
+
+<div id="info" class="callout success">Velg antall billetter til ett arrangement</div>
+
+<script>
+
+    // Referanser til HTML-elementer
+    let tb = document.getElementById("tb");
+    let info = document.getElementById("info");
+
+
+    let arrangementer = new Map();
+    let handlekurv = new Map();
+
+    arrangementer.set(1, {
+        navn: "Trondheim kammermusikkfestival: Fabelaktig formiddag",
+        prisvoksen: 100,
+        prisbarn: 50,
+        dato: "1. juni",
+        tidspunkt: "11:00",
+        informasjon: "Dette er barnas og familiens festivaldag. Én billett gjelder for alt, og du kan velge mellom en rekke ulike forestillinger."
+    });
+
+    arrangementer.set(2, {
+        navn: "Spill opp!",
+        prisvoksen: 100,
+        prisbarn: 50,
+        dato: "4. juni",
+        tidspunkt: "14:30",
+        informasjon: "Mastereksamen NTNU fløyte v/Matthias Lauga"
+    });
+
+    arrangementer.set(3, {
+        navn: "Onsdagskonsert",
+        prisvoksen: 100,
+        prisbarn: 50,
+        dato: "6. juni",
+        tidspunkt: "13:00",
+        informasjon: "Barokke treblåserensembler"
+    });
+
+    arrangementer.set(4, {
+        navn: "Juiogat: Joik for folk",
+        prisvoksen: 100,
+        prisbarn: 50,
+        dato: "9. juni",
+        tidspunkt: "14:00",
+        informasjon: "En vandring i samisk musikkhistorie ved Lena Jansen"
+    });
+
+    // Et objekt som lagrer info om en bestilling
+    let bestilling = {};
+
+    function visBestilling() {
+
+        let voksen = "voksen";
+        if(bestilling.antallvoksne > 1) {
+            voksen = "voksne";
+        }
+
+        let form = "billett";
+        if(bestilling.antallbarn + bestilling.antallvoksne > 1) {
+            form = "billetter";
+        }
+
+        info.innerHTML = "<p>";
+        info.innerHTML += `
+            Du har bestilt ${bestilling.antallbarn + bestilling.antallvoksne}
+            ${form} til ${bestilling.arrangement.navn}`;
+
+        if(bestilling.antallbarn > 0 && bestilling.antallvoksne > 0) {
+            info.innerHTML += `,
+                ${bestilling.antallvoksne} ${voksen} og
+                ${bestilling.antallbarn} barn`;
+        }
+
+        info.innerHTML += ". ";
+
+
+        let rabatt = 1;
+        if(bestilling.antallbarn + bestilling.antallvoksne >= 5) {
+            rabatt = 0.8;
+        }
+
+        let total = rabatt * (bestilling.antallbarn * bestilling.arrangement.prisbarn + bestilling.antallvoksne * bestilling.arrangement.prisvoksen);
+
+        info.innerHTML += `Totalprisen er ${total.toFixed(0)}`;
+
+        if(rabatt === 0.8) {
+            info.innerHTML += `, inklusiv grupperabbat på 20 prosent.`;
+        } else {
+            info.innerHTML += ".";
+        }
+
+        info.innerHTML += `</p>`;
+    }
+
+    function leggVareIHandlekurv(ant, arrangementid, erbarn) {
+
+        // Nullstiller alle bortsett fra valgte arrangement
+
+        const arrangement = arrangementer.get(arrangementid);
+
+        const radene = document.querySelectorAll("#tb tr");
+
+        for(const rad of radene) {
+
+            const inputfeltbarn = rad.querySelector("input.barn");
+            const inputfeltvoksen = rad.querySelector("input.voksen");
+
+            if(rad.id != arrangementid) {
+                inputfeltbarn.value = 0;
+                inputfeltvoksen.value = 0;
+            } else {
+                bestilling =  {
+                    antallbarn: Number(inputfeltbarn.value),
+                    antallvoksne: Number(inputfeltvoksen.value),
+                    arrangement: arrangementer.get(arrangementid)
+                };
+            }
+
+        }
+
+        visBestilling();
+
+    }
+
+
+    function lagTabell() {
+
+        for (let [id, arrangement] of arrangementer) {
+            tb.innerHTML += `
+                    <tr id="${id}">
+                        <td>${arrangement.dato}</td>
+                        <td>${arrangement.tidspunkt}</td>
+                        <td>${arrangement.navn}</td>
+                        <td>${arrangement.informasjon}</td>
+                        <td>
+                            <label>Ant. Barn</label>
+                            <input class="barn"
+                                oninput="leggVareIHandlekurv(this.value, ${id}, true)"
+                                type="number" min="0" max="100" value="0">
+                        </td>
+                        <td>
+                            <label>Ant. Voksne</label>
+                            <input
+                            class="voksen"
+                                oninput="leggVareIHandlekurv(this.value, ${id}, false)"
+                                type="number" min="0" max="100" value="0">
+                        </td>
+                    </tr>
+                `;
+        }
+
+    }
+
+    lagTabell();
+
+
+
+</script>
+</body>
+</html>
