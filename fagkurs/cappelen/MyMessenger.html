@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Messenger</title>
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #eeeeee;
+            font-family: "Helvetica Neue", sans-serif;
+        }
+
+        main {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 600px;
+            background-color: white;
+            height: 100vh;
+            display: grid;
+            grid-template-rows: 1fr auto;
+        }
+
+
+        #meldinger {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: scroll;
+        }
+
+        #meldinger p {
+            margin-top: 1px;
+            margin-bottom: 1px;
+        }
+
+        #meldinger span {
+            background-color: #f1f1f1;
+            border-radius: 16px;
+            padding: 6px 12px;
+            display: inline-block;
+            max-width: 80%;
+        }
+
+        #meldinger p.minemeldinger {
+            text-align: right;
+        }
+
+        #meldinger  img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-top: 5px;
+
+        }
+
+        #meldinger p.minemeldinger > span {
+            background-color: blueviolet;
+            color: white;
+        }
+        #skjema [type=text] {
+            width: 100%;
+            border: none;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            outline: none;
+        }
+        #ikoner {
+            font-size: 0;
+        }
+        #ikoner span {
+            cursor: pointer;
+            display: inline-block;
+            font-size: 1rem;
+            user-select: none;
+        }
+        main  footer {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            padding: 10px;
+        }
+
+        footer button {
+            cursor: pointer;
+            color: steelblue;
+            border: none;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <section id="meldinger">
+
+        </section>
+        <form id="skjema">
+            <section>
+                <input id="inpMelding" type="text" placeholder="Type a message" required autofocus>
+            </section>
+            <footer>
+                <section id="ikoner">
+                    <span onclick="settInn('😃')">😃</span>
+                    <span onclick="settInn('😒')">😒</span>
+                </section>
+                <button type="submit">Send</button>
+            </footer>
+        </form>
+
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCZCFVA86D3YcqNnt1wGBVecty9hzMOLa8",
+            authDomain: "webshop-2052a.firebaseapp.com",
+            databaseURL: "https://webshop-2052a.firebaseio.com",
+            projectId: "webshop-2052a",
+            storageBucket: "webshop-2052a.appspot.com",
+            messagingSenderId: "818570980309"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script>
+
+        const db = firebase.database();
+        const messages = db.ref("alltheawesomemessages");
+        const meldinger = document.getElementById("meldinger");
+        const inpMelding = document.getElementById("inpMelding");
+
+
+        var user = null;
+        const skjema = document.getElementById("skjema");
+
+        function lagreMelding(evt) {
+            evt.preventDefault();
+            if(!user) {
+                return false;
+            }
+            messages.push({
+                text: inpMelding.value,
+                displayName: user.displayName,
+                photoURL: user.photoURL,
+                uid: user.uid,
+                time: firebase.database.ServerValue.TIMESTAMP
+            });
+            skjema.reset();
+
+        }
+
+        function visMelding(snap) {
+            const melding = snap.val();
+
+            if(user.uid === melding.uid) {
+                meldinger.innerHTML += `
+                <p class="minemeldinger">
+                    <span>${melding.text}</span>
+                </p>
+                `;
+            } else {
+                meldinger.innerHTML += `
+                <p>
+                    <img src="${melding.photoURL}">
+                    <span>${melding.text}</span>
+                </p>
+                `;
+            }
+
+        }
+
+        function settInn(tekst) {
+            inpMelding.value += tekst;
+        }
+
+        skjema.onsubmit = lagreMelding;
+        messages.on("child_added", visMelding);
+
+
+        function initApp() {
+            firebase.auth().onAuthStateChanged(function(logged_in_user) {
+                if (logged_in_user) {
+                    user = logged_in_user;
+                } else {
+                    //document.location.href = "login.html";
+                    // User is signed out.
+                    document.getElementById('sign-in-status').textContent = 'Signed out';
+                    document.getElementById('sign-in').textContent = 'Sign in';
+                    document.getElementById('account-details').textContent = 'null';
+                }
+            }, function(error) {
+                console.log(error);
+            });
+        };
+
+        window.onload = initApp;
+    </script>
+
+</body>
+</html>
