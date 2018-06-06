@@ -52,7 +52,9 @@
             bilder.push({
                 uid: user.uid,
                 photoURL: user.photoURL,
-                displayName: user.displayName
+                displayName: user.displayName,
+                left: evt.clientX + "px",
+                top: evt.clientY + "px"
             });
 
         }
@@ -63,7 +65,7 @@
                 <img
                     src="${bilde.photoURL}"
                     title="${bilde.displayName}"
-                    style="left: ${evt.clientX}px; top: ${evt.clientY}px;"
+                    style="left: ${bilde.left}; top: ${bilde.top};"
                 >
             `;
 
