@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Messenger</title>
+    <style>
+
+        main img {
+            position: absolute;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <main id="main">
+
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCZCFVA86D3YcqNnt1wGBVecty9hzMOLa8",
+            authDomain: "webshop-2052a.firebaseapp.com",
+            databaseURL: "https://webshop-2052a.firebaseio.com",
+            projectId: "webshop-2052a",
+            storageBucket: "webshop-2052a.appspot.com",
+            messagingSenderId: "818570980309"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script>
+
+        const db = firebase.database();
+        const bilder = db.ref("alleprofilbildene");
+
+        const main = document.getElementById("main");
+
+        let user = null;
+
+
+        function lagreBilde(evt) {
+            if(!user) {
+                return false;
+            }
+
+            bilder.push({
+                uid: user.uid,
+                photoURL: user.photoURL,
+                displayName: user.displayName
+            });
+
+        }
+
+        function visBilde(snap) {
+            const bilde = snap.val();
+            main.innerHTML += `
+                <img
+                    src="${bilde.photoURL}"
+                    title="${bilde.displayName}"
+                    style="left: ${evt.clientX}px; top: ${evt.clientY}px;"
+                >
+            `;
+
+        }
+
+        document.onclick = lagreBilde;
+        bilder.on("child__added", visBilde);
+
+
+
+        /* La dette stå */
+
+        function initApp() {
+            firebase.auth().onAuthStateChanged(function(logged_in_user) {
+                if (logged_in_user) {
+                    user = logged_in_user;
+                } else {
+                    //document.location.href = "login.html";
+                    // User is signed out.
+                    document.getElementById('sign-in-status').textContent = 'Signed out';
+                    document.getElementById('sign-in').textContent = 'Sign in';
+                    document.getElementById('account-details').textContent = 'null';
+                }
+            }, function(error) {
+                console.log(error);
+            });
+        };
+
+        window.onload = initApp;
+    </script>
+
+</body>
+</html>
