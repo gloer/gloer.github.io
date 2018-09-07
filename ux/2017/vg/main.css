@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+}
+html {
+    font-size: 16px;
+}
+body {
+    background-color: #eee;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+body > main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+section, aside {
+    padding-bottom: 2rem;
+}
+
+.nyheter > h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.nyheter > main {
+    column-count: 3;
+    column-gap: 2rem;
+    column-rule: 1px solid black;
+}
+
+.nyheter p {
+    margin-bottom: 0.5rem;
+}
+
+.nyheter p::first-letter {
+    font-size: 2rem;
+}
+
+.red {
+    color: red;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    border-top: 0.25rem solid black;
+}
+
+.lesmer > main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+}
+
+.lesmer article {
+    background-color: white;
+    box-shadow: 0 4px 4px #888;
+}
+
+.lesmer article:hover {
+    box-shadow: 2px 8px 8px #888;
+}
+
+article.breaking {
+    background-color: red;    
+}
+
+article.breaking a {
+    color: white;
+}
+
+.lesmer a {
+    text-decoration: none;
+}
+
+.lesmer img {
+    width: 100%;
+}
+
+.lesmer h1 {
+    padding: .5rem;
+}
