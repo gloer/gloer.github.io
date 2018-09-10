@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Selektorer</title>
+    <style>
+
+        #cb {
+            display: none;
+        }
+        div {
+            height: 50px;
+            background-color: orange;
+            margin-bottom: 10px;
+        }
+        #div2 ~ div {
+            background-color: steelblue;
+        }
+        #cb:checked ~ div {
+            display: none;
+        } 
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="cb">
+    <label for="cb">TRYKK HER</label>
+
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <div id="div3"></div>
+    <section>
+        <div id="div4"></div>
+    </section>
+    <div id="div5"></div>
+    <div id="div6"></div>
+</body>
+</html>
