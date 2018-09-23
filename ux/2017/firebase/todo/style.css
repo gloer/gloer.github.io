@@ -1,0 +1,63 @@
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 100%;
+}
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+h1 {
+    font-size: 2rem;
+    color: darkorange;
+    margin-bottom: 1rem;
+}
+.news {
+    max-width: 600px;
+    margin: 50px auto;
+}
+
+.news img {
+    width: 100%;
+}
+
+.alternativ {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    cursor: pointer;
+    
+}
+
+.alternativ .ps {
+    position: absolute;
+    right: 1rem;
+    top: 0;
+    height: 100%;
+    width: 2rem;
+    text-align: right;
+    
+}
+
+.alternativ p {
+    position: absolute;
+    user-select: none;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    padding-left: 1.5rem;
+}
+.alternativ .soyle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 10%;
+    height: 100%;
+    background-color: aliceblue;
+    transition: 1s;
+    
+}

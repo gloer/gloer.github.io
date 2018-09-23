@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Radial gradient</title>
+    <style>
+
+        body {
+            background-color: black;
+        }
+    
+        body > div {
+            width: 400px;
+            height: 300px;
+            margin: 100px auto;
+                    
+            position: relative;
+            background-image: url("natur.jpeg");
+            background-position: center center;
+            background-size: cover;
+        }    
+
+        body > div > div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;            
+            opacity: 0;
+            transition: 2s;
+        }
+
+        body > div > div:first-child {
+            background-image: radial-gradient(transparent 0%, black 40%);
+            opacity: 1;
+        }
+
+        body > div > div:last-child {
+            background-image: radial-gradient(transparent 0%, black 80%);
+            opacity: 0;
+        }
+
+        body > div:hover > div:first-child {
+            opacity: 0;
+        }
+
+        body > div:hover > div:last-child {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div>
+        <div></div>
+        <div></div>
+    </div>
+
+</body>
+</html>

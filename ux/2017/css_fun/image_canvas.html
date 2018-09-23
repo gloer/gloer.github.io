@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Image</title>
+</head>
+<body>
+       
+                <canvas id="c5" width="600" height = "300" style="border:solid 1px #000000;"></canvas>
+                <div>
+                  <button onclick="draw_dragon();return true;">Draw Dragon</button>
+                  <button onclick="draw_smaller_dragon();return true;">Draw smaller dragon</button>
+                  <button onclick="draw_dragon_head();return true;">Draw Dragon Head</button>
+                  <button onclick="Clear_image();return true;">Erase Everything</button>
+                </div> 
+              </div>
+              
+              <script>
+                var c5 = document.getElementById("c5");
+                var c5_context = c5.getContext("2d");
+                
+                var dragon = new Image();
+                dragon.src = 'star.png';
+                
+                function draw_dragon() {
+                c5_context.drawImage(dragon, 100, 5);
+                }
+                
+                function draw_smaller_dragon() {
+                c5_context.drawImage(dragon, 10, 5, 58, 100);
+                }
+                
+                function draw_dragon_head() {
+                c5_context.drawImage(dragon, 0, 19, 69, 97, 300, 100, 103, 145);
+                }
+                
+                function Clear_image() {
+                c5_context.clearRect(1, 1, 600, 300);
+                } 
+              </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <section class="news">
+
+        <article id="poll0001">
+            <h1>Hvem er dette?</h1>
+            <img src="johndonne.jpg">
+            <section>
+                <div class="alternativ" id="alt1" onclick="stem1()">
+                    <div class="soyle" id="s1"></div>
+                    <div class="ps" id="pr1">22%</div>
+                    <p>Christiano Ronaldo</p>
+                </div>
+                <div class="alternativ" id="alt2" onclick="stem2()">
+                    <div class="soyle" id="s2"></div>
+                    <div class="ps" id="pr2">22%</div>
+                    <p>Christian Bale</p>
+                </div>
+                <div class="alternativ" id="alt3" onclick="stem3()">
+                    <div class="soyle" id="s3"></div>
+                    <div class="ps" id="pr3">22%</div>
+                    <p>Lionel Messi</p>
+                </div>
+                <div class="alternativ" id="alt4" onclick="stem4()">
+                    <div class="soyle" id="s4"></div>
+                    <div class="ps" id="pr4">22%</div>
+                    <p>Tom Lund</p>
+                </div>
+                
+            </section>
+        </article>
+    </section>
+    
+    <script>
+
+        const s1 = document.getElementById("s1");
+        const s2 = document.getElementById("s2");
+        const s3 = document.getElementById("s3");
+        const s4 = document.getElementById("s4");
+        
+        const pr1 = document.getElementById("pr1");
+        const pr2 = document.getElementById("pr2");
+        const pr3 = document.getElementById("pr3");
+        const pr4 = document.getElementById("pr4");
+
+
+        let a1 = 0;
+        let a2 = 0;
+        let a3 = 0;
+        let a4 = 0;
+
+        let total = 0;
+
+        const oppdater = () => {
+            const maks = Math.max(a1, a2, a3, a4);
+            
+            const p1 = (a1/maks) * 100;
+            const p2 = (a2/maks) * 100;
+            const p3 = (a3/maks) * 100;
+            const p4 = (a4/maks) * 100;
+
+            const ps1 = a1/total * 100;
+            const ps2 = a2/total * 100;
+            const ps3 = a3/total * 100;
+            const ps4 = a4/total * 100;
+            
+
+            s1.style.width = p1 + "%";
+            s2.style.width = p2 + "%";
+            s3.style.width = p3 + "%";
+            s4.style.width = p4 + "%";
+
+            pr1.innerHTML = Math.round(ps1) + "%";
+            pr2.innerHTML = Math.round(ps2) + "%";
+            pr3.innerHTML = Math.round(ps3) + "%";
+            pr4.innerHTML = Math.round(ps4) + "%";
+        }
+
+        const stem1 = () => { a1++; total++; oppdater(); }
+        const stem2 = () => { a2++; total++; oppdater(); }
+        const stem3 = () => { a3++; total++; oppdater(); }
+        const stem4 = () => { a4++; total++; oppdater(); }
+        
+
+    </script>
+
+</body>
+</html>

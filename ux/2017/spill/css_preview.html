@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS</title>
+    <style>
+    
+        #myCSS {
+            width: 400px;
+            border: 1px solid gray;
+            height: 300px;
+            outline: none;
+            padding: 10px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 1.25rem;
+        }
+
+    </style>
+</head>
+<body>
+    <textarea id="myCSS" autofocus></textarea>
+    <hr>
+    <div id="myOutput">
+        <p>The quick fox jumps</p>
+        <p>The quick fox jumps</p>
+        <p>The quick fox jumps</p>
+    </div>
+</body>
+
+<script>
+    const myCSS = document.getElementById("myCSS");
+    const myOutput = document.getElementById("myOutput");
+
+
+    myCSS.oninput = () => {
+
+        myOutput.style = myCSS.value;
+
+    }
+</script>
+</html>

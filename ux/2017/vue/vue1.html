@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Testing vue</title>
+    <!-- production version, optimized for size and speed -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <span v-bind:title="message">
+            <a v-bind:href="link">Hover over me to see dynamically shit!</a>
+        </span>
+        <ol>
+            <li v-for="todo in todos">
+                <span v-on:click="setDone">{{ todo.text }}</span>
+                
+                <span v-if="todo.done"> OK</span>
+                
+            </li>
+        </ol>
+    </div>
+
+    <script>
+    
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message: "Helle Vue at " + new Date(),
+                link: "http://www.db.no",
+                todos: [
+                    { text: "Learn Vue.js", done: false },
+                    { text: "Learn CSS", done: false },
+                    { text: "Learn HTML", done: false },
+                    { text: "Learn Waterskiing", done: false }
+                ]
+            },
+            methods: {
+                setDone: function() {
+                    console.log(this);
+                }
+            }
+        });
+
+        app.todos.push({ text: "Kjøpe øl", done: true });
+
+    </script>
+
+    
+</body>
+</html>

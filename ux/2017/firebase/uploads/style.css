@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+}
+
+html {
+    font-size: 100%;
+}
+
+body {    
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+main {
+    padding: 1rem;
+}
+
+#inpFile {
+    display: none;
+}
+
+.button {
+    padding: 1rem 1.5rem;
+    text-transform: uppercase;
+    background-color: slateblue;
+    color: white;
+    line-height: 1rem;
+    font-size: 1rem;
+    display: inline-block;
+}
+
+#divSelected {
+    padding: 1rem 1.5rem;        
+    color: #333;
+    line-height: 1rem;
+    font-size: 1rem;
+    display: inline-block;
+}

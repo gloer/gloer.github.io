@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Selektorer</title>
+    <style>
+    div {
+        margin-bottom: 10px;
+        height: 30px;
+        background-color: darkblue;
+    }
+
+    #d1 + div {
+        background-color: orange;
+    }
+
+    #d3 ~ div {
+        background-color: steelblue;
+    }
+
+    #cb:checked ~ div {
+        background-color: black;
+    }
+    
+    </style>
+</head>
+<body>
+    
+    <input type="checkbox" id="cb">
+    <div id="d1"></div>
+    <div id="d2"></div>
+    <div id="d3"></div>
+    <div id="d4"></div>
+    <div id="d5"></div>
+    <section>
+        <div id="d6"></div>
+    </section>
+    <div id="d7"></div>
+
+</body>
+</html>

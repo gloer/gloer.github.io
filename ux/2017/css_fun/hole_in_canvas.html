@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hole in the canvas</title>
+</head>
+<body>
+        <canvas id="myCanvas" width="600" height="300"></canvas>
+        <script>
+            let deg = 0;
+            var ctx = document.getElementById('myCanvas').getContext('2d');
+            
+         // draw a simple rectangle shape
+            ctx.fillStyle = "#FF0000";
+            ctx.fillRect(0,0,600,300);
+
+            ctx.save();
+
+            var dragon = new Image();
+            dragon.src = 'star.png';
+                
+            function draw_dragon() {
+                // move to the center of the canvas
+                ctx.translate(400, 150);
+
+// rotate the canvas to the specified degrees
+                ctx.rotate(90 * Math.PI/180);
+                ctx.drawImage(dragon, 0, 0);
+                ctx.rotate(-(90 * Math.PI/180));
+                deg++;
+            }
+        
+         // set the composite property shape
+          ctx.globalCompositeOperation = 'destination-out';
+           
+            ctx.fillRect(50, 50, 30, 30);
+            ctx.fillRect(100, 50, 30, 30);
+
+            ctx.font = "30px Arial";
+            ctx.fillText("Hello World",10,250);
+         
+            
+            document.onclick = draw_dragon;
+
+        </script>
+</body>
+</html>

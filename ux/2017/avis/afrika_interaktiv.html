@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Interaktive Afrika</title>
+</head>
+<body>
+    
+    <video src="afrika.mp4" autoplay muted controls></video>
+    <script>
+    
+        const video = document.querySelector("video");
+        
+        video.ontimeupdate = () => {
+            console.log(video.currentTime);
+            if(video.currentTime > 5) {
+                console.log("Nå har det gått over 5 sekunder. På tide med reklame");
+            }
+        }
+
+        // Kan vi hoppe til et bestemt sted i videoen?
+
+        document.onclick = () => {
+            video.currentTime = 60;
+        }
+
+    </script>
+
+</body>
+</html>

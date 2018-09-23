@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The burger</title>
+    <style>
+        * {
+            margin: 0;
+        }
+        html {
+            font-size: 16px;
+        }
+        body {
+            background-color: black;
+            font-family: sans-serif;
+            color: white;            
+        }
+        a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            line-height: 150%;
+        }
+
+        #leftmenu {
+            position: absolute;
+            width: 300px;
+            height: calc(100vh - 4rem);
+            top: 4rem;
+            left: -300px;
+            background-color: #333;
+            transition: 1s;
+            box-sizing: border-box;
+            padding: 40px;
+            text-align: center;
+        }
+
+        #cb {
+            display: none;
+        }
+
+        #cb:checked ~ #leftmenu {
+            display: block;
+            left: 0;
+        }
+        #burger {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            width: 2rem;
+            height: 2rem;     
+            cursor: pointer;       
+        }
+        #burger div {
+            position: absolute;
+            height: 2px;
+            background-color: white;
+            left: 0;
+            width: 100%;
+            transition: 1s;
+        }
+        #burger div:nth-child(1) { top: 0;}
+        #burger div:nth-child(2) { top: calc(50% - 1px);}
+        #burger div:nth-child(3) { top: calc(50% - 1px);}
+        #burger div:nth-child(4) { bottom: 0;}
+
+        #cb:checked ~ #burger div:nth-child(1) { transform: translateY(1rem); opacity: 0;}
+        #cb:checked ~ #burger div:nth-child(2) { transform: rotate(45deg); }
+        #cb:checked ~ #burger div:nth-child(3) { transform: rotate(-45deg); }
+        #cb:checked ~ #burger div:nth-child(4) { transform: translateY(-1rem); opacity: 0; }
+
+        @media (max-width: 500px) {
+
+            #leftmenu {
+                width: 100vw;
+                left: -100vw;
+            }
+            
+
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+
+        <nav id="burgermenu">
+            <input type="checkbox" id="cb">
+            <label for="cb" id="burger">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </label>
+            <nav id="leftmenu">
+                <a href="">Animals</a>
+                <a href="">Flights</a>
+                <a href="">Hotels</a>
+            </nav>
+        </nav>
+
+    </header>
+</body>
+</html>

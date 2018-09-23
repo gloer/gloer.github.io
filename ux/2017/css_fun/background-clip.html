@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BG</title>
+    <style>
+    
+       main {
+            clip-path: url(#clipping);
+
+            
+        }
+
+        @keyframes flytt {
+            to {
+                transform: translateX(200px);
+            }
+        }
+
+        svg {
+            position: absolute;
+            
+        }
+
+        circle {
+            animation: flytt 3s;
+        }
+
+        img {
+            
+        }
+    </style>
+</head>
+<body>
+   
+        <svg>
+            <defs>
+                <clipPath id="clipping">
+                    <circle cx="284" cy="213" r="213" />
+                    <text x="0" y="20" font-size="50">HELLO THERE</text>
+                </clipPath>
+            </defs>
+        </svg>
+        <main>
+                <img src="natur.jpeg">
+        </main>
+        
+
+</body>
+</html>

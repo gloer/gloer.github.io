@@ -1,0 +1,60 @@
+<html>
+<head>
+
+</head>
+<body>
+<canvas id="testCanvas" width="800" height="600">
+
+</canvas>
+
+<script>
+var rotation = 0;
+var dragon;
+
+
+(function init() {
+
+    canvas = document.getElementById("testCanvas");
+    context = canvas.getContext("2d");
+
+    context.clearRect(0, 0, context.width, context.height);
+    context.fillStyle = "lightblue";
+
+
+    dragon = new Image();
+    dragon.src = 'star.png';
+    dragon.onload = () => {
+        requestAnimationFrame(draw);
+    }
+        
+
+})();
+
+function draw() {
+
+    // reset transforms before clearing
+    ctx.fillStyle = "red";
+    context.setTransform(1, 0, 0, 1, 0, 0);
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    
+
+    //ctx.globalCompositeOperation = 'destination-out';
+
+    context.fillStyle = "green";
+    context.fillRect(10, 10, 20, 20);
+    // tramslate and rotate an absolute rotation value
+    context.translate(canvas.width/2, canvas.height/2);
+    context.rotate(rotation);
+
+    context.drawImage(dragon, -dragon.width/2, -dragon.height/2);   
+
+    // update rotation value and request new frame
+    rotation += 0.04;
+
+    requestAnimationFrame(draw)
+}
+
+</script>
+</body>
+</html>

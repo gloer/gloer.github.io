@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+        #container {
+            position: relative;
+            background-color: green;
+            width: 600px;
+            height: 30px;
+            margin: 100px;
+        }
+        #ball {
+            width: 10px;
+            height: 10px;
+            background-color: blue;
+            position: absolute;
+            left: 0;
+            top: 10px;
+        }
+    
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <div id="ball"></div>
+    </div>
+    
+
+
+    <script>
+    
+        const ball = document.getElementById("ball");
+
+        const animasjon = ball.animate([
+            {left: "0px"},
+            {left: "600px"}
+        ], {
+            duration: 10000,
+            iterations: Infinity
+        });
+
+        //animasjon.currentTime = 50000;
+
+        setInterval( () => { console.log(animasjon.currentTime); }, 10 );
+
+        //document.onclick = () => { animasjon.currentTime = 2000; }
+
+        document.onclick = () => { animasjon.reverse(); }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #eee;
+}
+body > main {
+    max-width: 980px;
+    margin: 0 auto;
+}
+h1 {
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.nyhet main {
+    column-count: 3;
+    column-gap: 2rem;
+    column-rule: 1px solid black;
+}
+.nyhet p {
+    margin-bottom: 1rem;
+}
+.nyhet p::first-letter {
+    font-size: 2rem;
+    color: green;
+}
+
+.lesmer main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+}
+
+.lesmer article {
+    background-color: white;
+    box-shadow: 0 4px 4px #888;
+}
+
+.lesmer article:hover {
+    box-shadow: 4px 8px 8px #888;
+}
+
+.lesmer img {
+    width: 100%;
+}
+
+.lesmer h1 {
+    padding: 1rem;
+    padding-top: 0.5rem;
+    margin: 0;
+}
+
+.lesmer a {
+    text-decoration: none;
+    color: #333;
+}
+
+@media (max-width: 680px) {
+    .nyhet main {
+        column-count: 2;
+    }
+}
+@media (max-width: 540px) {
+    .nyhet main {
+        column-count: 1;
+    }
+}

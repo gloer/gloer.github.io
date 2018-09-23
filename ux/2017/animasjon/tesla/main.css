@@ -1,0 +1,52 @@
+body {
+    background-image: linear-gradient(#999,#fff);
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+main {
+    width: 800px;
+    margin: auto;
+}
+
+#stage {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    margin-top: 200px;
+    border: 4px solid #999;
+    overflow: hidden;
+}
+
+#bil {
+    position: absolute;
+    background-image: url("images/tesla__0002_kjerra.png");
+    top: 150px;
+    left: 200px;
+    width: 376px;
+    height: 127px;
+    animation: drive 8s forwards infinite;
+}
+
+#forhjul, #bakhjul {
+    position: absolute;
+    animation: snurr 8s forwards infinite;
+}
+
+#forhjul {
+    bottom: 40px;
+    right: 67px;
+}
+#bakhjul {
+    bottom: 40px;
+    left: 80px;
+}
+
+main nav {
+    padding: 10px;
+}
+
+#slider {
+    width: 100%;
+}

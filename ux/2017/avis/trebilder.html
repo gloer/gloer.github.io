@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tre bilder av forskjellig størrelse</title>
+    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
+    <style>
+
+        * {
+            margin: 0;
+        }
+
+        body {
+            background-color: black;
+            padding-top: 80px;
+        }
+
+        main {            
+            display: grid;
+            grid-gap: 12px;
+            width: 700px;
+            margin: auto;
+            grid-template-columns: 1fr 1fr 1fr;
+        
+        }
+
+        main article {
+            position: relative;
+            border: 1px solid #333;
+            transform-origin: left bottom;
+        }
+        
+
+        main article div {            
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-end;
+            height: 100%;            
+        }
+
+        main p {
+            position: absolute;
+            top: 0;
+            color: white;
+            font-family: 'Bangers', sans-serif;
+            font-size: 2rem;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+
+        main p span {
+            opacity: 0;
+            transition: 1s;
+            filter: blur(10px);
+            transform: scale(4) rotate(20deg);
+        }
+
+        @keyframes rist {
+            0% { transform: translate(7px, 7px) }
+            25% { transform: translate(-7px, -7px) }
+            50% { transform: translate(7px, 7px) }
+            75% { transform: translate(-7px, -7px) }
+            100% { transform: translate(7px, 7px) }
+        }
+
+        main article:hover {
+            animation: rist 0.2s;
+        }
+
+        main article:hover p span {
+            opacity: 1;
+            filter: blur(1px);
+            transform: scale(1) rotate(-12deg);
+        }
+
+        main article:hover img {
+            
+        }
+        
+        main img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <article>
+            <div>
+                <img src="images/img2.jpg">
+            </div>                
+            <p>
+                <span>Deep Blue</span>
+            </p>
+        </article>
+        <article>
+                <div>
+                    <img src="images/img3.jpg">
+                </div> 
+                <p>
+                    <span>Down there</span>
+                </p>            
+        </article>
+        <article>
+                <div>
+                    <img src="images/img4.jpg">
+                </div> 
+                <p>
+                    <span>In to deep</span>
+                </p>            
+        </article>
+        
+    </main>
+</body>
+</html>

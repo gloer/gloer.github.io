@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Warhol</title>
+    <style>
+        #bilder {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 5px;
+            width: 800px;
+            margin: auto;
+        }
+        #bilder > article {
+            overflow: hidden;
+            height: 100%;
+            width: 100%;            
+        }
+
+        #bilder article:nth-child(1) { background-color: red; }
+        #bilder article:nth-child(2) { background-color: blue; }
+        #bilder article:nth-child(3) { background-color: pink; }
+        #bilder article:nth-child(4) { background-color: yellow; }
+
+        #bilder img {
+            width: 100%;
+            mix-blend-mode: color-burn;
+        }
+    </style>
+</head>
+<body>
+    <section id="bilder">
+        <article><img src="troll.png"></article>        
+        <article><img src="troll.png"></article>        
+        <article><img src="troll.png"></article>        
+        <article><img src="troll.png"></article>        
+        <article><img src="troll.png"></article>        
+        <article><img src="troll.png"></article>        
+        <article><img src="troll.png"></article>        
+        <article><img src="troll.png"></article>        
+        <article><img src="troll.png"></article>        
+        
+    </section>
+</body>
+</html>

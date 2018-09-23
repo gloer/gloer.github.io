@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mix blend mode</title>
+    <style>
+    
+        #stage {
+            width: 600px;
+            height: 400px;
+            margin: 100px auto;
+            border: 1px solid #ccc;
+            position: relative;
+            background-color: red;
+            overflow: hidden;
+            transition: 5s;
+            
+        }
+        
+        #stage:hover {
+            background-color: purple;            
+            
+        }
+
+        #stage img {
+            width: 100%;
+            mix-blend-mode: color-burn;           
+        }
+
+        #blank {
+            position: absolute;
+            left: -50%;
+            top: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: radial-gradient(transparent, black);
+            transition: 5s;
+        }
+
+        #stage:hover #blank {
+            transform: rotate(360deg);
+        }
+
+        #ball {
+
+            position: absolute;
+            left: 50px;
+            top: 50px;
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            mix-blend-mode: exclusion;
+            border: 1px solid green;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <section id="stage">
+        <img src="natur.jpeg">        
+        <div id="blank"></div>
+        <div id="ball"></div>
+    </section>
+
+    
+
+</body>
+</html>

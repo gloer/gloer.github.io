@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Grid and object fit</title>
+    <style>
+        main {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-gap: 1rem;
+        }
+        main article {
+            height: 200px;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        main img {
+            width: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <article><img src="images/img1.jpeg"></article>
+        <article><img src="images/img2.jpg"></article>
+        <article><img src="images/img3.jpg"></article>
+        <article><img src="images/img4.jpg"></article>
+        <article><img src="images/img1.jpeg"></article>
+        <article><img src="images/img2.jpg"></article>
+        <article><img src="images/img3.jpg"></article>
+        <article><img src="images/img4.jpg"></article>
+        <article><img src="images/img1.jpeg"></article>
+        <article><img src="images/img2.jpg"></article>
+        <article><img src="images/img3.jpg"></article>
+        <article><img src="images/img4.jpg"></article>
+        <article><img src="images/img1.jpeg"></article>
+        <article><img src="images/img2.jpg"></article>
+        <article><img src="images/img3.jpg"></article>
+        <article><img src="images/img4.jpg"></article>
+    </main>
+</body>
+</html>

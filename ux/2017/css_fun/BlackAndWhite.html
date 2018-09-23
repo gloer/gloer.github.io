@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mix blend mode</title>
+    <style>
+    
+        html, body {
+            background-color: black;
+            cursor: pointer;
+        }
+
+        #ball {
+
+            position: absolute;
+            left: 50px;
+            top: 50px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: white;
+            mix-blend-mode: exclusion;
+            border: 1px solid green;
+            transition: 0.1s;
+            pointer-events: none;
+        }
+
+        p {
+            font-family: 'Courier New', Courier, monospace;
+            color: white; font-size: 6rem;
+        }
+
+        p:hover ~  #ball {
+            width: 40px;
+            height: 40px;
+        }
+
+        p:hover {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    
+    
+    <p>THIS IS IT</p>
+    <div id="ball"></div>
+
+    <script>
+        const ball = document.getElementById("ball");
+
+        document.onmousemove = (evt) => {
+            ball.style.left = evt.clientX - 50 + "px";
+            ball.style.top = evt.clientY - 50 + "px";
+
+            if(evt.clientX < 50) {
+                //ball.style.width = ball.style.height = evt.clientX  + "px";
+            } else {
+                //ball.style.width = ball.style.height = "100px";
+            }
+
+            if(document.elementFromPoint(evt.clientX, evt.clientY)) {
+                console.log(document.elementFromPoint(evt.clientX, evt.clientY));
+            }
+        }
+    </script>
+
+</body>
+</html>

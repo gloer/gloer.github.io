@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #k {
+            width: 100px;
+            height: 100px;
+            background-color: firebrick;
+            position: absolute;
+            left: 200px;
+            top: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="k"></div>
+
+
+    <script>
+        const k = document.getElementById("k");
+
+        const keys = [
+            {transform: "rotate(0deg)" },
+            {transform: "rotate(360deg)" }
+        ];
+
+        const settings = {
+            duration: 1000,
+            easing: "linear",
+            iterations: Infinity
+        }
+
+        const anim = k.animate(keys, settings);
+
+        document.onclick = () => {
+            console.log(anim.currentTime);
+        }
+
+        anim.currentTime = 3000;
+        
+    </script>
+</body>
+</html>

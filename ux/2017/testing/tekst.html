@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tekst</title>
+    <style>
+        * {
+            margin: 0;
+        }
+        html {
+            font-size: 16px;
+        }
+        body {
+            padding: 10px;
+            background-color: #eee;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        body > main {
+            max-width: 980px;
+            margin: auto;
+        }        
+
+        article, aside {
+            padding-bottom: 1.5em;
+        }
+        .treer {
+            column-count: 3;
+            column-gap: 2em;
+            column-rule: 1px solid black;
+            display: block;
+
+        }
+        .lesmer main {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 1rem;
+        }
+        .lesmer article {
+            background-color: white;  
+            box-shadow: 0 4px 4px #999;          
+        }
+        .lesmer article a {
+            text-decoration: none;
+        }
+        .lesmer article:hover {
+            box-shadow: 2px 8px 8px #999;          
+        }
+        .lesmer article h1 {
+            padding: 0.5rem;
+            padding-bottom: 0.25rem;
+        }
+        .lesmer img {
+            width: 100%;
+            
+        }
+        .nyheter > h1, .lesmer > h1 {
+            font-size: 2em;
+            color: red;
+            border-top: 5px solid black;
+            margin-bottom: 1rem;
+            margin-top: 0.25rem;
+        }
+        p {
+            margin-bottom: 0.5rem;
+        }
+        p::first-letter {
+            font-size: 1.5rem;
+        }
+        @media (max-width: 780px) {
+            .nyheter > main {
+                column-count: 2;
+            }
+            .lesmer > main {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 650px) {
+            .nyheter > main {
+                column-count: 1;
+            }
+            .lesmer main {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+            <article class="nyheter">
+                <h1>Siste nytt</h1>
+                <main>
+                    <section class="treer">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit a iste similique harum eum animi, sit fugiat exercitationem deserunt illum aspernatur vitae dolorem veniam unde aut ratione ab provident cum!</p>
+                        <p>Korem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque nesciunt, animi ipsa cum vitae exercitationem amet, quidem sit aut omnis magnam, rerum eum mollitia et quo. Commodi aspernatur autem enim.In sint nisi libero iure delectus, quasi modi culpa fugit esse tempore sit recusandae repellat ipsam, corrupti sed minima, commodi ullam corporis facilis. Assumenda maiores deserunt tempora molestiae quas magni!</p>
+                        <p>Forem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, in nihil quas esse, asperiores recusandae sapiente dignissimos totam ex voluptatem quisquam earum omnis tenetur libero ullam voluptates cum amet iusto!</p>
+                        <p>Uorem ipsum dolor sit amet, consectetur adipisicing elit. Quam ipsam quia iure voluptatem saepe sapiente aliquam amet qui omnis ipsum, aliquid quae neque eligendi sit eos quisquam ipsa illum recusandae!
+                        Fugit odit iste dolor, corporis et, aperiam dignissimos facilis illum explicabo cupiditate dolores. Debitis error sapiente temporibus mollitia deleniti assumenda modi veritatis dignissimos similique eaque quo, at libero obcaecati ab.
+                        Nostrum dicta sapiente voluptatem harum minus dolores sequi expedita reprehenderit, animi quae quos praesentium. Modi sunt maiores rerum repellat nemo error autem corrupti earum maxime labore quis est, incidunt possimus.</p>
+                </section>
+                </main>
+            </article>
+        </section>
+
+        <aside class="lesmer">
+            <h1>Les mer i dagens avis</h1>
+            <main>
+                <article>
+                    <a href="https://www.vg.no/nyheter/utenriks/i/m6jO50/canada-og-usa-har-startet-handelssamtaler">
+                        <img src="images/img1.jpeg">
+                        <h1>Canada og USA har startet handelssamtaler</h1>
+                    </a>
+                </article>
+                <article>
+                    <a href="https://www.vg.no/nyheter/utenriks/i/m6jO50/canada-og-usa-har-startet-handelssamtaler">
+                        <img src="images/img2.jpeg">
+                        <h1>Chelsea Manning nekstes trolig innreise til Australia</h1>
+                    </a>    
+                </article>
+                <article>
+                    <a href="https://www.vg.no/nyheter/utenriks/i/m6jO50/canada-og-usa-har-startet-handelssamtaler">
+                        <img src="images/img3.jpeg">
+                        <h1>Ny demonstyrasjon i Chemnitz: - Vi er folket!</h1>
+                    </a>
+                </article>
+                <article>
+                    <a href="https://www.vg.no/nyheter/utenriks/i/m6jO50/canada-og-usa-har-startet-handelssamtaler">
+                        <img src="images/img4.jpeg">
+                        <h1>Det hvite hus: Analyserer språket i anonym kronikk for å finne forfatteren</h1>
+                    </a>
+                </article>
+                <article>
+                    <a href="https://www.vg.no/nyheter/utenriks/i/m6jO50/canada-og-usa-har-startet-handelssamtaler">
+                        <img src="images/img5.jpeg">
+                        <h1>India opphever lov som forbyr sex mellom likekjønnede</h1>
+                    </a>
+                </article>
+                <article>
+                    <a href="https://www.vg.no/nyheter/utenriks/i/m6jO50/canada-og-usa-har-startet-handelssamtaler">
+                        <img src="images/img6.jpeg">
+                        <h1>Kim og Moon møtes for å diskutere atomnedrustning</h1>
+                    </a>
+                </article>
+            </main>                
+        </aside>
+
+    </main>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>From Sketch to HTML and CSS</title>
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
+    <style>
+
+        html {
+            cursor: none;
+        }
+    
+        body {
+            font-family: "Maven Pro", sans-serif;
+            background-color: olive;
+        }
+        
+        main {
+            max-width: 700px;
+            padding: 1rem;
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            grid-column-gap: 2rem;
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        p {
+            margin-top: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        p.standfirst {
+            width: 90%;
+            color: rgb(140, 140, 140);
+        }
+
+        ol {
+            padding-left: 0;
+            margin-left: 1.1rem;
+        }
+        li {
+            margin-bottom: 1rem;
+        }
+    
+
+        #pila {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: white;
+            mix-blend-mode: difference;
+        }
+    </style>
+</head>
+<body>
+    
+    <main>
+        <h1>Sketch Wireframing Kit — v1.3</h1>
+        <p class="standfirst">This is a collection of symbols and text styles for quickly mocking up web apps, created by your friends at Bohemian Coding, and released under the MIT license.</p>
+
+        <h2>Document Structure</h2>
+        <p>The document has 2 pages as follows:</p>
+        <ol>
+            <li>Welcome page (this one), with some default artboards for Responsive Web Design</li>
+            <li>A collection of all symbols available in the document</li>
+        </ol>
+
+        <h2>Symbols - Usage</h2>
+        <section>
+            <div>
+                <img src="sync.png">
+            </div>
+            <article>
+                <p>Use the toolbar Symbols icon to add symbols from the predefined library to your document</p>
+                <p>We have grouped them for your convenience, so you´ll have no trouble finding the perfect symbol for your design.</p>
+            </article>
+        </section>
+        <h2>Text Styles - Usage</h2>
+        <section>
+            <div>
+                <img src="text_icon.png">
+            </div>
+            <article>
+                <p>Use the toolbar Styled Text icon to add styled text layers  from the predefined library to your document.</p>
+                <p>To update text layers that are using a shared text style, simply click the sync arrows that appear to the right of the style’s name in the Inspector. To reset unsynced changes, hold down the Option key and click on the reset arrow that appears in its place.</p>
+            </article>
+        </section>
+    </main>
+    
+    <div id="pila"></div>
+
+    <script>
+        const pila = document.getElementById("pila");
+    
+        document.onmousemove = (evt) => {
+            pila.style.left = evt.clientX - 40 + "px";
+            pila.style.top = evt.clientY - 40 + "px";
+            console.log(document.elementFromPoint(evt.clientX, evt.clientY));
+        }    
+
+    </script>
+
+</body>
+</html>

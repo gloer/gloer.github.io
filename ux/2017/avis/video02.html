@@ -5,10 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Africa Travel Resources</title>
+    <style>
+        * {
+            margin: 0;
+        }
+        html {
+            font-size: 16px;
+        }
+        body {
+            font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+        }
+        #videofront {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+        }
+        #videofront video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        #overlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url("images/bg-stripe-grid.png");
+        }
+        #front {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            text-align: center;
+            color: white;            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            letter-spacing: 6px;
+        }
+        #front h1 {
+            font-size: 4rem;
+            line-height: 150%;
+        }
+        .gray {
+            border-top: 1px solid black;
+            background-color: #666;
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+        .gray main {
+            color: white;
+            text-align: center;
+        }
+
+        #video_controls {
+            position: absolute;
+            left: 200px;
+            top: 100px;
+        }
+    </style>
 </head>
 <body>
     <section id="videofront">
-        <video src="afrika.mp4" muted autoplay></video>
+        <video id="video" src="afrika.mp4" muted autoplay loop></video>
     </section>
+    <div id="overlay"></div>
+    <section id="front">
+        <article>
+            <h1>ATR</h1>
+            <p>THE SAFARI EXPERTS</p>
+        </article>
+    </section>
+    <nav id="video_controls">
+        <button id="aper">Vis Aper</button>
+    </nav>
+    <section class="gray">
+        <main>
+            <h1>Hello there</h1>
+        </main>     
+    </section>
+
+    <script>
+    
+        const video = document.getElementById("video");
+        const aper = document.getElementById("aper");
+
+        aper.onclick = () => {
+
+            video.animate([
+                {opacity: 0},
+                {opacity: 1},
+            ],{
+                duration: 200
+            });
+
+            video.currentTime = 10;
+            video.playbackRate = 0.5;
+            video.style.filter = "invert(1)";
+        }
+    
+    </script>
+
 </body>
 </html>

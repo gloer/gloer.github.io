@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Africa Travel Resources</title>
+    <link rel="stylesheet" href="afrika.css">
+</head>
+<body>
+    <section id="videofront">
+        <video src="afrika.mp4" muted autoplay loop controls></video>
+    </section>
+    <div id="overlay"></div>
+
+    <nav id="menu">
+        <a data-tid="30" href="aper.html">Aper</a>
+        <a data-tid="20" href="aper.html">Zebraer</a>
+        <a data-tid="10" href="aper.html">Gnuer</a>
+        <a data-tid="50" href="aper.html">Flodhester</a>
+    </nav>
+
+    <nav id="icons">
+        <img id="ir" src="ir.png">
+    </nav>
+
+    <section id="news">
+        HER KOMMDER VANLIG TEKST
+    </section>
+
+    <script>
+        
+        let invers = false;
+
+        const video = document.querySelector("#videofront > video");
+        const ir = document.getElementById("ir");
+
+        const settTid = (evt) => {
+            const tid = Number(evt.target.getAttribute("data-tid"));
+            video.currentTime = tid;
+
+        }
+        const knapper = document.querySelectorAll("#menu > a");
+        for(const knapp of knapper){
+            knapp.onmouseenter = settTid;
+        }
+
+        ir.onclick = () => {
+            if(!invers)
+                video.style.filter = "invert(1)";
+            else 
+                video.style.filter = "none";
+            invers = !invers;
+        }
+
+
+    </script>
+
+</body>
+</html>
