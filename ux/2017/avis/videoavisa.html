@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Video</title>
+    <link rel="stylesheet" href="videoavisa.css">
+</head>
+<body>
+    <main>
+        <video id="video" src="afrika.mp4" controls autoplay muted>
+            Din nettleser støtter ikke video-elementet.
+        </video>
+        <section id="video_overlay"></section>
+    </main>
+
+    <section class="highlights">
+        <h1>Apene kommer</h1>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam nulla distinctio atque tempore eaque, natus quos aut pariatur deserunt. A aut ipsum porro sint eum vero sequi voluptates modi laborum.</p>
+    </section>
+
+
+    <script>
+    
+        const video = document.getElementById("video");
+
+        let reklameErVist = false;
+
+        function visReklame() {
+            if(video.currentTime > 5 && !reklameErVist) {
+                reklameErVist = true;
+                console.log("På tide å vise reklame");
+
+            }
+        }
+        
+        video.ontimeupdate = visReklame;
+    
+    </script>
+
+</body>
+</html>
