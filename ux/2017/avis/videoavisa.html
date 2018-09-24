@@ -9,10 +9,15 @@
 </head>
 <body>
     <main>
-        <video id="video" src="afrika.mp4" controls autoplay muted>
+        <video id="video" src="afrika.mp4" controls autoplay muted loop>
             Din nettleser støtter ikke video-elementet.
         </video>
         <section id="video_overlay"></section>
+        <section id="buttons">
+            <a href="aper.html" id="btnAper">
+                <img src="cute-monkey-clip-art-clipart-panda-free-clipart-images-monkey-face-clip-art-570_596.png" width="100">
+            </a>
+        </section>
     </main>
 
     <section class="highlights">
@@ -24,8 +29,21 @@
     <script>
     
         const video = document.getElementById("video");
+        const btnAper = document.getElementById("btnAper");
 
         let reklameErVist = false;
+
+        function fadeOutIn() {
+            const keyframes = [
+                {opacity: 1},
+                {opacity: 0},
+                {opacity: 1}
+            ];
+            const settings = {
+                duration: 600
+            };
+            video.animate(keyframes, settings);
+        }
 
         function visReklame() {
             if(video.currentTime > 5 && !reklameErVist) {
@@ -35,6 +53,13 @@
             }
         }
         
+        function visAper() {
+            
+            video.currentTime = 40.5;
+            fadeOutIn();
+        }
+
+        btnAper.onmouseenter = visAper;
         video.ontimeupdate = visReklame;
     
     </script>
