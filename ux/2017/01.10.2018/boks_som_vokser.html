@@ -9,7 +9,7 @@
        
         #boks {
             background-color: blue;
-            width: 300px;
+            width: 45%;
             height: 100px;
             margin-top: 50px;            
         }
@@ -28,7 +28,7 @@
 
         const keyframes = [
             { width: "0" },
-            { width: "600px" }
+            { width: "90%" }
         ];
         const settings = {
             duration: 2000,
@@ -41,7 +41,7 @@
         animasjon.pause();
 
         function spillForover() {
-            animasjon.playbackRate = 4;
+            animasjon.playbackRate = 1;
             animasjon.play();
         }
 
@@ -67,8 +67,9 @@
 
         btnVoks.onmousedown = spillForover;
         btnVoks.ontouchstart = spillForover;
+        
         btnMinsk.onmousedown = spillBaklengs;
-        btnVoks.ontouchend = spillBaklengs;
+        btnVoks.ontouchstart = spillBaklengs;
 
         btnVoks.onmouseup = stoppAnimasjon;
         btnMinsk.onmouseup = stoppAnimasjon;
