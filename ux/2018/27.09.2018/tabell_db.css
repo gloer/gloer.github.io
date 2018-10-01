@@ -66,7 +66,7 @@ table tbody td {
     text-align: right;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 500px) {
 
     table tr th:nth-child(4), table tr td:nth-child(4) { display: none; }
     table tr th:nth-child(5), table tr td:nth-child(5) { display: none; }
