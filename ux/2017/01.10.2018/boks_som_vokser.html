@@ -66,10 +66,15 @@
         animasjon.onfinish = ferdig;
 
         btnVoks.onmousedown = spillForover;
+        btnVoks.ontouchstart = spillForover;
         btnMinsk.onmousedown = spillBaklengs;
+        btnVoks.ontouchend = spillBaklengs;
 
         btnVoks.onmouseup = stoppAnimasjon;
         btnMinsk.onmouseup = stoppAnimasjon;
+        btnVoks.ontouchend = stoppAnimasjon;
+        btnMinsk.ontouchend = stoppAnimasjon;
+        
 
     </script>
 </body>
