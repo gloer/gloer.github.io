@@ -1,0 +1,66 @@
+html {
+    font-size: 100%; 
+    /* Dette er nettleserens valgte skriftstørrelse */
+}
+
+
+body {
+    background-color: #eee;
+    font-family: roboto, sans-serif;
+    margin: 0;
+}
+
+nav {
+    background-color: olive;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    
+}
+
+nav a {
+    text-decoration: none;
+    padding: 1rem;
+    color: white;
+    text-transform: uppercase;
+}
+
+nav a:hover {
+    background-color: darkblue;
+}
+
+main {
+    max-width: 660px;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    font-weight: 300;
+    margin-bottom: 1.25rem;  
+}
+
+figure {
+    float: right;
+    width: 50%;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+img {
+    width: 100%;
+}
+
+.standfirst {
+    font-weight: bold;
+}

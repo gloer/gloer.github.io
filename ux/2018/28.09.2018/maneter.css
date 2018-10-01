@@ -1,0 +1,8 @@
+body {
+
+    min-height: 100vh;
+    background-image: url("maneten.jpg");
+    background-size: cover;
+    background-position: right top;
+
+}

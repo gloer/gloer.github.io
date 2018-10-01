@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SVG in the browser</title>
+    <style>
+    
+        body {
+            margin: 0;
+        }
+        
+        @keyframes fly {
+            0% {
+                offset-distance: 0;
+            }
+            100% {
+                offset-distance: 100%;
+            }
+        }
+
+        .prikk {
+            position: absolute;
+            width: 20px;
+            height: 10px;
+            background-color: blueviolet;
+            left: 5px;
+            top: 5px;
+
+            transform: rotate(90deg);
+            offset-path: path('M98.5,87.5c-67,76-71,113.6-61,134c18.5,37.6,87.3,21.6,219,42c165.4,25.6,225.2,76.9,245,52c36.2-45.5-135.6-251.8-173-233c-13.4,6.7-1.8,38.4-28,65c-15.5,15.8-44.8,30.3-69,22c-36.7-12.6-30.8-67-70-85C140,74.6,115.9,80.6,98.5,87.5z');
+            animation: fly 7s infinite ease-in-out;
+            
+        }
+
+        .st0 {
+            fill: none;
+            stroke: black;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    
+    <svg width="800" height="600">
+
+        <path class="st0" d="M98.5,87.5c-67,76-71,113.6-61,134c18.5,37.6,87.3,21.6,219,42c165.4,25.6,225.2,76.9,245,52
+            c36.2-45.5-135.6-251.8-173-233c-13.4,6.7-1.8,38.4-28,65c-15.5,15.8-44.8,30.3-69,22c-36.7-12.6-30.8-67-70-85
+            C140,74.6,115.9,80.6,98.5,87.5z"/>
+        </svg>
+
+
+    </svg>
+
+    <div class="prikk"></div>
+
+    <script>
+    
+        for(let i=0; i<100; i++) {
+
+            const p = document.createElement("div");
+            p.className = "prikk";
+            p.style.animationDelay = i * 100 + "ms";
+            document.body.appendChild(p);
+
+
+        }
+    
+    </script>
+
+</body>
+</html>

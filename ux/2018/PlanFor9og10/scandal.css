@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+}
+
+main {
+    background-color: #f2f6f2;
+    display: grid;
+    grid-template-columns: 6fr 3fr;
+    width: 700px;
+    padding: 32px;
+    grid-gap: 16px;
+}
+
+h1 {
+    font-family: 'Pathway Gothic One', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+p {
+    text-align: justify;
+}
+
+aside p {
+    font-style: italic;
+}

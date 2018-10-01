@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Merkelig pil</title>
+    <style>
+        * {
+            cursor: none;
+        }
+        html {
+            background-color: black;
+        }
+        body {
+            margin: 0;
+        }
+        main {
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            position: relative;
+        }
+        main img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            mix-blend-mode: color-burn;
+        }
+
+        @keyframes blob {
+            0% {
+                transform:  rotate(0) scale(1, 1);
+            }
+            50% {
+                transform: rotate(120deg) scale(0.8, 1.4);
+            }
+            100% {
+                transform: rotate(360deg) scale(1.4, 0.8);
+            }
+        }
+
+        @keyframes bg {
+            0% {
+                background-color: red;
+            }
+            50% {
+                background-color: blue;
+            }
+            100% {
+                background-color: gray;
+            }
+        }
+
+        #bgr {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background-color: red;
+            animation: bg 16s infinite alternate;
+        }
+
+        #runding {
+            position: absolute;
+            left: 900px;
+            top: 300px;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background-color: white;
+            pointer-events: none;
+            /*background-image: radial-gradient(white, white, transparent, transparent, transparent);*/
+            mix-blend-mode: exclusion;
+            /*transform: rotate(50deg) scaleX(2);*/
+            /*animation: blob 4s infinite;*/
+        }
+
+        #txtManeter {
+            position: absolute;
+            left: 200px;
+            top: 200px;
+            color: white;
+            filter: blur(3.5px);
+            text-decoration: none;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 2rem;
+            transition: 1s;
+        }
+
+        #txtManeter:hover {
+            filter: blur(2px);
+            
+        }
+    </style>
+</head>
+<body>
+    
+    <main>
+        <div id="bgr"></div>
+        <img src="jellyfish.jpg" alt="En uhyggelig manet">
+        <a id="txtManeter" href="maneter.html">LES MER OM MANETER</a>
+        <div id="runding"></div>
+    </main>
+
+    <script>
+        const runding = document.getElementById("runding");
+
+        document.onmousemove = (evt) => {
+            runding.style.left = evt.clientX - 90 + "px";
+            runding.style.top = evt.clientY - 90 + "px";
+        } 
+        
+    </script>
+
+</body>
+</html>

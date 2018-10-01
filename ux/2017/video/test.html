@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Drukning</title>
+    <style>
+    
+        body {
+            margin: 0;
+        }
+
+        main {
+            background-image: linear-gradient(#333, #000);
+            width: 100vw;
+            height: 100vh;
+        }
+
+        main > img {
+            position: absolute;
+            left: 300px;
+            top: 280px;
+            opacity: 0.6;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <main>
+        
+    </main> 
+
+    <script>
+    
+        const main = document.querySelector("main");
+
+        for(let i=0; i<360; i++) {
+
+            const keyframes = [
+                {top: -Math.random() * 200 + "px" },
+                {top: "110%" }
+            ];
+            
+
+            const settings = {
+                duration: Math.random() * 8000,
+                fill: "forwards"
+            }
+
+            let bilde = document.createElement("img");
+            bilde.src = "images/drown.png";
+            bilde.style.left = Math.random() * innerWidth + "px";
+            bilde.style.top = Math.random() * 300 + "px";
+            main.appendChild(bilde); 
+            bilde.animate(keyframes, settings);   
+
+        }
+
+        
+        
+    </script>
+
+</body>
+</html>

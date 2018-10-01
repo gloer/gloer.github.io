@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stop Motion</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        @keyframes moveLeft {
+            to {
+                left: -600%;
+            }
+        }
+
+        #frame {
+            position: relative;
+            width: 200px;
+            height: 100px;
+            overflow: hidden;
+            background-image: url("manet.jpg");
+            
+        }
+
+        #manet {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #stripe {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 600%;
+            height: 100%;
+            background-color: orange;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: moveLeft 2s steps(6) infinite;
+            
+        }
+
+        #stripe div {
+            flex: 1;
+            height: 100%;
+            
+        }
+
+        #r1 { background-color: red; }
+        #r2 { background-color: blue; }
+        #r3 { background-color: green; }
+        #r4 { background-color: indigo; }
+        #r5 { background-color: brown; }
+        #r6 { background-color: slategray; }
+    </style>
+</head>
+<body>
+    
+    <div id="frame">
+        
+        <div id="stripe">
+            <div id="r1">1</div>
+            <div id="r2">2</div>
+            <div id="r3">3</div>
+            <div id="r4">4</div>
+            <div id="r5">5</div>
+            <div id="r6">6</div>
+        </div>
+    </div>
+
+</body>
+</html>

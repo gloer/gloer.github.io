@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Voks</title>
+
+    <style>
+
+        #boks {
+            background-color: red;
+            width: 100px;
+            height: 100px;
+            margin-top: 100px;
+        }
+
+    </style>
+</head>
+<body>
+    
+
+    <button id="krymp" onmousedown="bliMindre()" onmouseup="taPause()">Bli mindre</button>
+    <button id="voks" onmousedown="bliStorre()" onmouseup="taPause()">Bli større</button>
+
+    <div id="boks">
+
+    </div>
+
+
+    <script>
+    
+        const boks = document.getElementById("boks");
+        const keyframes = [
+            {width: 0},
+            {width: "200px"}
+        ];
+        const settings = {
+            duration: 2000,
+            fill: "both"
+        }
+
+        const animasjon = boks.animate(keyframes, settings);
+        animasjon.currentTime = 1000;
+        animasjon.pause();
+
+        function bliStorre() {
+            animasjon.playbackRate = 1;
+            animasjon.play();
+        }
+
+        function bliMindre() {
+            animasjon.playbackRate = -1;
+            animasjon.play();
+        }
+
+        function taPause() {
+            animasjon.pause();
+        }
+
+        animasjon.onfinish = function() {
+            console.log("Animasjonen er ferdig");
+
+            if(animasjon.currentTime === 0) {
+                console.log("Boksen er borte");
+            } else {
+                console.log("Boksen er stor");
+            }
+        }
+
+    </script>
+</body>
+</html>

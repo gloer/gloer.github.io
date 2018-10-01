@@ -1,0 +1,110 @@
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%; 
+    /* Dette er normalt 16px 
+    Men brukeren kan endre dette i instillinger i nettleseren */
+}
+
+body {
+    margin: 0;
+    background-color: #eee;
+    font-family: 'Open Sans', sans-serif;
+}
+
+header {
+    background-color: red;
+}
+
+nav {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 1rem 1rem;  
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;  
+    
+}
+
+
+nav a:hover {
+    background-color: darkblue;    
+}
+
+main {
+    width: 670px;
+    margin: auto;
+    background-color: white;
+    padding: 1rem;
+    padding-bottom: 2rem;
+    box-sizing: border-box;
+}
+
+footer {
+    width: 670px;
+    margin: auto;
+    background-color: white;
+    padding: 1rem;
+    border-top: 1px solid #ddd;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+}
+
+footer a {   
+    display: block; 
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0.25rem;
+}
+
+footer a span {
+    color: black;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+p {
+    color: #222;
+    line-height: 1.6;
+    font-size: 1rem;
+    text-align: justify;
+}
+
+.standfirst {
+    font-weight: bold;
+}
+
+figure {
+    float: right;
+    width: 30%;
+    margin-right: 0;
+    margin-left: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+img {
+    width: 100%;
+}
+
+figcaption {
+    border-bottom: 2px solid steelblue;
+}

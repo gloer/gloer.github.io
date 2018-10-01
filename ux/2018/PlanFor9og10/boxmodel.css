@@ -1,0 +1,17 @@
+h1 {
+    border: 1px solid olive;
+}
+
+.smal {
+    width: 600px;
+    
+
+    padding: 30px;
+    border-width: 50px;
+
+    box-sizing: border-box;
+}
+
+.right {
+    float: right;
+}

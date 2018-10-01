@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tekst</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+    
+        @keyframes blur_letter {
+            from {
+                filter: blur(15px);
+                transform: scale(2) translateX(0);
+            }
+            to {
+                filter: blur(1px);
+                transform: scale(1) translateX(-30px);
+                opacity: 1;
+            }
+        }
+
+        #s5 {
+            position: absolute;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            letter-spacing: 3px;
+            color: white;
+            font-size: 48px;
+            text-transform: uppercase;
+
+            left: 12vw;
+            top: 8vh;
+
+            
+        }
+
+        
+
+        #s5 span {
+            display: inline-block;
+            animation: blur_letter 2s forwards;
+            filter: blur(5px);    
+            opacity: 0;        
+        }
+
+        #s5 span:nth-child(1) { animation-delay: 1s; }
+        #s5 span:nth-child(2) { animation-delay: 1.2s; }
+        #s5 span:nth-child(3) { animation-delay: 1.4s; }
+        #s5 span:nth-child(4) { animation-delay: 1.6s; }
+        #s5 span:nth-child(5) { animation-delay: 1.8s; }
+        #s5 span:nth-child(6) { animation-delay: 2s; }
+        #s5 span:nth-child(7) { animation-delay: 2.2s; }
+        #s5 span:nth-child(8) { animation-delay: 2.4s; }
+        #s5 span:nth-child(9) { animation-delay: 2.6s; }
+        #s5 span:nth-child(11) { animation-delay: 2.8s; }
+    </style>
+</head>
+<body>
+    
+    <h1 id="s5">
+        <span>S</span><span>h</span><span>a</span><span>r</span><span>k</span><span>n</span><span>a</span><span>d</span><span>o</span>        <span></span><span>5</span>
+    </h1>
+
+</body>
+</html>

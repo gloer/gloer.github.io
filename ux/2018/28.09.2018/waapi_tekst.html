@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WAAPI Text</title>
+    <style>
+    
+        h1 {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: 4rem;
+            margin-left: 200px;
+            margin-top: 100px;
+        }
+
+        h1 span {
+            display: inline-block;
+            opacity: 0;
+            transform: scale(2);
+            filter: blur(5px);
+        }    
+
+        h1 span:last-child {
+            color: red;
+            font-size: 6rem;
+        }
+
+    </style>
+</head>
+<body>
+    
+
+    <h1 id="s1"></h1>
+
+
+    <script>
+    
+        const s1 = document.getElementById("s1");
+        const teksten = "SHARKNADO 5";
+
+        function lagTekst() {
+
+            const bokstaver = teksten.split("");
+
+            for(const [i, bokstav] of bokstaver.entries()){
+                
+                const span = document.createElement("span");
+                span.innerHTML = bokstav;
+                s1.appendChild(span);
+
+                span.animate([
+                    {opacity: 0, filter: "blur(5px)", transform: "translateX(0) scale(2)"},
+                    {opacity: 1, filter: "blur(1px)", transform: "translateX(-80px) scale(1)"},
+                ],{
+                    duration: 1500,
+                    delay: i * 300,
+                    fill: 'forwards',
+                    easing: 'ease-out'
+                }).onfinish = function() {
+                    console.log("HALLO");
+                };
+
+            }
+            
+
+        }
+
+        lagTekst();
+    
+    </script>
+
+</body>
+</html>

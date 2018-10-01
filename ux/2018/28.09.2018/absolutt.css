@@ -1,0 +1,55 @@
+body {
+    background-color: black;
+}
+
+.ghost {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    
+    transition: 1s;
+
+    width: 200px;
+    height: 300px;
+    background-color: cyan;
+    /*
+    border-top-left-radius: 20px;
+    border-top-right-radius: 40px; */
+    border-radius: 50% 50% 30px 30px;
+}
+
+.ghost:hover {
+    left: 200px;
+}
+
+.ghost:hover .eye {
+    transform: rotate(1turn) scale(2);
+}
+
+.eye {
+    transition: 1s;
+    position: absolute;
+    top: 100px;
+    width: 10px;
+    height: 10px;
+    background-color: blue;
+}
+
+#left {
+    left: 80px;
+}
+
+#right {
+    right: 80px;
+}
+
+#munn {
+    position: absolute;
+    bottom: 80px;
+    left: calc(50% - 75px);
+    width: 150px;
+    height: 20px;
+    background-color: black;
+
+}
+

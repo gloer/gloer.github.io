@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tekstanimasjon</title>
+    <style>
+        html {
+            font-size: 100%;
+        }
+        body {
+            margin: 0;
+        }
+        main {
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #tekst {
+            color: white;
+            text-transform: uppercase;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 2rem;
+        }
+
+        #tekst span {
+            display: inline-block;
+            opacity: 0;
+        }
+    
+    </style>
+</head>
+<body>
+    
+    <main>
+
+        <section id="tekst">
+            <h1 id="sharknado">
+                <span>S</span>
+                <span>h</span>
+                <span>a</span>
+                <span>r</span>
+                <span>k</span>
+                <span>n</span>
+                <span>a</span>
+                <span>d</span>
+                <span>o</span>
+                <span>&nbsp;</span>
+                <span>5</span>
+            </h1>
+        </section>
+
+    </main>
+
+    <script>
+    
+        const bokstaver = document.querySelectorAll("#sharknado > span");
+
+        const big = [
+
+            { transform: "scale(8)", filter: "blur(5px)", opacity: 0, color: "white" },
+            { transform: "scale(2) rotate(-15deg)", filter: "blur(0.1px)", opacity: 1, color: "red" }
+
+        ];
+
+        const keyframes = [
+
+            { transform: "scale(2)", filter: "blur(5px)", opacity: 0 },
+            { transform: "scale(1)", filter: "blur(0.1px)", opacity: 1 }
+
+        ];
+
+        const settings = {
+            duration: 1000,
+            fill: "forwards"
+        }
+
+        for(const [i, bokstav] of bokstaver.entries()) {
+
+            settings.delay = i * 200;
+
+            if(i === bokstaver.length - 1) {
+                bokstav.animate(big, settings);    
+            } else {
+                bokstav.animate(keyframes, settings);
+            }
+            
+            
+
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Katt som går</title>
+    <style>
+    
+        body {
+            background: #333;
+        }  
+        
+        @keyframes walk {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: 0 -2391px;
+            }
+        }
+
+        @keyframes stroll {
+            from {
+                background-position: 400px 0;
+            }
+            to {
+                background-position: 400px -2391px;
+            }
+        }
+
+         @keyframes run {
+            from {
+                background-position: 800px 0;
+            }
+            to {
+                background-position: 800px -2591px;
+            }
+        }
+
+        #katt {
+            width: 400px;
+            height: 200px;
+            background-image: url("sprites/cat_sprite.png");
+            background-color: darkolivegreen;
+            margin: auto;
+            animation: 
+                walk 1s steps(12) 24,
+                stroll .75s steps(12) 24s 1, 
+                run .5s steps(13) 24.75s infinite;
+        } 
+
+    </style>
+</head>
+<body>
+    
+    <div id="katt"></div>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+html {
+    font-size: 100%;
+}
+
+body {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+main {
+    border-left: 2px solid darkorange;
+    margin-left: 10%;
+}
+
+article {
+    width: 640px;
+    padding: 2.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    margin-left: 2rem;
+    background-color: aliceblue;
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+}
+
+article h1 {
+    font-size: 1.25rem;
+}
+
+article h2 {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+article p {
+    font-size: 1.125rem;
+}
+
+article p::first-letter {
+    float: left;
+    font-size: 4rem;
+    padding-right: 8px;
+    margin-bottom: 0;
+}
+
+#poppins {
+    background-color: #3bb85d;
+}
+
+#poppins h1 {
+    color: #ffe826;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+#poppins h2 {
+    color: #e8ede9;
+    font-family: 'Poppins', sans-serif;
+}
+
+#poppins p {
+    color: #e8ede9;
+    font-family: 'Varela Round', sans-serif;
+}

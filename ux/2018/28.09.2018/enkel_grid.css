@@ -1,0 +1,35 @@
+
+main {
+    display: grid;
+    grid-template-columns: 3fr 4fr 2fr;
+    grid-gap: 16px;
+    
+}
+
+article {
+    background-color: lightgreen;
+    padding: 30px;
+}
+
+.treer {
+    grid-column: span 3;
+}
+
+.torader {
+    grid-row: span 2;
+}
+
+
+/*
+main {
+    grid-template-columns: 1fr;
+}
+
+.torader {
+    grid-row: span 1;
+}
+
+.treer {
+    grid-column: span 1;
+}
+*/

@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    background-color: black;
+}
+
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+#alice {
+    color: #431236;
+    width: 25%;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform-origin: 0 0;
+    transform: rotate(0) translate(-50%, -50%);    
+    will-change: transform, color;
+  }
+
+#tunnel {
+    background: 
+        url("bg-tunnel-border-left.svg") repeat-y,
+        url("bg-tunnel-border-right.svg") repeat-y 100% 100%,
+        url("bg_tunnel-specks.png"),
+        #6c373f;
+    margin: 0 auto;
+    width: 60%;
+    height: calc(100% + 300px);
+    min-width: 400px;
+}

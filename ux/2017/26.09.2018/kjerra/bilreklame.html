@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Konfigurer din nye bil</title>
+</head>
+<style>
+
+    main {
+        width: 980px;
+        height: 400px;
+        margin: auto;
+        background-image: linear-gradient(#eee, #333);
+        position: relative;
+        overflow: hidden;
+    }
+    #bil {
+        position: absolute;
+        background-image: url("ani_0002_white.png");
+        width: 733px;
+        height: 255px;
+        top: 80px;
+        right: 120px;
+        transition: background-image 1s;
+    }
+    #forhjul {
+        position: absolute;
+        bottom: 80px;
+        left: 135px;
+    }
+    #bakhjul {
+        position: absolute;
+        bottom: 80px;
+        right: 140px;
+    }
+
+</style>
+<body>
+    
+    <main>
+        <div id="bil">
+            <img id="forhjul" src="ani_0000_front.png">
+            <img id="bakhjul" src="ani_0001_back.png">
+        </div>
+    </main>
+
+    <nav>
+        <button onclick="speedUp()">Jeg kan kjøre fort</button>
+        <button onclick="snu()">Jeg kan rygge også</button>
+        <button onclick="stopp()">Jeg kan stoppe</button>
+        <button onclick="bliRød()">Jeg kan bli rød</button>
+    </nav>
+
+    <script>
+    
+        const bil = document.getElementById("bil");
+        const forhjul = document.getElementById("forhjul");
+        const bakhjul = document.getElementById("bakhjul");
+
+        const driveKeyframes = [
+            { right: "-750px" },
+            { right: "990px" }
+        ];
+
+        const snurrKeyframes = [
+            { transform: "rotate(6turn)" },
+            { transform: "rotate(0)" }
+        ];
+
+        const driveSettings = {
+            duration: 8000,
+            iterations: Infinity,
+            easing: 'ease-in-out'
+        };
+
+        const drive = bil.animate(driveKeyframes, driveSettings);
+        const snurrForhjul = forhjul.animate(snurrKeyframes, driveSettings);
+        const snurrBakhjul = bakhjul.animate(snurrKeyframes, driveSettings);
+
+
+        let speed = 1;
+        function speedUp() {
+            speed++;
+
+            drive.playbackRate = speed;
+            snurrBakhjul.playbackRate = speed;
+            snurrForhjul.playbackRate = speed;
+        }
+
+        function snu() {
+            drive.reverse();
+            snurrBakhjul.reverse();
+            snurrForhjul.reverse();
+        }
+
+        function stopp() {
+            drive.playbackRate = 0;
+            snurrBakhjul.playbackRate = 0;
+            snurrForhjul.playbackRate = 0;
+        }
+
+        function bliRød() {
+            bil.style.backgroundImage = "url(ani_0003_red.png)";
+        }
+
+    </script>
+
+</body>
+</html>
