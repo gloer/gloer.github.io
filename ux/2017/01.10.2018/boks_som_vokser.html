@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>En boks som kan bli større</title>
+    <style>
+       
+        #boks {
+            background-color: blue;
+            width: 300px;
+            height: 100px;
+            margin-top: 50px;            
+        }
+    </style>
+</head>
+<body>
+    <button id="btnMinsk">Gjør boksen mindre</button>
+    <button id="btnVoks">Gjør boksen større</button>
+
+    <div id="boks"></div>
+
+    <script>
+        const btnMinsk = document.getElementById("btnMinsk");
+        const btnVoks = document.getElementById("btnVoks");
+        const boks = document.getElementById("boks");
+
+        const keyframes = [
+            { width: "0" },
+            { width: "600px" }
+        ];
+        const settings = {
+            duration: 2000,
+            fill: "both"            
+        };        
+
+        const animasjon = boks.animate(keyframes, settings);
+
+        animasjon.currentTime = 1000;
+        animasjon.pause();
+
+        function spillForover() {
+            animasjon.playbackRate = 4;
+            animasjon.play();
+        }
+
+        function spillBaklengs() {
+            animasjon.playbackRate = -1;
+            animasjon.play();
+        }
+
+        function stoppAnimasjon() {
+            animasjon.pause();
+        }
+
+        function ferdig() {
+            if(animasjon.currentTime === 0) {
+                console.log("Boksen er nå helt borte");
+            } else {
+                console.log("Boksen er nå så stor som den kan bli");
+            }
+            
+        }
+
+        animasjon.onfinish = ferdig;
+
+        btnVoks.onmousedown = spillForover;
+        btnMinsk.onmousedown = spillBaklengs;
+
+        btnVoks.onmouseup = stoppAnimasjon;
+        btnMinsk.onmouseup = stoppAnimasjon;
+
+    </script>
+</body>
+</html>

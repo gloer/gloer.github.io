@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Katten</title>
+    <style>
+    
+        @keyframes walk {
+            to {
+                background-position: 0 -2280px;
+            }
+        }
+
+        @keyframes move {
+            from {
+                left: 100px;
+            }
+            to {
+                left: 32px;
+            }
+        }
+
+        #katt {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            background-image: url("sprite_catwalk.png");
+            width: 400px;
+            height: calc(2280px / 12);
+            animation: walk 1s steps(12) infinite;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="katt"></div>
+
+</body>
+</html>
