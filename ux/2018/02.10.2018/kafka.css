@@ -1,0 +1,55 @@
+html {
+    font-size: 100%;
+}
+body {
+    font-family: 'EB Garamond', garamond, serif;
+    
+}
+
+article {
+    column-count: 3;
+    column-rule: 1px solid green;
+    column-gap: 2rem;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+
+/* Standing capital */
+/*
+p::first-letter {
+    color: green;
+    font-size: 3rem;
+    line-height: 3rem;
+}
+*/
+
+/* Drop Capital */
+p::first-letter {
+    color: green;
+    float: left;
+    font-size: 3rem;
+    line-height: 3rem;
+    padding-right: 1rem;
+}
+
+@media (max-width: 700px) {
+    article {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 500px) {
+    article {
+        column-count: 1;
+    }
+}
