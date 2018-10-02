@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lazy river</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url("black.png");
+            background-size: cover;
+            background-position: center;
+        }
+        audio {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+
+        p {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="dark.jpg" alt="Just used to load" style="display: none">
+    
+    <audio id="theMusic" src="Lazy_River.mp3" controls preload="true"></audio>
+
+    <p id="btnStart">Click to start the amazing slideshow</p>
+
+    <script>
+    
+        const theMusic = document.getElementById("theMusic");
+        const btnStart = document.getElementById("btnStart");
+
+        let playedFirstScene = false;
+
+        const firstKeyframes = [
+            {backgroundImage: "url(black.png)"},
+            {backgroundImage: "url(dark.jpg)"}
+        ];
+
+        const firstSettings = {
+            duration: 2000,
+            fill: "forwards"
+        }
+
+        const firstScene = document.body.animate(firstKeyframes, firstSettings);
+        firstScene.pause();
+        
+        theMusic.ontimeupdate = function() {
+            // Vi kan nå bruke tidslinjen til å kontrollere animasjoer o.l.
+            console.log(theMusic.currentTime);
+
+            if(theMusic.currentTime > 3 && !playedFirstScene) {
+                playedFirstScene = true;
+                firstScene.play();
+
+            }
+
+        }
+
+        function fadeMe() {
+            btnStart.animate([
+                {opacity: 1, filter: "blur(0)"},
+                {opacity: 0, filter: "blur(5px)"}
+            ],{
+                duration: 2000,
+                fill: "forwards"
+            });
+        }
+
+        btnStart.onclick = function() {
+            theMusic.play();
+            fadeMe();
+        }
+    
+    </script>
+
+</body>
+</html>
