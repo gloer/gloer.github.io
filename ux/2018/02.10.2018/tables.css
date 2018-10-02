@@ -1,0 +1,75 @@
+html {
+    /* Størrelse satt av bruker i nettleseren */
+    /* Standard er 16px */
+    font-size: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+main {
+    max-width: 800px;
+    margin: auto;
+}
+
+table {
+    /* Vi ønsker å sette skriftstørrelse til 14px */
+    /* Det blir det samme som 14/16 i rem-enheter */
+    font-size: 0.875rem;
+    width: 100%;
+    /* Gjør dette hver gang du lager en tabell !!! */
+    border-collapse: collapse;
+}
+
+table tr {
+    border-bottom: 1px solid #ddd;
+}
+
+table tr.success {
+    background-color: #baba56;
+    color: white;
+}
+
+thead {
+    border-top: 4px solid #d60000;
+    background-color: #f9f9f9;
+    
+}
+
+table th, table td {
+    border-right: 1px solid #dddddd;
+    line-height: 1.125rem;
+}
+
+table th:last-child, table td:last-child {
+    border: none;
+}
+
+table th {
+    font-weight: 600;
+    text-align: left;
+    text-transform: uppercase;
+    padding: 0.5rem 0.625rem 0.625rem 0.625rem;
+}
+
+table td {
+    font-weight: 300;
+    text-align: left;
+    padding: 0.5625rem 0.625rem;
+}
+
+@media (max-width: 600px) {
+
+    table th:nth-child(3) {
+        display: none;
+    }
+
+    table th:nth-child(4) {
+        display: none;
+    }
+
+    table td:nth-child(3) {
+        display: none;
+    }
+}
