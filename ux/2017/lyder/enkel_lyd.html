@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Enkel lyd</title>
+</head>
+<body>
+
+    <button id="a">A</button>
+    <button id="b">B</button>
+    <button id="c">C</button>
+    
+    <script>
+    
+        const a = document.getElementById("a");
+        const b = document.getElementById("b");
+        const c = document.getElementById("c");
+
+        const ac = new AudioContext();
+
+
+        function spill(frekvens) {
+
+            const osc = ac.createOscillator();
+            osc.connect(ac.destination);
+
+            osc.frequency.value = frekvens;
+
+            osc.start(ac.currentTime);
+            osc.stop(ac.currentTime + 0.1);
+
+        }
+
+        a.onclick = function() {
+            spill(440);
+        }
+
+        b.onclick = function() {
+            spill(660);
+        }
+
+        c.onclick = function() {
+            spill(790);
+        }
+        
+
+        
+
+    </script>
+
+</body>
+</html>
