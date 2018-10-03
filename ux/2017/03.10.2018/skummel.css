@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: black;
+    background-image: url("black.png");
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-image 2s;
+}
+
+#btnPlay {
+    color: white;
+    opacity: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

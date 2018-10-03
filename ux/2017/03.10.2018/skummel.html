@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Skumle saker</title>
+    <link rel="stylesheet" href="skummel.css">
+</head>
+<body>
+
+    <img src="img1.jpg" style="display: none">
+    <img src="img2.jpg" style="display: none">
+    <img src="img3.jpg" style="display: none">
+    <img src="img4.jpg" style="display: none">
+    <img src="img5.jpg" style="display: none">
+    <img src="img6.jpg" style="display: none">
+    
+
+    <h1 id="btnPlay">Click if you dare</h1>
+
+    <audio id="theMusic" src="Lazy_River.mp3" preload="auto" style="display: none">
+        Din nettleser har ikke støtte for denne lydfilen
+    </audio>
+
+    <script>
+        
+        const btnPlay = document.getElementById("btnPlay");
+        const theMusic = document.getElementById("theMusic");
+
+        const bilder = [
+            {fil: "img1.jpg", tekst: "In the dark forrest" },
+            {fil: "img2.jpg", tekst: "a mystery unravels" },
+            {fil: "img3.jpg", tekst: "From the director of" },
+            {fil: "img4.jpg", tekst: "Sharknado 5" },
+            {fil: "img5.jpg", tekst: "comes a movie so scary" },
+            {fil: "img6.jpg", tekst: "that you will shiver" }
+        ];
+
+        let bildenr = 0;
+
+        function byttBilde() {
+
+            const bilde = bilder[bildenr];
+            const filen = bilde.fil;
+            const teksten = bilde.tekst;
+
+            document.body.style.backgroundImage = `url("${filen}")`;
+            // document.body.backgroundImage = "url(" + filen + ")";
+            btnPlay.innerHTML = teksten;
+
+            // Fader ut teksten
+            btnPlay.animate( [
+                { opacity: 1, filter: "blur(1px)", transform: "scale(2)" },                
+                { opacity: 0, filter: "blur(10px)", transform: "scale(0)" }
+            ] , {
+                duration: 3000,
+                delay: 100,
+                fill: "forwards"
+            } );
+
+            bildenr++;
+
+        }
+
+        
+        btnPlay.onclick = function() {
+
+            theMusic.play();
+            // Starte slideshow
+            setInterval(byttBilde, 4000);
+
+            btnPlay.animate( [
+                { opacity: 1, filter: "blur(1px)", transform: "scale(1)" },
+                { opacity: 0, filter: "blur(18px)", transform: "scale(0)" }
+            ] , {
+                duration: 3000,
+                fill: "forwards"
+            } );
+
+
+        }
+
+        btnPlay.animate( [
+            { opacity: 0, filter: "blur(18px)", transform: "scale(3)" },
+            { opacity: 1, filter: "blur(1px)", transform: "scale(1)" }
+        ] , {
+            duration: 4000,
+            delay: 1000,
+            fill: "forwards"
+        } );
+               
+        
+
+    </script>
+
+    
+
+</body>
+</html>
