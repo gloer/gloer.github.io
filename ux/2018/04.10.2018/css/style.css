@@ -1,0 +1,41 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.premium {
+    background-color: #60b3f6;
+    color: white;
+    min-height: 640px;
+    background-image: url("../img/premium_dancer.png");
+    background-repeat: no-repeat;
+    background-position: right bottom -20px;
+}
+
+.premium article {
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 140px;
+}
+
+.premium h1 {
+   font-size: 5rem;
+   font-weight: 900; 
+   margin-bottom: 1rem;
+   
+}
+
+.premium p {
+    margin-bottom: 2rem;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    background-color: darkgreen;
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 700;
+    border-radius: 2rem;
+}
