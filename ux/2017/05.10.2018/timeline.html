@@ -83,7 +83,8 @@
             </div>
             <div class="distance">Utfor <span>▶</span></div>
             <div id="utfor" class="times">
-                <!-- Her kommer lydprikkene-->
+                <!-- Her kommer lydprikkene-->   
+                        
             </div>
 
         </section>
@@ -95,11 +96,45 @@
         const utfor = document.getElementById("utfor");
         // Dette er juksetider som er omgjort til prosenter
         // Hvor lenge etter har de kommet i mål
-        const tider = [0, 8, 12, 17, 43, 76,80, 88];
+        const tider = [0, 8, 12, 17, 43, 76, 80, 88];
 
         const ac = new AudioContext();
 
         // Her skal vi skrive resten av koden
+        for( var tid of tider ) {
+            const prikk = document.createElement("span");
+            utfor.appendChild(prikk);
+            prikk.style.left = tid + "%";
+        }
+
+        function visTider() {
+            utfor.innerHTML = ""; // Fjerner prikkene som er der fra før
+
+            for( var tid of tider ) {
+                const prikk = document.createElement("span");
+                utfor.appendChild(prikk);
+                prikk.style.left = tid + "%";
+
+                prikk.animate( [
+                    { transform: "scale(1)" },
+                    { transform: "scale(1.5)" },
+                    { transform: "scale(1)" }
+                ], {
+                    duration: 100,
+                    delay: tid * 15
+                } );
+
+                const osc = ac.createOscillator();
+                osc.connect(ac.destination);
+                osc.frequency.value = 880;
+
+                osc.start(ac.currentTime + (tid * 15) / 1000);
+                osc.stop(ac.currentTime + (tid * 15 + 100) / 1000 );
+
+            }
+        }
+
+        document.onclick = visTider;
 
 
     
