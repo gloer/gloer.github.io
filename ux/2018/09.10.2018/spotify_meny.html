@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Spotify</title>
+    <link rel="stylesheet" href="meny.css">
+</head>
+<body>
+    
+    <header class="">
+
+        <section class="container">
+            <a href="index.html" class="logo">
+                <img src="Spotify_Logo_RGB_White.png" alt="Logoen til Spotify">
+                <span>Home</span>
+            </a>
+
+            <nav>
+                <a href="#">Premium</a>
+                <a href="#">Help</a>
+                <a href="#">Download</a>
+                <div class="skillelinje"></div>
+                <a href="#">Sign up</a>
+                <a href="#">Log in</a>
+            </nav>
+
+        </section>
+
+    </header>
+
+    <div class="fjernmeg"></div>
+
+    <script>
+    
+        const header = document.querySelector("body > header");
+
+        onscroll = () => {
+            if(scrollY > 15) {
+                header.className = "semi-black";
+            } else {
+                header.className = "";
+            }
+        }
+
+    </script>
+
+</body>
+</html>
