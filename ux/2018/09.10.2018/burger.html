@@ -17,18 +17,18 @@
             position: absolute;
             left: 1rem;
             top: 1rem;   
+            cursor: pointer;
         }
         #burger div {
             position: absolute;
             height: 2px;
             width: 100%;
             background-color: white;
+            transition: 1s;
         }
 
         #cb {
-            position: absolute;
-            left: 400px;
-            top: 200px;
+            display: none;
         }
 
         #burger div:nth-child(1) { top: 0; }
@@ -36,7 +36,26 @@
         #burger div:nth-child(3) { top: calc(1rem - 1px); }
         #burger div:nth-child(4) { bottom: 0; }
 
-        
+        #cb:checked ~ #burger div:nth-child(1) { opacity: 0; top: 1rem; }
+        #cb:checked ~ #burger div:nth-child(2) { transform: rotate(45deg); }
+        #cb:checked ~ #burger div:nth-child(3) { transform: rotate(-45deg); }
+        #cb:checked ~ #burger div:nth-child(4) { opacity: 0; bottom: 1rem; }
+
+        #menu {
+
+            position: absolute;
+            top: 4rem;
+            left: -100%;
+            width: 100%;
+            height: calc(100vh - 4rem);
+            background-color: #666;
+            transition: 1s;
+
+        }
+
+        #cb:checked ~ #menu {
+            left: 0;
+        }
     
     </style>
 </head>
@@ -48,5 +67,8 @@
         <div></div>
         <div></div>
     </label>
+    <nav id="menu">
+        
+    </nav>
 </body>
 </html>
