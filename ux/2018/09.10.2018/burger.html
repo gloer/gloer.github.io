@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+        body {
+            background-color: black;
+        }
+
+        #burger {
+            width: 2rem;
+            height: 2rem;
+            position: absolute;
+            left: 1rem;
+            top: 1rem;   
+        }
+        #burger div {
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background-color: white;
+        }
+
+        #cb {
+            position: absolute;
+            left: 400px;
+            top: 200px;
+        }
+
+        #burger div:nth-child(1) { top: 0; }
+        #burger div:nth-child(2) { top: calc(1rem - 1px); }
+        #burger div:nth-child(3) { top: calc(1rem - 1px); }
+        #burger div:nth-child(4) { bottom: 0; }
+
+        
+    
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="cb">
+    <label id="burger" for="cb">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </label>
+</body>
+</html>
