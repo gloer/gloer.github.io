@@ -1,0 +1,12 @@
+img {
+    max-width: 200px;
+}
+
+img:first-child:active ~ img {
+    filter: invert(1);
+}
+
+img:nth-child(2):hover + img {
+    border-radius: 10px;
+    filter: grayscale(1);
+}

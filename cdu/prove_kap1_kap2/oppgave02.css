@@ -1,0 +1,31 @@
+
+
+
+ul {
+    list-style: none;
+    padding: 0;
+    background-color: #a2bbd9;
+    max-width: 400px;
+    color: white;
+    font-family: sans-serif;
+}
+ul > li {
+    background-color: #5377b2;
+    border-left: 32px solid #405cac;
+    border-right: 32px solid #6d8fbb;    
+    margin-bottom: 2px;
+}
+
+ul > li:hover {
+    background-color: #c3874d;
+    border-left-color: #a5ed9a;
+    border-right-color: #a5ed9a;
+}
+
+ul > li > a {
+    padding: 16px;
+    display: block;
+    text-decoration: none;
+    color: white;
+}
+
