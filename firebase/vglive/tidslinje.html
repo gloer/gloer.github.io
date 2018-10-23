@@ -82,6 +82,8 @@
         <button class="button" id="btnBorteGoal">Mål til bortelaget</button>                    
         <button class="button warning" id="btnHjemmeCorner">Corner til hjemmelaget</button>
         <button class="button warning" id="btnBorteCorner">Corner til bortelaget</button>                    
+        <button class="button primary" id="btnHjemmeGult">Gult kort til hjemmelaget</button>
+        <button class="button primary" id="btnBorteGult">Gult kort til bortelaget</button>                    
     </section>
 
     <section id="info">
@@ -112,6 +114,8 @@
         const btnBorteGoal = document.getElementById('btnBorteGoal');
         const btnHjemmeCorner = document.getElementById('btnHjemmeCorner');
         const btnBorteCorner = document.getElementById('btnBorteCorner');
+        const btnHjemmeGult = document.getElementById('btnHjemmeGult');
+        const btnBorteGult = document.getElementById('btnBorteGult');
         const regHendelse = document.getElementById('regHendelse');
         const inpHendelse = document.getElementById('inpHendelse');
         const nyKamp = document.getElementById('nyKamp');
@@ -198,6 +202,32 @@
                 type: "goal",
                 goaler: "home",
                 tekst: "Mål til " + hjemmelag + "!",
+                tidspunkt: firebase.database.ServerValue.TIMESTAMP
+            });
+            
+        }
+
+        btnHjemmeGult.onclick = () => {
+            kampen = kamper.child(key);
+            hendelser = kampen.child("hendelser");
+
+            hendelser.push({
+                type: "yellowcard",
+                goaler: "home",
+                tekst: "Gult til " + hjemmelag + "!",
+                tidspunkt: firebase.database.ServerValue.TIMESTAMP
+            });
+            
+        }
+
+        btnBorteGult.onclick = () => {
+            kampen = kamper.child(key);
+            hendelser = kampen.child("hendelser");
+
+            hendelser.push({
+                type: "yellowcard",
+                goaler: "away",
+                tekst: "Gult til " + bortelag + "!",
                 tidspunkt: firebase.database.ServerValue.TIMESTAMP
             });
             
