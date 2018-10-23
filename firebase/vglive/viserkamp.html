@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tidslinje</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <style>
+        html {
+            font-size: 100%;
+        }
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        header {
+            background-color: darkgreen;
+            color: white;
+            
+        }
+        main {            
+            font-size: 0.875rem;
+            font-weight: 400;
+        }
+        #time {
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: center;
+            color: white;
+            font-weight: 300;
+            font-size: 0.75rem;
+        }
+        #div_omgang {
+            background-color: #1a912b;
+            padding: 0.5rem;
+        }
+        #div_clock {
+            background-color: black;
+            padding: 0.5rem;
+        }
+        #stilling {
+            display: grid;
+            grid-template-columns: 1fr auto auto auto 1fr;
+            text-align: center;
+            grid-gap: 1rem;
+        }
+        #stilling div {
+            padding: 1rem;
+        }
+
+        main > div {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            grid-gap: 1rem;
+            padding: 1rem;
+            justify-content: center;
+            align-items: center;  
+            border-bottom: 1px solid #eee;          
+        }
+
+        
+
+        main div .bilde {
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 1rem;
+        }
+
+        .goal {
+            background-color: antiquewhite;            
+        }
+
+        .goal .tekst {
+            font-weight: 500;
+        }
+
+        .goal .bilde {
+            background-image: url(icons/goal-football.svg);
+            
+        }
+
+        .comment .bilde {
+            background-image: url(icons/comment.svg);
+        }
+
+        .corner .bilde {
+            background-image: url(icons/corner.svg);
+        }
+
+    
+
+    </style>
+</head>
+<body>
+    
+    <header>
+        <section id="time">
+            <div id="div_omgang">1. omgang</div>
+            <div id="div_clock">00:00</div>
+        </section>
+        <section id="stilling">
+            <div id="divHjemmelag">.....</div>
+            <div id="divHjemmeScore">0</div>
+            <div>-</div>
+            <div id="divBorteScore">0</div>
+            <div id="divBortelag">.....</div>
+        </section>
+    </header>
+    <main>
+
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDX7_vsdMR6qbW807NMDafCM1m3RK_Gmrc",
+            authDomain: "fire-my-store.firebaseapp.com",
+            databaseURL: "https://fire-my-store.firebaseio.com",
+            projectId: "fire-my-store",
+            storageBucket: "fire-my-store.appspot.com",
+            messagingSenderId: "377970988097"
+        };
+        firebase.initializeApp(config);
+        // Done initializing
+        
+        
+        const main = document.querySelector("main");
+        const div_clock = document.getElementById('div_clock');
+        const divHjemmelag = document.getElementById('divHjemmelag');
+        const divBortelag = document.getElementById('divBortelag');
+
+        const divHjemmeScore = document.getElementById('divHjemmeScore');
+        const divBorteScore = document.getElementById('divBorteScore');
+        
+        
+        
+
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var id = url.searchParams.get("id");
+        
+        //console.log(id);
+
+        let start;
+
+        const db = firebase.database();
+        const kamp = db.ref("kamper/" + id);
+        const hendelser = kamp.child("hendelser");
+
+        let sekunder;
+        
+        const visKlokke = () => {
+            sekunder++;
+
+            let minutter = Math.floor(sekunder / 60);
+            if(minutter < 10) {
+                minutter = "0" + minutter;
+            }
+            s = sekunder % 60;
+            if(s < 10) {
+                s = "0" + s;
+            }
+
+            div_clock.innerHTML = minutter + ":" + s;
+        }
+
+        const startKlokka = (start, now) => {
+            sekunder = Math.floor(now / 1000 - start / 1000);
+            
+            setInterval(visKlokke, 1000);
+
+            let minutter = Math.floor(sekunder / 60);
+            if(minutter < 10) {
+                minutter = "0" + minutter;
+            }
+            s = sekunder % 60;
+            if(s < 10) {
+                s = "0" + s;
+            }
+
+            div_clock.innerHTML = minutter + ":" + s;
+
+            
+        }
+
+        let homegoals = 0;
+        let awaygoals = 0;
+
+        
+        const visHendelser = (snap) => {
+
+
+            if(!start) {
+
+                kamp.on("value", snap => {                    
+                    start = snap.val().start_tid;                    
+                });
+
+            }
+            
+            main.innerHTML = `
+                <div class="${snap.val().type}">
+                    <div class="bilde"></div>                    
+                    <span class="tekst">${snap.val().tekst}</span>    
+                    <span>${Math.floor((snap.val().tidspunkt / 1000 - start / 1000) / 60)}'</span>
+                </div>
+            ` + main.innerHTML;
+
+            const data = snap.val();
+            if(data.type === "goal" && data.goaler === "home") {
+                homegoals++;
+                divHjemmeScore.innerText = homegoals;
+                
+            }
+            if(data.type === "goal" && data.goaler === "away") {
+                awaygoals++;
+                divBorteScore.innerText = awaygoals;
+            }
+
+            document.querySelector("title").innerHTML = hjemmelag + " " + homegoals + " - " + awaygoals + " " + bortelag;
+
+        };
+
+        let klokkaErStartet = false;
+        
+        kamp.on("value", snap => {
+            const data = snap.val();
+            
+            divHjemmelag.innerText = data.hjemmelag;
+            divBortelag.innerText = data.bortelag;
+
+            hjemmelag = data.hjemmelag;
+            bortelag = data.bortelag;
+            
+
+            start = snap.val().start_tid;
+
+            // Starting a session
+            const sessions = db.ref("sessions");
+            sessions.push({
+                session_started: firebase.database.ServerValue.TIMESTAMP
+            }).then (                
+                snap => { snap.on("value", snap => {
+
+                    if(!klokkaErStartet) {
+                        startKlokka(start, snap.val().session_started);
+                        klokkaErStartet = true;
+                    } else {
+                        // do nothing
+                    }
+                    
+
+
+                }) }
+            );
+            
+        });
+
+        
+
+        hendelser.on("child_added", visHendelser);
+        
+
+        
+        
+    </script>
+
+</body>
+</html>

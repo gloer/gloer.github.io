@@ -1,0 +1,244 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kamprapport</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-float.css">
+    <style>
+    
+        body {
+            max-width: 700px;
+            padding: 0 1rem;
+            margin: auto;
+        }
+
+        #kampinfo {
+            background-color: darkgreen;
+            color: white;
+            font-weight: 500;
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: space-around;
+            padding: 0.5rem;
+            grid-gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        #knapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 1rem;
+        }
+    
+    </style>
+</head>
+<body>
+
+
+    <section id="kampinfo">
+        <div class="hjemmelag">...</div>                    
+        <div class="bortelag">...</div>    
+    </section>
+
+    <section id="nyKamp">
+
+        <form id="startSkjema">
+            <label for="inpHjemmelag">Hjemmelag: </label>
+            <input type="text" id="inpHjemmelag" placeholder="Hjemmelag">
+
+            <label for="inpBortelag">Bortelag: </label>
+            <input type="text" id="inpBortelag" placeholder="Bortelag">
+
+            <button class="button expanded" type="submit">START KAMP</button>
+        </form>
+
+    </section>
+
+    <section>
+
+        <form id="regHendelse">
+            <input type="text" id="inpHendelse" placeholder="Hva skjedde">
+            <button class="button success expanded" type="submit">Registrer hendelse</button>
+        </form>
+
+    </section>
+
+    <section id="knapper">            
+        <button class="button" id="btnHjemmeGoal">Mål til hjemmelaget</button>
+        <button class="button" id="btnBorteGoal">Mål til bortelaget</button>                    
+        <button class="button warning" id="btnHjemmeCorner">Corner til hjemmelaget</button>
+        <button class="button warning" id="btnBorteCorner">Corner til bortelaget</button>                    
+    </section>
+
+    <section>
+        <a href="" id="linkKamp" target="_blank" style="display: none;">Følg kampen her</a>
+    </section>
+
+    
+    
+    
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDX7_vsdMR6qbW807NMDafCM1m3RK_Gmrc",
+            authDomain: "fire-my-store.firebaseapp.com",
+            databaseURL: "https://fire-my-store.firebaseio.com",
+            projectId: "fire-my-store",
+            storageBucket: "fire-my-store.appspot.com",
+            messagingSenderId: "377970988097"
+        };
+        firebase.initializeApp(config);
+        // Done initializing
+
+                
+        const linkKamp = document.getElementById('linkKamp');
+        const btnHjemmeGoal = document.getElementById('btnHjemmeGoal');
+        const btnBorteGoal = document.getElementById('btnBorteGoal');
+        const btnHjemmeCorner = document.getElementById('btnHjemmeCorner');
+        const btnBorteCorner = document.getElementById('btnBorteCorner');
+        const regHendelse = document.getElementById('regHendelse');
+        const inpHendelse = document.getElementById('inpHendelse');
+        const nyKamp = document.getElementById('nyKamp');
+        
+        
+
+        const startSkjema = document.getElementById('startSkjema');
+        const inpHjemmelag = document.getElementById('inpHjemmelag');
+        const inpBortelag = document.getElementById('inpBortelag');
+        
+        
+        
+
+        const db = firebase.database();
+        const kamper = db.ref("kamper");
+        
+        let start = 0;
+        let key = null;
+
+        let kampen;
+        let hendelser;
+
+        let hjemmelag;
+        let bortelag;
+
+        if(localStorage.myGameID) {
+
+            nyKamp.style.display = "none";
+
+            kampen = kamper.child(localStorage.myGameID);            
+            hendelser = kampen.child("hendelser");
+            key = localStorage.myGameID;
+
+
+            kampen.on("value", snap => {
+                const data = snap.val();
+                console.log("DATA: " + data.hjemmelag);
+                hjemmelag = data.hjemmelag;
+                bortelag = data.bortelag;
+                document.querySelector("#kampinfo .hjemmelag").innerText = data.hjemmelag;
+                document.querySelector("#kampinfo .bortelag").innerText = data.bortelag;                
+                btnHjemmeGoal.innerText = "Mål til " + hjemmelag;
+                btnBorteGoal.innerText = "Mål til " + bortelag;
+                btnHjemmeCorner.innerText = "Corner til " + hjemmelag;
+                btnBorteCorner.innerText = "Corner til " + bortelag;
+            });
+        }
+
+        startSkjema.onsubmit = (evt) => {
+
+            evt.preventDefault();
+            kamper.push({
+                start_tid: firebase.database.ServerValue.TIMESTAMP,
+                hjemmelag: inpHjemmelag.value,
+                bortelag: inpBortelag.value,
+                hjemmegoal: 0,
+                bortegoal: 0
+            }).then(
+                snap => { 
+                    key = snap.key; linkKamp.href="viserKamp.html?id=" + snap.key; 
+                    linkKamp.style.display = "inline-block";
+                    btnHjemmeGoal.innerText = "Mål til " + inpHjemmelag.value;
+                    btnBorteGoal.innerText = "Mål til " + inpBortelag.value;
+                    hjemmelag = inpHjemmelag.value;
+                    bortelag = inpBortelag.value;
+                    localStorage.myGameID = snap.key;
+                }
+            );
+            
+
+        }
+
+        btnHjemmeGoal.onclick = () => {
+            kampen = kamper.child(key);
+            hendelser = kampen.child("hendelser");
+
+            hendelser.push({
+                type: "goal",
+                goaler: "home",
+                tekst: "Mål til " + hjemmelag + "!",
+                tidspunkt: firebase.database.ServerValue.TIMESTAMP
+            });
+            
+        }
+
+        btnHjemmeCorner.onclick = () => {
+            kampen = kamper.child(key);
+            hendelser = kampen.child("hendelser");
+
+            hendelser.push({
+                type: "corner",
+                goaler: "home",
+                tekst: "Corner til " + hjemmelag + "!",
+                tidspunkt: firebase.database.ServerValue.TIMESTAMP
+            });
+            
+        }
+
+        btnBorteCorner.onclick = () => {
+            kampen = kamper.child(key);
+            hendelser = kampen.child("hendelser");
+
+            hendelser.push({
+                type: "corner",
+                goaler: "away",
+                tekst: "Corner til " + bortelag + "!",
+                tidspunkt: firebase.database.ServerValue.TIMESTAMP
+            });
+            
+        }
+
+        btnBorteGoal.onclick = () => {
+            kampen = kamper.child(key);
+            hendelser = kampen.child("hendelser");
+
+            hendelser.push({
+                type: "goal",
+                goaler: "away",
+                tekst: "Mål til " + bortelag + "!",
+                tidspunkt: firebase.database.ServerValue.TIMESTAMP
+            });
+            
+        }
+
+        regHendelse.onsubmit = (evt) => {
+            evt.preventDefault();
+            hendelser.push({
+                type: "comment",
+                tekst: inpHendelse.value,
+                tidspunkt: firebase.database.ServerValue.TIMESTAMP
+            });
+
+            regHendelse.reset();
+        }
+    
+
+    </script>
+
+</body>
+</html>
