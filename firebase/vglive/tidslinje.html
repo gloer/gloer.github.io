@@ -34,6 +34,15 @@
             grid-template-columns: 1fr 1fr;
             grid-gap: 1rem;
         }
+
+        #info {
+            padding: 1rem;
+            margin-top: 1rem;
+            border-top: 1px solid #ccc;
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: space-between;
+        }
     
     </style>
 </head>
@@ -75,8 +84,9 @@
         <button class="button warning" id="btnBorteCorner">Corner til bortelaget</button>                    
     </section>
 
-    <section>
-        <a href="" id="linkKamp" target="_blank" style="display: none;">Følg kampen her</a>
+    <section id="info">
+        <a href="" id="linkKamp" target="_blank">Følg kampen her</a>
+        <button id="btnVisNyKamp" class="button">Start en ny kamp</button>
     </section>
 
     
@@ -105,6 +115,8 @@
         const regHendelse = document.getElementById('regHendelse');
         const inpHendelse = document.getElementById('inpHendelse');
         const nyKamp = document.getElementById('nyKamp');
+        const btnVisNyKamp = document.getElementById('btnVisNyKamp');
+        
         
         
 
@@ -172,6 +184,10 @@
             );
             
 
+        }
+
+        btnVisNyKamp.onclick = () => {
+            nyKamp.style.display = "block";
         }
 
         btnHjemmeGoal.onclick = () => {
