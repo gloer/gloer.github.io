@@ -31,7 +31,7 @@
 
         #knapper {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr auto 1fr;
             grid-gap: 1rem;
         }
 
@@ -79,11 +79,15 @@
 
     <section id="knapper">            
         <button class="button" id="btnHjemmeGoal">Mål til hjemmelaget</button>
+        <img src="icons/goal-football.svg">
         <button class="button" id="btnBorteGoal">Mål til bortelaget</button>                    
         <button class="button warning" id="btnHjemmeCorner">Corner til hjemmelaget</button>
+        <img src="icons/corner.svg">
         <button class="button warning" id="btnBorteCorner">Corner til bortelaget</button>                    
         <button class="button primary" id="btnHjemmeGult">Gult kort til hjemmelaget</button>
-        <button class="button primary" id="btnBorteGult">Gult kort til bortelaget</button>                    
+        <img src="icons/yellow.svg">
+        <button class="button primary" id="btnBorteGult">Gult kort til bortelaget</button>    
+        
     </section>
 
     <section id="info">
