@@ -24,6 +24,7 @@
             display: grid;
             grid-auto-flow: column;
             justify-content: space-around;
+            align-items: center;
             padding: 0.5rem;
             grid-gap: 0.5rem;
             margin-bottom: 1rem;
@@ -69,6 +70,27 @@
             border-top: 1px solid #ccc;
             padding-top: 1rem;
         }
+
+        #secSisteHendelser {
+            padding: 1rem;
+            background-color: #ffffef;
+            border: 1px solid #ddd;
+        }
+
+        #watch {
+            display: grid;
+            grid-auto-flow: column;
+            align-items: center;
+            grid-gap: 0.5rem;
+            background-color: darkblue;
+            padding: 2px 0.5rem;
+            cursor: pointer;
+            border-radius: 0.25rem;
+        }
+        #watch img {
+            height: 1.5rem;
+            filter: invert(1);
+        }
     
     </style>
 </head>
@@ -76,7 +98,11 @@
 
     <header>
         <section id="kampinfo">
-            <div class="hjemmelag">...</div>                    
+            <div class="hjemmelag">...</div>    
+            <div id="watch">
+                <img src="icons/watch.png">
+                <span>Start 1. omg</span>
+            </div>                
             <div class="bortelag">...</div>    
         </section>
     </header>
@@ -118,6 +144,11 @@
             <button class="button primary" id="btnBorteGult">Gult kort til bortelaget</button>    
             
         </section>
+
+        <section id="secSisteHendelser">
+
+        </section>
+
 
         
     </main>
@@ -243,6 +274,13 @@
                     linkKamp.style.display = "inline-block";                    
                     btnHjemmeGoal.innerText = "Mål til " + inpHjemmelag.value;
                     btnBorteGoal.innerText = "Mål til " + inpBortelag.value;
+                    btnHjemmeCorner.innerText = "Corner til " + inpHjemmelag.value;
+                    btnBorteCorner.innerText = "Corner til " + inpBortelag.value;
+                    btnHjemmeGult.innerText = "Gult kort til " + inpHjemmelag.value;
+                    btnBorteGult.innerText = "Gult kort til " + inpBortelag.value;
+                    document.querySelector("#kampinfo .hjemmelag").innerText = inpHjemmelag.value;
+                    document.querySelector("#kampinfo .bortelag").innerText = inpBortelag.value;
+
                     hjemmelag = inpHjemmelag.value;
                     bortelag = inpBortelag.value;
                     localStorage.myGameID = snap.key;
@@ -289,12 +327,19 @@
             kampen = kamper.child(key);
             hendelser = kampen.child("hendelser");
 
+            let ekstra = "";
+            if(inpHendelse.value != "") {
+                ekstra = "<span>" + inpHendelse.value + "</span>";
+            }
+
             hendelser.push({
                 type: "yellowcard",
                 goaler: "home",
-                tekst: "Gult kort til " + hjemmelag + "!",
+                tekst: "<div>Gult kort til " + hjemmelag + "!</div> " + ekstra,
                 tidspunkt: firebase.database.ServerValue.TIMESTAMP
             });
+
+            inpHendelse.value = "";
             
         }
 
@@ -302,12 +347,19 @@
             kampen = kamper.child(key);
             hendelser = kampen.child("hendelser");
 
+            let ekstra = "";
+            if(inpHendelse.value != "") {
+                ekstra = "<span>" + inpHendelse.value + "</span>";
+            }
+
             hendelser.push({
                 type: "yellowcard",
                 goaler: "away",
-                tekst: "Gult kort til " + bortelag + "!",
+                tekst: "<div>Gult kort til " + bortelag + "!</div> " + ekstra,
                 tidspunkt: firebase.database.ServerValue.TIMESTAMP
             });
+
+            inpHendelse.value = "";
             
         }
 
@@ -315,25 +367,38 @@
             kampen = kamper.child(key);
             hendelser = kampen.child("hendelser");
 
+            let ekstra = "";
+            if(inpHendelse.value != "") {
+                ekstra = "<span>" + inpHendelse.value + "</span>";
+            }
+
             hendelser.push({
                 type: "corner",
                 goaler: "home",
-                tekst: "Corner til " + hjemmelag + "!",
+                tekst: "<div>Corner til " + hjemmelag + "!</div> " + ekstra,
                 tidspunkt: firebase.database.ServerValue.TIMESTAMP
             });
             
+            inpHendelse.value = "";
         }
 
         btnBorteCorner.onclick = () => {
             kampen = kamper.child(key);
             hendelser = kampen.child("hendelser");
 
+            let ekstra = "";
+            if(inpHendelse.value != "") {
+                ekstra = "<span>" + inpHendelse.value + "</span>";
+            }
+
             hendelser.push({
                 type: "corner",
                 goaler: "away",
-                tekst: "Corner til " + bortelag + "!",
+                tekst: "<div>Corner til " + bortelag + "!</div> " + ekstra,
                 tidspunkt: firebase.database.ServerValue.TIMESTAMP
             });
+
+            inpHendelse.value = "";
             
         }
 
@@ -352,6 +417,7 @@
                 tekst: "<div>Mål til " + bortelag + "!</div> " + ekstra,
                 tidspunkt: firebase.database.ServerValue.TIMESTAMP
             });
+
             inpHendelse.value = "";
             
         }
@@ -366,6 +432,11 @@
 
             regHendelse.reset();
         }
+
+        hendelser.on("child_added", (snap) => {
+            const data = snap.val();
+            document.querySelector("#secSisteHendelser").innerHTML = data.tekst;
+        });
     
 
     </script>
