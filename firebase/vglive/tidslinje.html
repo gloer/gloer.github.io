@@ -183,6 +183,7 @@
                 btnHjemmeGult.innerText = "Gult kort til " + hjemmelag;
                 btnBorteGult.innerText = "Gult kort til " + bortelag;
                 linkKamp.href = "viserkamp.html?id=" + snap.key;
+                document.querySelector("title").innerHTML = hjemmelag + " - " + bortelag;
                 
                 
             });
@@ -210,6 +211,7 @@
                     hjemmelag = inpHjemmelag.value;
                     bortelag = inpBortelag.value;
                     localStorage.myGameID = snap.key;
+                    document.querySelector("title").innerHTML = hjemmelag + " - " + bortelag;
                 }
             );
             
