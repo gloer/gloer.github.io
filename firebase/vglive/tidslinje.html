@@ -77,7 +77,7 @@
             border: 1px solid #ddd;
         }
 
-        #watch {
+        .watch {
             display: grid;
             grid-auto-flow: column;
             align-items: center;
@@ -87,10 +87,16 @@
             cursor: pointer;
             border-radius: 0.25rem;
         }
-        #watch img {
+
+        .watch img {
             height: 1.5rem;
             filter: invert(1);
         }
+
+        #watch1, #watch2, #watch3, #watch4 {
+            display: none;
+        }
+        
     
     </style>
 </head>
@@ -99,10 +105,22 @@
     <header>
         <section id="kampinfo">
             <div class="hjemmelag">...</div>    
-            <div id="watch">
+            <div id="watch" class="watch">
                 <img src="icons/watch.png">
                 <span>Start 1. omg</span>
-            </div>                
+            </div> 
+            <div id="watch2" class="watch">
+                <img src="icons/watch.png">
+                <span>Pause</span>
+            </div>                 
+            <div id="watch3" class="watch">
+                <img src="icons/watch.png">
+                <span>Start 2. omg</span>
+            </div>                 
+            <div id="watch4" class="watch">
+                <img src="icons/watch.png">
+                <span>Avslutt kamp</span>
+            </div>                 
             <div class="bortelag">...</div>    
         </section>
     </header>
@@ -117,7 +135,11 @@
             <label for="inpBortelag">Bortelag: </label>
             <input type="text" id="inpBortelag" placeholder="Bortelag">
 
-            <button class="button expanded" type="submit">START KAMP</button>
+            <label for="taKampinfo">Kampinfo: </label>
+            <input type="text" id="taKampinfo">
+            
+
+            <button class="button expanded" type="submit">Gjør klart til kamp</button>
         </form>
 
     </section>
@@ -168,7 +190,7 @@
 
        <section id="info">
             <a href="" id="linkKamp" target="_blank">Følg kampen her</a>
-            <button id="btnVisNyKamp" class="button alert">Start en ny kamp</button>
+            <button id="btnVisNyKamp" class="button alert">Opprett en ny kamp</button>
         </section>
 
     </footer>
@@ -205,6 +227,7 @@
         const btnFb = document.getElementById("btnFb");
         
         
+        const taKampinfo = document.getElementById('taKampinfo');
         
 
         const startSkjema = document.getElementById('startSkjema');
@@ -258,15 +281,18 @@
         startSkjema.onsubmit = (evt) => {
 
             evt.preventDefault();
+
             nyKamp.style.display = "none";
             document.querySelector("header").style.display = "block";
             document.querySelector("main").style.display = "block";
+            document.querySelector("footer").style.display = "block";
             kamper.push({
-                start_tid: firebase.database.ServerValue.TIMESTAMP,
+                start_tid: 0, //firebase.database.ServerValue.TIMESTAMP,
                 hjemmelag: inpHjemmelag.value,
                 bortelag: inpBortelag.value,
                 hjemmegoal: 0,
-                bortegoal: 0
+                bortegoal: 0,
+                status: "ikke_startet"
             }).then(
                 snap => { 
                     key = snap.key; 
@@ -285,6 +311,22 @@
                     bortelag = inpBortelag.value;
                     localStorage.myGameID = snap.key;
                     document.querySelector("title").innerHTML = hjemmelag + " - " + bortelag;
+
+                    kampen = kamper.child(key);
+                    hendelser = kampen.child("hendelser");
+
+                    hendelser.on("child_added", (snap) => {
+                        const data = snap.val();
+                        document.querySelector("#secSisteHendelser").innerHTML = data.tekst;
+                    });
+
+                    hendelser.push({
+                        type: "startcomment",
+                        tekst: taKampinfo.value,
+                        tidspunkt: 0
+                    });
+
+                    
                 }
             );
             
@@ -302,6 +344,7 @@
             nyKamp.style.display = "block";
             document.querySelector("header").style.display = "none";
             document.querySelector("main").style.display = "none";
+            document.querySelector("footer").style.display = "none";
         }
 
         btnHjemmeGoal.onclick = () => {
@@ -433,11 +476,33 @@
             regHendelse.reset();
         }
 
+        /*
         hendelser.on("child_added", (snap) => {
             const data = snap.val();
             document.querySelector("#secSisteHendelser").innerHTML = data.tekst;
         });
+        */
     
+        document.querySelector("#watch").onclick = () => {
+
+            kampen.update({
+                start_tid: firebase.database.ServerValue.TIMESTAMP
+            });
+
+            hendelser.push({                
+                type: "comment",
+                tekst: "Da er vi i gang",
+                tidspunkt: firebase.database.ServerValue.TIMESTAMP
+            });
+
+            document.querySelector("#watch").style.display = "none";
+
+            
+        }
+
+        kampen.on("child_changed", (snap) => {
+            console.log("Something happened to the time");
+        });
 
     </script>
 

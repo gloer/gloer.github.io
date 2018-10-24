@@ -90,12 +90,16 @@
             
         }
 
-        .comment .bilde {
+        .startcomment .bilde, .comment .bilde {
             background-image: url(icons/comment.svg);
         }
 
         .corner .bilde {
             background-image: url(icons/corner.svg);
+        }
+
+        .startcomment span {
+            opacity: 0;
         }
 
     
@@ -107,7 +111,7 @@
     <header>
         <section id="time">
             <div id="div_omgang">1. omgang</div>
-            <div id="div_clock">00:00</div>
+            <div id="div_clock">00:00</div>            
         </section>
         <section id="stilling">
             <div id="divHjemmelag">.....</div>
@@ -198,6 +202,10 @@
         let homegoals = 0;
         let awaygoals = 0;
 
+        kamp.on("child_changed", (snap) => {
+            console.log("Something changed");
+        });
+
         
         const visHendelser = (snap) => {
 
@@ -236,6 +244,7 @@
         let klokkaErStartet = false;
         
         kamp.on("value", snap => {
+            console.log("NÅ SKJER DET NOE");
             const data = snap.val();
             
             divHjemmelag.innerText = data.hjemmelag;
@@ -245,17 +254,20 @@
             bortelag = data.bortelag;
             
 
-            start = snap.val().start_tid;
+            //start = snap.val().start_tid;
+            //if(data.status === "startet_1omg") {
+            //
+            //}
 
             // Starting a session
             const sessions = db.ref("sessions");
             sessions.push({
                 session_started: firebase.database.ServerValue.TIMESTAMP
             }).then (                
-                snap => { snap.on("value", snap => {
+                session_snap => { session_snap.on("value", session_snap => {
 
-                    if(!klokkaErStartet) {
-                        startKlokka(start, snap.val().session_started);
+                    if(!klokkaErStartet && data.start_tid != 0) {
+                        startKlokka(start, session_snap.val().session_started);
                         klokkaErStartet = true;
                     } else {
                         // do nothing
