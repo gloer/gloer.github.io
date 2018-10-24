@@ -48,11 +48,13 @@
 </head>
 <body>
 
-
-    <section id="kampinfo">
-        <div class="hjemmelag">...</div>                    
-        <div class="bortelag">...</div>    
-    </section>
+    <header>
+        <section id="kampinfo">
+            <div class="hjemmelag">...</div>                    
+            <div class="bortelag">...</div>    
+        </section>
+    </header>
+    
 
     <section id="nyKamp">
 
@@ -68,32 +70,42 @@
 
     </section>
 
-    <section>
+    <main>
+        <section>
 
-        <form id="regHendelse">
-            <input type="text" id="inpHendelse" placeholder="Hva skjedde">
-            <button class="button success expanded" type="submit">Registrer hendelse</button>
-        </form>
+            <form id="regHendelse">
+                <input type="text" id="inpHendelse" placeholder="Hva skjedde">
+                <button class="button success expanded" type="submit">Kommentar...</button>
+            </form>
 
-    </section>
+        </section>
 
-    <section id="knapper">            
-        <button class="button" id="btnHjemmeGoal">Mål til hjemmelaget</button>
-        <img src="icons/goal-football.svg">
-        <button class="button" id="btnBorteGoal">Mål til bortelaget</button>                    
-        <button class="button warning" id="btnHjemmeCorner">Corner til hjemmelaget</button>
-        <img src="icons/corner.svg">
-        <button class="button warning" id="btnBorteCorner">Corner til bortelaget</button>                    
-        <button class="button primary" id="btnHjemmeGult">Gult kort til hjemmelaget</button>
-        <img src="icons/yellow.svg">
-        <button class="button primary" id="btnBorteGult">Gult kort til bortelaget</button>    
-        
-    </section>
+        <section id="knapper">            
+            <button class="button" id="btnHjemmeGoal">Mål til hjemmelaget</button>
+            <img src="icons/goal-football.svg">
+            <button class="button" id="btnBorteGoal">Mål til bortelaget</button>                    
+            <button class="button warning" id="btnHjemmeCorner">Corner til hjemmelaget</button>
+            <img src="icons/corner.svg">
+            <button class="button warning" id="btnBorteCorner">Corner til bortelaget</button>                    
+            <button class="button primary" id="btnHjemmeGult">Gult kort til hjemmelaget</button>
+            <img src="icons/yellow.svg">
+            <button class="button primary" id="btnBorteGult">Gult kort til bortelaget</button>    
+            
+        </section>
 
-    <section id="info">
-        <a href="" id="linkKamp" target="_blank">Følg kampen her</a>
-        <button id="btnVisNyKamp" class="button">Start en ny kamp</button>
-    </section>
+        <section id="info">
+            <a href="" id="linkKamp" target="_blank">Følg kampen her</a>
+            <button id="btnVisNyKamp" class="button">Start en ny kamp</button>
+        </section>
+    </main>
+
+    <footer>
+
+       <button id="btnFb" class="button">
+           Share on Facebook
+       </button>
+
+    </footer>
 
     
     
@@ -124,6 +136,7 @@
         const inpHendelse = document.getElementById('inpHendelse');
         const nyKamp = document.getElementById('nyKamp');
         const btnVisNyKamp = document.getElementById('btnVisNyKamp');
+        const btnFb = document.getElementById("btnFb");
         
         
         
@@ -169,12 +182,18 @@
                 btnBorteCorner.innerText = "Corner til " + bortelag;
                 btnHjemmeGult.innerText = "Gult kort til " + hjemmelag;
                 btnBorteGult.innerText = "Gult kort til " + bortelag;
+                linkKamp.href = "viserkamp.html?id=" + snap.key;
+                
+                
             });
         }
 
         startSkjema.onsubmit = (evt) => {
 
             evt.preventDefault();
+            nyKamp.style.display = "none";
+            document.querySelector("header").style.display = "block";
+            document.querySelector("main").style.display = "block";
             kamper.push({
                 start_tid: firebase.database.ServerValue.TIMESTAMP,
                 hjemmelag: inpHjemmelag.value,
@@ -183,8 +202,9 @@
                 bortegoal: 0
             }).then(
                 snap => { 
-                    key = snap.key; linkKamp.href="viserkamp.html?id=" + snap.key; 
-                    linkKamp.style.display = "inline-block";
+                    key = snap.key; 
+                    linkKamp.href="viserkamp.html?id=" + snap.key; 
+                    linkKamp.style.display = "inline-block";                    
                     btnHjemmeGoal.innerText = "Mål til " + inpHjemmelag.value;
                     btnBorteGoal.innerText = "Mål til " + inpBortelag.value;
                     hjemmelag = inpHjemmelag.value;
@@ -196,20 +216,35 @@
 
         }
 
+        btnFb.onclick = () => {
+            console.log(key);
+            const url = "http://gloer.github.io/firebase/vglive/viserkamp.html?id=" + key;
+            window.open("https://www.facebook.com/sharer/sharer.php?u=" + url + "&t="+document.title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false; 
+            
+        }        
+
         btnVisNyKamp.onclick = () => {
             nyKamp.style.display = "block";
+            document.querySelector("header").style.display = "none";
+            document.querySelector("main").style.display = "none";
         }
 
         btnHjemmeGoal.onclick = () => {
             kampen = kamper.child(key);
             hendelser = kampen.child("hendelser");
+            let ekstra = "";
+            if(inpHendelse.value != "") {
+                ekstra = "<span>" + inpHendelse.value + "</span>";
+            }
 
             hendelser.push({
                 type: "goal",
                 goaler: "home",
-                tekst: "Mål til " + hjemmelag + "!",
+                tekst: "<div>Mål til " + hjemmelag + "!</div> " + ekstra,
                 tidspunkt: firebase.database.ServerValue.TIMESTAMP
             });
+
+            inpHendelse.value = "";
             
         }
 
@@ -269,12 +304,18 @@
             kampen = kamper.child(key);
             hendelser = kampen.child("hendelser");
 
+            let ekstra = "";
+            if(inpHendelse.value != "") {
+                ekstra = "<span>" + inpHendelse.value + "</span>";
+            }
+
             hendelser.push({
                 type: "goal",
                 goaler: "away",
-                tekst: "Mål til " + bortelag + "!",
+                tekst: "<div>Mål til " + bortelag + "!</div> " + ekstra,
                 tidspunkt: firebase.database.ServerValue.TIMESTAMP
             });
+            inpHendelse.value = "";
             
         }
 

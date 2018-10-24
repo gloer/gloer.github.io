@@ -73,7 +73,7 @@
             background-color: antiquewhite;            
         }
 
-        .goal .tekst {
+        .goal .tekst div {
             font-weight: 500;
         }
 
@@ -86,7 +86,7 @@
         }
 
         .goal .bilde {
-            background-image: url(icons/goal-football.svg);
+            background-image: url(icons/goal.png);
             
         }
 
@@ -213,7 +213,7 @@
             main.innerHTML = `
                 <div class="${snap.val().type}">
                     <div class="bilde"></div>                    
-                    <span class="tekst">${snap.val().tekst}</span>    
+                    <div class="tekst">${snap.val().tekst}</div>    
                     <span>${Math.floor((snap.val().tidspunkt / 1000 - start / 1000) / 60)}'</span>
                 </div>
             ` + main.innerHTML;
