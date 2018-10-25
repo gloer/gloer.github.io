@@ -1,0 +1,64 @@
+html {
+    font-size: 100%;
+}
+body {
+    margin: 0;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url("trendy-abstract-geometric-pattern-background.jpg");
+    perspective: 500px;
+    
+}
+
+@keyframes tekstanimasjon {
+    to {
+        text-shadow:    -1px -1px 0px #26143c,
+                        -3px -2px 0px #624cec,
+                        -5px -3px 0px #26143c,
+                        -7px -4px 0px #624cec,
+                        -9px -5px 0px #26143c,
+                        -11px -6px 0px #624cec,
+                        -13px -7px 0px #26143c,
+                        -15px -8px 0px #624cec,
+                        -17px -9px 0px #26143c,
+                        -19px -10px 0px #624cec,
+                        -21px -11px 0px #26143c,
+                        -23px -12px 0px #624cec,
+                        -25px -13px 0px #26143c,
+                        -27px -14px 0px #624cec,
+                        -29px -15px 0px #26143c,
+                        -31px -16px 0px #624cec,
+                        -33px -17px 0px #26143c,
+                        -35px -18px 0px #624cec,
+                        -37px -19px 0px #26143c,
+                        -39px -20px 0px #624cec,
+                        -41px -21px 0px #26143c,
+                        -43px -22px 0px #624cec,
+                        -45px -23px 0px #26143c,
+                        -47px -24px 0px #624cec,
+                        -49px -25px 0px #26143c,
+                        -51px -26px 0px #624cec,
+                        -53px -27px 0px #26143c,
+                        -55px -28px 0px #624cec,
+                        -57px -29px 0px #26143c,
+                        -59px -30px 0px #624cec,
+                        -61px -31px 0px #26143c,
+                        -63px -32px 0px #624cec,
+                        -65px -33px 0px #26143c,
+                        -67px -34px 0px #624cec,
+                        -69px -35px 0px #26143c,
+                        -71px -36px 0px #624cec,
+                        -73px -37px 0px #26143c,            
+                        -75px -38px 0px #624cec;
+    }
+}
+
+h1 {
+    color: #ea3ff7;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 10rem;
+    transform: translateX(10%) rotate(-2deg) rotateY(25deg);
+    animation: tekstanimasjon 4s infinite alternate;
+}
