@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LIL LIVE</title>
+    <link rel="apple-touch-icon" sizes="150x150" href="touch-icon-ipad.png">
+    <link rel="icon" type="image/png" href="touch-icon-ipad.png" sizes="150x150">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-float.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <header>
+        <section id="kampinfo">
+            <div class="hjemmelag">...</div>                
+            <div id="watch2" class="watch">
+                <img src="icons/icons8-time-40.png">
+                <span>Pause</span>
+            </div>                 
+            <div id="watch3" class="watch">
+                <img src="icons/icons8-time-40.png">
+                <span>Start 2. omg</span>
+            </div>                 
+            <div id="watch4" class="watch">
+                <img src="icons/icons8-time-40.png">
+                <span>Avslutt kamp</span>
+            </div>     
+            <div id="infoFerdig">Kampen er slutt</div>            
+            <div class="bortelag">...</div>    
+        </section>
+    </header>
+    
+
+    <section id="nyKamp">
+
+        <header>
+            <img src="icons/logo.svg">
+            <h1>Skriv inn informasjon om kampen</h1>
+        </header>
+        <section>
+            <form id="startSkjema">
+                <label for="inpHjemmelag" required>Hjemmelag: </label>
+                <input type="text" id="inpHjemmelag" placeholder="Hjemmelag">
+
+                <label for="inpBortelag" required>Bortelag: </label>
+                <input type="text" id="inpBortelag" placeholder="Bortelag">
+
+                <label for="taKampinfo" required>Kampinfo: </label>
+                <input type="text" id="taKampinfo" placeholder="Dagens kommentator er Phil Neal">
+                
+                <label for="inpKampstart" required>Kampen starter kl.</label>
+                <input type="text" id="inpKampstart" placeholder="19:30">
+                <button class="button expanded" type="submit">Gjør klart til kamp</button>
+            </form>
+        </section>
+    </section>
+
+    <main>
+        <section>
+
+            <form id="regHendelse">
+                <input type="text" id="inpHendelse" placeholder="Hva skjedde" required>
+                <button class="button success expanded" type="submit">Kommentar...</button>
+            </form>
+
+        </section>
+
+        <section id="knapper">            
+            <button class="button" id="btnHjemmeGoal">Mål til hjemmelaget</button>
+            <img src="icons/goal-football.svg">
+            <button class="button" id="btnBorteGoal">Mål til bortelaget</button>                    
+            <button class="button warning" id="btnHjemmeCorner">Corner til hjemmelaget</button>
+            <img src="icons/corner.svg">
+            <button class="button warning" id="btnBorteCorner">Corner til bortelaget</button>                    
+            <button class="button primary" id="btnHjemmeGult">Gult kort til hjemmelaget</button>
+            <img src="icons/yellow.svg">
+            <button class="button primary" id="btnBorteGult">Gult kort til bortelaget</button>    
+            
+        </section>
+
+        <section id="secSisteHendelser">
+            Her vises din siste oppdatering...
+        </section>
+
+
+        
+    </main>
+
+    <footer>
+
+       
+        <div id="btnFb">
+            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="_1pbq" color="#ffffff"><path fill="#ffffff" fill-rule="evenodd" d="M8 14H3.667C2.733 13.9 2 13.167 2 12.233V3.667A1.65 1.65 0 0 1
+                3.667 2h8.666A1.65 1.65 0 0 1 14 3.667v8.566c0 .934-.733
+                1.667-1.667
+                1.767H10v-3.967h1.3l.7-2.066h-2V6.933c0-.466.167-.9.867-.9H12v-1.8c.033
+                0-.933-.266-1.533-.266-1.267 0-2.434.7-2.467
+                2.133v1.867H6v2.066h2V14z"></path>
+            </svg></span>
+            <span>Del kampen på Facebook</span>
+       </div>
+        
+
+       <section id="info">
+            <a href="" id="linkKamp" target="_blank">Følg kampen her</a>
+            <button id="btnVisNyKamp" class="button alert">Opprett en ny kamp</button>
+        </section>
+
+    </footer>
+
+    <section id="overlay">
+            <div id="btnFbOverlay">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="_1pbq" color="#ffffff"><path fill="#ffffff" fill-rule="evenodd" d="M8 14H3.667C2.733 13.9 2 13.167 2 12.233V3.667A1.65 1.65 0 0 1
+                        3.667 2h8.666A1.65 1.65 0 0 1 14 3.667v8.566c0 .934-.733
+                        1.667-1.667
+                        1.767H10v-3.967h1.3l.7-2.066h-2V6.933c0-.466.167-.9.867-.9H12v-1.8c.033
+                        0-.933-.266-1.533-.266-1.267 0-2.434.7-2.467
+                        2.133v1.867H6v2.066h2V14z"></path>
+                    </svg></span>
+                    <span>Del kampen på Facebook</span>
+               </div>
+
+            <div id="watch" class="watch">
+                <img src="icons/icons8-time-40.png">
+                <span>Start 1. omg</span>
+            </div> 
+    </section>
+    
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+    <script src="main.js"></script>
+
+</body>
+</html>
