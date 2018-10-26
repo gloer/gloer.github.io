@@ -158,6 +158,8 @@
         //console.log(id);
 
         let start;
+        let start2;
+        
 
         const db = firebase.database();
         const kamp = db.ref("kamper/" + id);
@@ -180,10 +182,12 @@
             div_clock.innerHTML = minutter + ":" + s;
         }
 
+        let klokke_timer;
+
         const startKlokka = (start, now) => {
             sekunder = Math.floor(now / 1000 - start / 1000);
             
-            setInterval(visKlokke, 1000);
+            klokke_timer = setInterval(visKlokke, 1000);
 
             let minutter = Math.floor(sekunder / 60);
             if(minutter < 10) {
@@ -202,10 +206,6 @@
         let homegoals = 0;
         let awaygoals = 0;
 
-        kamp.on("child_changed", (snap) => {
-            console.log("Something changed");
-        });
-
         
         const visHendelser = (snap) => {
 
@@ -217,16 +217,34 @@
                 });
 
             }
+
+            if(!start2) {
+                kamp.on("value", snap => {
+                    start2 = snap.val().start_tid_2_omgang;
+                });
+            }
+
+            const data = snap.val();
             
+            // Regner om tiden fra 2. omgang startet
+            if(data.omgang === 2) {
+                start = start2;
+            }
+
+            let skjultid = "";
+            if(data.pause === true) {
+                skjultid = " pause";
+            }
+
             main.innerHTML = `
-                <div class="${snap.val().type}">
+                <div class="${snap.val().type + skjultid}">
                     <div class="bilde"></div>                    
                     <div class="tekst">${snap.val().tekst}</div>    
                     <span>${Math.floor((snap.val().tidspunkt / 1000 - start / 1000) / 60)}'</span>
                 </div>
             ` + main.innerHTML;
 
-            const data = snap.val();
+            
             if(data.type === "goal" && data.goaler === "home") {
                 homegoals++;
                 divHjemmeScore.innerText = homegoals;
@@ -244,8 +262,13 @@
         let klokkaErStartet = false;
         
         kamp.on("value", snap => {
-            console.log("NÅ SKJER DET NOE");
+            
             const data = snap.val();
+            const start2omgang = data.start_tid_2_omgang;
+
+            if(data.status === "ikke_startet") {
+                div_clock.innerText = data.kampstart;
+            }                        
             
             divHjemmelag.innerText = data.hjemmelag;
             divBortelag.innerText = data.bortelag;
@@ -253,30 +276,62 @@
             hjemmelag = data.hjemmelag;
             bortelag = data.bortelag;
             
+            if(data.status === "pause") {
 
-            //start = snap.val().start_tid;
-            //if(data.status === "startet_1omg") {
-            //
-            //}
+                console.log("Nå er det pause");
+                div_clock.innerText = "pause";
+                klokke_timer = clearInterval(klokke_timer);
+                klokkaErStartet = false;
 
-            // Starting a session
-            const sessions = db.ref("sessions");
-            sessions.push({
-                session_started: firebase.database.ServerValue.TIMESTAMP
-            }).then (                
-                session_snap => { session_snap.on("value", session_snap => {
+            }
 
-                    if(!klokkaErStartet && data.start_tid != 0) {
-                        startKlokka(start, session_snap.val().session_started);
-                        klokkaErStartet = true;
-                    } else {
-                        // do nothing
-                    }
-                    
+            if(data.status === "kampen_er_ferdig") {
+                div_clock.innerText = "Ferdig";
+                klokke_timer = clearInterval(klokke_timer);
+            }
+                       
+
+            if(!klokkaErStartet) { /*************/
+
+            
+                // Starting a session
+                const sessions = db.ref("sessions");
+                sessions.push({
+                    session_started: firebase.database.ServerValue.TIMESTAMP
+                }).then (                
+                    session_snap => { session_snap.on("value", session_snap => {
+
+                        console.log(!klokkaErStartet);
+                        console.log(data.start_tid != 0);
+                        console.log(data.status != "pause");
+                        if(!klokkaErStartet && data.start_tid != 0 && (data.status === "1_omgang_spilles" || data.status === "2_omgang_spilles") ) {
+
+                            if(data.status === "2_omgang_spilles") {
+                                
+                                startKlokka(start2omgang, session_snap.val().session_started);
+                                klokkaErStartet = true;
+                            } else {
+                                console.log("Skal starte klokka for 1. omgang");
+                                startKlokka(start, session_snap.val().session_started);
+                                klokkaErStartet = true;    
+                            }
+                            
 
 
-                }) }
-            );
+                        } else {
+                            console.log("Klokka starter ikke");
+                            console.log("klokkaErStartet: " + klokkaErStartet);
+                            console.log("data.start_tid: " + data.start_tid);
+                            console.log("data.status: " + data.status);
+
+                        }
+                        
+
+
+                    }) }
+                );
+
+            } /**********/
             
         });
 
