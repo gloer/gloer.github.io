@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="no">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -163,6 +163,8 @@
         const div_clock = document.getElementById('div_clock');
         const divHjemmelag = document.getElementById('divHjemmelag');
         const divBortelag = document.getElementById('divBortelag');
+        const div_omgang = document.getElementById('div_omgang');
+        
 
         const divHjemmeScore = document.getElementById('divHjemmeScore');
         const divBorteScore = document.getElementById('divBorteScore');
@@ -307,6 +309,10 @@
             if(data.status === "kampen_er_ferdig") {
                 div_clock.innerText = "Ferdig";
                 klokke_timer = clearInterval(klokke_timer);
+            }
+
+            if(data.status === "2_omgang_spilles") {
+                div_omgang.innerText = "2. omgang";
             }
                        
 
