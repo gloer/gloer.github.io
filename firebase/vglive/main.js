@@ -10,7 +10,7 @@
 firebase.initializeApp(config);
 // Done initializing
 
-        
+
 const linkKamp = document.getElementById('linkKamp');
 const btnHjemmeGoal = document.getElementById('btnHjemmeGoal');
 const btnBorteGoal = document.getElementById('btnBorteGoal');
@@ -31,10 +31,7 @@ const watch3 = document.getElementById('watch3');
 const watch4 = document.getElementById('watch4');
 const inpKampstart = document.getElementById('inpKampstart');
 const infoFerdig = document.getElementById('infoFerdig');
-
 const taKampinfo = document.getElementById('taKampinfo');
-
-
 const startSkjema = document.getElementById('startSkjema');
 const inpHjemmelag = document.getElementById('inpHjemmelag');
 const inpBortelag = document.getElementById('inpBortelag');
@@ -61,9 +58,11 @@ btnHjemmeGoal.disabled = true;
 btnHjemmeGult.disabled = true;
 btnBorteGult.disabled = true;
 
-
+console.log(localStorage.myGameID);
 
 if(localStorage.myGameID) {
+
+    console.log("Viser forrige kamp");
 
     nyKamp.style.display = "none";
 
@@ -153,6 +152,16 @@ if(localStorage.myGameID) {
         }
         
     });
+} else {
+    console.log("Oppretter en ny kamp");
+    // This is the first time the app launches on this device
+    // We go directly to the add new Game
+    nyKamp.style.display = "block";
+    document.querySelector("header").style.display = "none";
+    document.querySelector("main").style.display = "none";
+    document.querySelector("footer").style.display = "none";
+
+
 }
 
 startSkjema.onsubmit = (evt) => {
