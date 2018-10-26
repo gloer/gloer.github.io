@@ -5,11 +5,7 @@ body {
     margin: auto;
 }
 
-@media (max-width: 600px){
-    body {
-        padding: 0;
-    }
-}
+
 
 #kampinfo {
     background-color: darkgreen;
@@ -144,4 +140,18 @@ footer {
 #watch {
     padding: 2rem;
     font-size: 1.5rem;
+}
+
+
+
+@media (max-width: 800px) {
+    body {
+        padding: 0;
+    }
+    main {
+        padding: 0.25rem;
+    }
+    footer {
+        padding: 0.25rem;
+    }
 }

@@ -58,8 +58,6 @@ btnHjemmeGoal.disabled = true;
 btnHjemmeGult.disabled = true;
 btnBorteGult.disabled = true;
 
-console.log(localStorage.myGameID);
-
 if(localStorage.myGameID) {
 
     console.log("Viser forrige kamp");
