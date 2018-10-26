@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="apple-touch-icon" sizes="150x150" href="touch-icon-ipad.png">
+    <link rel="icon" type="image/png" href="touch-icon-ipad.png" sizes="150x150">
     <title>LIL LIVE </title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <style>
@@ -30,7 +32,7 @@
             justify-content: center;
             color: white;
             font-weight: 300;
-            font-size: 0.75rem;
+            font-size: 0.75rem;         
         }
         #div_omgang {
             background-color: #1a912b;
@@ -106,17 +108,30 @@
             opacity: 0;
         }
 
+        header > div {
+           text-align: center;
+            margin-bottom: 0.25rem;
+        }
+        header > div >img {
+            height: 3rem;
+        }
     
+        
 
     </style>
 </head>
 <body>
     
     <header>
+        <div>
+            <img src="icons/logo.svg">            
+        </div>
         <section id="time">
             <div id="div_omgang">1. omgang</div>
             <div id="div_clock">00:00</div>            
         </section>
+        
+        
         <section id="stilling">
             <div id="divHjemmelag">.....</div>
             <div id="divHjemmeScore">0</div>
