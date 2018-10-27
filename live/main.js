@@ -468,6 +468,14 @@ watch3.onclick = () => {
     watch3.style.display = "none";
     watch4.style.display = "inline-block";
 
+    hendelser = kampen.child("hendelser");
+
+    hendelser.push({
+        type: "startcomment",        
+        tekst: "Da er vi i gang med 2. omgang",
+        tidspunkt: firebase.database.ServerValue.TIMESTAMP
+    });
+
     btnBorteCorner.disabled = false;
     btnHjemmeCorner.disabled = false;
     btnBorteGoal.disabled = false;
@@ -484,6 +492,14 @@ watch4.onclick = () => {
     });
     watch4.style.display = "none";
     pause = true;
+
+    hendelser = kampen.child("hendelser");
+
+    hendelser.push({
+        type: "startcomment",        
+        tekst: "Da er kampen ferdig",
+        tidspunkt: firebase.database.ServerValue.TIMESTAMP
+    });
 
     btnHjemmeGoal.disabled = true;
     btnBorteGoal.disabled = true;
