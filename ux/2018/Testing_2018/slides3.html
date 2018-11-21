@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Slideshow with scrolling</title>
+</head>
+<body>
+    
+
+    <div class="slides">
+        <div class="slide" id="slide-1">1</div>
+        <div class="slide" id="slide-2">2</div>
+        <div class="slide" id="slide-3">3</div>
+        <div class="slide" id="slide-4">4</div>
+        <div class="slide" id="slide-5">5</div>
+        <div class="slide" id="slide-6">6</div>
+        <nav>
+            <a class="aktiv" href="#slide-1"></a>
+            <a href="#slide-2"></a>
+            <a href="#slide-3"></a>
+            <a href="#slide-4"></a>
+            <a href="#slide-5"></a>
+            <a href="#slide-6"></a>
+        </nav>
+    </div>        
+
+    <style>
+
+        :root {
+            --bredde: 100vw;
+            --hoyde: 100vh;
+        }
+
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }        
+
+        .slides nav {
+            position: fixed;
+            width: 100%;
+            left: 0;
+            bottom: 10vh;
+            display: grid;
+            grid-auto-flow: column;
+            grid-gap: 10px;
+            justify-content: center;
+        }
+
+        .slides nav a {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 2px solid green;
+            border-radius: 50%;
+        }
+
+        .slides nav a:hover, .slides nav a:active {
+            
+            border-color: #333;
+            transform: scale(1.2);
+        }
+
+        .slides nav a.aktiv {
+            border-color: black;
+            transform: scale(1.4);
+        }
+
+
+        .slides {
+
+            position: relative;
+
+            background-color: coral;
+            width: var(--bredde);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(6, var(--bredde));
+            overflow: auto;
+
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .slide {
+            height: var(--hoyde);
+            display: grid;
+
+            align-items: center;
+            justify-content: center;
+            font-size: 96px;
+
+            scroll-snap-align: center;
+        }
+
+        #slide-1 { background-color: peru; }
+        #slide-2 { background-color: brown; }
+        #slide-3 { background-color: peru; }
+        #slide-4 { background-color: brown; }
+        #slide-5 { background-color: peru; }
+        #slide-6 { background-color: brown; }
+    
+    </style>
+
+    <script>
+    
+        const links = document.querySelectorAll("nav a");
+        const slides = document.querySelector(".slides");
+
+
+        function checkLinks() {
+
+            const x = slides.scrollLeft;
+            
+            if(x >= 5 * innerWidth) {
+                links[5].classList.add("aktiv");
+                links[4].classList.remove("aktiv");
+                links[3].classList.remove("aktiv");
+                links[2].classList.remove("aktiv");
+                links[1].classList.remove("aktiv");
+                links[0].classList.remove("aktiv");
+                return;
+            }
+
+            if(x >= 4 * innerWidth) {
+                links[4].classList.add("aktiv");
+                links[5].classList.remove("aktiv");
+                links[3].classList.remove("aktiv");
+                links[2].classList.remove("aktiv");
+                links[1].classList.remove("aktiv");
+                links[0].classList.remove("aktiv");
+                return;
+            }
+            if(x >= 3 * innerWidth) {
+                links[3].classList.add("aktiv");
+                links[5].classList.remove("aktiv");
+                links[4].classList.remove("aktiv");
+                links[2].classList.remove("aktiv");
+                links[1].classList.remove("aktiv");
+                links[0].classList.remove("aktiv");
+                return;
+            }
+            if(x >= 2 * innerWidth) {
+                links[2].classList.add("aktiv");
+                links[5].classList.remove("aktiv");
+                links[3].classList.remove("aktiv");
+                links[4].classList.remove("aktiv");
+                links[1].classList.remove("aktiv");
+                links[0].classList.remove("aktiv");
+                return;
+            }
+            if(x >= 1 * innerWidth) {
+                links[1].classList.add("aktiv");
+                links[5].classList.remove("aktiv");
+                links[3].classList.remove("aktiv");
+                links[2].classList.remove("aktiv");
+                links[4].classList.remove("aktiv");
+                links[0].classList.remove("aktiv");
+                return;
+            }
+            if(x >= 0) {
+                links[0].classList.add("aktiv");
+                links[5].classList.remove("aktiv");
+                links[3].classList.remove("aktiv");
+                links[2].classList.remove("aktiv");
+                links[1].classList.remove("aktiv");
+                links[4].classList.remove("aktiv");
+                return;
+            }
+            
+                    
+            
+            
+            
+        }
+        
+
+        slides.onscroll = checkLinks;
+
+     
+    </script>
+
+</body>
+</html>
