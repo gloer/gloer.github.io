@@ -1,0 +1,22 @@
+.slides {
+
+    width: 300px;
+    height: 300px;
+    display: grid;
+    grid-auto-flow: column;
+    background-color: antiquewhite;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.slide {
+    width: 300px;
+    scroll-snap-align: center;
+}
+
+#slide-1 { background-color: palegreen; }
+#slide-2 { background-color: darkorange; }
+#slide-3 { background-color: powderblue; }
+#slide-4 { background-color: burlywood; }
+#slide-5 { background-color: salmon; }
+#slide-6 { background-color: peachpuff; }
