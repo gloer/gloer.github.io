@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Oppgave 2</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    
+    <header>
+        <nav>
+            <a href="#forside" class="valgt">Hyttekart</a>
+            <a href="#granbo">Granbo</a>
+            <a href="#granstua">Granstua</a>
+            <a href="#video">Se video</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="forside">
+            <div class="image-container">
+                <a href="#granbo" id="linkGranbo"></a>
+                <a href="#granstua" id="linkGranstua"></a>
+            </div>        
+        </section>
+        <section id="granbo" class="hytte">
+            <h1>Granbo</h1>
+            <div class="slide-wrapper">
+                <div class="slide-show">
+                    <div class="slides">
+                        <img id="granbo1" src="bilder/granbo01.jpg">
+                        <img id="granbo2" src="bilder/granbo02.jpg">
+                        <img id="granbo3" src="bilder/granbo03.jpg">
+                        <img id="granbo4" src="bilder/granbo04.jpg">                    
+                    </div>                
+                </div>
+                <nav>
+                    <figure class="sirkel" onclick="slide(0, this)"></figure>
+                    <figure class="sirkel" onclick="slide(1, this)"></figure>
+                    <figure class="sirkel" onclick="slide(2, this)"></figure>
+                    <figure class="sirkel" onclick="slide(3, this)"></figure>
+                </nav>
+            </div>
+            
+            <div class="info">                
+                <p>Antall sengeplasser: 4</p>
+                <p>Standard: Høy</p>
+                
+            </div>
+
+        </section>
+        <section id="granstua" class="hytte">
+            <h1>Granstua</h1>
+        </section>
+        <section id="video">
+            <h1>Video</h1>
+        </section>
+        
+    </main>
+
+    <script src="index.js"></script>
+</body>
+</html>

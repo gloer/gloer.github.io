@@ -6,6 +6,8 @@ img:first-child:active ~ img {
     filter: invert(1);
 }
 
+
+/* CSS-selektoren + velger det neste elementet på samme nivå   */
 img:nth-child(2):hover + img {
     border-radius: 10px;
     filter: grayscale(1);

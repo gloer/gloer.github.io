@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Katt som går</title>
+    <style>
+
+        @keyframes walk {
+            to {
+                background-position: 0 -1200%;
+            }
+        }
+    
+        #katten {
+            width: 400px;
+            height: 190px;
+            
+            background-image: url("catwalk.png");
+
+            background-position: 0 0;
+            animation: walk 1s infinite;
+            animation-timing-function: steps(12);
+            
+        }
+    
+    </style>
+</head>
+<body>
+    
+    <div id="katten"></div>
+
+</body>
+</html>

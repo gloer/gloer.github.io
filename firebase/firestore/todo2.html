@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TodoList</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-float.css">
+    <style>
+        
+        main {
+            max-width: 48rem;
+            padding: 1rem;
+            margin: auto;
+        }
+
+        section {
+            display: grid;
+            grid-gap: 2px;
+        }
+
+        section div {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            grid-gap: 1px;
+        }
+
+        section > div:nth-child(odd) span {
+            background-color: #eee;
+        }
+
+        section > div > span {
+            padding: 0.25rem;
+        }
+
+        section > div > span:last-child {
+
+            padding-left: 1rem;
+            padding-right: 1rem;
+            background-color: #ccc;
+            color: white;
+        }
+    
+    </style>
+</head>
+<body>
+    
+    <main>
+        <input type="text" id="inpTodo" placeholder="What needs to be done">
+        <section id="listTodos">
+            
+        </section>
+    </main>
+    
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDX7_vsdMR6qbW807NMDafCM1m3RK_Gmrc",
+            authDomain: "fire-my-store.firebaseapp.com",
+            databaseURL: "https://fire-my-store.firebaseio.com",
+            projectId: "fire-my-store",
+            storageBucket: "fire-my-store.appspot.com",
+            messagingSenderId: "377970988097"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+
+    <script>
+    
+        const inpTodo = document.querySelector("#inpTodo");
+        const listTodos = document.querySelector("#listTodos");
+
+        const db = firebase.firestore();
+        const todos = db.collection("todos");
+
+        inpTodo.onchange = () => {
+            todos.add({
+                text: inpTodo.value
+            });
+        }
+
+        function fjern(id) {
+
+            const todo = todos.doc(id);
+            todo.delete();
+
+            const elem = document.getElementById(id);
+            elem.style.display = "none";
+
+        }
+
+        todos.onSnapshot(
+            (docs) => {
+                docs.docChanges().forEach(                    
+                    (change) => {
+                        const key = change.doc.id;
+                        listTodos.innerHTML += `<div id="${key}"> <span>${change.doc.data().text}</span> <span onclick="fjern('${key}')">x</span> </div>`;
+                    }
+                );
+            }
+        );
+    
+
+    </script>
+
+</body>
+</html>

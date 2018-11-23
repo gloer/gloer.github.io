@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SVG</title>
+
+    <style>
+    
+        svg {
+            border: 1px solid gray;
+        }
+
+        #rektangel {
+            fill: green;
+            
+            transform-origin: 50px 25px;
+            transform: rotate(0deg);
+            transition: 1s;
+        }
+
+        #rektangel:hover {
+
+            transform: rotate(360deg);
+            fill: blue;
+        }
+
+    </style>
+</head>
+<body>
+    
+
+    <main>
+
+        <svg width="400" height="400">
+
+            <rect x="0" y="0" width="100" height="50" id="rektangel" fill="orange"></rect>
+
+        </svg>
+
+    </main>
+
+</body>
+</html>

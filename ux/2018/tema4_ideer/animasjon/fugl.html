@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fugle</title>
+    <style>
+
+        @keyframes fly {
+
+            0% {
+                transform: translateX(0) scale(0.1) rotateX(0);
+
+            }
+
+            100% {
+                transform:  translateX(-800px) scale(2) rotateY(-180deg);
+            }
+
+        }
+    
+        .fugl {
+            width: 300px;
+            height: 50px;
+            margin: 100px auto;
+            display: grid;
+            grid-template-columns: 4fr 1fr 4fr;
+            align-items: center;
+
+            animation: fly 6s;
+        }
+
+        @keyframes vift-venstre {
+            to {
+                transform: rotate(-16deg);
+            }
+        }
+
+        @keyframes vift-hoyre {
+            to {
+                transform: rotate(16deg);
+            }
+        }
+
+        .vinge-1 {
+            background-color: pink;
+            height: 20%;
+            transform-origin: right center;
+            animation: vift-venstre 0.2s infinite alternate;
+            
+        }
+
+        .vinge-2 {
+            background-color: pink;
+            height: 20%;
+            transform-origin: left center;
+            animation: vift-hoyre 0.2s infinite alternate;
+        }
+
+        .hode {
+            height: 100%;
+            background-color: salmon;
+            border-radius: 50%;
+        }
+
+
+    
+    </style>
+</head>
+<body>
+    <section class="fugl">
+        <div class="vinge-1"></div>
+        <div class="hode"></div>
+        <div class="vinge-2"></div>
+    </section>
+</body>
+</html>

@@ -50,6 +50,7 @@ body {
 .slide {
     scroll-snap-align: center;
     width: var(--bredde);
+    height: var(--hoyde);
     display: grid;
     align-items: center;
     justify-content: center;
@@ -63,4 +64,23 @@ body {
 .slide:nth-child(odd) {
     background-color: peru;
     color: white;
+}
+
+.high {
+    display: grid;  
+    overflow-y: auto;  
+    scroll-snap-type: y mandatory;
+}
+
+.high div {
+    scroll-snap-align: center;
+    width: var(--bredde);
+    height: var(--hoyde);
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.high div:nth-child(odd) {
+    background-color: orange;
 }

@@ -11,6 +11,16 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+main {
+    max-width: 1400px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+}
+
+
 table {
     font-size: 0.875rem;
     border-collapse: collapse;

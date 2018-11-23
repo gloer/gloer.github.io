@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Slide it again</title>
+    <style>
+        
+        :root {
+            --w: 50vw;
+            --h: 50vh;
+        }
+        body {
+            margin: 0;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .slides {
+            position: relative;
+            width: var(--w);
+            height: var(--h);
+            margin: 0 auto;
+            display: grid;
+            grid-auto-flow: column;
+            overflow: auto;
+            scroll-snap-type: x mandatory;
+        }
+        .slides nav {
+
+            position: fixed;
+            display: grid;
+            width: 100%;
+            grid-auto-flow: column;
+            grid-gap: 10px;
+            justify-content: center;
+            bottom: 50px;
+            left: 0;
+
+        }
+
+        .slides nav a {
+            width: 20px;
+            height: 20px;            
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 3px solid #ccc;
+            border-radius: 50%;
+        }
+        .slide {
+            width: var(--w);
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            font-size: 96px;
+            scroll-snap-align: center;
+        }
+        .slide:nth-child(odd) {
+            background-color: darkorange;
+        }
+        .slide:nth-child(even) {
+            background-color: darkmagenta;
+            color: white;
+        }
+    
+    </style>
+</head>
+<body>
+    <section class="slides">
+        <div class="slide" id="slide-1">1</div>
+        <div class="slide" id="slide-2">2</div>
+        <div class="slide" id="slide-3">3</div>
+        <div class="slide" id="slide-4">4</div>
+        <div class="slide" id="slide-5">5</div>
+        <div class="slide" id="slide-6">6</div>
+        <div class="slide" id="slide-7">7</div>
+        <nav>
+            <a href="slide-1"></a>
+            <a href="slide-2"></a>
+            <a href="slide-3"></a>
+            <a href="slide-4"></a>
+            <a href="slide-5"></a>
+            <a href="slide-6"></a>
+            <a href="slide-7"></a>
+        </nav>
+    </section>
+</body>
+</html>

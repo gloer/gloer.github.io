@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React</title>
+    <style>
+
+        :root {
+            --bredde: 200px;
+        }
+    
+        body {
+            margin: 0;
+            background-color: black;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: var(--bredde);
+            height: var(--bredde);            
+            position: relative;
+        }
+
+        .ellipse {
+            position: absolute;
+            width: 80%;
+            height: 40%;
+            border: calc(var(--bredde) / 40) solid cyan;
+            border-radius: 50%;
+            transition: 1s;
+        }
+
+         .circle {
+            position: absolute;
+            width: 10%;
+            height: 10%;
+            background-color: cyan;
+            border-radius: 50%;
+            transition: 1s;
+        }
+
+        .ellipse:nth-child(1) {
+            transform: rotate(60deg);
+        }
+
+        .ellipse:nth-child(2) {
+            transform: rotate(120deg);
+        }
+        .ellipse:nth-child(3) {
+            transform: rotate(0);
+        }
+
+        main:hover .ellipse:nth-child(1) { transform: rotate(-300deg); }
+        main:hover .ellipse:nth-child(2) { transform: rotate(480deg); }
+        main:hover .ellipse:nth-child(3) { transform: rotate(180deg); }
+        main:hover .circle { transform: scale(1.5); }
+
+       
+    
+    </style>
+</head>
+<body>
+    <main>
+
+        <div class="ellipse"></div>
+        <div class="ellipse"></div>
+        <div class="ellipse"></div>
+        <div class="circle"></div>
+
+    </main>
+</body>
+</html>

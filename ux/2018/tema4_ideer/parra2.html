@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Parra 2</title>
+
+    <style>
+    
+        * {
+            margin: 0;
+        }
+
+
+        body {
+            width: 100vw;
+            overflow-x: auto;
+            display: grid;
+            grid-auto-flow: column;
+        }
+
+        .para {
+            width: 100vw;
+            height: 100vh;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .innhold {
+            padding: 150px;
+            text-align: center;
+            background-color: coral;            
+        }
+
+        #para-1 {
+            background-image: url(three.jpg);
+        }
+
+        #para-2 {
+            background-image: url(ant.jpg);
+        }
+
+        #para-3 {
+            background-image: url(map2.jpg);
+        }
+
+        .fiks {
+            position: absolute;
+            right: 200px;
+            top: 300px;
+            font-size: 96px;
+        }
+    
+    </style>
+</head>
+<body>
+    <section id="para-1" class="para">
+        <section class="fiks">
+            <p>🤡</p>
+        </section>
+        <section class="innhold">
+            <h1>THIS IS THE CONTENT</h1>
+        </section>
+    </section>
+
+    <section id="para-2" class="para">
+        <section class="innhold">
+            <h1>THIS IS THE CONTENT</h1>
+        </section>
+    </section>
+
+    <section id="para-3" class="para">
+        <section class="innhold">
+            <h1>THIS IS THE CONTENT</h1>
+        </section>
+    </section>
+
+
+</body>
+</html>

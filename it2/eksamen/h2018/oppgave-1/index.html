@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Oppgave 1 - Beregn pris på heiskort</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <header>
+        <h1>Oppgave 1</h1>
+        <h2>Beregn pris på heiskort</h2>
+    </header>
+    <main>
+        <section class="input">
+            
+            <h1>Hva slags kort ønsker du</h1>
+            <form id="skjema">                
+                <label for="rbBarn">Barn (0 - 12 år)</label>
+                <input data-pris="100" data-tekst="Barn" type="radio" id="rbBarn" name="rb" checked>
+                <label for="rbVoksen">Voksen (over 12 år)</label>
+                <input data-pris="200" data-tekst="Voksen" type="radio" id="rbVoksen" name="rb">
+                <label for="inpAntallDager">Antall dager</label>
+                <input type="number" min="1" max="7" value="1" id="inpAntallDager">
+            </form>
+        </section>
+        <section class="output">
+            <h1>Ditt heiskort</h1>
+            <article>
+                <p>Type: </p>
+                <p id="visType"></p>
+                <p>Pris per dag: </p>
+                <p id="visDagpris"></p>
+                <p>Antall dager:</p>
+                <p id="visAntallDager"></p>
+                <p>Rabatt: </p>
+                <p id="visRabatt">0</p>
+                <p class="bold">Pris: </p>
+                <p class="bold" id="visPris">0</p>
+            </article>        
+        </section>
+    </main>
+
+    <script src="index.js"></script>
+</body>
+</html>

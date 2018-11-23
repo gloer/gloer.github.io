@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GraphQL</title>
+</head>
+<body>
+            
+        <script>
+            
+            fetch('https://api.entur.org/stop_places/1.0/graphql', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'ET-Client-Name' : 'reise-bloggen' },
+                    body: JSON.stringify({ 
+                        query: '{ topographicPlace(query: 'Frogn') { name } }' 
+                    })
+                })
+                .then(res => res.json())
+                .then(json => console.log(json.data));
+        
+        </script>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rocket landing</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        header {
+            
+        }
+
+        figure {
+            margin: 0;
+            display: inline-block;
+        }
+        .ufo {
+            font-size: 64px;
+            animation: landing 8s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite; /* enten et tall eller infinite*/
+            animation-direction: alternate;
+
+            /* Skriv alt på en linje */
+            /* animation: landing 8s 3s forwards ease-in-out infinite alternate; */
+        }
+
+        #tregingen {
+            animation-delay: 1s;
+        }
+
+        @keyframes landing {
+            0% {
+                transform: translate(0, 400px) rotate(10deg);
+            }
+            50% {
+                transform: translate(400px, 300px) rotate(45deg);
+            }
+            100% {
+                transform: translate(0, 200px) rotate(-12deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <figure class="ufo">🛸</figure>
+        <figure id="tregingen" class="ufo">🛸</figure>
+        <figure class="ufo">🛸</figure>
+        <figure class="ufo">🛸</figure>
+        <figure class="ufo">🛸</figure>
+    </header>
+    <h1>Rocket landing</h1>
+</body>
+</html>

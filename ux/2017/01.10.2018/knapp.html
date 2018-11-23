@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Knapp</title>
+</head>
+<body>
+    
+    <button id="knappen">Klikk på meg</button>
+
+    <script>
+    
+        const knappen = document.getElementById("knappen");
+
+
+        function skrivJa() {
+            console.log("JA");
+        }
+
+        function skrivNei() {
+            console.log("NEI");
+        }
+
+        knappen.onclick = skrivJa;
+        knappen.onclick = skrivNei;
+
+        
+        knappen.addEventListener("click", skrivJa);
+        knappen.addEventListener("click", skrivNei);
+
+        knappen.addEventListener("touchstart", skrivJa);
+
+
+    </script>
+
+</body>
+</html>

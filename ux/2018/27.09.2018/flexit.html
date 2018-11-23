@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flex box</title>
+    <style>
+    
+        .statistikk div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }    
+
+        .statistikk div div {
+            flex: 1;
+            border: 1px solid green;
+            padding: 16px;
+            transition: 0.3s;
+        }
+
+       .statistikk div div:hover {
+           flex: 2;
+       }
+
+    </style>
+</head>
+<body>
+    
+    <section class="statistikk">
+
+        <div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>
+
+        <div>
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+            </div>
+
+            <div>
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                </div>
+
+    </section>
+
+</body>
+</html>

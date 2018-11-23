@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Slides</title>
+    <style>
+
+       
+        .slide-wrapper {
+            width: 300px;
+            
+            margin: auto;            
+        }
+
+        .slides {
+            width: 300px;
+            height: 300px;
+            display: grid;
+            grid-auto-flow: column;
+            overflow-x: auto;
+
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .slide {
+            width: 300px;
+            scroll-snap-align: center;
+
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 48px;
+        }
+
+        .slide-wrapper nav {
+            display: grid;
+            grid-gap: 4px;
+            grid-auto-flow: column;
+            justify-content: center;            
+        }
+
+        .slide-wrapper a {
+            padding: 5px;
+
+            width: 20px;
+            height: 20px;
+            text-decoration: none;
+            border-radius: 50%;
+            background-color: lawngreen;
+        }
+
+        .slide:nth-child(1) { background-color: lawngreen; }
+        .slide:nth-child(2) { background-color: olive; }
+        .slide:nth-child(3) { background-color: paleturquoise; }
+        .slide:nth-child(4) { background-color: brown; }
+        .slide:nth-child(5) { background-color: aliceblue; }
+        .slide:nth-child(6) { background-color: coral; }
+    
+    </style>
+</head>
+<body>
+    <section class="slide-wrapper">
+
+        <nav>
+            <a href="#slide-1">1</a>
+            <a href="#slide-2">2</a>
+            <a href="#slide-3">3</a>
+            <a href="#slide-4">4</a>
+            <a href="#slide-5">5</a>
+            <a href="#slide-6">6</a>
+        </nav>
+
+        <div class="slides">
+
+            <div class="slide" id="slide-1">1</div>
+            <div class="slide" id="slide-2">2</div>
+            <div class="slide" id="slide-3">3</div>
+            <div class="slide" id="slide-4">4</div>
+            <div class="slide" id="slide-5">5</div>
+            <div class="slide" id="slide-6">6</div>
+
+        </div>
+
+
+    </section>
+</body>
+</html>

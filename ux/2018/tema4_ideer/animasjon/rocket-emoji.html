@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rocket</title>
+    <style>
+
+        * {
+            margin: 0;
+        }
+
+        body {
+            background-color: #eee;
+            color: #666;
+            font-family: sans-serif;
+        }
+    
+        header {
+            height: 150px;
+            text-align: center;
+        }
+
+        @keyframes landing {
+            from {
+                transform: translateY(-65px) rotate(0);
+            }
+            to {
+                transform: translateY(65px) rotate(-43deg);
+            }
+        }
+
+        header span {
+            font-size: 64px;
+            transform: translateY(65px) rotate(-43deg);
+            display: inline-block;
+            animation: landing 8s;
+            filter: grayscale(1);
+        }
+
+        main {
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        main h1 {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        p {
+            column-count: 2;
+            column-gap: 32px;
+            text-align: justify;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <header>
+        <span>🚀</span>
+    </header>
+    <main>
+        <h1>Rocket Landing</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus voluptatem vel eos et, qui magnam ullam! Esse, delectus ullam, exercitationem quis dolore deserunt velit praesentium quidem corporis iure dolorum eius?</p>
+    </main>
+
+</body>
+</html>

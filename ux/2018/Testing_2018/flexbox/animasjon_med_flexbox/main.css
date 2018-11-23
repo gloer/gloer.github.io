@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    
+}
+
+html {
+    font-size: 100%;
+}
+
+body {
+    background-color: #E80C7A;
+}
+
+main {
+    position: relative;
+    max-width: 1200px;
+    margin: 4rem auto;
+    height: 450px;
+    background-color: #E82C0C;
+    padding: 1rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+main div {
+    background-color: #FF530D;
+    height: 40px;
+    flex: 1;
+    margin: 0.25rem;
+    animation: fall-ned 4s alternate infinite ease-in-out;    
+}
+
+main div:first-child {
+    background-color: darkmagenta;
+}
+
+main div:last-child {
+    background-color: darkmagenta;
+}
+
+@keyframes fall-ned {
+    to {
+        margin-top: calc(450px - 40px);
+    }
+}

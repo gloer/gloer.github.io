@@ -16,6 +16,7 @@
             background-image: url("black.png");
             background-size: cover;
             background-position: center;
+            transition: background-image 2s;
         }
         audio {
             position: absolute;
@@ -29,62 +30,99 @@
             font-size: 2rem;
             cursor: pointer;
         }
+        #first {
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
 
     <img src="dark.jpg" alt="Just used to load" style="display: none">
+    <img src="im1.jpg" alt="Just used to load" style="display: none">
+    <img src="img2.jpg" alt="Just used to load" style="display: none">
+    <img src="img3.jpg" alt="Just used to load" style="display: none">
+    <img src="img4.jpg" alt="Just used to load" style="display: none">
+    <img src="img5.jpg" alt="Just used to load" style="display: none">
+    <img src="img6.jpg" alt="Just used to load" style="display: none">
     
-    <audio id="theMusic" src="Lazy_River.mp3" controls preload="true"></audio>
+    <audio id="theMusic" src="Lazy_River.mp3" preload="true"></audio>
 
-    <p id="btnStart">Click to start the amazing slideshow</p>
+    <p id="btnStart"><span id="first">C</span>lick if you dare</p>
 
+
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/61811/web-animations-next-2.2.0.min.js"></script>
     <script>
     
         const theMusic = document.getElementById("theMusic");
         const btnStart = document.getElementById("btnStart");
 
-        let playedFirstScene = false;
-
-        const firstKeyframes = [
-            {backgroundImage: "url(black.png)"},
-            {backgroundImage: "url(dark.jpg)"}
+        let nesteBilde = 0;
+    
+        const bilder = [
+            {bilde: "img1.jpg", tekst: "In the deeep forrest"},
+            {bilde: "img2.jpg", tekst: "a mystery unravels"},
+            {bilde: "img3.jpg", tekst: "so scary"},
+            {bilde: "img4.jpg", tekst: "it will leave you"},
+            {bilde: "img5.jpg", tekst: "horrified..."}
         ];
 
-        const firstSettings = {
-            duration: 2000,
-            fill: "forwards"
-        }
+        const keyframes = [
+                {opacity: 0, transform: "scale(2.0)", filter: "blur(5px)"},
+                {opacity: 1, transform: "scale(1.5)", filter: "blur(1px)"},
+                {opacity: 0, transform: "scale(1)", filter: "blur(5px)"}
+        ];
 
-        const firstScene = document.body.animate(firstKeyframes, firstSettings);
-        firstScene.pause();
-        
-        theMusic.ontimeupdate = function() {
-            // Vi kan nå bruke tidslinjen til å kontrollere animasjoer o.l.
-            console.log(theMusic.currentTime);
+        const settings = {
+            duration: 4000,
+            fill: "forwards",
+            delay: 500
+        };
 
-            if(theMusic.currentTime > 3 && !playedFirstScene) {
-                playedFirstScene = true;
-                firstScene.play();
-
-            }
+        function byttBilde() {
+            console.log(nesteBilde);
+            
+            btnStart.onclick = function() {}
+            document.body.style.backgroundImage = "url(" + bilder[nesteBilde].bilde + ")";
+            btnStart.innerHTML = bilder[nesteBilde].tekst;
+            btnStart.animate(keyframes, settings);
+            nesteBilde++;
 
         }
 
         function fadeMe() {
             btnStart.animate([
                 {opacity: 1, filter: "blur(0)"},
-                {opacity: 0, filter: "blur(5px)"}
+                {opacity: 0, filter: "blur(7px)"}
             ],{
-                duration: 2000,
+                duration: 3000,
                 fill: "forwards"
             });
+            setInterval(byttBilde, 6000);            
+
         }
 
         btnStart.onclick = function() {
             theMusic.play();
             fadeMe();
         }
+
+        btnStart.animate([
+            {filter: "blur(32px)", opacity: 0, transform: "scale(0)"},
+            {filter: "blur(1px)", opacity: 1, transform: "scale(1)"}
+        ],{
+            duration: 7000,
+            fill: "forwards"
+        });
+
+        const first = document.getElementById("first");
+
+        first.animate([
+            {transform: "translateX(-400px) scale(3)"},
+            {transform: "translateX(0) scale(1)"}
+        ],{
+            duration: 7000,
+            fill: "forwards"
+        });
     
     </script>
 

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mixed layout</title>
+    <style>
+
+        html {
+            font-size: 100%;
+        }
+
+        main {
+            max-width: 1400px;
+            margin: auto;
+        }
+    
+        .bilde_og_tekst {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 2rem;
+
+        }        
+        .bilde_og_tekst img {
+            width: 100%;
+        }
+
+        .tekst div {
+            columns: 3;
+            column-gap: 2rem;
+            column-rule: 1px solid #333;
+        }
+
+        .tekst div p {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+
+        .tekst div p::first-letter {
+            font-size: 3rem;
+            color: darkgreen;
+            float: left;                    
+            padding-right: 1rem;
+            padding-bottom: 1rem;
+            
+            
+        }
+
+    </style>
+</head>
+<body>
+    
+    <header></header>
+
+    <main>
+
+        <section class="bilde_og_tekst">
+
+            <article>
+                <img src="28.09.2018/manet.jpg">
+                <h1>Maneter</h1>
+            </article>
+            <article>
+                <img src="28.09.2018/manet.jpg">
+                <h1>Maneter</h1>
+            </article>
+            <article>
+                <img src="28.09.2018/manet.jpg">
+                <h1>Maneter</h1>
+            </article>
+
+        </section>
+
+        <section class="tekst">
+
+            <h1>Metamorphosis</h1>
+            <div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi ipsa dignissimos harum, excepturi inventore quidem ea incidunt ratione nulla corporis perferendis enim ipsam voluptatibus sunt, eveniet accusamus provident. Recusandae, earum?</p>
+                <p>Est, rem pariatur blanditiis harum facilis dignissimos. Aspernatur tempore voluptate temporibus nam architecto quod voluptatibus sed quae totam. Voluptatibus autem non illum minus aliquam dolorem? Quam fugiat laborum aspernatur similique.</p>
+                <p>Illum temporibus magni laudantium consequatur. Quis facere tempore non fugiat illum modi expedita consequuntur libero eligendi possimus maxime, saepe optio alias quam quidem et culpa similique explicabo qui labore error!</p>
+                <p>Amet odio ipsam soluta quisquam eos recusandae ducimus rem quia tenetur in! Temporibus ea vitae, veniam sit fuga possimus excepturi repellat accusantium neque fugiat ullam et asperiores laborum commodi quam.</p>
+                <p>Placeat alias exercitationem numquam accusamus vel odio asperiores? Voluptates voluptate quam est recusandae quidem maiores commodi numquam cumque id reiciendis, sapiente ipsa quod enim fugit ipsam odit aliquid illum in?</p>
+                <p>Et sapiente mollitia architecto iure, quibusdam illo. Totam eligendi eum doloribus facilis ratione architecto modi quaerat molestiae, distinctio in dolorum. Voluptatibus vitae nesciunt in quae laborum, aliquam quisquam! Iure, minima?</p>
+                <p>Tempore illum totam perferendis ipsum exercitationem, fugiat qui odio omnis rerum at facilis unde mollitia quidem non sed expedita quae animi reiciendis minus commodi cupiditate quas possimus officiis? Ad, harum?</p>
+                <p>Est praesentium perspiciatis ex voluptas quia, incidunt doloremque consequatur totam distinctio, laboriosam modi possimus quod reiciendis quae error? Aliquid laborum obcaecati vel asperiores quasi quos molestiae sed amet quisquam odio.</p>
+                <p>Dolores, libero. Quis, cumque iste! Vel eos quos voluptas sequi consectetur temporibus et doloremque, ipsum delectus harum eius, blanditiis quo? Repellat nobis similique laudantium vel totam maiores impedit quo eaque!</p>
+                <p>Eligendi dolor dolorum omnis? Beatae debitis maxime quaerat. At fugiat necessitatibus vitae tenetur neque nobis atque maiores earum aperiam ipsum beatae repellendus, dolores ratione eos officia voluptatem possimus quas quam!</p>
+                
+            </div>
+
+
+        </section>
+
+    </main>
+
+    <footer></footer>
+
+</body>
+</html>

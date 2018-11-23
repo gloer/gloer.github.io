@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Animasjon 02</title>
+    <style>
+        
+        body {
+            margin: 0;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            background-color: orange;
+            min-height: 100vh;
+            background-image: 
+                linear-gradient(to right, blue 0%, blue 50%, transparent 50%, transparent 100%),
+                linear-gradient(to right, transparent 0%, transparent 50%, blue 50%, blue 100%);
+
+                background-size: 
+                    100% 50%,
+                    100% 50%;
+                background-repeat: no-repeat, no-repeat;
+
+                background-position: left top, left bottom;
+        }
+
+        #firkant {
+            width: 200px;
+            height: 100px;
+            background-color: blueviolet;
+            animation: snurr 3s;
+        }
+
+        @keyframes snurr {
+            to {
+                transform: rotate(360deg) scale(2);
+            }
+        }
+
+
+    
+    </style>
+</head>
+<body>
+    <div id="firkant"></div>
+</body>
+</html>

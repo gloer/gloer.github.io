@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Storage</title>
+    <style>
+        main {
+            padding: 16px;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-gap: 16px;
+        }
+
+        main article {
+            background-color: #eee;
+            padding: 8px;
+            display: grid;
+        }
+        main img {
+            width: 100%;
+        }
+        main article p {
+            align-self: end;
+        }
+    </style>
+</head>
+<body>
+    
+    <form id="skjema">
+            <input type="file" id="inpFile" required>
+            <input type="text" id="inpTekst" required placeholder="Hva har du tatt bilde av">
+            <button type="submit">Last opp bilde</button>
+    </form>
+
+    <main>
+
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyDX7_vsdMR6qbW807NMDafCM1m3RK_Gmrc",
+        authDomain: "fire-my-store.firebaseapp.com",
+        databaseURL: "https://fire-my-store.firebaseio.com",
+        projectId: "fire-my-store",
+        storageBucket: "fire-my-store.appspot.com",
+        messagingSenderId: "377970988097"
+    };
+    firebase.initializeApp(config);
+    </script>
+    
+    <script>
+    
+        const inpFile = document.querySelector("#inpFile");
+        const skjema = document.querySelector("#skjema");
+        const inpTekst = document.getElementById("inpTekst");
+        const main = document.querySelector("main");
+        
+
+        const db = firebase.database();
+        const bilder = db.ref("bilder");
+        const storage = firebase.storage();
+        const imagesRef = storage.ref("images");        
+
+        skjema.onsubmit = (evt) => {
+            evt.preventDefault();
+
+            const file = inpFile.files[0];
+            const bildetekst = inpTekst.value;                      
+            const name = (+new Date()) + file.name;
+            
+            imagesRef.child(name).put(file)            
+                .then(snapshot => snapshot.ref.getDownloadURL())
+                .then(url => {
+                    bilder.push({
+                        link: url,
+                        tekst: bildetekst
+                    });                    
+                });
+                
+            skjema.reset();                
+        }
+
+        const visBilde = (snapshot) => {
+            const bilde = snapshot.val();
+            main.innerHTML += `
+                <article>
+                    <img src="${bilde.link}">
+                    <p>${bilde.tekst}</p>
+                </article>
+            `;
+
+        }
+
+        bilder.on("child_added", visBilde);
+
+
+    </script>
+
+</body>
+</html>

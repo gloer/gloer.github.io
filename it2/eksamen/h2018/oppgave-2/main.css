@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    font-size: 100%;
+    scroll-behavior: smooth;    
+    
+}
+
+
+body {
+    font-family: 'Open Sans', sans-serif;    
+    color: white;         
+           
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+header {
+    background-color: rgba(255, 255, 255, 0.8);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;    
+    z-index: 1;
+}
+
+header a {
+    display: inline-block;
+    padding: 20px 30px;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 4px solid olive; 
+    transition: 0.5s;    
+}
+
+header a:hover {
+    border-bottom: 4px solid slategray;    
+}
+
+header a.valgt {
+    background-color: lavenderblush;
+}
+
+main {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+section {
+    min-height: 100vh;
+    scroll-snap-align: start;
+}
+
+section.hytte, section#video {
+    text-align: center;
+    padding-top: 8rem;
+}
+
+.slide-wrapper {
+    position: relative;
+}
+
+.slide-show {
+    width: 50vw;
+    margin: auto;    
+    overflow-x: auto;    
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+}
+
+.slides {    
+    width: 400%;
+    display: grid;
+    grid-auto-flow: column;        
+    
+}
+
+.slides img {    
+    scroll-snap-align: center;    
+    width: 100%;
+}
+
+
+
+.slide-wrapper nav {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    width: 100%;
+    grid-gap: 1rem;
+}
+
+.sirkel {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+#forside {
+
+    background-color: #eb5055;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#granstua {
+    background-color: olivedrab;
+}
+
+#granbo {
+    background-color: darkorange;
+    
+}
+
+#video {
+    background-color: salmon;
+}
+
+.image-container {
+    background-image: url("../Vedlegg_H18/menybilde.jpg");
+    background-repeat: no-repeat;
+    
+    width: 60vw;
+    height: calc(60vw * 720/1280);
+    background-size: 100%;
+    margin: auto;
+    position: relative;
+}
+
+.image-container  a {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#linkGranbo {
+    left: calc(477 / 1280 * 100%);
+    top: calc(149 / 720 * 100%);
+    width: calc(170 / 1280 * 100%);
+    height: calc(130 / 720 * 100%);    
+}
+
+#linkGranstua {
+    left: calc(648 / 1280 * 100%);
+    top: calc(216 / 720 * 100%);
+    width: calc(180 / 1280 * 100%);
+    height: calc(146 / 720 * 100%);    
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Faust</title>
+    <style>
+    
+        #teksten {
+            display: grid;
+            grid-template-columns: repeat(30, 1fr);
+            
+        }    
+
+    </style>
+</head>
+<body>
+    
+    <div id="teksten"></div>
+    
+    <script>
+        const teksten = document.getElementById("teksten");
+        const tekst = "I (Melanchthon) know one by the name of Faust, from Kundling, a small town in the neighbourhood of my home. Whilst this man was a student at Cracow he learnt the art of Magic, which art indeed was aforetimes greatly in vogue there, and of it there were public professorial courses. He wandered far and wide and talked of mysterious things. When he was going to give an exhibition in Venice, he said he would fly up into the sky. And accordingly the Devil raised him aloft and so dashed him down, that being hurled to the ground he was well-nigh a dead man, but nevertheless he came off with his life. Not many years since this same Johannes Faustus sat very dismal on his last day in a certain village of the Duchy of Württemberg. The host asked him why, contrary to his use and wont, he was so sad, for he was used to be a good-for-nothing losel, of a foul way of life, so that on divers occasions his debaucheries had brought him to Death’s door; whereupon he said unto the host in that village: ‘See you be not affrighted this night.’ And at dead of night the house quaked, and when Faust did not arise betimes and it was already on midday, the host took others to himself, went into his chamber and found him lying beside his bed with his face twisted round to his back, thus he had been destroyed of the devil. Whilst he still lived he had a dog with him, that was a devil. . . . This Faust slipped away in this city of Wittenberg when the excellent Prince, Duke John, had given orders to lay hands upon him. So also he got away at Nuremberg. There he had scarce set himself down to breakfast when a great agitation took him, and he immediately rose up, paid his host what he owed him, but scarcely was out at the door when the tipstaves came and sought for him. This same sorcerer Faust, an abominable beast and a sink of many devils, boasted of himself that all the victories won by the imperial armies in Italy had been by him brought to pass with the aid of his magic. But that was altogether a vain lie.";
+
+        const bokstaver = tekst.split("");
+
+        for(const bokstav of bokstaver) {
+
+            teksten.innerHTML += `
+                <span>${bokstav}</span>
+            `;
+
+
+        }
+
+
+    </script>
+    
+
+
+
+</body>
+</html>

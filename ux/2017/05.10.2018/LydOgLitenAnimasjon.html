@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Synkronisert luyd og animasjon</title>
+    <style>
+        #firkant {
+            width: 100px;
+            height: 100px;
+            background-color: steelblue;
+            margin: 200px;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="spillLyd()">
+        Spill av en lyd som er synkronisert med en animasjon
+    </button>
+
+    <div id="firkant"></div>
+
+    <script>
+        const firkant = document.getElementById("firkant");
+        const ac = new AudioContext();
+
+
+        function spillLyd() {
+            const osc = ac.createOscillator();
+            osc.connect(ac.destination);
+            osc.frequency.value = 880;
+            osc.start(ac.currentTime);
+            osc.stop(ac.currentTime + 0.5);
+            
+            firkant.animate( [
+
+                { transform: "scale(1)" },
+                { transform: "scale(3)" },
+                { transform: "scale(1)" }
+
+            ] , {
+
+                duration: 500
+
+            } );
+
+        }
+        
+    
+    </script>
+
+</body>
+</html>

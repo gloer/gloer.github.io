@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Animated mask</title>
+    <style>
+    
+        video {
+            -webkit-mask-image: url(africa.png);
+            -webkit-mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            max-width: 100%;
+        }
+
+        body {
+            padding: 40px;
+            text-align: center;
+            font-family: monospace;
+            background-image: linear-gradient(45deg, #ebebeb 25%, transparent 25%), linear-gradient(-45deg, #ebebeb 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ebebeb 75%), linear-gradient(-45deg, transparent 75%, #ebebeb 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+        }
+
+    
+    </style>
+</head>
+<body>
+    <h1>Animated mask-image is a thing</h1>
+    <video src="afrika.mp4" muted autoplay></video>
+    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/851550/sponge.jpg">
+    <h2>Neat huh?</h2>
+</body>
+</html>

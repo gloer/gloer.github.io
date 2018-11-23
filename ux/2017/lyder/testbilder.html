@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bilder</title>
+    <style>
+    
+        body {
+            margin: 0;
+            background-image: url(black.png);
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+
+    </style>
+</head>
+<body>
+    
+
+    <script>
+    
+        const bilder = [
+            "img1.jpg",
+            "img2.jpg",
+            "img3.jpg",
+            "img4.jpg",
+            "img5.jpg",
+            "img6.jpg",
+        ];
+
+        let bnr = 0;
+
+        function byttBilde() {
+            
+            const bilde = bilder[bnr];
+            document.body.style.backgroundImage = "url(" + bilde + ")";
+            bnr++;
+
+        }
+
+        setInterval(byttBilde, 1000)
+
+    </script>
+
+</body>
+</html>

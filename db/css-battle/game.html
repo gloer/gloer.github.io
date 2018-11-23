@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Ultimate CSS Battle</title>
+    <style>
+    
+        main {
+            display: grid;
+            grid-template-columns: repeat(6, auto);
+            grid-gap: 20px;
+        }
+
+        main > div {
+            transition: 0.5s;
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+        }
+    
+    </style>
+</head>
+<body>
+    
+    <main>
+
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyAxtG6P20o9dM_jx-pQDBxDWiNE-2xU8lk",
+        authDomain: "cluedo-4c246.firebaseapp.com",
+        databaseURL: "https://cluedo-4c246.firebaseio.com",
+        projectId: "cluedo-4c246",
+        storageBucket: "cluedo-4c246.appspot.com",
+        messagingSenderId: "148420711646"
+    };
+    firebase.initializeApp(config);
+    </script>
+    <script src="game.js"></script>
+
+</body>
+</html>

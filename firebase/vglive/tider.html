@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tider med moment</title>
+</head>
+<body>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/nb.js"></script>
+
+        <script>
+        
+            const ukenr = moment().week();
+            console.log(typeof(ukenr));
+
+            console.log("Ukenr: " + moment().week() );
+
+            console.log( moment().format('Do MMMM YYYY, HH:mm:ss') );
+        
+        </script>
+
+</body>
+</html>

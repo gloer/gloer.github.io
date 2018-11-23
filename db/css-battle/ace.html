@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ACE in Action</title>
+<style type="text/css" media="screen">
+    
+    body {
+        margin: 0;
+    }
+
+    main {
+        display: grid;
+        grid-template-rows: 1fr 3fr;
+        height: 100vh;
+    }
+
+    #editor-container {
+        position: relative;
+    }
+
+    #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #editor {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+</style>
+<style id="minStil"></style>
+</head>
+<body>
+
+<main>
+    <section id="container">
+        <div id="figur">HELLO THERE</div>
+    </section>
+    <section id="editor-container">
+        <div id="editor">body {
+    background-color: green;
+}</div>
+    </section>
+
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.2/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/css");
+
+    editor.getSession().on('change', function () {
+       console.log(editor.getSession().getValue());
+       document.querySelector("#minStil").innerHTML = editor.getSession().getValue();
+   });
+
+
+</script>
+</body>
+</html>

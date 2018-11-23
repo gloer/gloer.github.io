@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fisken</title>
+    <style>
+
+        * {
+            margin: 0;
+        }
+    
+        .havet {
+            height: 300px;
+            background-color: deepskyblue;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fisk {
+            display: inline-block;
+            font-size: 64px;
+            position: absolute;
+
+            right: -100px;
+            bottom: 30px;
+
+            animation: swim 8s linear;
+        }
+
+        .hval {
+            display: inline-block;
+            font-size: 128px;
+            position: absolute;
+            left: -300px;
+            transform: rotateY(180deg);
+            animation: hval-bevegelse 8s;
+        }
+
+        @keyframes hval-bevegelse {
+            from {
+                left: -100px;
+                bottom: -10px;
+                font-size: 32px;
+                
+            }
+            to {
+                left: 800px;
+                font-size: 128px;
+                bottom: 10px;
+                
+            }
+        }
+
+        .fisk:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .fisk:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+    
+        @keyframes swim {
+
+            from {
+                right: -150px;
+                
+            }
+
+            to {
+                bottom: 110%;
+                right: 150%;
+                transform: rotate(12deg);
+            }
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <section class="havet">
+        <figure class="fisk">🐠</figure>    
+        <figure class="fisk">🐠</figure>    
+        <figure class="fisk">🐠</figure> 
+        
+        <figure class="hval">🐳</figure>
+    </section>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fleksible bokser</title>
+    <style>
+        .bokser {
+            display: flex;
+            flex-direction: row;
+        }
+        .bokser div {
+            background-color: steelblue;
+            background-size: cover;
+            background-position: center;
+            min-height: 200px;
+            margin: 5px;
+            flex: 1;
+            transition: 1.5s;
+        }
+
+        .bokser div:hover {
+            flex: 4;
+        }
+
+        .bokser div.boks-1 { background-image: url("images/elephant.jpg");  }
+        .bokser div.boks-2 { background-image: url("images/neshorn.jpg");  }
+
+        
+    </style>
+</head>
+<body>
+    <section class="bokser">
+        <div class="boks-1"></div>
+        <div class="boks-2"></div>
+        <div class="boks-3"></div>
+        <div class="boks-4"></div>
+        <div class="boks-5"></div>
+        <div class="boks-6"></div>
+        <div class="boks-7"></div>
+        <div class="boks-8"></div>
+    </section>
+</body>
+</html>

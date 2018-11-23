@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registrer en ny kamp</title>
+    <style>
+        body {
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    
+    <textarea id="ta"></textarea>
+
+    <script>
+    
+        const ta = document.getElementById('ta');
+        
+
+        ta.oninput = () => {
+
+            console.log(ta.value);
+
+        }
+    
+    </script>
+
+</body>
+</html>

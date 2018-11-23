@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Share this</title>
+</head>
+<body>
+    
+    <h1>Dynamic Facebook Share Button</h1>
+
+    <a href="javascript:fbshareCurrentPage()" target="_blank" alt="Share on Facebook">
+        <img src="https://assets.cobaltnitra.com/teams/repository/export/685/994e08a161005809f00505692530e/685994e08a161005809f00505692530e.png" style="width: 30px; alt=" alt="" />
+    </a>
+
+
+    <script language="javascript">
+        function fbshareCurrentPage()
+        {window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(window.location.href)+"&t="+document.title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false; }
+    </script>
+
+</body>
+</html>

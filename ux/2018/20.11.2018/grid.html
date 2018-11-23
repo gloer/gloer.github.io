@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Grid</title>
+    <style>
+        body {
+            margin: 50px;
+        }
+        .rutenett {
+            display: grid;
+            grid-template-columns: 50px 100px 50px 200px;
+            grid-template-rows: 100px 50px 100px 50px;
+        }
+        .hallo {
+            background-color: coral;
+            grid-column: span 2;
+        }
+        .hadetbra {
+            background-color: darkorange;
+            grid-column: 4 / 5;
+            grid-row: 3 / 5;
+        }
+    </style>
+</head>
+<body>
+    
+    <section class="rutenett">
+        <article class="hallo">
+            HALLO
+        </article>
+        <article class="hadetbra">
+            HA DET BRA
+        </article>
+    </section>
+
+    
+
+</body>
+</html>

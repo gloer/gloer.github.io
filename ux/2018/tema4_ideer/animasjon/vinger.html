@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vinger</title>
+
+    <style>
+    
+        #fugl {
+            width: 900px;
+            height: 229px;
+            margin: 150px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @keyframes flyV {
+            to {
+                transform: rotate(20deg);
+            }
+        }
+
+        @keyframes flyH {
+            to {
+                transform: rotate(-20deg);
+            }
+        }
+
+
+        .left {
+            transform: rotate(-20deg);
+            background-image: url(vinger.png);
+            transform-origin: right 50%;
+            animation: flyV 3s infinite alternate;
+        }
+
+        .right {
+            transform: rotate(20deg);
+            background-image: url("vinger.png");
+            background-position: -100%;
+            transform-origin: left 50%;
+            animation: flyH 3s infinite alternate;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <section id="fugl">
+        <div class="left"></div>
+        <div class="right"></div>
+    </section>
+
+</body>
+</html>

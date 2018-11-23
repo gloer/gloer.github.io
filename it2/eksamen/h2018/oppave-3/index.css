@@ -1,0 +1,49 @@
+html {
+    font-size: 100%;
+}
+
+h1 {
+    text-align: center;
+}
+
+#overlay {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    color: white;
+    text-align: center;
+    display: none;
+}
+
+#btnClose {
+    display: inline-block;
+}
+
+#oversikt {
+    max-width: 700px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    grid-gap: 2rem;
+}
+
+#btnGrantoppen {
+    grid-column: span 5;
+    justify-self: center;
+}
+
+.bilde {
+    grid-column: span 5;
+    justify-self: center;
+}
+
+.button {
+    background-color: slateblue;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}

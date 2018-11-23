@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Amazing skyskrapers</title>
+    <style>
+    
+        * {
+            margin: 0;
+        }
+
+        .paralax {
+            height: 100vh;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            display: grid;
+            grid-template-rows: 1fr auto 1fr;
+        }
+
+        .paralax img {
+            width: 100%;
+        }
+
+        .content {
+            
+            font-family: sans-serif;
+            color: #777;
+            padding: 70px 0;
+            text-align: center;
+        }
+
+        .content h1 {
+            margin-bottom: 40px;
+        }
+
+        #new-york {
+            background-image: url(sky.jpg);
+            
+        }
+
+        #bejing {
+            background-image: url(sky2.jpg);
+        }
+
+        #chicago {
+            background-image: url(sky3.jpg);
+        }
+
+        .white {
+            background-color: white;
+        }
+
+
+    
+    </style>
+</head>
+<body>
+    
+    <section class="paralax" id="new-york">
+        
+            <div class="white"></div>
+            <img src="bgr.png">   
+            <div class="white"></div>
+        
+    </section>
+    <section class="paralax" id="bejing">
+            <div class="white"></div>
+            <img src="bgr.png">   
+            <div class="white"></div>
+        
+    </section>
+    <section class="paralax" id="chicago">
+            <div class="white"></div>
+            <img src="bgr.png">   
+            <div class="white"></div>
+        
+    </section>
+
+</body>
+</html>

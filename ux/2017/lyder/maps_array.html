@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Array og Map</title>
+</head>
+<body>
+
+    <input type="text" id="inpPersonnummer">
+    <span id="visPerson"></span>
+    
+    <script>
+
+        const inpPersonnummer = document.getElementById("inpPersonnummer");
+        const visPerson = document.getElementById("visPerson");
+    
+        const personer = new Map();
+
+        personer.set("123456", "Gløer Langslet");
+        personer.set("123457", "Per Nilsen");
+        personer.set("123458", "Stine Brun");
+        personer.set("123459", "Lena Grønn");
+
+        function finnPerson() {
+            if(personer.get(inpPersonnummer.value)) {
+                const person = personer.get(inpPersonnummer.value);
+                visPerson.innerHTML = person;
+            } else {
+                visPerson.innerHTML = "";
+            }
+        }
+
+        inpPersonnummer.oninput = finnPerson;
+
+        
+    
+    </script>
+
+</body>
+</html>

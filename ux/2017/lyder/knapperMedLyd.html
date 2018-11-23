@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Knapper med lyd</title>
+</head>
+<body>
+    
+    <button id="btnA" accesskey="a">A Button</button>
+    <button id="btnB">B Button</button>
+
+    <script>
+        const btnA = document.getElementById("btnA");
+        const btnB = document.getElementById("btnB");
+
+        const ac = new AudioContext();
+
+        let osc;
+
+        function spillA() {
+            osc = ac.createOscillator();
+            osc.connect(ac.destination);
+            osc.start(ac.currentTime);
+        }
+
+        function spillB() {
+            osc = ac.createOscillator();
+            osc.connect(ac.destination);
+            osc.frequency.value = 880;
+            osc.start(ac.currentTime);
+        }
+
+        function stoppLyd() {
+            osc.stop();
+        }
+
+        btnA.onmousedown = spillA;
+        btnA.onmouseup = stoppLyd;
+        
+        btnB.onmousedown = spillB;
+        btnB.onmouseup = stoppLyd;
+
+
+
+    </script>
+
+</body>
+</html>

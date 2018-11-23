@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Keyboard</title>
+</head>
+<body>
+    
+    <div id="keyboard"></div>
+
+    <script src="qwerty-hancock.min.js"></script>
+    <script>
+        const ac = new AudioContext();
+
+
+        var keyboard = new QwertyHancock({
+            id: 'keyboard',
+            width: 600,
+            height: 150,
+            octaves: 2,
+            startNote: 'A3',
+            whiteNotesColour: 'white',
+            blackNotesColour: 'black',
+            hoverColour: '#f3e939'
+        });
+
+        const toner = new Map();
+
+        keyboard.keyDown = function (note, frequency) {
+            
+            const osc = ac.createOscillator();
+            osc.frequency.value = frequency;
+            osc.connect(ac.destination);
+            osc.start();
+
+            toner.set(note, osc);
+
+        };
+
+        keyboard.keyUp = function (note, frequency) {
+            // Your code here
+            // Hvordan i huleste skal jeg klare å skru av den samme lyden?
+            const osc = toner.get(note);
+            osc.stop();
+            toner.delete(osc);
+        };
+    </script>
+    
+
+</body>
+</html>

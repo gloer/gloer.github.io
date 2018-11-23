@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Animer</title>
+</head>
+<body>
+    <h1>TEKSTEN</h1>
+
+    <script>
+    
+    const h1 = document.querySelector("body > h1");
+
+    let y = 0;
+
+    const animer = () => {
+
+        console.log("ANUMER");
+        h1.style.transform = `translateY(${y}px)`;
+        y++;    
+
+
+        console.log(y);
+        
+        if(y > 100) { y = 0; }
+
+        requestAnimationFrame(animer);    
+        
+    }
+
+    document.onclick = animer;
+    
+    </script>
+</body>
+</html>

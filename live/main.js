@@ -60,7 +60,6 @@ btnBorteGult.disabled = true;
 
 if(localStorage.myGameID) {
 
-    console.log("Viser forrige kamp");
 
     nyKamp.style.display = "none";
 

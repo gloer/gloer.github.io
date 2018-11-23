@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Koffka</title>
+    <style>
+    
+        :root {
+            --bredde: 500px;
+        }
+
+        #koffka {
+            width: var(--bredde);
+            height: var(--bredde);
+            margin: 100px auto;
+            
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            
+        }
+        #koffka div {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            border: 100px solid #a4a3a4;
+            width: 100px;
+            height: 100px;
+            background-color: transparent;
+            border-radius: 50%;
+        }
+
+        @keyframes moveLeft {
+            0% {
+                transform: translateX(0);
+            }
+            30% {
+                transform: translateX(-100px);
+            }
+            70% {
+                transform: translateX(-100px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes moveRight {
+            0% {
+                transform: translateX(0);
+            }
+            30% {
+                transform: translateX(100px);
+            }
+            70% {
+                transform: translateX(100px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes moveUp {
+            0% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-50px);
+            }
+            70% {
+                transform: translateY(-50px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        @keyframes moveDown {
+            0% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(50px);
+            }
+            70% {
+                transform: translateY(50px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .left {
+            background-color: #d2d1d2;
+            animation: 
+                moveLeft 8s 2s linear forwards,
+                moveDown 8s 12s linear forwards,
+                moveUp 8s 22s linear forwards;
+        }
+
+        .right {
+            background-color: #737273;
+            animation: 
+                moveRight 8s 2s linear forwards,
+                moveUp 8s 12s linear forwards,
+                moveDown 8s 22s linear forwards;
+        }
+
+
+
+        .left .circle {
+            top: 100px;
+            left: 100px;
+        }
+
+        .right .circle { 
+            left: -150px;
+            top: 100px;
+        }
+
+        
+    
+    </style>
+</head>
+<body>
+    
+    <section id="koffka">
+
+        <div class="left">
+            <div class="circle"></div>
+        </div>
+
+        <div class="right">
+            <div class="circle"></div>
+        </div>
+
+    </section>
+
+</body>
+</html>

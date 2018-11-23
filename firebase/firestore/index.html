@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Fire Store</title>
+</head>
+<body>
+    
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyDX7_vsdMR6qbW807NMDafCM1m3RK_Gmrc",
+        authDomain: "fire-my-store.firebaseapp.com",
+        databaseURL: "https://fire-my-store.firebaseio.com",
+        projectId: "fire-my-store",
+        storageBucket: "fire-my-store.appspot.com",
+        messagingSenderId: "377970988097"
+    };
+    firebase.initializeApp(config);
+    </script>
+
+    <script>
+    
+        const db = firebase.firestore();
+
+        /*
+        db.collection("users").add({
+            first: "Gløer",
+            last: "Langslet",
+            weight: 100
+        })
+        .then(
+            (docRef) => {
+                console.log("Document written with ID: " + docRef.id)
+            }
+        );
+       
+
+       db.collection("cities").doc("LA").set({
+           name: "Los Angeles",
+           state: "CA",
+           country: "USA"
+       });
+
+        */
+
+       const citiesRef = db.collection("cities");
+
+       citiesRef.where("capital", "==", true).where("population", "<", 1000000)
+        .get()
+        .then(
+            (snap) => {
+                snap.forEach(
+                    (doc) => {
+                        console.log(doc.data());
+                    }
+                )
+            }
+        );
+
+        
+
+
+    </script>
+
+</body>
+</html>

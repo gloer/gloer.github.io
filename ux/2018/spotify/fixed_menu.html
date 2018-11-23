@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fixed menu</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700,700i,800,900" rel="stylesheet">
+    <style>
+        html {
+            font-size: 100%;
+        }
+
+        body {
+            margin: 0;
+            
+            font-family: 'Poppins', sans-serif;
+            
+        }
+
+        main {
+            color: white;
+            min-height: 2000px;
+            padding-top: 150px;
+            max-width: 1024px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .transparent {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        header {
+            background-color:rgba(0, 0, 0, 0);
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin-left: auto;
+            margin-right: auto;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        header nav {
+
+            display: grid;
+            grid-auto-flow: column;            
+            justify-content: end;
+            align-items: center;
+            grid-gap: 1rem;
+        }
+
+        header .skillelinje {
+            width: 1px;
+            height: 1rem;
+            background-color: white;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            padding: 2rem 0.5rem;
+            font-weight: 700;
+        }
+
+        header nav a:hover {
+            color: darkblue;
+        }
+
+        .logo span {
+            display: none;
+        }
+        .logo img {
+            height: 35px;
+        }
+    
+
+
+
+    /* opening front stuff */
+    .opening {
+            color: white;
+            background-color: #60b3f6;
+            background-image: url("premium_dancer.png");
+            background-repeat: no-repeat;
+            background-position: right bottom -20px;
+            min-height: 640px;
+
+        }
+        .opening div {
+            max-width: 1140px;
+            margin: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .opening h1 {
+            font-size: 6rem;
+            letter-spacing: -4px;
+            margin-top: 0;
+            padding-top: 10rem;   
+            margin-bottom: 0.125rem;         
+        }
+
+        .opening p {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-top: 0;
+        }
+
+        .btn {
+            padding: 1rem 3rem;
+            background-color: #1DB954;
+            display: inline-block;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: white;
+            font-weight: 700;
+            border-radius: 2rem;
+            transition: 0.5s;
+        }
+
+        .btn:hover {
+            background-color: rgb(141, 192, 159);
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <section class="container">
+            <a href="#" class="logo">
+                <span>Home</span>
+                <img src="Spotify_Logo_RGB_White.png">
+            </a>
+            
+            
+            <nav>
+                <a href="#">Premium</a>
+                <a href="#">Help</a>
+                <a href="#">Download</a>
+                <div class="skillelinje"></div>
+                <a href="#">Sign Up</a>
+                <a href="#">Log in</a>            
+            </nav>
+        </section>        
+    </header>
+
+    <section class="opening">
+        <div>
+            <h1>Go Premium. Be Happy.</h1>
+            <p>Try Premium free for 30 days. Only kr109,00/month after.</p>
+            <a class="btn" href="premium.html">Start free trial</a>
+        </div>
+        </section>
+
+    <script>
+    
+        const header = document.querySelector("header");
+
+        onscroll = () => {
+            if(scrollY > 10) {
+                header.className = "transparent";
+            } else {
+                header.className = "";
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Zoom it</title>
+    <style>
+
+        body {
+            margin: 0;
+        }
+        
+        #zoom {
+            position: absolute;
+            pointer-events: none;
+            top: 0;
+            left: 900px;
+            width: 200px;
+            height: 200px;
+            border: 1px solid lightcoral;
+            background-color: lightgreen;
+            background-image: url("e0krlkq3ij8y.jpg");
+            background-repeat: no-repeat;
+            border-radius: 50%;
+            
+
+            
+            
+            margin: auto;
+        }
+
+        #map {
+            
+            margin: auto;
+        }
+
+        #map img {
+            
+        }
+    
+    </style>
+</head>
+<body>
+    <section id="zoom"></section>
+    <section id="map">
+
+        <img width="900" src="e0krlkq3ij8y.jpg">
+
+    </section>
+
+    <script>
+    
+        const map = document.querySelector("#map");
+        const zoom = document.querySelector("#zoom");
+
+        map.onmousemove = evt => {
+            var mapRect = map.getBoundingClientRect();
+            var x = evt.clientX;
+            var y = evt.clientY;
+            var top = mapRect.y;
+            var left = mapRect.x;
+            console.log(left, top);
+            console.log("MUS: ", evt.clientX, evt.clientY);
+
+            zoom.style.backgroundPosition = (-x*2 - left*2 + 100) + "px" + " " + (-y*2 + top*2 + 100) + "px"; 
+
+            zoom.style.left = x - 100 + "px";
+            zoom.style.top = y - 100 + "px";
+        }
+    
+    </script>
+
+</body>
+</html>

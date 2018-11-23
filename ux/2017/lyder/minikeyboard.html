@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mini keyboard</title>
+</head>
+<body>
+    
+    <button id="a1">Start</button>
+
+    <script>
+    
+        const  a1 = document.getElementById("a1");
+
+
+        const ac = new AudioContext();
+
+        let osc;
+
+        function start() {
+
+            osc = ac.createOscillator();
+            osc.connect(ac.destination);
+            osc.start();
+
+        }
+
+        function stop() {
+            osc.stop();
+        }
+
+        a1.addEventListener("mousedown", start);
+        a1.addEventListener("mouseup", stop);
+    
+    </script>
+    
+
+</body>
+</html>

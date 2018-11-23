@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Juletrequiz</title>
+    <style>
+    
+        body {
+            background-color: black;
+        }
+
+        #lysene {
+            display: grid;
+            grid-template-columns: repeat(6, auto);
+            grid-gap: 5px;
+        }
+
+        #lysene div {
+            background-color: #222;
+            padding: 10px;
+        }
+    
+    </style>
+</head>
+<body>
+    
+    <section id="lysene">
+        <div id="q1"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </section>
+
+    <script>
+    
+
+        let svar1;
+
+        svar1 = Math.sqrt(250);
+
+        const q1 = document.getElementById("q1");
+
+        if(svar1 === Math.sqrt(250)) { q1.style.backgroundColor = "yellow"; }
+
+    </script>
+
+</body>
+</html>

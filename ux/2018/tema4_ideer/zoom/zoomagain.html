@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ZOOM</title>
+    <style>
+    
+        * {
+            margin: 0;
+        }
+
+        body {
+            margin-left: 100px;
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: start;
+            grid-gap: 20px;
+        }
+
+        #zoom {
+            width: 630px;
+            height: 432px;
+            background-image: url("bee.jpg");
+
+            background-position: -1000px -600px;
+            background-repeat: no-repeat;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- 3150 x 2160 -->
+
+    <div id="photoDiv">
+        <img width="630" height="432" id="photo" src="bee.jpg">
+    </div>
+    <div id="zoom">
+
+    </div>
+
+    <script>
+    
+        const photo = document.querySelector("#photo");
+        const zoom = document.querySelector("#zoom");
+
+        photo.onmousemove = evt => {
+
+            const bildeKvadrat = photo.getBoundingClientRect();
+            const pLeft = bildeKvadrat.x;
+            const pTop = bildeKvadrat.y;
+            
+            const x = - (5 * evt.clientX) + 315  + (pLeft * 5) + "px";
+            const y = - (5 * evt.clientY) + 216  + (pTop * 5) + "px";
+
+            zoom.style.backgroundPosition = x + " " + y;
+
+        }
+    
+    </script>
+
+</body>
+</html>

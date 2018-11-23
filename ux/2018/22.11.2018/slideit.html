@@ -6,12 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Slide It</title>
     <link rel="stylesheet" href="slideit.css">
-</head>
+</head> 
 <body>
-    <div class="slide-wrapper">
+
+    <div class="slide-wrapper" style="margin-top: 300px;">
         <section class="slides">
             <div class="slide" id="slide-1">1</div>
-            <div class="slide" id="slide-2">2</div>
+            <div class="slide high" id="slide-2">
+                
+                    <div>A</div>
+                    <div>B</div>
+                    <div>C</div>
+                
+            </div>
             <div class="slide" id="slide-3">3</div>
             <div class="slide" id="slide-4">4</div>
             <div class="slide" id="slide-5">5</div>
@@ -22,11 +29,30 @@
             <a href="#slide-1"></a>
             <a href="#slide-2"></a>
             <a href="#slide-3"></a>
-            <a class="active" href="#slide-4"></a>
+            <a href="#slide-4"></a>
             <a href="#slide-5"></a>
             <a href="#slide-6"></a>
             <a href="#slide-7"></a>
         </nav>
     </div>
+
+    <div style="height: 100vh"></div>
+
+    <script>
+        const slides = document.querySelector(".slides");
+        const high = document.querySelector(".high");
+
+        high.onscroll = evt => {
+            console.log(high.scrollTop);
+            if(high.scrollTop > 0) {
+                slides.style.overflow = "hidden";
+            } else {
+                slides.style.overflow = "auto";
+            }
+        }
+
+        //slides.style.overflow = "hidden";
+    
+    </script>
 </body>
 </html>

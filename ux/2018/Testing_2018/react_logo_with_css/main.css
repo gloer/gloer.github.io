@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    background-color: black;
+}
+
+main {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 80px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main .ellipse {
+    position: absolute;
+    width: 80%;
+    height: 40%;
+    border-radius: 50%;
+    border: 8px solid #61DAFB;
+}
+
+main .ellipse:first-child {
+    transform: rotate(60deg);
+}
+
+main .ellipse:last-child {
+    transform: rotate(120deg);
+}
+
+main .circle {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #61DAFB;
+}

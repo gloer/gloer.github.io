@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Text animation</title>
+    <style>
+        
+        body {
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            background-color: black;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            position: absolute;
+            color: white;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            animation: fade-in-out 12s;
+        }
+
+        .cover {
+            position: absolute;
+            width: 100%;
+            height: 200px;
+            background-image: linear-gradient(to left, black,  black, black, transparent);
+            animation: move-left 3s alternate 2 both;
+        }
+
+        @keyframes fade-in-out {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1.4);
+            }
+        }
+
+        @keyframes move-left {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+    
+    </style>
+</head>
+<body>
+    
+
+    <h1>COMING TO A CINEMA NEAR YOU THIS SUMMER</h1>
+    <div class="cover"></div>
+
+    
+
+</body>
+</html>

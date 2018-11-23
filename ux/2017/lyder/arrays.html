@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Array</title>
+    <style>
+    
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }    
+
+    </style>
+</head>
+<body>
+    
+    <h1 id="h1Navn"></h1>
+
+    <script>
+        
+        const h1Navn = document.getElementById("h1Navn");
+
+        let personer = [
+            { navn: "Stine", alder: 22 },
+            { navn: "Per", alder: 24 },
+            { navn: "Lise", alder: 5 },
+            { navn: "Ester", alder: 56 },
+            { navn: "Ravi", alder: 43 }
+        ];
+
+        let indeks = 0;
+
+        function visNavn() {
+
+            const person = personer[indeks];
+            h1Navn.innerHTML = person.navn + ", " + person.alder;
+            
+            h1Navn.animate([
+                {opacity: 0},
+                {opacity: 1}
+            ], {
+                duration: 2000
+            });                        
+            indeks++;
+
+            if(indeks === personer.length) {
+                indeks = 0;
+            }
+
+        }
+
+        visNavn();
+        setInterval(visNavn, 3000);
+
+
+
+
+    </script>
+    
+
+
+    
+</body>
+</html>

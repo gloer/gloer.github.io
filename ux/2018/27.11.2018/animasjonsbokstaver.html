@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Animate IT</title>
+    <style>
+    
+        body {
+            background-color: darkorange;
+        }
+
+        .bokstaver {
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: center;
+            margin-top: 80px;
+            
+        }
+
+        .bokstaver div {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: white;
+            font-size: 64px;
+            padding: 20px;
+            opacity: 0;
+            animation: fall-ned 1s forwards;
+            
+        }
+
+        .bokstaver div.item-2 { animation-delay: 0.1s; }
+        .bokstaver div.item-3 { animation-delay: 0.2s; }
+        .bokstaver div.item-4 { animation-delay: 0.3s; }
+        .bokstaver div.item-5 { animation-delay: 0.4s; }
+        .bokstaver div.item-6 { animation-delay: 0.5s; }
+
+        @keyframes fall-ned {
+            from {
+                transform: translateX(100vw) scale(1.5);
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    
+    <section class="bokstaver">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+    </section>
+
+</body>
+</html>

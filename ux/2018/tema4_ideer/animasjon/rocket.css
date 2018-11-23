@@ -1,0 +1,84 @@
+body {
+    background-color: #eee;
+    font-family: sans-serif;
+    color: #999;
+}
+
+header {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 500px;
+    margin: 0 auto;
+    position: relative;
+}
+
+@keyframes skyer {
+    0% {
+        transform: translateX(-300px);
+    }
+    
+    100% {
+        transform: translateX(300px);
+    }
+    
+}
+
+#sky1 {
+    position: absolute;
+    background-image: url(images/cloud.png);
+    width: 100px;
+    height: 100px;
+    left: 0;
+    top: 0;
+    animation: skyer 20s infinite alternate;
+}
+
+#sky2 {
+    position: absolute;
+    background-image: url(images/cloud.png);
+    background-position: 100px 0;
+    width: 100px;
+    height: 100px;
+    right: 0;
+    top: 30px;
+    animation: skyer 30s infinite alternate;
+}
+
+
+@keyframes landing {
+    0% {
+        transform: translateY(-200px);
+    }
+    20% {
+        transform: translateY(50px);
+    }
+    40% {
+        transform: translateY(50px);
+    }
+    80% {
+        transform: translate(200px, -200px) rotate(45deg);
+    }
+    100% {
+        transform: translateY(50px);
+    }
+}
+
+#rocket {
+    animation: landing 4s forwards;
+}
+
+h1 {
+    font-family: "Carter One", cursive;
+    text-align: center;
+}
+
+p {
+    max-width: 500px;
+    margin: 16px auto;
+    line-height: 1.6;
+    column-count: 2;
+    column-gap: 32px;
+    text-align: justify;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Scroll Snap</title>
+    <style>
+    
+        main {
+            background-color: orange;
+            width: 600px;
+            height: 400px;
+            overflow: scroll;       
+            margin: 100px auto;
+            scroll-snap-type: both mandatory;            
+            display: grid;
+            grid-template-rows: 400px 400px 400px;
+            grid-template-columns: 600px 600px 600px;
+            
+        }
+
+        main section {
+            
+            border-bottom: 1px solid peru;
+            scroll-snap-align: center;
+                
+        }
+
+        section:nth-child(1) { background-color: blueviolet; scroll-snap-align: end; }
+        section:nth-child(2) { background-color: orange; }
+        section:nth-child(3) { background-color: rebeccapurple; }
+        section:nth-child(4) { background-color: peru; }
+        section:nth-child(5) { background-color: beige; }
+        section:nth-child(6) { background-color: lawngreen; }
+        section:nth-child(7) { background-color: seagreen; }
+        section:nth-child(8) { background-color: wheat; }
+        section:nth-child(9) { background-color: teal; }
+        
+        
+    
+    </style>
+</head>
+<body>
+    
+    <main>
+
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+
+
+
+    </main>
+
+    <script>
+    
+        const main = document.querySelector("main");
+        main.scrollLeft = 600;
+
+        
+        function sperrLeftTop() {
+            if(main.scrollLeft < 600 && main.scrollTop < 400) {
+                    main.scrollLeft = 0;
+                    main.scrollTop = 400;                 
+            }
+        }
+
+        setInterval(sperrLeftTop, 1);
+        
+
+    </script>
+
+</body>
+</html>

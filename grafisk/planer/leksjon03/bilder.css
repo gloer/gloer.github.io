@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+}
+
+main > article {
+    flex: 1;
+    border: 1px solid green;
+    min-height: 100vh;
+    background-position: center;
+    background-size: cover;
+    transition: flex 1s cubic-bezier(0.72,-0.03, 0.56, 1.35);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+main > article:active {
+    flex: 8;
+}
+
+main > article > p {
+    font-family: "Amatic SC", sans-serif;
+    font-size: 3rem;
+    text-shadow: 2px 2px 0 #333,
+                -2px -2px 0 #333;
+    color: white;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main > article > p:first-child { 
+    transform: translateY(-100%); 
+    transition: 1s ease-in-out;
+}
+main > article > p:last-child { 
+    transform: translateY(100%); 
+    transition: 1s ease-in-out;
+}
+
+main > article:active > p {
+    transform: translateY(0);
+    transition: 1s 0.5s ease-in-out;
+}
+
+
+
+main > article:nth-child(1) { background-image: url("img01.jpg"); }
+main > article:nth-child(2) { background-image: url("img02.jpg"); }
+main > article:nth-child(3) { background-image: url("img03.jpg"); }
+main > article:nth-child(4) { background-image: url("img04.jpg"); }
+main > article:nth-child(5) { background-image: url("img05.jpg"); }
+main > article:nth-child(6) { background-image: url("img06.jpg"); }

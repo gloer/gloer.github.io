@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Logo and menu</title>
+    <style>
+    
+        html {
+            font-size: 100%;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: #60b3f6;
+            margin: 0;
+
+        }
+
+        .trans {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            grid-gap: 1rem;
+            align-items: center;
+            background-color: rbga(0,0,0,0);
+            padding: 8px;
+            transition: 0.2s;
+        }
+        header nav {
+            display: grid;
+            justify-content: end;
+            grid-auto-flow: column;
+        }
+
+        header nav a {
+            padding: 1rem 2rem;
+            color: white;
+            text-decoration: none;
+            position: relative;
+        }
+        .signup:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            width: 1px;
+            height: 1rem;
+            background-color: white;
+            
+        }
+        header nav a:hover {
+            color: blueviolet;
+        }
+        a.logo span {
+            display: none;
+        }
+        a.logo img {
+            width: 120px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    
+    <header>
+        <a href="#" class="logo">
+            <span>Home</span>
+            <img src="Spotify_Logo_RGB_White.png">
+        </a>
+        
+        
+        <nav>
+            <a href="#">Premium</a>
+            <a href="#">Help</a>
+            <a href="#" class="signup">Download</a>
+            <a href="#">Sign Up</a>
+            <a href="#">Log in</a>            
+        </nav>
+    </header>
+
+    <main style="height: 2000px; padding: 100px;">MAIN</main>
+
+    <script>
+    
+        const header = document.querySelector("header");
+
+        onscroll = function() {
+            if(scrollY > 10) {
+                header.className = "trans";
+            } else {
+                header.className = "";
+            }
+        }
+
+    </script>
+
+</body>
+</html>

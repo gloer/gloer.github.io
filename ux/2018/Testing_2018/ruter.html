@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ruter</title>
+    <style>
+    
+        * {
+            margin: 0;
+        }
+
+        main {            
+            display: grid;
+            grid-template-columns: 100vw 100vw 100vw;
+            grid-template-rows: 100vh 100vh 100vh;
+
+
+            scroll-snap-type: both mandatory;
+        }
+
+        main section {
+            scroll-snap-coordinate: start;
+        }
+
+
+        section:nth-child(1) { background-color: aqua; }
+        section:nth-child(2) { background-color: palegreen; }
+        section:nth-child(3) { background-color: saddlebrown; }
+        section:nth-child(4) { background-color: wheat; }
+        section:nth-child(5) { background-color: peachpuff; }
+        section:nth-child(6) { background-color: brown; }
+        section:nth-child(7) { background-color: olivedrab; }
+        section:nth-child(8) { background-color: azure; }
+        section:nth-child(9) { background-color: lightcoral; }
+    
+    </style>
+</head>
+<body>
+    <main>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+    </main>
+</body>
+</html>

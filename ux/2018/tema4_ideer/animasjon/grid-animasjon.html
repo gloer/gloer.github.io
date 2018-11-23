@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Grid animasjon</title>
+
+    <style>
+    
+        #grid {
+            margin: 100px auto;
+            width: 800px;
+            height: 400px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }    
+
+        #grid div {            
+            
+        }
+
+        @keyframes move-left {
+            to {
+                transform: rotate(-45deg);
+            }
+        }
+
+        @keyframes move-right {
+            to {
+                transform: rotate(45deg);
+            }
+        }
+
+        .left {
+            transform-origin: right bottom;
+            background-color: blueviolet;
+            animation: move-left 3s alternate 2;
+        }
+
+        .right {
+            transform-origin: left bottom;
+            background-color: brown;
+            animation: move-right 3s alternate 2;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <section id="grid">
+        <div class="left"></div>
+        <div class="right"></div>
+    </section>
+</body>
+</html>

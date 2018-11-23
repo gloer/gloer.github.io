@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Figurer</title>
+    <style>
+    
+        * {
+            margin: 0;
+        }
+
+        .havet {
+            position: relative;
+            overflow: hidden;
+            background-color: darkblue;
+            height: 300px;
+            text-align: center;
+            box-sizing: border-box;
+            padding-top: 10px;
+            color: lightblue;
+            font-family: sans-serif;
+        }
+
+        figure {
+            position: absolute;         
+            display: inline-block;
+            margin: 0;   
+            user-select: none;  
+            font-size: 64px;                               
+        }
+
+        .havfrue {            
+            left: 100px;
+            top: 40px;
+        }
+
+        .skjell {
+            font-size: 32px;
+            right: 100px;
+
+            bottom: 5px;            
+        }
+
+        .krabbe {            
+            bottom: -60px;
+            left: 50%;
+        }
+
+        .drop {
+            font-size: 8px;
+        }
+
+        .fisk {
+            bottom: 100px;
+            right: -150px;
+            animation: swim 8s forwards;
+        }
+
+        .fisk.bak {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes swim {
+            to {
+                right: 110%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    
+    <section class="havet">
+        <h1>På havets bunn</h1>
+        <figure class="drop">💧</figure>
+        <figure class="havfrue">🧜‍♀️</figure>
+        <figure class="skjell">🐚</figure>
+        <figure class="krabbe">🦀</figure>
+        <figure class="fisk">🐟</figure>
+        <figure class="fisk bak">🐟</figure>
+    </section>
+    
+    
+
+</body>
+</html>

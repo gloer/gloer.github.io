@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ruter</title>
+    <style>
+    
+        * {
+            margin: 0;
+        }
+
+        #bgr {
+            width: 100vw;
+            height: 100vh;
+            background-image: url("../zoom/manet.jpg");   
+        }
+
+        #overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            
+
+            left: 0;
+            top: 0;
+
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+        }
+
+        .usynlig {
+            opacity: 0;
+            background-color: red;
+            
+        }
+
+        .synlig {
+            background-color: blue;
+            
+        }
+    
+    </style>
+</head>
+<body>
+
+    <section id="bgr">
+
+    </section>
+
+    <section id="overlay">
+        <div class="usynlig"></div>
+        <div class="synlig"></div>
+    </section>
+
+</body>
+</html>
