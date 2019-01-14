@@ -1,0 +1,14 @@
+main {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 1rem;
+}
+
+main article {
+    border: 1px solid #ccc;
+    
+}
+
+main img {
+    width: 100%;
+}

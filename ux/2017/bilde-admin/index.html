@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Last opp bilder til porteføljen</title>
+    <link rel="stylesheet" href="./index.css">
 </head>
 <body>
     
-    <input type="file" id="inpFil">
+    <form id="skjema">
+        <input type="file" id="inpFil" required>
+        <input type="text" id="inpTekst" required placeholder="Hva har du tatt bilde av">
+        <button type="submit">Last opp bilde</button>
+    </form>
+
+    <main></main>
 
     <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
     <script>
