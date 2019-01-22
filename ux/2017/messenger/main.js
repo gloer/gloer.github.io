@@ -68,8 +68,6 @@ function visMelding(snap) {
 
 // Event Listeners
 skjema.addEventListener("submit", lagreMelding);
-if(user) {
-    meldinger.on("child_added", visMelding);
-}
+meldinger.on("child_added", visMelding);
 
 
